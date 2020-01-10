@@ -2,3 +2,7 @@
 *.out
 *.a
 *.o
+*.plist
+Cube3D.dSYM/Contents/Resources/DWARF/Cube3D
+Cube3D
+Cube3D

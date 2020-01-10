@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/01/09 21:30:44 by siferrar     #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/09 21:44:58 by siferrar    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/01/10 22:05:11 by siferrar    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -20,5 +20,6 @@
 # include <math.h>
 # include "MiniLib/opengl/mlx.h"
 # include "MiniLib/mms/mlx.h"
+# include "../debug.h"
 
 #endif

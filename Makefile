@@ -13,12 +13,15 @@ INCLUDES =	$(INCPATH)cube3d.h \
 			$(MINILIB)opengl/mlx_opengl.h \
 			$(MINILIB)opengl/mlx_png.h \
 			$(MINILIB)opengl/mlx_int.h \
+			\
+			debug.h
 
 
-SRCS = 		main.c
+SRCS = 		main.c \
+			debug.c
 
 CC =		gcc
-CFLAGS =	-Wall -Wextra -Werror -framework OpenGL -framework AppKit
+CFLAGS =	-Wall -Wextra -Werror
 
 OBJS = ${SRCS:.c=.o}
 
@@ -31,7 +34,7 @@ $(NAME):	$(OBJS) $(INCLUDES)
 			ar rc $(NAME).a $(OBJS)
 
 comp:		all
-			@gcc $(CFLAGS) main.c $(NAME).a -o $(NAME)
+			@gcc $(CFLAGS) main.c $(NAME).a -o $(NAME)  -framework OpenGL -framework AppKit
 
 launch:		comp
 			./Cube3D
