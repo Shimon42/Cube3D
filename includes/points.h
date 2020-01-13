@@ -1,42 +1,26 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   cube3d.h                                         .::    .:/ .      .::   */
+/*   points.h                                         .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: siferrar <siferrar@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2020/01/09 21:30:44 by siferrar     #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/13 23:16:45 by siferrar    ###    #+. /#+    ###.fr     */
+/*   Created: 2020/01/12 17:34:23 by siferrar     #+#   ##    ##    #+#       */
+/*   Updated: 2020/01/13 21:34:28 by siferrar    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
-#ifndef CUBE_3D_H
-# define CUBE_3D_H
+#ifndef POINTS_H
+# define POINTS_H
 
-# include <stdlib.h>
-# include <stdio.h>
-# include <string.h>
-# include <math.h>
-# include "MiniLib/opengl/mlx.h"
-# include "MiniLib/mms/mlx.h"
-# include "../debug.h"
-# include "points.h"
-
-typedef struct	s_ctx
+typedef struct	s_point
 {
-	void		*mlx_ptr;
-	void		*win_ptr;
-	int			color;
+	int			x;
+	int			y;
 
-}				t_ctx;
+}				t_point;
 
-typedef struct	s_brain
-{
-	t_ctx		*ctx;
-}				t_brain;
-
-void pixel_put(t_ctx *ctx, int x, int y);
-void draw_line(t_ctx *ctx, t_point p1, t_point p2);
-
+void	disp_point(t_point p);
+t_point	new_point(int x, int y);
 #endif

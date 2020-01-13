@@ -1,11 +1,12 @@
 NAME =		Cube3D
 
-SRCPATH =	srcs/
+SRCSPATH =	srcs/
 INCPATH =	includes/
 
 MINILIB =	$(INCPATH)MiniLib/
 
 INCLUDES =	$(INCPATH)cube3d.h \
+			$(INCPATH)points.h \
 			\
 			$(MINILIB)mms/mlx.h \
 			$(MINILIB)opengl/mlx.h \
@@ -18,6 +19,7 @@ INCLUDES =	$(INCPATH)cube3d.h \
 
 
 SRCS = 		main.c \
+			$(SRCSPATH)draw_line.c \
 			debug.c
 
 CC =		gcc
