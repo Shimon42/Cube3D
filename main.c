@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/01/09 21:29:11 by siferrar     #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/14 18:13:57 by siferrar    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/01/14 21:27:12 by siferrar    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -77,20 +77,20 @@ void meditate(t_brain *b)
 	free(b);
 }
 
-int	main(void)
+int	main(int ac, char **av)
 {
 	t_brain *b;
 
-	b = new_brain(1000, 1000, "Cube3D");
-	draw_line(b->ctx, new_point(500,500), new_point(300,300));
-	draw_line(b->ctx, new_point(500,500), new_point(500,300));
-	draw_line(b->ctx, new_point(500,500), new_point(700,300));
-	draw_line(b->ctx, new_point(500,500), new_point(700,500));
-	draw_line(b->ctx, new_point(500,500), new_point(700,700));
-	draw_line(b->ctx, new_point(500,500), new_point(500,700));
-	draw_line(b->ctx, new_point(500,500), new_point(300,700));
-	draw_line(b->ctx, new_point(500,500), new_point(300,500));
+	if(ac != 2)
+		return (-1);
 
+	b = new_brain(1000, 1000, "Cube3D");
+	draw_line(b->ctx, new_point(300,300), new_point(700,700));
+	draw_line(b->ctx, new_point(300,500), new_point(700,500));
+	draw_line(b->ctx, new_point(300,700), new_point(700,300));
+	draw_line(b->ctx, new_point(500,300), new_point(500,700));
+
+	parse_map(b, av[1]);
 	
 	//mlx_pixel_put (b->ctx->mlx_ptr, b->ctx->win_ptr, 0, 0, b->ctx->color);
 	mlx_key_hook(b->ctx->win_ptr, key_gest, 0);

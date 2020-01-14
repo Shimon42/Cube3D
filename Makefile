@@ -3,8 +3,11 @@ NAME =		Cube3D
 SRCSPATH =	srcs/
 INCPATH =	includes/
 
+#---------  LIBS --
 MINILIB =	$(INCPATH)MiniLib/
+LIBFT =		$(INCPATH)Libft/
 
+#---------	INCLUDES --
 INCLUDES =	$(INCPATH)cube3d.h \
 			$(INCPATH)points.h \
 			$(INCPATH)Gnl/get_next_line.h \
@@ -13,31 +16,42 @@ INCLUDES =	$(INCPATH)cube3d.h \
 			\
 			debug.h
 
-
+#--------	SRCS --
 SRCS = 		main.c \
-			$(INCPATH)Gnl/get_next_line.c \
-			$(INCPATH)Gnl/get_next_line_utils.c \
-			$(SRCSPATH)draw_line.c \
+			$(SRCSPATH)Drawing/draw_line.c \
 			$(SRCSPATH)Drawing/rect.c \
+			$(SRCSPATH)map_parsing.c \
 			debug.c
 
+GNL_SRCS =	$(INCPATH)Gnl/get_next_line.c \
+			$(INCPATH)Gnl/get_next_line_utils.c
+
+GNL_OBJS =	${GNL_SRCS:.c=.o}
+
 CC =		gcc
-CFLAGS =	-Wall -Wextra -Werror
-GNLBUFF =	-D BUFFER_SIZE=100
+
+CFLAGS_G	= -Wall -Wextra -Werror
+CFLAGS	= 
 
 OBJS = ${SRCS:.c=.o}
+
+MAPS	= assets/
+MAP1 = $(MAPS)map.cub
 
 all:		$(NAME)
 
 $(NAME):	$(OBJS) $(INCLUDES)
-			@make -C $(MINILIB)
-			ar rc $(NAME).a $(OBJS)
+			make -C $(MINILIB)
+			gcc -c $(GNL_SRCS) -D BUFFER_SIZE=128
+			cp $(MINILIB)libmlx.a $(NAME).a
+			ar rc $(NAME).a $(OBJS) get_next_line.o get_next_line_utils.o
+			ar -rcT $(NAME).a  $(LIBFT)libft.a
 
 comp:		all
-			@gcc $(CFLAGS) main.c -D BUFFER_SIZE=100 $(NAME).a -o $(NAME) -framework OpenGL -framework AppKit
+			@gcc $(CFLAGS) main.c $(NAME).a -o $(NAME) -framework OpenGL -framework AppKit
 
 launch:		comp
-			./Cube3D
+			./Cube3D $(MAP1) 
 
 minilib:	
 			@make -C $(MINILIB)

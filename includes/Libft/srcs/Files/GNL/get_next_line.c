@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/10/30 14:39:54 by siferrar     #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/14 22:35:27 by siferrar    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/12/02 14:53:35 by siferrar    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -57,7 +57,7 @@ t_gnl	*get_brain(t_gnl **b, int fd, char **line)
 	return (*b);
 }
 
-static void	meditate(t_gnl **blist, t_gnl *b, char **line)
+void	meditate(t_gnl **blist, t_gnl *b, char **line)
 {
 	t_gnl **ptr;
 

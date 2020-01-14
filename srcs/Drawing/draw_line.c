@@ -6,12 +6,12 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/01/13 21:20:40 by siferrar     #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/14 17:59:43 by siferrar    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/01/14 22:57:42 by siferrar    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
-#include "../includes/cube3d.h"
+#include "../../includes/cube3d.h"
 
 void pixel_put(t_ctx *ctx, int x, int y)
 {
