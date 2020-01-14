@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/01/13 21:20:40 by siferrar     #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/13 23:25:37 by siferrar    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/01/14 17:59:43 by siferrar    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -185,8 +185,8 @@ void draw_line(t_ctx *ctx, t_point p1, t_point p2)
 					calc_fourth_quad(ctx, p1, p2, diff);
 			}
 			else
-				while (p1.x++ != p2.x)
-					pixel_put(ctx, p1.x, p1.y) ;
+				while (p1.x != p2.x)
+					pixel_put(ctx, p1.x++, p1.y) ;
 		}
 		else
 		{
@@ -198,8 +198,8 @@ void draw_line(t_ctx *ctx, t_point p1, t_point p2)
 					calc_third_quad(ctx, p1, p2, diff);
 			}
 			else
-				while (p1.x-- != p2.x)
-					pixel_put(ctx, p1.x, p1.y) ;
+				while (p1.x != p2.x)
+					pixel_put(ctx, p1.x--, p1.y) ;
 		}
 	}
 	else
@@ -208,13 +208,13 @@ void draw_line(t_ctx *ctx, t_point p1, t_point p2)
 		{
 			if (diff.y > 0)
 			{
-				while (p1.y++ != p2.y)
-					pixel_put(ctx, p1.x, p1.y) ;
+				while (p1.y != p2.y)
+					pixel_put(ctx, p1.x, p1.y++) ;
 			}
 			else
 			{
-				while (p1.y-- != p2.y)
-					pixel_put(ctx, p1.x, p1.y) ;
+				while (p1.y != p2.y)
+					pixel_put(ctx, p1.x, p1.y--) ;
 			}
 		}
 	}

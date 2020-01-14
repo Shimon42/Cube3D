@@ -1,41 +1,38 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   cube3d.h                                         .::    .:/ .      .::   */
+/*   get_next_line.h                                  .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: siferrar <siferrar@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2020/01/09 21:30:44 by siferrar     #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/14 17:37:16 by siferrar    ###    #+. /#+    ###.fr     */
+/*   Created: 2019/10/21 20:52:46 by siferrar     #+#   ##    ##    #+#       */
+/*   Updated: 2019/12/02 16:02:45 by siferrar    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
-#ifndef CUBE_3D_H
-# define CUBE_3D_H
-
+#ifndef GET_NEXT_LINE_H
+# define GET_NEXT_LINE_H
 # include <stdlib.h>
-# include <stdio.h>
-# include <string.h>
-# include <math.h>
-# include "MiniLib/mlx.h"
-# include "../debug.h"
-# include "points.h"
+# include <unistd.h>
+# include <fcntl.h>
 
-typedef struct	s_ctx
+typedef struct		s_gnl
 {
-	void		*mlx_ptr;
-	void		*win_ptr;
-	int			color;
+	struct s_gnl	*next;
+	int				fd;
+	int				asleft;
+	int				nbr_read;
+	int				eol;
+	char			*buff;
+}					t_gnl;
 
-}				t_ctx;
-
-typedef struct	s_brain
-{
-	t_ctx		*ctx;
-}				t_brain;
-
-void pixel_put(t_ctx *ctx, int x, int y);
-void draw_line(t_ctx *ctx, t_point p1, t_point p2);
-void	draw_rect(t_ctx *ctx, int x, int y, int width, int height);
+int					get_next_line(int fd, char **line);
+int					has_eol(char *s);
+char				*ft_strnjoin(char const *s1,
+					char const *s2,
+					int start,
+					int size);
+size_t				ft_strlen(const char *s);
+void				*ft_calloc(size_t count, size_t size);
 #endif

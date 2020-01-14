@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/01/09 21:29:11 by siferrar     #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/13 23:26:30 by siferrar    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/01/14 18:13:57 by siferrar    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -68,59 +68,7 @@ t_point	calc_diff(t_point p1, t_point p2)
 	ret.y = p1.y - p2.y;
 	return (ret);
 }
-/*
-void	draw_line(t_ctx *ctx, t_point p1, t_point p2)
-{
-	//double		dist_a;
-	double		rayon;
-	//double		dist_c;
-	double		cur_r;
-	double		angle;
-	int			x;
-	int			y;
-	int			prev_x;
-	int			prev_y;
-	int			i;
-	t_point		p_a;
-	t_point		vec1;
-	t_point		vec2;
-	double sinus;
 
-	i = 0;
-	x = 0;
-	y = 0;
-	rayon = calc_dist(p1, p2);
-	p_a = new_point(p1.x, p1.y - rayon);
-	vec1 = calc_diff(p_a, p1);
-	vec2 = calc_diff(p1, p2);
-	mlx_pixel_put (ctx->mlx_ptr, ctx->win_ptr, p_a.x, p_a.y, ctx->color);
-	disp_point(p1);
-	disp_point(p2);
-	//dist_a = calc_dist(p_a, p1);
-	//dist_c = calc_dist(p2, p_a);
-	//angle = ((- pow(dist_b,2)) + pow(dist_b, 2) + pow(dist_c, 2)) / (2 * dist_b * dist_c);
-	angle = (calc_scal(vec1, vec2)) / (calc_norm(vec1) * calc_norm(vec2));
-	disp_point(p_a);
-	printf("rayon: %f\n", rayon);
-	sinus = acosh(angle);
-	sinus = sinus * (PI/180);
-	printf("angle: %f\n", angle);
-	cur_r = 0;
-	while ((x != p2.x || y != p2.y) && i < 1000)
-	{
-		x = p1.x + (cur_r * cos(angle));
-		y = p1.y + (cur_r * sin(angle));
-		printf("{ x:%6d, y:%6d }\n", x, y);
-		mlx_pixel_put (ctx->mlx_ptr, ctx->win_ptr, x, y, ctx->color);
-		cur_r++;
-		prev_x = x;
-		prev_y = y;
-		i++;
-	}
-	printf("i:%d\n", i);
-
-}
-*/
 void meditate(t_brain *b)
 {
 	free(b->ctx->win_ptr);
@@ -143,8 +91,7 @@ int	main(void)
 	draw_line(b->ctx, new_point(500,500), new_point(300,700));
 	draw_line(b->ctx, new_point(500,500), new_point(300,500));
 
-		draw_line(b->ctx, new_point(500,500), new_point(300,400));
-
+	
 	//mlx_pixel_put (b->ctx->mlx_ptr, b->ctx->win_ptr, 0, 0, b->ctx->color);
 	mlx_key_hook(b->ctx->win_ptr, key_gest, 0);
 	mlx_loop(b->ctx->mlx_ptr);
