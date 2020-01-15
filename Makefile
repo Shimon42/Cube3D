@@ -9,7 +9,9 @@ LIBFT =		$(INCPATH)Libft/
 
 #---------	INCLUDES --
 INCLUDES =	$(INCPATH)cube3d.h \
-			$(INCPATH)points.h \
+			$(INCPATH)brain.h \
+			$(INCPATH)my_canvas.h \
+			$(INCPATH)map.h \
 			$(INCPATH)Gnl/get_next_line.h \
 			\
 			$(MINILIB)mlx.h \
@@ -18,8 +20,9 @@ INCLUDES =	$(INCPATH)cube3d.h \
 
 #--------	SRCS --
 SRCS = 		main.c \
-			$(SRCSPATH)Drawing/draw_line.c \
-			$(SRCSPATH)Drawing/rect.c \
+			$(SRCSPATH)Canvas/draw_line.c \
+			$(SRCSPATH)Canvas/rect.c \
+			$(SRCSPATH)Canvas/context.c \
 			$(SRCSPATH)map_parsing.c \
 			debug.c
 
@@ -30,8 +33,8 @@ GNL_OBJS =	${GNL_SRCS:.c=.o}
 
 CC =		gcc
 
-CFLAGS_G	= -Wall -Wextra -Werror
-CFLAGS	= 
+CFLAGS	= -Wall -Wextra -Werror
+CFLAGSs	= 
 
 OBJS = ${SRCS:.c=.o}
 

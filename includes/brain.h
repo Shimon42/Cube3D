@@ -1,26 +1,26 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   rect.c                                           .::    .:/ .      .::   */
+/*   brain.h                                          .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: siferrar <siferrar@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2020/01/14 17:15:35 by siferrar     #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/14 17:38:13 by siferrar    ###    #+. /#+    ###.fr     */
+/*   Created: 2020/01/15 21:47:46 by siferrar     #+#   ##    ##    #+#       */
+/*   Updated: 2020/01/15 21:52:40 by siferrar    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
-#include "../../includes/cube3d.h"
+#ifndef BRAIN_H
+# define BRAIN_H
 
-void	draw_rect(t_ctx *ctx, int x, int y, int width, int height)
+# include "cube3d.h"
+
+typedef struct	s_brain
 {
-	int cur_h;
+	t_ctx		*ctx;
+	t_map		*map;
+}				t_brain;
 
-	cur_h = 0;
-	while (cur_h < height)
-	{
-		draw_line(ctx, new_point(x, y + cur_h), new_point(x + width, y + cur_h));
-		cur_h++;
-	}
-}
+int				open_map(t_brain *b, char *map_path);
+#endif

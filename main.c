@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/01/09 21:29:11 by siferrar     #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/14 21:27:12 by siferrar    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/01/15 22:44:03 by siferrar    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -37,9 +37,9 @@ t_brain *new_brain(int width, int height, char * name)
 	t_brain *new;
 
 	new = calloc(1, sizeof(new));
-	new->ctx = calloc(1, sizeof(t_ctx));
-	new->ctx->mlx_ptr = mlx_init();
+	new->ctx = new_ctx(width, height);
 	new->ctx->win_ptr = mlx_new_window(new->ctx->mlx_ptr, width, height, name);
+	
 	new->ctx->color = 0x00FFFF;
 	return (new);
 }
@@ -90,9 +90,11 @@ int	main(int ac, char **av)
 	draw_line(b->ctx, new_point(300,700), new_point(700,300));
 	draw_line(b->ctx, new_point(500,300), new_point(500,700));
 
-	parse_map(b, av[1]);
 	
-	//mlx_pixel_put (b->ctx->mlx_ptr, b->ctx->win_ptr, 0, 0, b->ctx->color);
+	open_map(b, av[1]);
+	b->ctx->rect(b->ctx, 100, 100, 100, 100, 0);
+	b->ctx->rect(b->ctx, 205, 100, 100, 100, 1);
+	
 	mlx_key_hook(b->ctx->win_ptr, key_gest, 0);
 	mlx_loop(b->ctx->mlx_ptr);
 	return (0);
