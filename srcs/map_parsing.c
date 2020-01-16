@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/01/14 20:36:43 by siferrar     #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/16 17:57:32 by siferrar    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/01/16 21:52:55 by siferrar    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -51,9 +51,7 @@ void print_map_grid_debug(t_map *map)
 
 	x = 0;
 	y = 0;
-	printf("Width: %d\n", map->width);
-	printf("Height: %d\n", map->height);
-	/*while (x < map->width)
+	while (x < map->width)
 	{
 		while (y < map->height)
 		{
@@ -68,7 +66,7 @@ void print_map_grid_debug(t_map *map)
 			y++;
 		}
 		x++;
-	}*/
+	}
 	ft_putchar('\n');
 }
 
@@ -77,6 +75,58 @@ int				init_map(t_map **map)
 	(*map) = malloc(sizeof(t_map));
 	(*map)->height = 0;
 	(*map)->width = 0;
+
+	return (1);
+}
+
+int			**init_2d_tab(int width, int height)
+{
+	int **new;
+	int i;
+
+	i = 0;
+	new = malloc((width) * sizeof(int **));
+	while (i < width)
+		new[i++] = malloc(height * sizeof(int *));
+	return (new);
+}
+
+int			add_row(t_map *map)
+{
+	int **new;
+	int x;
+	int y;
+	
+	x = 0;
+	new = init_2d_tab(map->width, map->height + 1);
+	while(x < map->width)
+	{
+		y = 0;
+		while (y < map->height)
+		{
+			new[x][y] = map->grid[x][y];
+			y++;
+		}
+		free(map->grid[x]);
+		x++;
+	}
+	map->height++;
+	return (1);
+}
+
+int			parse_values(t_map *map, char *line)
+{
+	int x;
+	int i;
+
+	x = 0;
+	i = 0;
+	while (x < map->width)
+	{
+		map->grid[x][map->height] = line[i] - '0';
+		i += 2;
+		x++;
+	}
 	return (1);
 }
 
@@ -87,11 +137,12 @@ int				open_map(t_brain *b, char *map_path)
 	int		ret;
 
 	init_map(&b->map);
+
 	file = open(map_path, O_RDONLY);
 	while ((ret = get_next_line(file, &line)) != -1)
 	{
 		print_map_debug(line);
-		parse_map(&b->map, line);
+		add_map_row(&b->map, line);
 		if (!ret)
 			break;
 	}
@@ -114,32 +165,32 @@ size_t		line_length(char *line)
 	return (len);
 }
 
-int			parse_map(t_map **map, char *line)
+
+int			add_map_row(t_map **map, char *line)
 {
 	int i;
 
 	i = 0;
 	if (!(*map)->width)
 		(*map)->width = line_length(line);
-	alloc_map(map);
-	/*while (line[i])
-	{
-		(*map)->grid[i][(*map)->height] = line[i] - '0';
-	}*/
+	//add_row(*map);
+	//parse_values(*map, line);
+	//print_map_grid_debug(*map);
 	return (1);
 }
+
 
 int			alloc_map(t_map **map)
 {
 	int **new;
-	int i;
+	int x;
 
-	i = 0;
+	x = 0;
 	new = malloc(((*map)->width + 1) * sizeof(short **));
 	new[(*map)->width + 1] = 0;
-	while (i < (*map)->width + 1)
-		new[i++] = malloc(((*map)->height + 1) * sizeof(short *));
-	new[i - 1][((*map)->height++)] = 0;
+	while (x < (*map)->width + 1)
+		new[x++] = malloc(((*map)->height + 1) * sizeof(short *));
+	new[x - 1][((*map)->height++)] = 0;
 
 	
 	(*map)->grid = new;
