@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/01/14 22:46:16 by siferrar     #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/15 21:54:38 by siferrar    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/01/16 16:38:22 by siferrar    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -25,6 +25,6 @@ typedef struct	s_map
 	double		scale;
 }				t_map;
 
-int				parse_map(t_map *map, char *line);
-int				alloc_map(t_map *map);
+int				parse_map(t_map **map, char *line);
+int				alloc_map(t_map **map);
 #endif

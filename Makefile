@@ -45,6 +45,7 @@ all:		$(NAME)
 
 $(NAME):	$(OBJS) $(INCLUDES)
 			make -C $(MINILIB)
+			make -C $(LIBFT)
 			gcc -c $(GNL_SRCS) -D BUFFER_SIZE=128
 			cp $(MINILIB)libmlx.a $(NAME).a
 			ar rc $(NAME).a $(OBJS) get_next_line.o get_next_line_utils.o
