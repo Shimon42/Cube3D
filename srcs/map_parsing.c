@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/01/14 20:36:43 by siferrar     #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/16 21:52:55 by siferrar    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/01/21 17:22:11 by siferrar    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -50,21 +50,22 @@ void print_map_grid_debug(t_map *map)
 	int y;
 
 	x = 0;
-	y = 0;
+	printf("Map Print\nWidth: %d\nHeight:%d\n", map->width, map->height);
 	while (x < map->width)
 	{
+		y = 0;
 		while (y < map->height)
 		{
-			if (map->grid[x][y] == '0')
+			if (map->grid[x][y] == 0)
 				ft_putstr(DGREY);
-			else if (map->grid[x][y] == '1')
+			else if (map->grid[x][y] == 1)
 				ft_putstr(DCYAN);
-			else if (map->grid[x][y] == '2')
+			else if (map->grid[x][y] == 2)
 				ft_putstr(YELO); 
-			
-			ft_putchar(map->grid[x][y]);
+			ft_putchar(map->grid[x][y] + '0');
 			y++;
 		}
+		ft_putchar('\n');
 		x++;
 	}
 	ft_putchar('\n');
@@ -75,6 +76,7 @@ int				init_map(t_map **map)
 	(*map) = malloc(sizeof(t_map));
 	(*map)->height = 0;
 	(*map)->width = 0;
+	alloc_map(map);
 
 	return (1);
 }
@@ -91,29 +93,6 @@ int			**init_2d_tab(int width, int height)
 	return (new);
 }
 
-int			add_row(t_map *map)
-{
-	int **new;
-	int x;
-	int y;
-	
-	x = 0;
-	new = init_2d_tab(map->width, map->height + 1);
-	while(x < map->width)
-	{
-		y = 0;
-		while (y < map->height)
-		{
-			new[x][y] = map->grid[x][y];
-			y++;
-		}
-		free(map->grid[x]);
-		x++;
-	}
-	map->height++;
-	return (1);
-}
-
 int			parse_values(t_map *map, char *line)
 {
 	int x;
@@ -123,8 +102,9 @@ int			parse_values(t_map *map, char *line)
 	i = 0;
 	while (x < map->width)
 	{
-		map->grid[x][map->height] = line[i] - '0';
-		i += 2;
+		map->grid[x][map->height - 1] = line[i] - '0';
+		while (*line + i  == ' ')
+			i++;
 		x++;
 	}
 	return (1);
@@ -142,11 +122,14 @@ int				open_map(t_brain *b, char *map_path)
 	while ((ret = get_next_line(file, &line)) != -1)
 	{
 		print_map_debug(line);
-		add_map_row(&b->map, line);
+		add_map_row(b->map, line);
+		parse_values(b->map, line);
 		if (!ret)
 			break;
 	}
 	printf(GRN"MAP READ - OK"RST"\n");
+	printf("Width: [%d]\n", b->map->width);
+	printf("Height:[%d]\n", b->map->height);
 	print_map_grid_debug(b->map);
 	close(file);
 	return (1);
@@ -166,19 +149,49 @@ size_t		line_length(char *line)
 }
 
 
-int			add_map_row(t_map **map, char *line)
+int			add_map_row(t_map *map, char *line)
 {
-	int i;
+	int **new;
+	int x;
+	int y;
 
-	i = 0;
-	if (!(*map)->width)
-		(*map)->width = line_length(line);
-	//add_row(*map);
-	//parse_values(*map, line);
-	//print_map_grid_debug(*map);
+	y = 0;
+	x = 0;
+	if (!map->width)
+		map->width = line_length(line);
+	new = alloc_2d_tab(map->width, map->height);
+	if (map->grid)
+	{
+		while (x < map->width - 1)
+		{
+			y = 0;
+			while (y < map->height - 1)
+			{
+				new[x][y] = map->grid[x][y];
+				y++;
+			}
+			x++;
+		}
+	}
+	map->height++;
+	map->grid = new;
 	return (1);
 }
 
+
+int			**alloc_2d_tab(int width, int height)
+{
+	int **new;
+	int x;
+
+	x = 0;
+	new = malloc((width + 1) * sizeof(int **));
+	new[width + 1] = 0;
+	while (x < width + 1)
+		new[x++] = malloc((height + 1) * sizeof(int *));
+	//new[x - 1][(height++)] = 0;	
+	return (new);
+}
 
 int			alloc_map(t_map **map)
 {
@@ -186,13 +199,11 @@ int			alloc_map(t_map **map)
 	int x;
 
 	x = 0;
-	new = malloc(((*map)->width + 1) * sizeof(short **));
+	new = malloc(((*map)->width + 1) * sizeof(int **));
 	new[(*map)->width + 1] = 0;
 	while (x < (*map)->width + 1)
-		new[x++] = malloc(((*map)->height + 1) * sizeof(short *));
-	new[x - 1][((*map)->height++)] = 0;
-
-	
+		new[x++] = malloc(((*map)->height + 1) * sizeof(int *));
+	new[x - 1][((*map)->height)] = 0;	
 	(*map)->grid = new;
 	return (1);
 }
