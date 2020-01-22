@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/01/09 21:29:11 by siferrar     #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/16 20:19:48 by siferrar    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/01/22 17:50:16 by siferrar    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -92,8 +92,6 @@ int	main(int ac, char **av)
 
 	
 	open_map(b, av[1]);
-	b->ctx->rect(b->ctx, 100, 100, 100, 100, 0);
-	b->ctx->rect(b->ctx, 205, 100, 100, 100, 1);
 	
 	mlx_key_hook(b->ctx->win_ptr, key_gest, 0);
 	mlx_loop(b->ctx->mlx_ptr);

@@ -13,6 +13,7 @@ INCLUDES =	$(INCPATH)cube3d.h \
 			$(INCPATH)my_canvas.h \
 			$(INCPATH)map.h \
 			$(INCPATH)Gnl/get_next_line.h \
+			$(LIBFT)includes/libft.h \
 			\
 			$(MINILIB)mlx.h \
 			\
@@ -24,6 +25,7 @@ SRCS = 		main.c \
 			$(SRCSPATH)Canvas/rect.c \
 			$(SRCSPATH)Canvas/context.c \
 			$(SRCSPATH)map_parsing.c \
+			$(SRCSPATH)draw_map.c \
 			debug.c
 
 GNL_SRCS =	$(INCPATH)Gnl/get_next_line.c \
@@ -47,18 +49,20 @@ $(NAME):	$(OBJS) $(INCLUDES)
 			make -C $(MINILIB)
 			make -C $(LIBFT)
 			gcc -c $(GNL_SRCS) -D BUFFER_SIZE=128
-			cp $(MINILIB)libmlx.a $(NAME).a
+			cp $(MINILIB)libmlx.a .
 			ar rc $(NAME).a $(OBJS) get_next_line.o get_next_line_utils.o
-			ar -rcT $(NAME).a  $(LIBFT)libft.a
 
 comp:		all
-			@gcc $(CFLAGS) main.c $(NAME).a -o $(NAME) -framework OpenGL -framework AppKit
+			gcc $(CFLAGS) main.c $(NAME).a $(LIBFT)libft.a libmlx.a -o $(NAME) -framework OpenGL -framework AppKit
 
 launch:		comp
 			./Cube3D $(MAP1) 
 
 minilib:	
 			@make -C $(MINILIB)
+
+libft:
+			@make -C $(LIBFT) re
 
 $(OBJS):	$(INCLUDES)
 
