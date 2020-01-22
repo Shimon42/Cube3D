@@ -1,4 +1,4 @@
-# Cube 3D • Alpha 0.0.6
+# Cube 3D • Alpha 0.1.0
 
 -> make - Compile only
 
@@ -10,20 +10,22 @@
     ————————————————————————————————————
     	Changes:
     ————————————————————————————————————
-	- Add t_map and begin of map Alloc
-	- Add t_ctx and new_context() with function pointer
-		•	ctx->line()
-		•	ctx->rect()
-		•	ctx->clear()
-	- Rect can be drawn filled or not
+	- Map parsing
+	- Minimap draw
+	- Add t_player, t_camera
+	- Add static context for t_ctx functions line(), rect()
+		-> no more need to precise context after context init
+	- Add init_player()
 
     ————————————————————————————————————
 		Cur State:
 	————————————————————————————————————
 	- Open new window
 	- [ESC] to quit (brutal killing)
-	- 
+	- Map parsing, without config
+	- Minimap display
 
 	————————————————————————————————————
     	Known Bugs:
 	————————————————————————————————————
+	- init_player -> SEGFAULT

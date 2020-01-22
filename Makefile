@@ -26,6 +26,7 @@ SRCS = 		main.c \
 			$(SRCSPATH)Canvas/context.c \
 			$(SRCSPATH)map_parsing.c \
 			$(SRCSPATH)draw_map.c \
+			$(SRCSPATH)player.c \
 			debug.c
 
 GNL_SRCS =	$(INCPATH)Gnl/get_next_line.c \

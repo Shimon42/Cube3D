@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/01/14 22:43:45 by siferrar     #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/22 18:09:56 by siferrar    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/01/22 23:11:42 by siferrar    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -19,12 +19,12 @@ void            draw_frame(t_brain *b, int x, int y, double scale)
     t_map *map;
 
     map = b->map;
-    b->ctx->rect(b->ctx,
-                x,
+    b->ctx->rect(x,
                 y,
                 map->bloc_size * map->width * scale,
                 map->bloc_size * map->height * scale,
-                0);
+                0,
+				b->ctx);
 }
 
 void		draw_elems(t_brain *b, int disp_x, int disp_y, double scale)
@@ -48,16 +48,16 @@ void		draw_elems(t_brain *b, int disp_x, int disp_y, double scale)
 				b->ctx->color = 0x00FFFF;
 			else if (val == '2')
 				b->ctx->color = 0x00FF00;
-			else if (val == 'N')
-				b->ctx->color = 0x00DDDD;
+			else if (ft_strchr("NESW", val))
+				b->ctx->color = 0xDD00DD;
 			else
 				b->ctx->color = 0xFF0000;
-			b->ctx->rect(b->ctx,
-						disp_x + (x * b->map->bloc_size * scale),
-						disp_y + (y * b->map->bloc_size * scale),
+			b->ctx->rect(floor(disp_x + (x * b->map->bloc_size * scale)),
+						floor(disp_y + (y * b->map->bloc_size * scale)),
 						b->map->bloc_size * scale,
 						b->map->bloc_size * scale,
-						1);
+						1,
+						b->ctx);
 			i++;
 			x++;
 		};
@@ -72,4 +72,12 @@ void			draw_minimap(t_brain *b, int x, int y, double scale)
     map = b->map;
     draw_frame(b, x, y, scale);
     draw_elems(b, x, y, scale);
+}
+
+void			draw_fullmap(t_brain *b, double scale)
+{
+	draw_minimap(b, 
+				(b->ctx->width - (b->map->width * b->map->bloc_size *  scale))/2,
+				(b->ctx->height - (b->map->height * b->map->bloc_size * scale))/2,
+				scale);
 }

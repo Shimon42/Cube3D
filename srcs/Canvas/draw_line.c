@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/01/13 21:20:40 by siferrar     #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/15 19:18:42 by siferrar    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/01/22 22:58:31 by siferrar    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -23,7 +23,7 @@ void calc_first_quad(t_ctx *ctx, t_point p1, t_point p2, t_point diff)
 		diff.y *= 2;
 		while (1)
 		{  // déplacements horizontaux
-			pixel_put(ctx, p1.x, p1.y) ;
+			pixel_put(p1.x, p1.y, ctx);
 			if (++p1.x == p2.x)
 				break;
 			if ((e -= diff.y) < 0)
@@ -39,7 +39,7 @@ void calc_first_quad(t_ctx *ctx, t_point p1, t_point p2, t_point diff)
 		diff.x *= 2;
 		while (1)
 		{  // déplacements horizontaux
-			pixel_put(ctx, p1.x, p1.y) ;
+			pixel_put(p1.x, p1.y, ctx);
 			if (++p1.y == p2.y)
 				break;
 			if ((e -= diff.x) < 0)
@@ -60,7 +60,7 @@ void calc_fourth_quad(t_ctx *ctx, t_point p1, t_point p2, t_point diff)
 		diff.y *= 2;
 		while (1)
 		{  // déplacements horizontaux
-			pixel_put(ctx, p1.x, p1.y) ;
+			pixel_put(p1.x, p1.y, ctx);
 			if (++p1.x == p2.x)
 				break;
 			if ((e += diff.y) < 0)
@@ -76,7 +76,7 @@ void calc_fourth_quad(t_ctx *ctx, t_point p1, t_point p2, t_point diff)
 		diff.x *= 2;
 		while (1)
 		{  // déplacements horizontaux
-			pixel_put(ctx, p1.x, p1.y) ;
+			pixel_put(p1.x, p1.y, ctx);
 			if (--p1.y == p2.y)
 				break;
 			if ((e += diff.x) > 0)
@@ -98,7 +98,7 @@ void calc_second_quad(t_ctx *ctx, t_point p1, t_point p2, t_point diff)
 		diff.y *= 2;
 		while (1)
 		{  // déplacements horizontaux
-			pixel_put(ctx, p1.x, p1.y) ;
+			pixel_put(p1.x, p1.y, ctx);
 			if (--p1.x == p2.x)
 				break;
 			if ((e += diff.y) >= 0)
@@ -114,7 +114,7 @@ void calc_second_quad(t_ctx *ctx, t_point p1, t_point p2, t_point diff)
 		diff.x *= 2;
 		while (1)
 		{  // déplacements horizontaux
-			pixel_put(ctx, p1.x, p1.y) ;
+			pixel_put(p1.x, p1.y, ctx);
 			if (++p1.y == p2.y)
 				break;
 			if ((e += diff.x) <= 0)
@@ -135,7 +135,7 @@ void calc_third_quad(t_ctx *ctx, t_point p1, t_point p2, t_point diff)
 		diff.y *= 2;
 		while (1)
 		{  // déplacements horizontaux
-			pixel_put(ctx, p1.x, p1.y) ;
+			pixel_put(p1.x, p1.y, ctx);
 			if (--p1.x == p2.x)
 				break;
 			if ((e -= diff.y) >= 0)
@@ -151,7 +151,7 @@ void calc_third_quad(t_ctx *ctx, t_point p1, t_point p2, t_point diff)
 		diff.x *= 2;
 		while (1)
 		{  // déplacements horizontaux
-			pixel_put(ctx, p1.x, p1.y) ;
+			pixel_put(p1.x, p1.y, ctx);
 			if (--p1.y == p2.y)
 				break;
 			if ((e -= diff.x) >= 0)
@@ -163,10 +163,13 @@ void calc_third_quad(t_ctx *ctx, t_point p1, t_point p2, t_point diff)
 	}
 }
 
-void draw_line(t_ctx *ctx, t_point p1, t_point p2)
+void draw_line(t_point p1, t_point p2, t_ctx *ctx)
 {
+	static t_ctx *cur_ctx = NULL;
 	t_point diff;
 
+	if ((p1.x == -1 && p1.y == -1 && p2.x == -1 &&  p2.y == -1) || ctx)
+		set_context(&cur_ctx, ctx);
 	diff = new_point(0, 0);
 	if ((diff.x = p2.x - p1.x) != 0)
 	{
@@ -175,26 +178,26 @@ void draw_line(t_ctx *ctx, t_point p1, t_point p2)
 			if ((diff.y = p2.y - p1.y) != 0)
 			{
 				if (diff.y > 0)
-					calc_first_quad(ctx, p1, p2, diff);
+					calc_first_quad(cur_ctx, p1, p2, diff);
 				else
-					calc_fourth_quad(ctx, p1, p2, diff);
+					calc_fourth_quad(cur_ctx, p1, p2, diff);
 			}
 			else
 				while (p1.x != p2.x)
-					pixel_put(ctx, p1.x++, p1.y) ;
+					pixel_put(p1.x++, p1.y, cur_ctx);
 		}
 		else
 		{
 			if ((diff.y = p2.y - p1.y) != 0)
 			{
 				if (diff.y > 0)
-					calc_second_quad(ctx, p1, p2, diff);
+					calc_second_quad(cur_ctx, p1, p2, diff);
 				else
-					calc_third_quad(ctx, p1, p2, diff);
+					calc_third_quad(cur_ctx, p1, p2, diff);
 			}
 			else
 				while (p1.x != p2.x)
-					pixel_put(ctx, p1.x--, p1.y) ;
+					pixel_put(p1.x--, p1.y, cur_ctx) ;
 		}
 	}
 	else
@@ -204,12 +207,12 @@ void draw_line(t_ctx *ctx, t_point p1, t_point p2)
 			if (diff.y > 0)
 			{
 				while (p1.y != p2.y)
-					pixel_put(ctx, p1.x, p1.y++) ;
+					pixel_put(p1.x, p1.y++, cur_ctx);
 			}
 			else
 			{
 				while (p1.y != p2.y)
-					pixel_put(ctx, p1.x, p1.y--) ;
+					pixel_put(p1.x, p1.y--, cur_ctx) ;
 			}
 		}
 	}

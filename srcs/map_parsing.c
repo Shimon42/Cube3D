@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/01/14 20:36:43 by siferrar     #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/22 18:13:53 by siferrar    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/01/22 23:10:42 by siferrar    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -30,15 +30,24 @@ int				open_map(t_brain *b, char *map_path)
 	char	*line;
 	int		file;
 	int		ret;
+	int		as_player;
 
 	init_map(&b->map);
 
 	file = open(map_path, O_RDONLY);
 	while ((ret = get_next_line(file, &line)) != -1)
 	{
-		add_map_row(b->map, line);
+		if ((as_player = add_map_row(b->map, line)) >= 0)
+		{
+			printf("Player found: %d\n", as_player);
+			//	init_player(b, ret);
+		}
 		if (!ret)
+		{
+			printf("End of get map - Code: %d\n", ret);
 			break;
+		} else
+			printf("Readed: [%s]\n", line);
 	}
 	ft_putstr(b->map->grid);
 	printf(GRN"\nMAP READ - OK"RST"\n");
@@ -46,9 +55,7 @@ int				open_map(t_brain *b, char *map_path)
 	printf("Height:[%d]\n", b->map->height);
 	print_map_grid(b->map);
 	close(file);
-	draw_minimap(b, 10, 10, 1);
-	draw_minimap(b, 10, 180, 2.5);
-	draw_minimap(b, 10, 560, 3);
+	draw_fullmap(b, (b->ctx->width / (b->map->width * b->map->bloc_size)));
 	return (1);
 }
 
@@ -68,10 +75,11 @@ int			add_map_row(t_map *map, char *line)
 	char	*new;
 	char	*temp;
 	int		i;
+	int		as_player;
 
 	i = 0;
+	as_player = -1;
 	new = NULL;
-	
 	if (!map->grid)
 		map->grid = ft_calloc(line_length(line) + 1, sizeof(char));
 	else
@@ -84,10 +92,12 @@ int			add_map_row(t_map *map, char *line)
 			temp = ft_strnjoin(new, line + i, 0, 1);
 			free(new);
 			new = temp;
+			if (line[i] == 'N' || line[i] == 'E' || line[i] == 'S' || line[i] == 'W')
+				as_player = i;
 		}
 		i++;
 	}
 	map->height++;
 	map->grid = new;
-	return (1);
+	return (as_player);
 }
