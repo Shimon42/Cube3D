@@ -1,20 +1,28 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   brain.h                                          .::    .:/ .      .::   */
+/*   player.h                                         .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: siferrar <siferrar@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2020/01/15 21:47:46 by siferrar     #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/23 19:04:35 by siferrar    ###    #+. /#+    ###.fr     */
+/*   Created: 2020/01/23 18:52:51 by siferrar     #+#   ##    ##    #+#       */
+/*   Updated: 2020/01/23 19:07:12 by siferrar    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
-#ifndef BRAIN_H
-# define BRAIN_H
-
+#ifndef PLAYER_H
+# define PLAYER_H
 # include "cube3d.h"
+# include "my_canvas.h"
+
+typedef struct	s_camera
+{
+	t_point		*pos;
+	double		height;
+	double		fov;
+}				t_camera;
+
 
 
 

@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/01/14 20:36:43 by siferrar     #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/23 17:59:03 by siferrar    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/01/23 18:47:46 by siferrar    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -40,23 +40,23 @@ int				open_map(t_brain *b, char *map_path)
 		if ((as_player = add_map_row(b->map, line)) >= 0)
 		{
 			printf(CYAN"Player found: %d"RST"\n", as_player);
-			//	init_player(b, ret);
+			init_player(b, as_player);
 		}
 		if (!ret)
 		{
-			printf("End of get map - Code: %d\n", ret);
+			printf(YELO"End of get map - Code: %d\n"RST, ret);
 			break;
-		} else
-			printf("Readed: [%s]\n", line);
+		}/* else
+			printf("Readed: [%s]\n", line);*/
 	}
-	ft_putstr(b->map->grid);
-	printf(GRN"\nMAP READ - OK"RST"\n");
-	printf("Width: [%d]\n", b->map->width);
-	printf("Height:[%d]\n", b->map->height);
-	print_map_grid(b->map);
 	close(file);
+	//ft_putstr(b->map->grid);
+	printf(GRN"MAP READ - OK"RST"\n");
+	printf(DCYAN" -> Width: [%d]\n", b->map->width);
+	printf(" -> Height:[%d]\n"RST, b->map->height);
+	print_map_grid(b->map);
 	draw_fullmap(b, (b->ctx->width / (b->map->width * b->map->bloc_size)));
-	draw_minimap(b, 10, 10, 1);
+	//draw_minimap(b, 10, 10, 1);
 	return (1);
 }
 

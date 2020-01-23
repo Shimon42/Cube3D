@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/01/15 17:33:03 by siferrar     #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/23 17:04:19 by siferrar    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/01/23 18:34:22 by siferrar    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -22,7 +22,6 @@ typedef struct	s_point
 {
 	int			x;
 	int			y;
-
 }				t_point;
 
 typedef struct	s_ctx
@@ -48,6 +47,6 @@ void			draw_circle(int c_x, int c_y, int ray, int fill, t_ctx *ctx);
 void			clear_ctx(int color, t_ctx *ctx);
 
 t_point	new_point(int x, int y);
-void			disp_point(t_point p);
+void			disp_point(t_point *p);
 
 #endif

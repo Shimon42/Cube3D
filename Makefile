@@ -12,6 +12,7 @@ INCLUDES =	$(INCPATH)cube3d.h \
 			$(INCPATH)brain.h \
 			$(INCPATH)my_canvas.h \
 			$(INCPATH)map.h \
+			$(INCPATH)player.h \
 			$(INCPATH)Gnl/get_next_line.h \
 			$(LIBFT)includes/libft.h \
 			\
@@ -63,7 +64,7 @@ comp:		all
 			gcc $(CFLAGS) main.c $(NAME).a $(LIBFT)libft.a libmlx.a -o $(NAME) -framework OpenGL -framework AppKit
 
 launch:		comp
-			@echo "Launching Cube3D ..."
+			clear
 			@echo "$(COL_CUBE)  .––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––.	"
 			@echo " / |                          $(COL_TITLE)Launching$(COL_CUBE)                          | \	"
 			@echo "+––+–––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––+––+"

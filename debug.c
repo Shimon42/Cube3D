@@ -6,16 +6,16 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/11/20 15:53:12 by siferrar     #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/22 17:41:01 by siferrar    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/01/23 18:32:00 by siferrar    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "includes/cube3d.h"
 
-void	disp_point(t_point p)
+void	disp_point(t_point *p)
 {
-	printf("{ x:%6d, y:%6d }\n", p.x, p.y);
+	printf("{ x:%6d, y:%6d }\n", p->x, p->y);
 }
 
 void print_map_debug(char *line)
