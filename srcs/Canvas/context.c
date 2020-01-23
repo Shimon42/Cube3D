@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/01/15 18:42:08 by siferrar     #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/22 22:58:40 by siferrar    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/01/23 17:04:03 by siferrar    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -51,6 +51,7 @@ t_ctx	*new_ctx(int width, int height)
 	ctx->height = height;
 	ctx->line = &draw_line;
 	ctx->rect = &draw_rect;
+	ctx->circle = &draw_circle;
 	ctx->clear = &clear_ctx;
 	init_ctx_funcs(ctx);
 	return(ctx);

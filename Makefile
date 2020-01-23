@@ -23,6 +23,7 @@ INCLUDES =	$(INCPATH)cube3d.h \
 SRCS = 		main.c \
 			$(SRCSPATH)Canvas/draw_line.c \
 			$(SRCSPATH)Canvas/rect.c \
+			$(SRCSPATH)Canvas/circle.c \
 			$(SRCSPATH)Canvas/context.c \
 			$(SRCSPATH)map_parsing.c \
 			$(SRCSPATH)draw_map.c \
@@ -44,6 +45,11 @@ OBJS = ${SRCS:.c=.o}
 MAPS	= assets/
 MAP1 = $(MAPS)map.cub
 
+COL_TITLE = \033[2;33m
+COL_CUBE = \033[2;32m
+COL_TXT = \033[0;36m
+COL_SHADOW = \033[2;36m
+
 all:		$(NAME)
 
 $(NAME):	$(OBJS) $(INCLUDES)
@@ -57,7 +63,19 @@ comp:		all
 			gcc $(CFLAGS) main.c $(NAME).a $(LIBFT)libft.a libmlx.a -o $(NAME) -framework OpenGL -framework AppKit
 
 launch:		comp
-			./Cube3D $(MAP1) 
+			@echo "Launching Cube3D ..."
+			@echo "$(COL_CUBE)  .––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––.	"
+			@echo " / |                          $(COL_TITLE)Launching$(COL_CUBE)                          | \	"
+			@echo "+––+–––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––+––+"
+			@echo "|  |$(COL_TXT)             _____       _            _____ ____$(COL_CUBE)             |  |"
+			@echo "|  |$(COL_TXT)            /  __ \     | |          |____ |  _  \ $(COL_CUBE)          |  |"
+			@echo "|  |$(COL_TXT)           |  /  \/_   _| |__   ___      / / | | |$(COL_CUBE)           |  |"
+			@echo "|  |$(COL_TXT)           |  |   | | | | |_ \ / _ \     \ \ | | |$(COL_CUBE)           |  |"
+			@echo "|  |$(COL_TXT)           |  \__/\ |_| | |_) |  __/ .___/ / |_/ /$(COL_CUBE)           |  |"
+			@echo "|  |____________$(COL_TXT)\_____/\__,_|_.__/ \___| \____/|____/ $(COL_CUBE)___________|  |"
+			@echo "| / $(COL_SHADOW)           /////// ////////// | \\\\\\\\\\\\\\\\\\ \\\\\\\\\\\\\\\\\\\\ \\\\\\\\\\\\\\\\\\\\\\\\$(COL_CUBE)            \ |"
+			@echo "+–––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––+\033[0m"
+			@./Cube3D $(MAP1)
 
 minilib:	
 			@make -C $(MINILIB)

@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/01/14 22:43:45 by siferrar     #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/22 23:11:42 by siferrar    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/01/23 18:05:02 by siferrar    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -48,16 +48,25 @@ void		draw_elems(t_brain *b, int disp_x, int disp_y, double scale)
 				b->ctx->color = 0x00FFFF;
 			else if (val == '2')
 				b->ctx->color = 0x00FF00;
-			else if (ft_strchr("NESW", val))
-				b->ctx->color = 0xDD00DD;
 			else
 				b->ctx->color = 0xFF0000;
-			b->ctx->rect(floor(disp_x + (x * b->map->bloc_size * scale)),
-						floor(disp_y + (y * b->map->bloc_size * scale)),
-						b->map->bloc_size * scale,
-						b->map->bloc_size * scale,
-						1,
-						b->ctx);
+
+			if (ft_strchr("NESW", val))
+			{
+				b->ctx->color = 0xDD00DD;
+				b->ctx->circle(floor(disp_x + (x * b->map->bloc_size * scale) + (b->map->bloc_size * scale)/2),
+								floor(disp_y + (y * b->map->bloc_size * scale) + (b->map->bloc_size * scale)/2),
+								2 * scale,
+								1,
+								b->ctx);
+			}
+			else
+				b->ctx->rect(floor(disp_x + (x * b->map->bloc_size * scale)),
+							floor(disp_y + (y * b->map->bloc_size * scale)),
+							b->map->bloc_size * scale,
+							b->map->bloc_size * scale,
+							1,
+							b->ctx);
 			i++;
 			x++;
 		};

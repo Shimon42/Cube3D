@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/01/14 20:36:43 by siferrar     #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/22 23:10:42 by siferrar    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/01/23 17:59:03 by siferrar    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -39,7 +39,7 @@ int				open_map(t_brain *b, char *map_path)
 	{
 		if ((as_player = add_map_row(b->map, line)) >= 0)
 		{
-			printf("Player found: %d\n", as_player);
+			printf(CYAN"Player found: %d"RST"\n", as_player);
 			//	init_player(b, ret);
 		}
 		if (!ret)
@@ -56,6 +56,7 @@ int				open_map(t_brain *b, char *map_path)
 	print_map_grid(b->map);
 	close(file);
 	draw_fullmap(b, (b->ctx->width / (b->map->width * b->map->bloc_size)));
+	draw_minimap(b, 10, 10, 1);
 	return (1);
 }
 
@@ -75,9 +76,11 @@ int			add_map_row(t_map *map, char *line)
 	char	*new;
 	char	*temp;
 	int		i;
+	int		real;
 	int		as_player;
 
 	i = 0;
+	real = 0;
 	as_player = -1;
 	new = NULL;
 	if (!map->grid)
@@ -93,7 +96,8 @@ int			add_map_row(t_map *map, char *line)
 			free(new);
 			new = temp;
 			if (line[i] == 'N' || line[i] == 'E' || line[i] == 'S' || line[i] == 'W')
-				as_player = i;
+				as_player = real;
+			real++;
 		}
 		i++;
 	}

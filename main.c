@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/01/09 21:29:11 by siferrar     #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/22 23:05:45 by siferrar    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/01/23 17:10:49 by siferrar    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -84,13 +84,11 @@ int	main(int ac, char **av)
 	if(ac != 2)
 		return (-1);
 
-	//printf("Opening %s\n", av[1]);
+	printf(GRN"Opening %s\n\n"RST, av[1]);
 	b = new_brain(1000, 1000, "Cube3D");
 	open_map(b, av[1]);
-	b->ctx->rect(10,10,100,100,1, NULL);
 
 	mlx_key_hook(b->ctx->win_ptr, key_gest, 0);
-	
 	mlx_loop(b->ctx->mlx_ptr);
 	return (0);
 }

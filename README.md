@@ -1,4 +1,4 @@
-# Cube 3D • Alpha 0.1.0
+# Cube 3D • Alpha 0.1.1
 
 -> make - Compile only
 
@@ -7,15 +7,11 @@
 -> [ESC] to quit (brutal killing)
    
    
-    ————————————————————————————————————
-    	Changes:
-    ————————————————————————————————————
-	- Map parsing
-	- Minimap draw
-	- Add t_player, t_camera
-	- Add static context for t_ctx functions line(), rect()
-		-> no more need to precise context after context init
-	- Add init_player()
+	————————————————————————————————————
+		Changes:
+	————————————————————————————————————
+	- Add ctx->circle
+	- Fix bad player detect
 
     ————————————————————————————————————
 		Cur State:
