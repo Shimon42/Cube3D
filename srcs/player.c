@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/01/22 22:24:57 by siferrar     #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/23 19:16:05 by siferrar    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/01/23 22:49:38 by siferrar    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -29,16 +29,23 @@ int		init_player(t_brain *b, int pos_x)
 	b->player->pos->x = (pos_x * b->map->bloc_size) - (b->map->bloc_size/2);
 	b->player->pos->y = (b->map->height * b->map->bloc_size) - b->map->bloc_size/2;
 	disp_point(b->player->pos);
-	printf(" - OK\n");
 	b->player->move = &move;
-	b->player->speed = 1;
+	b->player->speed = 5;
 	b->player->angle = 0;
+	b->player->rot_speed = 45;
+	printf(" - OK\n");
 	return (1);
+}
+
+double deg_to_rad(double angle)
+{
+	return ((angle* 2 * PI)/ 360);
 }
 
 void	move(struct s_player *p, t_ctx *ctx)
 {
-	p->pos->x = p->pos->x + p->speed * cos(p->angle);
-	p->pos->y = p->pos->y + p->speed * sin(p->angle);
+	printf("Angle: %f\n", p->angle);
+	p->pos->x = floor(p->pos->x + (p->speed * cos(deg_to_rad(p->angle))));
+	p->pos->y = floor(p->pos->y + (p->speed * sin(deg_to_rad(p->angle))));
 	ctx->circle(p->pos->x, p->pos->y, 5, 1, ctx);
 }

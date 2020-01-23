@@ -6,21 +6,29 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/01/09 21:29:11 by siferrar     #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/23 17:10:49 by siferrar    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/01/23 23:08:23 by siferrar    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "includes/cube3d.h"
-#define PI 3.14159
 
-int	key_gest(int keycode, void *param)
+
+int	key_gest(int key, t_brain *param)
 {
-  param = 0;
-  printf(CYAN"Key [%d] pressed"RST"\n", keycode);
-  if (keycode == 53)
-    exit(1);
-  return (0);
+	t_brain *b;
+
+	b = (t_brain *)param;
+	printf(CYAN"Key [%d] pressed"RST"\n", key);
+ 	if (key== 13)
+		b->player->move(b->player, b->ctx);
+	/*if (key == 0)
+		b->player->angle -= b->player->rot_speed;
+	if (key == 2)
+		b->player->angle += b->player->rot_speed;*/
+	if (key == 53)
+		exit(1);
+	return (0);
 }
 
 t_point	new_point(int x, int y)
@@ -87,8 +95,20 @@ int	main(int ac, char **av)
 	printf(GRN"Opening %s\n\n"RST, av[1]);
 	b = new_brain(1000, 1000, "Cube3D");
 	open_map(b, av[1]);
+	printf("Map Parsing OK\n");
 
-	mlx_key_hook(b->ctx->win_ptr, key_gest, 0);
+
+
+
+
+
+
+
+
+
+
+	mlx_key_hook(b->ctx->win_ptr, key_gest, b);
+	mlx_do_key_autorepeaton(b->ctx->mlx_ptr);
 	mlx_loop(b->ctx->mlx_ptr);
 	return (0);
 }

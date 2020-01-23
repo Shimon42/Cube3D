@@ -6,14 +6,14 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/01/09 21:30:44 by siferrar     #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/23 19:11:41 by siferrar    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/01/23 22:16:35 by siferrar    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #ifndef CUBE_3D_H
 # define CUBE_3D_H
-
+# define PI 3.14159265359
 # include <stdlib.h>
 # include <unistd.h>
 # include <fcntl.h>
@@ -32,6 +32,7 @@ typedef struct	s_player
 	t_point		*pos;
 	t_camera	*cam;
     double      angle;
+    double      rot_speed;
     double      speed;
 	void		(*move)(struct s_player *, t_ctx *);
 }				t_player;
