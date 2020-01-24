@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/01/09 21:30:44 by siferrar     #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/23 22:16:35 by siferrar    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/01/24 17:03:33 by siferrar    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -26,19 +26,30 @@
 # include "my_canvas.h"
 # include "map.h"
 # include "player.h"
+# include "MiniLib/X.h"
+
+typedef struct	s_camera
+{
+	t_point		*pos;
+	double		height;
+	double		fov;
+}				t_camera;
 
 typedef struct	s_player
 {
+	int			inited;
 	t_point		*pos;
 	t_camera	*cam;
     double      angle;
     double      rot_speed;
     double      speed;
 	void		(*move)(struct s_player *, t_ctx *);
+	void		(*draw)(struct s_player *, t_ctx *);
 }				t_player;
 
 typedef struct	s_brain
 {
+	int			inited;
 	t_ctx		*ctx;
 	t_map		*map;
 	t_player	*player;
@@ -53,9 +64,10 @@ void            draw_frame(t_brain *b, int x, int y, double scale);
 
 int		init_player(t_brain *b, int pos_x);
 void	move(struct s_player*, t_ctx *);
-
+void	draw_player(struct s_player *p, t_ctx *ctx);
 
 void    print_map_debug(char *line);
 void	print_map_grid(t_map *map);
+void	disp_map_s(t_map *m);
 
 #endif

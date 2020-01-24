@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/11/20 15:53:12 by siferrar     #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/23 18:32:00 by siferrar    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/01/24 16:19:40 by siferrar    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -16,6 +16,11 @@
 void	disp_point(t_point *p)
 {
 	printf("{ x:%6d, y:%6d }\n", p->x, p->y);
+}
+
+void	disp_map_s(t_map *m)
+{
+	printf("\nMap:\n\tHeight: [%d]\n\tWidth: [%d]\n\tBloc Size: [%d]\n\tScale: [%f]\n", m->width, m->height, m->bloc_size, m->scale);
 }
 
 void print_map_debug(char *line)

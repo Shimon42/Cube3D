@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/01/14 22:43:45 by siferrar     #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/23 18:05:02 by siferrar    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/01/24 16:26:45 by siferrar    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -16,15 +16,16 @@
 
 void            draw_frame(t_brain *b, int x, int y, double scale)
 {
-    t_map *map;
-
-    map = b->map;
+	disp_map_s(b->map);
+	printf("x: [%d]\ny: [%d]\n", x, y);
+	printf("x: [%f]\ny: [%f]\n", (double)x, (double)y);
     b->ctx->rect(x,
                 y,
-                map->bloc_size * map->width * scale,
-                map->bloc_size * map->height * scale,
+                b->map->bloc_size * b->map->width * scale,
+                b->map->bloc_size * b->map->height * scale,
                 0,
 				b->ctx);
+	disp_map_s(b->map);
 }
 
 void		draw_elems(t_brain *b, int disp_x, int disp_y, double scale)
@@ -53,9 +54,10 @@ void		draw_elems(t_brain *b, int disp_x, int disp_y, double scale)
 
 			if (ft_strchr("NESW", val))
 			{
+				ft_putstr("Printing player\n");
 				b->ctx->color = 0xDD00DD;
-				b->ctx->circle(floor(disp_x + (x * b->map->bloc_size * scale) + (b->map->bloc_size * scale)/2),
-								floor(disp_y + (y * b->map->bloc_size * scale) + (b->map->bloc_size * scale)/2),
+				b->ctx->circle(disp_x + (x * b->map->bloc_size * scale) + (b->map->bloc_size * scale)/2,
+								disp_y + (y * b->map->bloc_size * scale) + (b->map->bloc_size * scale)/2,
 								2 * scale,
 								1,
 								b->ctx);
@@ -72,14 +74,14 @@ void		draw_elems(t_brain *b, int disp_x, int disp_y, double scale)
 		};
 		y++;
 	}
+	ft_putstr("Draw Elems ok\n");
 }
 
 void			draw_minimap(t_brain *b, int x, int y, double scale)
 {
-    t_map *map;
-
-    map = b->map;
+	ft_putstr("Draw frame - ");
     draw_frame(b, x, y, scale);
+	ft_putstr("OK\n");
     draw_elems(b, x, y, scale);
 }
 
@@ -89,4 +91,5 @@ void			draw_fullmap(t_brain *b, double scale)
 				(b->ctx->width - (b->map->width * b->map->bloc_size *  scale))/2,
 				(b->ctx->height - (b->map->height * b->map->bloc_size * scale))/2,
 				scale);
+	ft_putstr("Show Full Map ok\n");
 }

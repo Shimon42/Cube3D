@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/01/14 20:36:43 by siferrar     #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/23 18:47:46 by siferrar    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/01/24 15:41:45 by siferrar    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -55,7 +55,7 @@ int				open_map(t_brain *b, char *map_path)
 	printf(DCYAN" -> Width: [%d]\n", b->map->width);
 	printf(" -> Height:[%d]\n"RST, b->map->height);
 	print_map_grid(b->map);
-	draw_fullmap(b, (b->ctx->width / (b->map->width * b->map->bloc_size)));
+	ft_putstr("Map Parsing OK\n");
 	//draw_minimap(b, 10, 10, 1);
 	return (1);
 }

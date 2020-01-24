@@ -6,19 +6,18 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/01/23 16:58:38 by siferrar     #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/23 17:09:34 by siferrar    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/01/24 16:09:11 by siferrar    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "../../includes/my_canvas.h"
 
-void	draw_circle(int c_x, int c_y, int ray, int fill, t_ctx *ctx)
+void	draw_circle(double c_x, double c_y, int ray, int fill, t_ctx *ctx)
 {
-    
-    int x;
-    int y;
-    int d;
+    int          x;
+    int          y;
+    int          d;
     
     while ((fill == 1 && ray > 0) || fill == 0)
     {
