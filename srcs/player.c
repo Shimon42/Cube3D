@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/01/22 22:24:57 by siferrar     #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/28 17:26:20 by siferrar    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/01/28 20:22:31 by siferrar    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -34,7 +34,7 @@ int		init_player(t_brain *b, int pos_x)
 	b->player->draw = &draw_player;
 	b->player->speed = 5;
 	b->player->angle = 0;
-	b->player->rot_speed = 10;
+	b->player->rot_speed = (5 * PI) / 180;
 	b->player->inited = 1;
 	printf(" - OK\n");
 	return (1);
@@ -45,21 +45,26 @@ double deg_to_rad(double angle)
 	return ((angle * PI)/ 180);
 }
 
+double rad_to_deg(double angle)
+{
+	return (angle * 180.0 / PI);
+}
+
 void	draw_rays(struct s_player *p, t_ctx *ctx)
 {
-	int fov = 90;
+	double fov = deg_to_rad(90);
 	int rayDist = 500;
 	int nbrRay = 6;
 	int i = 0;
-	int cur_a = 0;
+	double cur_a = 0;
 
 	while (i < nbrRay/2 + 1)
 	{
 		ctx->line(new_point(p->pos->x, p->pos->y),
-			new_point(p->pos->x + rayDist * cos(deg_to_rad(p->angle - cur_a)), p->pos->y + rayDist * sin(deg_to_rad(p->angle - cur_a))),
+			new_point(p->pos->x + rayDist * cos(p->angle - cur_a), p->pos->y + rayDist * sin(p->angle - cur_a)),
 			ctx);
 		ctx->line(new_point(p->pos->x, p->pos->y),
-			new_point(p->pos->x + rayDist * cos(deg_to_rad(p->angle + cur_a)), p->pos->y + rayDist * sin(deg_to_rad(p->angle + cur_a))),
+			new_point(p->pos->x + rayDist * cos(p->angle + cur_a), p->pos->y + rayDist * sin(p->angle + cur_a)),
 			ctx);
 		cur_a += (fov/(nbrRay));
 		i++;
@@ -76,8 +81,8 @@ void	draw_player(struct s_player *p, t_ctx *ctx)
 
 void	move(struct s_player *p, int dir)
 {
-	p->pos->y += round(((p->speed * sin(deg_to_rad(p->angle))) * dir));
-	p->pos->x += round(((p->speed * cos(deg_to_rad(p->angle))) * dir));
+	p->pos->y += ((p->speed * sin(p->angle)) * dir);
+	p->pos->x += ((p->speed * cos(p->angle)) * dir);
 	//p->draw(p, ctx);
 }
 
@@ -88,10 +93,10 @@ void	rotate(struct s_player *p, int dir)
 		p->angle -= p->rot_speed;
 	else
 		p->angle += p->rot_speed;
-	if (p->angle > 360)
-		p->angle = p->angle - 360;
+	if (p->angle > 2*PI)
+		p->angle = p->angle - 2 * PI;
 	if (p->angle < 0)
-		p->angle = 360 - p->angle;
-	printf("Angle: %f\n", p->angle);
+		p->angle = 2 * PI - p->angle;
+	printf("Angle: %f\n", rad_to_deg(p->angle));
 	//p->draw(p, ctx);
 }
