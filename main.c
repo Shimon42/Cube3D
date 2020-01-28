@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/01/09 21:29:11 by siferrar     #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/28 23:09:25 by siferrar    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/01/28 23:43:40 by siferrar    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -185,8 +185,9 @@ int loop_hook(t_brain *b)
 	key_press(-1, b);
 	mlx_clear_window(b->ctx->mlx_ptr, b->ctx->win_ptr);
 	init_buff(b->ctx);
-	b->player->draw(b->player, b->ctx);
-	draw_minimap(b, 10, 10, 1);
+//	b->player->draw(b->player, b->ctx);
+	//draw_minimap(b, 10, 10, 1);
+	draw_fullmap(b, (b->ctx->width / (b->map->width * b->map->bloc_size)));
 	mlx_put_image_to_window(b->ctx->mlx_ptr , b->ctx->win_ptr, b->ctx->buff->img, 0, 0);
 	mlx_destroy_image(b->ctx->mlx_ptr, b->ctx->buff->img);
 	return (b->inited);
@@ -202,9 +203,6 @@ int	main(int ac, char **av)
 	printf(GRN"Opening %s\n\n"RST, av[1]);
 	open_map(b, av[1]);
 	
-	//draw_fullmap(b, (b->ctx->width / (b->map->width * b->map->bloc_size)));
-
-
 	mlx_loop_hook(b->ctx->mlx_ptr, &loop_hook, b);
 	mlx_hook(b->ctx->win_ptr, InputOnly, KeyPress, &key_press, b);
 	mlx_key_hook(b->ctx->win_ptr, &key_release, b);

@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/01/22 22:24:57 by siferrar     #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/28 23:19:06 by siferrar    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/01/28 23:41:46 by siferrar    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -82,14 +82,10 @@ void	draw_player(struct s_player *p, t_ctx *ctx)
 
 void	move(struct s_player *p, int dir)
 {
-	if (p->pos->y < p->ctx->height)
-		p->pos->y += round(((p->speed * sin(deg_to_rad(p->angle))) * dir));
-	else
-		p->pos->y = p->ctx->height - 5;
-	if (p->pos->x < p->ctx->width)
-		p->pos->x += round(((p->speed * cos(deg_to_rad(p->angle))) * dir));
-	else
-		p->pos->x = p->ctx->width - 5;
+
+		p->pos->y += ((p->speed * sin(p->angle)) * dir);
+	
+		p->pos->x += ((p->speed * cos(p->angle)) * dir);
 }
 
 void	rotate(struct s_player *p, int dir)

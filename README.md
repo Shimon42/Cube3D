@@ -1,4 +1,4 @@
-# Cube 3D • Alpha 0.2.0
+# Cube 3D • Alpha 0.2.1
 
 -> make - Compile only
 
@@ -10,7 +10,7 @@
 	————————————————————————————————————
 		Changes:
 	————————————————————————————————————
-	- Now buffering frame with mlx_put_img !
+	- [WIP] Player pos on map
 
     ————————————————————————————————————
 		Cur State:
