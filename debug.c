@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/11/20 15:53:12 by siferrar     #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/24 16:19:40 by siferrar    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/01/28 22:07:59 by siferrar    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -21,6 +21,18 @@ void	disp_point(t_point *p)
 void	disp_map_s(t_map *m)
 {
 	printf("\nMap:\n\tHeight: [%d]\n\tWidth: [%d]\n\tBloc Size: [%d]\n\tScale: [%f]\n", m->width, m->height, m->bloc_size, m->scale);
+}
+
+void	disp_buff(t_buff *b)
+{
+	if (b->img)
+		printf("\nimg: set\n");
+	else
+		printf(RED"\nNO IMG\n"RST);
+	printf("addr: [%s]\n", b->addr);
+	printf("bit/pixel: [%d]\n", b->bits_per_pixel);
+	printf("line_len: [%d]\n", b->line_length);
+	printf("endian: [%d]\n", b->endian);
 }
 
 void print_map_debug(char *line)
