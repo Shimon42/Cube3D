@@ -6,28 +6,100 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/01/09 21:29:11 by siferrar     #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/24 17:22:43 by siferrar    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/01/28 17:50:43 by siferrar    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "includes/cube3d.h"
 
+void	disp_keys(t_brain *b)
+{
+	int i;
+
+	i = 0;
+	while (i < 10)
+	{
+		ft_putnbr(b->keys[i]);
+		if (i < 9)
+			ft_putstr(", ");
+		i++;
+	}
+	ft_putchar('\n');
+}
+
+int	is_key_pressed(t_brain *b, int key)
+{
+	int i;
+
+	i = 0;
+	while (i < 10 && key != -1)
+	{
+		if (b->keys[i] == key)
+		{
+			//printf("Key %d is pressed\n", key);
+			//disp_keys(b);
+			return (i);
+		}
+		i++;
+	}
+	return (-1);
+}
+
+int	add_key_pressed(t_brain *b, int key)
+{
+	int i;
+
+	i = 0;
+	while (b->keys[i] != -1 && i < 10)
+		i++;
+	if (i < 10)
+	{
+		b->keys[i] = key;
+		//printf("Add %d\n", key);
+		//disp_keys(b);
+		return (1);
+	}
+	return (0);
+}
+
+int	del_key_pressed(t_brain *b, int key)
+{
+	int i;
+
+	i = 0;
+	while (b->keys[i] != key && i < 10)
+		i++;
+	if (i < 10 && b->keys[i] == key)
+	{
+		b->keys[i] = -1;
+		//printf("Key %d deleted\n", key);
+		//disp_keys(b);
+		return (1);
+	}
+	return (0);
+}
 
 int	key_press(int key, void *param)
 {
-	t_brain *b;
+	t_brain *b;	
 
 	b = (t_brain*)param;
-	printf(CYAN"Key [%d] pressed"RST"\n", key);
- 	if (b && b->inited && b->player && b->player->inited)
+	if (key != -1 && is_key_pressed(b, key) == -1)
 	{
-		if (key== 13)
-			b->player->move(b->player, b->ctx);
-		if (key == 0)
-			b->player->angle -= b->player->rot_speed;
-		if (key == 2)
-			b->player->angle += b->player->rot_speed;
+		printf(CYAN"Key [%d] pressed"RST"\n", key);
+		add_key_pressed(b, key);
+	}
+	if (b && b->inited && b->player && b->player->inited)
+	{
+		if (is_key_pressed(b, 13) >= 0)
+			b->player->move(b->player, 1);
+		if (is_key_pressed(b, 1) >= 0)
+			b->player->move(b->player, -1);
+		if (is_key_pressed(b, 0) >= 0)
+			b->player->rot(b->player, -1);
+		if (is_key_pressed(b, 2) >= 0)
+			b->player->rot(b->player, 1);
 	}
 	if (key == 53)
 		exit(1);
@@ -39,18 +111,8 @@ int	key_release(int key, void *param)
 	t_brain *b;
 
 	b = (t_brain*)param;
-	printf(CYAN"Key [%d] released"RST"\n", key);
- 	if (b && b->inited && b->player && b->player->inited)
-	{
-		if (key== 13)
-			b->player->move(b->player, b->ctx);
-		if (key == 0)
-			b->player->angle -= b->player->rot_speed;
-		if (key == 2)
-			b->player->angle += b->player->rot_speed;
-	}
-	if (key == 53)
-		exit(1);
+//	printf(CYAN"Key [%d] released"RST"\n", key);
+ 	del_key_pressed(b, key);
 	return (0);
 }
 
@@ -63,6 +125,15 @@ t_point	new_point(int x, int y)
 	return (new);
 }
 
+void	init_keys(t_brain *b)
+{
+	int i;
+
+	i = 0;
+	while (i < 10)
+		b->keys[i++] = -1;
+}
+
 t_brain *new_brain(int width, int height, char * name)
 {
 	t_brain *new;
@@ -71,10 +142,11 @@ t_brain *new_brain(int width, int height, char * name)
 	new->ctx = new_ctx(width, height);
 	new->ctx->win_ptr = mlx_new_window(new->ctx->mlx_ptr, width, height, name);
 	new->ctx->color = 0x00FFFF;
+	new->keys = ft_calloc(10, sizeof(int));
+	init_keys(new);
 	new->inited = 1;
 	return (new);
 }
-
 
 int		calc_dist(t_point p1, t_point p2)
 {
@@ -110,7 +182,10 @@ void meditate(t_brain *b)
 
 int loop_hook(t_brain *b)
 {
-
+	draw_minimap(b, 10, 10, 1);
+	key_press(-1, b);
+	b->player->draw(b->player, b->ctx);
+	mlx_clear_window(b->ctx->mlx_ptr, b->ctx->win_ptr);
 	return (b->inited);
 }
 
@@ -124,12 +199,12 @@ int	main(int ac, char **av)
 	printf(GRN"Opening %s\n\n"RST, av[1]);
 	open_map(b, av[1]);
 	
-	draw_fullmap(b, (b->ctx->width / (b->map->width * b->map->bloc_size)));
-
+	//draw_fullmap(b, (b->ctx->width / (b->map->width * b->map->bloc_size)));
+	draw_minimap(b, 10, 10, 1);
 
 	mlx_loop_hook(b->ctx->mlx_ptr, &loop_hook, b);
-	mlx_hook(b->ctx->win_ptr, InputOnly, KeyRelease, &key_release, b);
 	mlx_hook(b->ctx->win_ptr, InputOnly, KeyPress, &key_press, b);
+	mlx_key_hook(b->ctx->win_ptr, &key_release, b);
 
 	//mlx_key_hook(b->ctx->win_ptr, key_gest, b);
 	mlx_do_key_autorepeaton(b->ctx->mlx_ptr);

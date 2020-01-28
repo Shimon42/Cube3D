@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/01/15 18:42:08 by siferrar     #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/24 17:05:40 by siferrar    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/01/28 17:51:34 by siferrar    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -70,6 +70,7 @@ t_ctx	*new_ctx(int width, int height)
 	ctx->rect = &draw_rect;
 	ctx->circle = &draw_circle;
 	ctx->clear = &clear_ctx;
+	ctx->buff_img = mlx_new_image(ctx->mlx_ptr, width, height);
 	return(ctx);
 }
 

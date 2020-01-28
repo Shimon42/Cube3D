@@ -1,4 +1,4 @@
-# Cube 3D • Alpha 0.1.1
+# Cube 3D • Alpha 0.1.2
 
 -> make - Compile only
 
@@ -10,8 +10,9 @@
 	————————————————————————————————————
 		Changes:
 	————————————————————————————————————
-	- Add ctx->circle
-	- Fix bad player detect
+	- Add KeyGest
+	- Add player rays
+	- Better player angle gest
 
     ————————————————————————————————————
 		Cur State:
@@ -20,8 +21,8 @@
 	- [ESC] to quit (brutal killing)
 	- Map parsing, without config
 	- Minimap display
+	- Need to work with buffer_img
 
 	————————————————————————————————————
     	Known Bugs:
 	————————————————————————————————————
-	- init_player -> SEGFAULT

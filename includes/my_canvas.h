@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/01/15 17:33:03 by siferrar     #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/24 16:01:51 by siferrar    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/01/28 17:50:55 by siferrar    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -32,6 +32,7 @@ typedef struct	s_ctx
 	int			line_width;
 	void		*mlx_ptr;
 	void		*win_ptr;
+	void		*buff_img;
 	void		(*line)(t_point, t_point, struct s_ctx *);
 	void		(*rect)(int, int, int, int, int, struct s_ctx *);
 	void		(*circle)(double, double, int, int, struct s_ctx *);
