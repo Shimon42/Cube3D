@@ -1,4 +1,4 @@
-# Cube 3D • Alpha 0.1.2
+# Cube 3D • Alpha 0.2.0
 
 -> make - Compile only
 
@@ -10,9 +10,7 @@
 	————————————————————————————————————
 		Changes:
 	————————————————————————————————————
-	- Add KeyGest
-	- Add player rays
-	- Better player angle gest
+	- Now buffering frame with mlx_put_img !
 
     ————————————————————————————————————
 		Cur State:
@@ -21,8 +19,9 @@
 	- [ESC] to quit (brutal killing)
 	- Map parsing, without config
 	- Minimap display
-	- Need to work with buffer_img
+	- Player and direction display
 
 	————————————————————————————————————
     	Known Bugs:
 	————————————————————————————————————
+	- Line drawn after end of win width is drawn on the other side of the window

@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/01/22 22:24:57 by siferrar     #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/28 17:26:20 by siferrar    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/01/28 23:08:18 by siferrar    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -32,6 +32,7 @@ int		init_player(t_brain *b, int pos_x)
 	b->player->move = &move;
 	b->player->rot = &rotate;
 	b->player->draw = &draw_player;
+	b->player->ctx = b->ctx;
 	b->player->speed = 5;
 	b->player->angle = 0;
 	b->player->rot_speed = 10;
@@ -76,9 +77,14 @@ void	draw_player(struct s_player *p, t_ctx *ctx)
 
 void	move(struct s_player *p, int dir)
 {
-	p->pos->y += round(((p->speed * sin(deg_to_rad(p->angle))) * dir));
-	p->pos->x += round(((p->speed * cos(deg_to_rad(p->angle))) * dir));
-	//p->draw(p, ctx);
+	if (p->pos->y < p->ctx->height)
+		p->pos->y += round(((p->speed * sin(deg_to_rad(p->angle))) * dir));
+	else
+		p->pos->y = p->ctx->height - 5;
+	if (p->pos->x < p->ctx->width)
+		p->pos->x += round(((p->speed * cos(deg_to_rad(p->angle))) * dir));
+	else
+		p->pos->x = p->ctx->width - 5;
 }
 
 void	rotate(struct s_player *p, int dir)
