@@ -3,10 +3,10 @@
 /*                                                              /             */
 /*   context.c                                        .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
-/*   By: siferrar <siferrar@student.le-101.fr>      +:+   +:    +:    +:+     */
+/*   By: simeon <simeon@student.le-101.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/01/15 18:42:08 by siferrar     #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/28 23:06:32 by siferrar    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/01/29 15:34:46 by simeon      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -79,6 +79,7 @@ t_ctx	*new_ctx(int width, int height)
 	ctx->line = &draw_line;
 	ctx->rect = &draw_rect;
 	ctx->circle = &draw_circle;
+	ctx->text = &put_text;
 	ctx->clear = &clear_ctx;
 	init_buff(ctx);
 	disp_buff(ctx->buff);

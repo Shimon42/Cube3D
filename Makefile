@@ -18,13 +18,15 @@ INCLUDES =	$(INCPATH)cube3d.h \
 			\
 			$(MINILIB)mlx.h \
 			\
-			debug.h
+			debug.h\
+			debug_defines.h
 
 #--------	SRCS --
 SRCS = 		main.c \
 			$(SRCSPATH)Canvas/draw_line.c \
 			$(SRCSPATH)Canvas/rect.c \
 			$(SRCSPATH)Canvas/circle.c \
+			$(SRCSPATH)Canvas/text.c \
 			$(SRCSPATH)Canvas/context.c \
 			$(SRCSPATH)map_parsing.c \
 			$(SRCSPATH)draw_map.c \

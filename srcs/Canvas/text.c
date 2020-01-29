@@ -1,21 +1,19 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   debug.h                                          .::    .:/ .      .::   */
+/*   text.c                                           .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: simeon <simeon@student.le-101.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2020/01/29 15:20:13 by simeon       #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/29 15:28:07 by simeon      ###    #+. /#+    ###.fr     */
+/*   Created: 2020/01/29 15:32:29 by simeon       #+#   ##    ##    #+#       */
+/*   Updated: 2020/01/29 15:35:31 by simeon      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
-#ifndef DEBUG_H
-# define DEBUG_H
-# include "includes/cube3d.h"
-# include "includes/map.h"
-# include "includes/my_canvas.h"
+#include "../../includes/my_canvas.h"
 
-
-#endif
+void			put_text(char *str, int x, int y, t_ctx *ctx)
+{
+    mlx_string_put(ctx->mlx_ptr, ctx->win_ptr, x, y, ctx->color, str);
+}

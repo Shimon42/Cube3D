@@ -3,10 +3,10 @@
 /*                                                              /             */
 /*   draw_map.c                                       .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
-/*   By: siferrar <siferrar@student.le-101.fr>      +:+   +:    +:    +:+     */
+/*   By: simeon <simeon@student.le-101.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/01/14 22:43:45 by siferrar     #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/28 23:44:05 by siferrar    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/01/29 15:38:05 by simeon      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -57,6 +57,13 @@ void		draw_elems(t_brain *b, int disp_x, int disp_y, double scale)
 						b->map->bloc_size * scale,
 						1,
 						b->ctx);
+			b->ctx->color = 0x999999;
+			b->ctx->rect(floor(disp_x + (x * b->map->bloc_size * scale)),
+						floor(disp_y + (y * b->map->bloc_size * scale)),
+						b->map->bloc_size * scale,
+						b->map->bloc_size * scale,
+						0,
+						b->ctx);
 			i++;
 			x++;
 		};
@@ -68,8 +75,8 @@ void		draw_elems(t_brain *b, int disp_x, int disp_y, double scale)
 void			draw_player_map(t_brain *b, t_player *p, t_point m_pos)
 {
 	b->ctx->color = 0xFF00FF;
-	b->ctx->circle(m_pos.x + (p->pos->x /  (b->map->bloc_size * b->map->scale)) + (b->map->bloc_size * b->map->scale)/2,
-					m_pos.y + (p->pos->y / (b->map->bloc_size * b->map->scale)) + (b->map->bloc_size * b->map->scale)/2,
+	b->ctx->circle(m_pos.x + (p->pos->x + (b->map->bloc_size * b->map->scale)) + (b->map->bloc_size * b->map->scale)/2,
+					m_pos.y + (p->pos->y + (b->map->bloc_size * b->map->scale)) + (b->map->bloc_size * b->map->scale)/2,
 					2 * b->map->scale,
 					1,
 					b->ctx);

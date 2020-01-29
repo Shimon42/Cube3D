@@ -3,15 +3,20 @@
 /*                                                              /             */
 /*   debug.c                                          .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
-/*   By: siferrar <siferrar@student.le-101.fr>      +:+   +:    +:    +:+     */
+/*   By: simeon <simeon@student.le-101.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/11/20 15:53:12 by siferrar     #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/28 22:07:59 by siferrar    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/01/29 15:45:25 by simeon      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "includes/cube3d.h"
+#include "debug.h"
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
 void	disp_point(t_point *p)
 {
@@ -33,6 +38,15 @@ void	disp_buff(t_buff *b)
 	printf("bit/pixel: [%d]\n", b->bits_per_pixel);
 	printf("line_len: [%d]\n", b->line_length);
 	printf("endian: [%d]\n", b->endian);
+}
+
+void print_player_debug(t_brain *b)
+{
+	b->ctx->color = 0x88000000;
+	b->ctx->rect(10,10, 200,100, 1, b->ctx);
+	b->ctx->color = 0xFFFFFF;
+	b->ctx->text("PosX: ", 12, 12, b->ctx);
+
 }
 
 void print_map_debug(char *line)

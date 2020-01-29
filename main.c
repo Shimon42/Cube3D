@@ -3,10 +3,10 @@
 /*                                                              /             */
 /*   main.c                                           .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
-/*   By: siferrar <siferrar@student.le-101.fr>      +:+   +:    +:    +:+     */
+/*   By: simeon <simeon@student.le-101.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/01/09 21:29:11 by siferrar     #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/28 23:43:40 by siferrar    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/01/29 15:24:38 by simeon      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -188,6 +188,7 @@ int loop_hook(t_brain *b)
 //	b->player->draw(b->player, b->ctx);
 	//draw_minimap(b, 10, 10, 1);
 	draw_fullmap(b, (b->ctx->width / (b->map->width * b->map->bloc_size)));
+	print_player_debug(b);
 	mlx_put_image_to_window(b->ctx->mlx_ptr , b->ctx->win_ptr, b->ctx->buff->img, 0, 0);
 	mlx_destroy_image(b->ctx->mlx_ptr, b->ctx->buff->img);
 	return (b->inited);
