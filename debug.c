@@ -3,10 +3,10 @@
 /*                                                              /             */
 /*   debug.c                                          .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
-/*   By: simeon <simeon@student.le-101.fr>          +:+   +:    +:    +:+     */
+/*   By: siferrar <siferrar@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/11/20 15:53:12 by siferrar     #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/29 15:45:25 by simeon      ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/01/29 22:12:12 by siferrar    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -46,6 +46,7 @@ void print_player_debug(t_brain *b)
 	b->ctx->rect(10,10, 200,100, 1, b->ctx);
 	b->ctx->color = 0xFFFFFF;
 	b->ctx->text("PosX: ", 12, 12, b->ctx);
+	b->ctx->text(ft_itoa(b->player->pos->x), 65, 12, b->ctx);
 
 }
 
@@ -101,21 +102,14 @@ void		print_map_grid(t_map *map)
 	}
 }
 
-/*
+
 void disp_brain(t_brain *b)
 {
-    t_param **params;
-
-    params = &(b->params);
     printf(CYAN"┌────────────────────────────\n");
     printf("|----------- BRAIN ----------\n");
     printf("|\n");
-    printf(YELO"|\tParams:\n");
-    while (*params != NULL)
-    {
-		disp_param(*params);
-        params = &((*params)->next);
-    }
+
+	printf("|\tINITED: %d\n", b->inited);
+
     printf("────────────────────────────"RST"\n");
 }
-*/

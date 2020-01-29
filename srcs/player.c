@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/01/22 22:24:57 by siferrar     #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/28 23:41:46 by siferrar    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/01/29 23:03:42 by siferrar    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -33,10 +33,11 @@ int		init_player(t_brain *b, int pos_x)
 	b->player->rot = &rotate;
 	b->player->draw = &draw_player;
 	b->player->ctx = b->ctx;
-	b->player->speed = 5;
+	b->player->speed = 2;
 	b->player->angle = 0;
 	b->player->rot_speed = (5 * PI) / 180;
 	b->player->inited = 1;
+	b->player->brain = b;
 	printf(" - OK\n");
 	return (1);
 }
@@ -78,14 +79,31 @@ void	draw_player(struct s_player *p, t_ctx *ctx)
 	draw_rays(p, ctx);
 }
 
-
-
 void	move(struct s_player *p, int dir)
 {
+	t_map *map;
+	t_brain *b;
 
+	b = (t_brain *)p->brain;
+	map = b->map;
+
+	if (p->pos->y < map->px_height)
+	{
 		p->pos->y += ((p->speed * sin(p->angle)) * dir);
-	
+		if (p->pos->y < 0)
+			p->pos->y = 0;
+	}
+	else
+		p->pos->y = map->px_height - 1;
+
+	if (p->pos->x < map->px_width)
+	{
 		p->pos->x += ((p->speed * cos(p->angle)) * dir);
+		if (p->pos->x < 0)
+			p->pos->x = 0;
+	}
+	else
+		p->pos->x = map->px_width - 1;
 }
 
 void	rotate(struct s_player *p, int dir)

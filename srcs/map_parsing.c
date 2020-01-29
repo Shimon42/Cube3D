@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/01/14 20:36:43 by siferrar     #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/28 23:45:07 by siferrar    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/01/29 20:38:11 by siferrar    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -20,7 +20,7 @@ int				init_map(t_map **map)
 	(*map)->width = 0;
 	(*map)->grid = NULL;
 	(*map)->scale = 1;
-	(*map)->bloc_size = 10;
+	(*map)->bloc_size = 64;
 
 	return (1);
 }
@@ -55,6 +55,10 @@ int				open_map(t_brain *b, char *map_path)
 	printf(DCYAN" -> Width: [%d]\n", b->map->width);
 	printf(" -> Height:[%d]\n"RST, b->map->height);
 	print_map_grid(b->map);
+	b->map->px_width = b->map->width * b->map->bloc_size;
+	b->map->px_height = b->map->height * b->map->bloc_size;
+	printf("Real Width: %d\n", b->map->px_width);
+	printf("Real Height: %d\n", b->map->px_height);
 	ft_putstr("Map Parsing OK\n");
 	//draw_minimap(b, 10, 10, 1);
 	return (1);

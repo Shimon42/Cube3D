@@ -3,10 +3,10 @@
 /*                                                              /             */
 /*   main.c                                           .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
-/*   By: simeon <simeon@student.le-101.fr>          +:+   +:    +:    +:+     */
+/*   By: siferrar <siferrar@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/01/09 21:29:11 by siferrar     #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/29 15:24:38 by simeon      ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/01/29 22:59:04 by siferrar    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -185,10 +185,15 @@ int loop_hook(t_brain *b)
 	key_press(-1, b);
 	mlx_clear_window(b->ctx->mlx_ptr, b->ctx->win_ptr);
 	init_buff(b->ctx);
-//	b->player->draw(b->player, b->ctx);
-	//draw_minimap(b, 10, 10, 1);
-	draw_fullmap(b, (b->ctx->width / (b->map->width * b->map->bloc_size)));
-	print_player_debug(b);
+	//b->player->draw(b->player, b->ctx);
+	if (is_key_pressed(b, 3) == -1)
+		draw_fullmap(b, 0.15);
+	else
+	{
+		draw_fullmap(b, 0);
+		draw_minimap(b, 10, 10, b->ctx->width * 0.2);
+	}
+//	print_player_debug(b);
 	mlx_put_image_to_window(b->ctx->mlx_ptr , b->ctx->win_ptr, b->ctx->buff->img, 0, 0);
 	mlx_destroy_image(b->ctx->mlx_ptr, b->ctx->buff->img);
 	return (b->inited);
@@ -200,7 +205,7 @@ int	main(int ac, char **av)
 
 	if(ac != 2)
 		return (-1);
-	b = new_brain(1000, 1000, "Cube3D");
+	b = new_brain(1920, 1080, "Cube3D");
 	printf(GRN"Opening %s\n\n"RST, av[1]);
 	open_map(b, av[1]);
 	

@@ -1,27 +1,27 @@
-# Cube 3D • Alpha 0.2.1
+# Cube 3D • Alpha 0.2.2
 
 -> make - Compile only
 
 -> make launch - Compile changes & launch
 
--> [ESC] to quit (brutal killing)
-   
-   
+	[ESC] to quit (brutal killing)
+	[F]Expand map
+
 	————————————————————————————————————
 		Changes:
 	————————————————————————————————————
-	- [WIP] Player pos on map
+	- Good player pos on map
+	- [F] key to expand map
 
     ————————————————————————————————————
 		Cur State:
 	————————————————————————————————————
-	- Open new window
-	- [ESC] to quit (brutal killing)
 	- Map parsing, without config
 	- Minimap display
-	- Player and direction display
+	- Player and direction can be displayed
 
 	————————————————————————————————————
     	Known Bugs:
 	————————————————————————————————————
 	- Line drawn after end of win width is drawn on the other side of the window
+	- Player speed is different depending on the angle

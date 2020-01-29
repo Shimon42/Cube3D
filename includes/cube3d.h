@@ -3,10 +3,10 @@
 /*                                                              /             */
 /*   cube3d.h                                         .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
-/*   By: simeon <simeon@student.le-101.fr>          +:+   +:    +:    +:+     */
+/*   By: siferrar <siferrar@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/01/09 21:30:44 by siferrar     #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/29 15:28:13 by simeon      ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/01/29 21:41:23 by siferrar    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -45,6 +45,7 @@ typedef struct	s_player
     double      rot_speed;
     double      speed;
 	t_ctx		*ctx;
+	void		*brain;
 	void		(*rot)(struct s_player *, int);
 	void		(*move)(struct s_player *, int);
 	void		(*draw)(struct s_player *, t_ctx *);
@@ -61,8 +62,8 @@ typedef struct	s_brain
 }				t_brain;
 
 int				open_map(t_brain *b, char *map_path);
-void			draw_minimap(t_brain *b, int x, int y, double scale);
-void			draw_fullmap(t_brain *b, double scale);
+void			draw_minimap(t_brain *b, int x, int y, int width);
+void			draw_fullmap(t_brain *b, double ease_val);
 void            draw_frame(t_brain *b, int x, int y, double scale);
 
 
@@ -77,5 +78,6 @@ void	print_map_grid(t_map *map);
 void	disp_map_s(t_map *m);
 void	disp_buff(t_buff *b);
 void    print_player_debug(t_brain *b);
+void disp_brain(t_brain *b);
 
 #endif

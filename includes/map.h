@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/01/14 22:46:16 by siferrar     #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/22 17:49:40 by siferrar    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/01/29 20:35:42 by siferrar    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -21,8 +21,11 @@ typedef struct	s_map
 	char		*grid;
 	int			width;
 	int			height;
+	int			px_width;
+	int			px_height;
 	int			bloc_size;		
 	double		scale;
+	int			mini_map_width;
 }				t_map;
 
 int				init_map(t_map **map);
