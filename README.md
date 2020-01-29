@@ -4,11 +4,10 @@
 
 -> make launch - Compile changes & launch
 
-Key [ESC] to quit (brutal killing)
 
-Key [F] to expand map
+[ESC] - quit (brutal killing)
 
-————————————————————————————————————————————————————
+[F] - expand map
 
 	————————————————————————————————————
 		Changes:
