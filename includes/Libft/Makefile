@@ -33,6 +33,7 @@ SRCS	=	$(MATHLIB)ft_abs.c \
 			$(PRINTLIB)ft_putstr_fd.c \
 			$(PRINTLIB)ft_putstr.c \
 			$(PRINTLIB)ft_putnstr.c \
+			$(PRINTLIB)ft_putint.c \
 			\
 			$(STRLIB)ft_split.c \
 			$(STRLIB)ft_strchr.c \

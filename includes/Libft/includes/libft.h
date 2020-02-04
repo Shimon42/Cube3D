@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/10/11 12:00:43 by siferrar     #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/14 21:31:19 by siferrar    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/02/03 22:23:59 by siferrar    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -49,6 +49,7 @@ void				ft_putstr(char *str);
 size_t				ft_putnstr(char *str, size_t maxlen);
 size_t				ft_putihex(unsigned int n, int upper);
 size_t				ft_puthex(unsigned long n, int upper);
+void				ft_putint(char *name, int nbr);
 char				**ft_split(char const *s, char c);
 int					ft_findchar(const char *needles, const char *str);
 char				*ft_strchr(const char *s, int c);

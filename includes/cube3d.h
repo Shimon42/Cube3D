@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/01/09 21:30:44 by siferrar     #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/29 21:41:23 by siferrar    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/02/03 22:04:23 by siferrar    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -65,12 +65,14 @@ int				open_map(t_brain *b, char *map_path);
 void			draw_minimap(t_brain *b, int x, int y, int width);
 void			draw_fullmap(t_brain *b, double ease_val);
 void            draw_frame(t_brain *b, int x, int y, double scale);
-
-
+t_point			map_scaled(t_point *p, t_map *m);
+int get_grid(t_map *m, int x, int y);
 int		init_player(t_brain *b, int pos_x);
 void	move(struct s_player*, int dir);
 void	rotate(struct s_player *p, int dir);
 void	draw_player(struct s_player *p, t_ctx *ctx);
+
+void draw_ray(t_player *p, t_map *m, double angle);
 
 /* ---------------- DEBUG ---------*/
 void    print_map_debug(char *line);

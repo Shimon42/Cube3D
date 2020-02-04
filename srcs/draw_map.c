@@ -6,13 +6,26 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/01/14 22:43:45 by siferrar     #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/29 23:02:53 by siferrar    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/02/03 22:09:01 by siferrar    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "../includes/cube3d.h"
 
+int get_grid(t_map *m, int x, int y)
+{
+	return (m->grid[y * m->width + x] - '0');
+}
+
+t_point			map_scaled(t_point *p, t_map *m)
+{
+	t_point ret;
+
+	ret.x = p->x * m->scale;
+	ret.y = p->y * m->scale;
+	return(ret);
+}
 
 void            draw_frame(t_brain *b, int x, int y, double scale)
 {
