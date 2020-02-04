@@ -5,7 +5,7 @@
 -> make launch - Compile changes & launch
 
 
-[ESC] - quit (brutal killing)
+<span style="color:green">[ESC]</span> - quit (brutal killing)
 
 [F] - expand map
 
