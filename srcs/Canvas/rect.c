@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/01/14 17:15:35 by siferrar     #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/28 21:56:39 by siferrar    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/02/04 21:18:45 by siferrar    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -32,8 +32,8 @@ void	draw_rect(int x, int y, int width, int height, int fill, t_ctx *ctx)
 	{
 		draw_line(new_point(x, y), new_point(x + width, y), ctx);
 		draw_line(new_point(x, y), new_point(x, y + height), ctx);
-		draw_line(new_point(x + width, y), new_point(x + width, y + height), ctx);
-		draw_line(new_point(x, y + height), new_point(x + width, y + height), ctx);
+		draw_line(new_point(x + width - 1, y), new_point(x + width - 1, y + height - 1), ctx);
+		draw_line(new_point(x, y + height - 1), new_point(x + width - 1, y + height - 1), ctx);
 	}
 	return ;
 }

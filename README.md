@@ -1,4 +1,4 @@
-# Cube 3D • Alpha 0.2.2
+# Cube 3D • Alpha 0.2.3
 
 -> make - Compile only
 
@@ -12,13 +12,15 @@
 	————————————————————————————————————
 		Changes:
 	————————————————————————————————————
-	- Good player pos on map
-	- [F] key to expand map
+	- Closest grid x and y is detected and displayed on minimap
+	- Correct draw_rect (size was size + 1) (Not sure 100%)
+	- Cur pos in grid (yellow square on the minimap)
 
     ————————————————————————————————————
 		Cur State:
 	————————————————————————————————————
 	- Map parsing, without config
+	- Detect closest grid (Horizontal and Vertical)
 	- Minimap display
 	- Player and direction can be displayed
 
