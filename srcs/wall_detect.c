@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/01/30 22:11:09 by siferrar     #+#   ##    ##    #+#       */
-/*   Updated: 2020/02/04 23:56:34 by siferrar    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/02/05 01:00:13 by siferrar    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -39,39 +39,52 @@ t_point	 closest_grid_v(t_point *p, t_map *m, double angle)
 
 t_point closest_wall_h(t_point *p, t_map *m, double angle)
 {
-	t_point closest;
 	t_point offset;
 	t_point cur_point;
+	
 	int wall;
-
 	wall = 0;
+	int try = 0;
 	cur_point = closest_grid_h(p, m, angle);
 	if (angle > 2 * PI * 0.75 && angle < PI / 2)
 		offset.y = m->bloc_size;
 	else
 		offset.y = -m->bloc_size;
 	offset.x = m->bloc_size / tan(angle);
-	while (wall == 0)
+	while (wall == 0 && try++ < 1)
 	{
-	//	if ()
-		wall = 1;
-		closest.x = 1;
-		closest.y = 2;
+		if (get_grid(m, p->x + cur_point.x, p->y + cur_point.y, 1) == 1) 
+			wall = 1;
+		cur_point.x += offset.x;
+		cur_point.y += offset.y;
 	}
-	return (closest);
+	return (cur_point);
 }
-/*
-t_point closest_wall_h(t_point *p, t_map *m, double angle)
-{
-	t_point closest;
-	t_point offset;
 
+t_point closest_wall_v(t_point *p, t_map *m, double angle)
+{
+	t_point cur_point;
+	t_point offset;
+	int wall;
+
+	wall = 0;
+	cur_point = closest_grid_v(p, m, angle);
+	cur_point.x += p->x;
+	cur_point.y += p->y;
 	if (angle < 2 * PI * 0.75 && angle > PI / 2)
 		offset.x = m->bloc_size;
 	else
 		offset.x = -m->bloc_size;
 	offset.y = m->bloc_size / tan(angle);
-}*/
+	while (wall == 0)
+	{
+		if (get_grid(m, cur_point.x, cur_point.y,1) == 1) 
+			wall = 1;
+		cur_point.x += offset.x;
+		cur_point.y += offset.y;
+	}
+	return (cur_point);
+}
 
 void draw_ray(t_player *p, t_map *m, double angle)
 {
@@ -80,7 +93,7 @@ void draw_ray(t_player *p, t_map *m, double angle)
 	t_point p_pos;
 //	double ray_dist;
 
-	p_pos = to_grid(p->pos, m);
+	p_pos = to_grid(p->pos->x, p->pos->y, m);
 	cur_h = closest_grid_h(p->pos, m, angle);
 	cur_v = closest_grid_v(p->pos, m, angle);
 	ft_putchar('\n');

@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/01/09 21:30:44 by siferrar     #+#   ##    ##    #+#       */
-/*   Updated: 2020/02/04 22:52:54 by siferrar    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/02/05 00:58:29 by siferrar    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -66,26 +66,28 @@ void			draw_minimap(t_brain *b, int x, int y, int width);
 void			draw_fullmap(t_brain *b, double ease_val);
 void            draw_frame(t_brain *b, int x, int y, double scale);
 t_point			map_scaled(t_point *p, t_map *m);
-int				get_grid(t_map *m, int x, int y);
-t_point			to_grid(t_point *p, t_map *m);
+int				get_grid(t_map *m, int x, int y, int need_rescale);
+t_point			to_grid(int x, int y, t_map *m);
 
-int		init_player(t_brain *b, int pos_x);
-void	move(struct s_player*, int dir);
-void	rotate(struct s_player *p, int dir);
-void	draw_player(struct s_player *p, t_ctx *ctx);
+int				init_player(t_brain *b, int pos_x);
+void			move(struct s_player*, int dir);
+void			rotate(struct s_player *p, int dir);
+void			draw_player(struct s_player *p, t_ctx *ctx);
 
 t_point			closest_grid_h(t_point *p, t_map *m, double angle);
 t_point			closest_grid_v(t_point *p, t_map *m, double angle);
+t_point			closest_wall_h(t_point *p, t_map *m, double angle);
+t_point			closest_wall_v(t_point *p, t_map *m, double angle);
 
-void draw_ray(t_player *p, t_map *m, double angle);
-void	draw_minimap_rays(t_brain *b, t_point disp);
+void			draw_ray(t_player *p, t_map *m, double angle);
+void			draw_minimap_rays(t_brain *b, t_point disp);
 
 /* ---------------- DEBUG ---------*/
-void    print_map_debug(char *line);
-void	print_map_grid(t_map *map);
-void	disp_map_s(t_map *m);
-void	disp_buff(t_buff *b);
-void    print_player_debug(t_brain *b);
-void disp_brain(t_brain *b);
+void    		print_map_debug(char *line);
+void			print_map_grid(t_map *map);
+void			disp_map_s(t_map *m);
+void			disp_buff(t_buff *b);
+void    		print_player_debug(t_brain *b);
+void			disp_brain(t_brain *b);
 
 #endif
