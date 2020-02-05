@@ -1,4 +1,4 @@
-# Cube 3D • Alpha 0.2.3
+# Cube 3D • Alpha 0.3.0
 
 -> make - Compile only
 
@@ -12,15 +12,13 @@
 	————————————————————————————————————
 		Changes:
 	————————————————————————————————————
-	- Closest grid x and y is detected and displayed on minimap
-	- Correct draw_rect (size was size + 1) (Not sure 100%)
-	- Cur pos in grid (yellow square on the minimap)
+	- CLOSEST WALL HORIZONTALLY AND VERTICALLY !!
 
     ————————————————————————————————————
 		Cur State:
 	————————————————————————————————————
 	- Map parsing, without config
-	- Detect closest grid (Horizontal and Vertical)
+	- Detect closest wall (Horizontally and Vertically)
 	- Minimap display
 	- Player and direction can be displayed
 
