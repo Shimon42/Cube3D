@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/01/14 22:43:45 by siferrar     #+#   ##    ##    #+#       */
-/*   Updated: 2020/02/05 00:59:56 by siferrar    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/02/05 18:02:54 by siferrar    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -17,11 +17,11 @@ int get_grid(t_map *m, int x, int y, int need_rescale)
 {
 	t_point scaled;
 
-	ft_putstr("Wanting val of grid [");
+	/*ft_putstr("Wanting val of grid [");
 	ft_putnbr(x);
 	ft_putstr("][");
 	ft_putnbr(y);
-	ft_putstr("] - ");
+	ft_putstr("] - ");*/
 	if (x > 0 && y > 0)
 	{
 		if (need_rescale)
@@ -30,13 +30,13 @@ int get_grid(t_map *m, int x, int y, int need_rescale)
 			x = scaled.x;
 			y = scaled.y;
 		}
-		ft_putstr(GRN"OK -> "YELO);
-		ft_putchar(m->grid[y * m->width + x]);
-		ft_putstr("\n"RST);
+	//	ft_putstr(GRN"OK -> "YELO);
+		//ft_putchar(m->grid[y * m->width + x]);
+		//ft_putstr("\n"RST);
 		return (m->grid[y * m->width + x] - '0');
 	}else
 	{
-		ft_putstr(RED"BAD\n"RST);
+		//ft_putstr(RED"BAD\n"RST);
 		return (-1);
 	}
 }
@@ -48,11 +48,11 @@ t_point			to_grid(int x, int y, t_map *m)
 	
 	ret.x = x / m->bloc_size;
 	ret.y = y / m->bloc_size;
-	ft_putstr("TOGRID[");
-	ft_putnbr(ret.x);
-	ft_putstr("][");
-	ft_putnbr(ret.y);
-	ft_putstr("] \n");
+	//ft_putstr("TOGRID[");
+	//ft_putnbr(ret.x);
+	//ft_putstr("][");
+	//ft_putnbr(ret.y);
+	//ft_putstr("] \n");
 	return(ret);
 }
 
@@ -156,21 +156,24 @@ void	draw_minimap_closest(t_brain *b, t_point disp)
 
 void	draw_minimap_rays(t_brain *b, t_point disp)
 {
-		t_point close_h = closest_wall_h(b->player->pos, b->map, b->player->angle);
-		//t_point close_v = closest_wall_v(b->player->pos, b->map, b->player->angle);
+		t_point close_h = closest_wall_h(b, b->player->pos, b->player->angle);
+		t_point close_v = closest_wall_v(b, b->player->pos, b->player->angle);
 		t_point p_pos = map_scaled(b->player->pos, b->map);
 		int ray_length = 500;
 		close_h = map_scaled(&close_h, b->map);
-		//close_v = map_scaled(&close_v, b->map);
+		close_v = map_scaled(&close_v, b->map);
 		b->ctx->color = 0xFFFF00;
 		b->ctx->circle(disp.x + close_h.x, disp.y + close_h.y, 3, 1, b->ctx);
+		/*b->ctx->line(new_point(disp.x + p_pos.x, disp.y + p_pos.y),
+			new_point(disp.x + close_h.x , disp.y + close_h.y ),
+			b->ctx);*/
 		b->ctx->color = 0xFF00FF;
-		//b->ctx->circle(disp.x + close_v.x, disp.y + close_v.y, 3, 1, b->ctx);
-	//	b->ctx->color = 0x00FFFF;
+		b->ctx->circle(disp.x + close_v.x, disp.y + close_v.y, 3, 1, b->ctx);
+		b->ctx->color = 0x00FFFF;
 		
 		
 		b->ctx->line(new_point(disp.x + p_pos.x, disp.y + p_pos.y),
-			new_point(disp.x + p_pos.x  + ray_length * cos(b->player->angle), disp.y + p_pos.y + ray_length * sin(b->player->angle) ),
+			new_point(disp.x + p_pos.x  + ray_length * cos(b->player->angle), disp.y + p_pos.y  * sin(b->player->angle) ),
 			b->ctx);
 
 }
@@ -195,7 +198,7 @@ void			draw_minimap(t_brain *b, int x, int y, int width)
 	scale = ((double)(width / (double)b->map->px_width)) ;
 	b->map->scale = scale;
 	
-    draw_frame(b, x, y, scale);
+  //  draw_frame(b, x, y, scale);
 	//ft_putstr("OK\n");
     draw_elems(b, x, y, scale);
 	draw_player_map(b, b->player, new_point(x, y));

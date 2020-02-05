@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/01/09 21:30:44 by siferrar     #+#   ##    ##    #+#       */
-/*   Updated: 2020/02/05 00:58:29 by siferrar    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/02/05 16:13:30 by siferrar    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -76,8 +76,8 @@ void			draw_player(struct s_player *p, t_ctx *ctx);
 
 t_point			closest_grid_h(t_point *p, t_map *m, double angle);
 t_point			closest_grid_v(t_point *p, t_map *m, double angle);
-t_point			closest_wall_h(t_point *p, t_map *m, double angle);
-t_point			closest_wall_v(t_point *p, t_map *m, double angle);
+t_point			closest_wall_h(t_brain *b, t_point *p, double angle);
+t_point			closest_wall_v(t_brain *b, t_point *p, double angle);
 
 void			draw_ray(t_player *p, t_map *m, double angle);
 void			draw_minimap_rays(t_brain *b, t_point disp);

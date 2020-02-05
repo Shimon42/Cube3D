@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/01/30 22:11:09 by siferrar     #+#   ##    ##    #+#       */
-/*   Updated: 2020/02/05 01:00:13 by siferrar    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/02/05 17:59:15 by siferrar    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -37,23 +37,25 @@ t_point	 closest_grid_v(t_point *p, t_map *m, double angle)
 	return (closest);
 }
 
-t_point closest_wall_h(t_point *p, t_map *m, double angle)
+t_point closest_wall_h(t_brain *b, t_point *p, double angle)
 {
 	t_point offset;
 	t_point cur_point;
-	
 	int wall;
 	wall = 0;
-	int try = 0;
-	cur_point = closest_grid_h(p, m, angle);
-	if (angle > 2 * PI * 0.75 && angle < PI / 2)
-		offset.y = m->bloc_size;
+
+	cur_point = closest_grid_h(p, b->map, angle);
+	if (angle > PI && angle < 2 * PI)
+		offset.y = -b->map->bloc_size;
 	else
-		offset.y = -m->bloc_size;
-	offset.x = m->bloc_size / tan(angle);
-	while (wall == 0 && try++ < 1)
+		offset.y = b->map->bloc_size;
+	offset.x = (b->map->bloc_size / tan(angle));
+	disp_point(&offset);
+	ft_putstr("Cur point");
+	disp_point(&cur_point);
+	while (wall == 0 && cur_point.x < b->map->px_width && cur_point.x > 0)
 	{
-		if (get_grid(m, p->x + cur_point.x, p->y + cur_point.y, 1) == 1) 
+		if (get_grid(b->map, cur_point.x, cur_point.y, 1) == 1)
 			wall = 1;
 		cur_point.x += offset.x;
 		cur_point.y += offset.y;
@@ -61,24 +63,22 @@ t_point closest_wall_h(t_point *p, t_map *m, double angle)
 	return (cur_point);
 }
 
-t_point closest_wall_v(t_point *p, t_map *m, double angle)
+t_point closest_wall_v(t_brain *b, t_point *p, double angle)
 {
 	t_point cur_point;
 	t_point offset;
 	int wall;
 
 	wall = 0;
-	cur_point = closest_grid_v(p, m, angle);
-	cur_point.x += p->x;
-	cur_point.y += p->y;
+	cur_point = closest_grid_v(p, b->map, angle);
 	if (angle < 2 * PI * 0.75 && angle > PI / 2)
-		offset.x = m->bloc_size;
+		offset.x = b->map->bloc_size;
 	else
-		offset.x = -m->bloc_size;
-	offset.y = m->bloc_size / tan(angle);
-	while (wall == 0)
+		offset.x = -b->map->bloc_size;
+	offset.y = b->map->bloc_size / tan(angle);
+	while (wall == 0 && cur_point.y < b->map->px_height && cur_point.y > 0)
 	{
-		if (get_grid(m, cur_point.x, cur_point.y,1) == 1) 
+		if (get_grid(b->map, cur_point.x, cur_point.y,1) == 1) 
 			wall = 1;
 		cur_point.x += offset.x;
 		cur_point.y += offset.y;
