@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/01/22 22:24:57 by siferrar     #+#   ##    ##    #+#       */
-/*   Updated: 2020/02/06 16:11:46 by siferrar    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/02/06 22:51:51 by siferrar    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -47,10 +47,13 @@ int		init_player(t_brain *b, int pos_x)
 	b->player->rot = &rotate;
 	b->player->draw = &draw_player;
 	b->player->ctx = b->ctx;
-	b->player->speed = 2;
-	b->player->angle = 0;
+	b->player->speed = 3;
+	b->player->angle = PI*0.75*2;
 	b->player->rot_speed = (1 * PI) / 180;
 	b->player->inited = 1;
+	b->player->step = malloc(sizeof(t_point));
+	b->player->step->x = 1;
+	b->player->step->y = 1;
 	b->player->brain = b;
 	printf(" - OK\n");
 	return (1);
@@ -103,7 +106,7 @@ void	move(struct s_player *p, int dir)
 
 	if (p->pos->y < map->px_height)
 	{
-		p->pos->y += ((p->speed * sin(p->angle)) * dir);
+		p->pos->y += p->step->y * dir;
 		if (p->pos->y < 0)
 			p->pos->y = 0;
 	}
@@ -112,7 +115,7 @@ void	move(struct s_player *p, int dir)
 
 	if (p->pos->x < map->px_width)
 	{
-		p->pos->x += ((p->speed * cos(p->angle)) * dir);
+		p->pos->x += p->step->x * dir;
 		if (p->pos->x < 0)
 			p->pos->x = 0;
 	}
@@ -122,6 +125,7 @@ void	move(struct s_player *p, int dir)
 
 void	rotate(struct s_player *p, int dir)
 {
+	//double dist;
 
 	if (dir < 0)
 		p->angle -= p->rot_speed;
@@ -131,6 +135,13 @@ void	rotate(struct s_player *p, int dir)
 		p->angle = p->angle - 2 * PI;
 	if (p->angle < 0)
 		p->angle = 2 * PI - p->angle;
+
+	//dist = calc_dist(*p->pos, new_point(p->pos->x + p->speed * cos(p->angle), p->pos->y + p->speed * sin(p->angle)));
+
+	p->step->x = (p->pos->x + p->speed * cos(p->angle)) - p->pos->x;
+	ft_putint("Step->x; ", p->step->x);
+	p->step->y = (p->pos->y + p->speed * sin(p->angle)) - p->pos->y;
+	ft_putint("Step.y; ", p->step->y);
 	printf("Angle: %f\n", rad_to_deg(p->angle));
 	//p->draw(p, ctx);
 }

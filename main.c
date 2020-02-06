@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/01/09 21:29:11 by siferrar     #+#   ##    ##    #+#       */
-/*   Updated: 2020/02/06 17:06:29 by siferrar    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/02/06 22:48:02 by siferrar    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -96,9 +96,9 @@ int	key_press(int key, void *param)
 			b->player->move(b->player, 1);
 		if (is_key_pressed(b, 1) >= 0)
 			b->player->move(b->player, -1);
-		if (is_key_pressed(b, 0) >= 0)
+		if (is_key_pressed(b, 123) >= 0)
 			b->player->rot(b->player, -1);
-		if (is_key_pressed(b, 2) >= 0)
+		if (is_key_pressed(b, 124) >= 0)
 			b->player->rot(b->player, 1);
 	}
 	if (key == 53)

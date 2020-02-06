@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/01/09 21:30:44 by siferrar     #+#   ##    ##    #+#       */
-/*   Updated: 2020/02/06 16:19:39 by siferrar    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/02/06 22:40:30 by siferrar    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -42,6 +42,7 @@ typedef struct	s_player
 	t_point		*pos;
 	t_camera	*cam;
     double      angle;
+	t_point		*step;
     double      rot_speed;
     double      speed;
 	t_ctx		*ctx;
@@ -73,6 +74,8 @@ int				init_player(t_brain *b, int pos_x);
 void			move(struct s_player*, int dir);
 void			rotate(struct s_player *p, int dir);
 void			draw_player(struct s_player *p, t_ctx *ctx);
+
+int				calc_dist(t_point p1, t_point p2);
 
 t_point			closest_grid_h(t_point *p, t_map *m, double angle);
 t_point			closest_grid_v(t_point *p, t_map *m, double angle);

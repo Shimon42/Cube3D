@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/01/23 18:52:51 by siferrar     #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/24 17:03:10 by siferrar    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/02/06 23:01:14 by siferrar    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -15,6 +15,5 @@
 # define PLAYER_H
 # include "cube3d.h"
 # include "my_canvas.h"
-
 
 #endif

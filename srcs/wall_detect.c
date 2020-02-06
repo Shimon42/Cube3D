@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/01/30 22:11:09 by siferrar     #+#   ##    ##    #+#       */
-/*   Updated: 2020/02/06 17:47:38 by siferrar    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/02/06 22:57:12 by siferrar    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -153,8 +153,10 @@ void	draw_walls(t_brain *b, t_ctx *c)
 		{
 			c->color = 0x388FBA;
 			c->line(new_point(cur_col, 0), new_point(cur_col, c->height/2 - w_height/2), c);
+			
 			c->color = 0x900C3F;
 			c->line(new_point(cur_col, c->height/2 - w_height/2), new_point(cur_col, c->height/2 + w_height/2), c);
+			
 			c->color = 0x91672C;
 			c->line(new_point(cur_col, c->height/2 + w_height/2), new_point(cur_col, c->height), c);
 		
@@ -162,30 +164,4 @@ void	draw_walls(t_brain *b, t_ctx *c)
 			c->line(new_point(cur_col, 0), new_point(cur_col, c->height), c);
 		cur_col++;
 	}
-}
-
-void draw_ray(t_player *p, t_map *m, double angle)
-{
-	t_point cur_h;
-	t_point cur_v;
-	t_point p_pos;
-//	double ray_dist;
-
-	p_pos = to_grid(p->pos->x, p->pos->y, m);
-	cur_h = closest_grid_h(p->pos, m, angle);
-	cur_v = closest_grid_v(p->pos, m, angle);
-	ft_putchar('\n');
-	printf("Angle: %f\n", angle);
-	ft_putstr(YELO"h");
-	disp_point(&p_pos);
-	ft_putstr(CYAN"h");
-	disp_point(&cur_h);
-	ft_putstr(GRN"v");
-	disp_point(&cur_v);
-	ft_putstr(RST);
-	if (cur_h.x > 0 && cur_h.y > 0)
-	{
-		p->ctx->line(map_scaled(p->pos, m), map_scaled(&cur_h, m), p->ctx);
-	}
-
 }

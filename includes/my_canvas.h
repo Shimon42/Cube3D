@@ -3,10 +3,10 @@
 /*                                                              /             */
 /*   my_canvas.h                                      .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
-/*   By: simeon <simeon@student.le-101.fr>          +:+   +:    +:    +:+     */
+/*   By: siferrar <siferrar@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/01/15 17:33:03 by siferrar     #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/29 15:34:54 by simeon      ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/02/06 22:45:06 by siferrar    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -23,6 +23,12 @@ typedef struct	s_point
 	int			x;
 	int			y;
 }				t_point;
+
+typedef struct	s_fpoint
+{
+	double		x;
+	double		y;
+}				t_fpoint;
 
 typedef struct  s_buff {
     void        *img;
