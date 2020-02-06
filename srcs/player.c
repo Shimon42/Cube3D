@@ -6,12 +6,25 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/01/22 22:24:57 by siferrar     #+#   ##    ##    #+#       */
-/*   Updated: 2020/02/05 22:41:42 by siferrar    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/02/06 16:11:46 by siferrar    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "../includes/cube3d.h"
+
+int		init_cam(t_brain *b)
+{
+	t_camera *cam;
+
+	b->player->cam = malloc(sizeof(t_camera));
+	cam = b->player->cam;
+	cam->fov = ft_inrad(90);
+	cam->proj_size.x = b->ctx->width;
+	cam->proj_size.y = b->ctx->height;
+	cam->proj_dist = (cam->proj_size.x / 2) / tan(cam->fov / 2);
+	return (1);
+}
 
 int		init_player(t_brain *b, int pos_x)
 {
@@ -29,6 +42,7 @@ int		init_player(t_brain *b, int pos_x)
 	b->player->pos->x = (pos_x * b->map->bloc_size) - (b->map->bloc_size/2);
 	b->player->pos->y = (b->map->height * b->map->bloc_size) - b->map->bloc_size/2;
 	disp_point(b->player->pos);
+	init_cam(b);
 	b->player->move = &move;
 	b->player->rot = &rotate;
 	b->player->draw = &draw_player;

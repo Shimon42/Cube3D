@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/01/30 22:11:09 by siferrar     #+#   ##    ##    #+#       */
-/*   Updated: 2020/02/05 23:10:12 by siferrar    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/02/06 17:47:38 by siferrar    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -92,11 +92,11 @@ t_point closest_wall_v(t_brain *b, t_point *p, double angle)
 		offset.y = (b->map->bloc_size * tan(angle)) * (angle < 2 * PI * 0.75 && angle > PI / 2 ? -1 : 1);
 	else
 		offset.y = b->map->bloc_size;
-	ft_putstr("Cur point (closest grid h):\n");
-	disp_point(&cur_point);
-	ft_putstr("Offset:\n");
-	disp_point(&offset);
-	ft_putint("Angle: ", ft_indeg(angle));
+//	ft_putstr("Cur point (closest grid h):\n");
+	//disp_point(&cur_point);
+//	ft_putstr("Offset:\n");
+//	disp_point(&offset);
+	//ft_putint("Angle: ", ft_indeg(angle));
 	while (is_wall == 0 && cur_point.y < b->map->px_height && cur_point.y > 0)
 	{
 		is_wall = (get_grid(b->map, cur_point.x - 1, cur_point.y, 1) || get_grid(b->map, cur_point.x + 1, cur_point.y, 1));
@@ -106,6 +106,62 @@ t_point closest_wall_v(t_brain *b, t_point *p, double angle)
 		cur_point.y += offset.y;
 	}
 	return (cur_point);
+}
+
+double	dist_to_wall(t_brain *b, t_point *p, double angle)
+{
+	t_point closest_h;
+	t_point closest_v;
+	t_point dists;
+	double bad_dist;
+	
+	closest_h = closest_wall_h(b, p, angle);
+	closest_v = closest_wall_v(b, p, angle);
+	dists.x = fabs((p->x - closest_h.x) / cos(angle));
+	dists.y = fabs((p->x - closest_v.x) / cos(angle));
+	if (dists.x < dists.y)
+		bad_dist = dists.x;
+	else
+		bad_dist = dists.y;
+//dprintf(1, "Closest wall: %f\n", bad_dist);
+	
+	return (bad_dist);
+}
+
+void	draw_walls(t_brain *b, t_ctx *c)
+{
+	double w_height;
+	double dist;
+	double cur_col;
+	double col_step;
+	double cur_angle;
+
+	cur_col = 0;
+	col_step = b->player->cam->fov / c->width;
+	while (cur_col < c->width)
+	{
+		cur_angle = b->player->angle - (b->player->cam->fov / 2) + (col_step * cur_col);
+		dist = dist_to_wall(b, b->player->pos, cur_angle);
+		if (cur_col < c->width / 2)
+			dist = dist * cos (b->player->cam->fov/2);
+		else
+			dist = dist * cos (-(b->player->cam->fov/2));
+		w_height = ((b->map->bloc_size) / dist) * b->player->cam->proj_dist;
+		//dprintf(1, "Wall Height: %f\n", w_height);
+		c->color = 0x900C3F;
+		if (w_height < c->height)
+		{
+			c->color = 0x388FBA;
+			c->line(new_point(cur_col, 0), new_point(cur_col, c->height/2 - w_height/2), c);
+			c->color = 0x900C3F;
+			c->line(new_point(cur_col, c->height/2 - w_height/2), new_point(cur_col, c->height/2 + w_height/2), c);
+			c->color = 0x91672C;
+			c->line(new_point(cur_col, c->height/2 + w_height/2), new_point(cur_col, c->height), c);
+		
+		}else
+			c->line(new_point(cur_col, 0), new_point(cur_col, c->height), c);
+		cur_col++;
+	}
 }
 
 void draw_ray(t_player *p, t_map *m, double angle)
