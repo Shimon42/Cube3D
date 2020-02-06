@@ -3,11 +3,7 @@
 *.a
 *.o
 *.plist
-Cube3D.dSYM/Contents/Resources/DWARF/Cube3D
+*.dSYM
 Cube3D
-Cube3D
-*/.DS_Store
 *.DS_Store
-includes/.DS_Store
-includes/.DS_Store
 *.json
