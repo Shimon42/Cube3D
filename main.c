@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/01/09 21:29:11 by siferrar     #+#   ##    ##    #+#       */
-/*   Updated: 2020/02/06 22:48:02 by siferrar    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/02/06 23:18:38 by siferrar    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -195,8 +195,6 @@ int loop_hook(t_brain *b)
 		draw_minimap(b, 10, 10, b->ctx->width * 0.2);
 	}
 	mlx_put_image_to_window(b->ctx->mlx_ptr , b->ctx->win_ptr, b->ctx->buff->img, 0, 0);
-	mlx_string_put(b->ctx->mlx_ptr, b->ctx->win_ptr, 10, 10, 0xFF0000, "Closest grid H");
-	mlx_string_put(b->ctx->mlx_ptr, b->ctx->win_ptr, 10, 30, 0x00FFFF, "Closest grid V");
 	mlx_destroy_image(b->ctx->mlx_ptr, b->ctx->buff->img);
 	return (b->inited);
 }
