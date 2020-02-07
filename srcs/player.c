@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/01/22 22:24:57 by siferrar     #+#   ##    ##    #+#       */
-/*   Updated: 2020/02/06 22:51:51 by siferrar    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/02/07 17:09:13 by siferrar    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -19,7 +19,7 @@ int		init_cam(t_brain *b)
 
 	b->player->cam = malloc(sizeof(t_camera));
 	cam = b->player->cam;
-	cam->fov = ft_inrad(90);
+	cam->fov = ft_inrad(60);
 	cam->proj_size.x = b->ctx->width;
 	cam->proj_size.y = b->ctx->height;
 	cam->proj_dist = (cam->proj_size.x / 2) / tan(cam->fov / 2);
