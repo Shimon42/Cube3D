@@ -28,10 +28,12 @@
 <hr>
 	##Current State:
 ————————————————————————————————————
+
 - [x] Map parsing, without config
 - [x] Draw walls (bad orientation display sometimes + fish eye)
 - [x] Minimap display
 - [x] Player movement
+
 ————————————————————————————————————
 	Known Bugs:
 ————————————————————————————————————
