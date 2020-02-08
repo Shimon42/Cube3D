@@ -12,6 +12,8 @@
 [F] - expand map
 
 ![Cube3D Minimap expanded](/images/screen2.png)
+
+
 	————————————————————————————————————
 		Changes:
 	————————————————————————————————————
