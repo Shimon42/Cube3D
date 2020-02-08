@@ -1,7 +1,6 @@
 # Cube 3D • Alpha 0.3.3
 
 ![Cube3D Screenshot](/images/screen.png)
-Format: ![Alt Text](url)
 
 -> make - Compile only
 
