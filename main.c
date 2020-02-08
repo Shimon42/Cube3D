@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/01/09 21:29:11 by siferrar     #+#   ##    ##    #+#       */
-/*   Updated: 2020/02/06 23:18:38 by siferrar    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/02/08 15:33:08 by siferrar    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -188,7 +188,7 @@ int loop_hook(t_brain *b)
 	//b->player->draw(b->player, b->ctx);
 	draw_walls(b, b->ctx);
 	if (is_key_pressed(b, 3) != -1)
-		draw_fullmap(b, 0.15);
+		draw_fullmap(b, 0.3);
 	else
 	{
 		draw_fullmap(b, 0);

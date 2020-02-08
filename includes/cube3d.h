@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/01/09 21:30:44 by siferrar     #+#   ##    ##    #+#       */
-/*   Updated: 2020/02/06 22:40:30 by siferrar    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/02/08 16:15:17 by siferrar    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -81,7 +81,7 @@ t_point			closest_grid_h(t_point *p, t_map *m, double angle);
 t_point			closest_grid_v(t_point *p, t_map *m, double angle);
 t_point			closest_wall_h(t_brain *b, t_point *p, double angle);
 t_point			closest_wall_v(t_brain *b, t_point *p, double angle);
-double			dist_to_wall(t_brain *b, t_point *p, double angle);
+t_detect		dist_to_wall(t_brain *b, t_point *p, double angle);
 void			draw_walls(t_brain *b, t_ctx *c);
 
 void			draw_ray(t_player *p, t_map *m, double angle);

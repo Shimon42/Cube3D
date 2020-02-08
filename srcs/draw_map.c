@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/01/14 22:43:45 by siferrar     #+#   ##    ##    #+#       */
-/*   Updated: 2020/02/06 17:22:05 by siferrar    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/02/08 16:14:57 by siferrar    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -143,7 +143,7 @@ void	draw_minimap_closest(t_brain *b, t_point disp)
 
 		b->ctx->color = 0xFFFFFF;
 		b->ctx->line(new_point(disp.x + p_pos.x, disp.y + p_pos.y),
-			new_point(disp.x + p_pos.x  + ray_length * cos(b->player->angle), disp.y + p_pos.y + ray_length * sin(b->player->angle) ),
+			new_point(disp.x + p_pos.x  + (ray_length * b->map->scale) * cos(b->player->angle), disp.y + p_pos.y + (ray_length * b->map->scale) * sin(b->player->angle) ),
 			b->ctx);
 
 		b->ctx->color = 0xFF0000;
@@ -214,14 +214,14 @@ void			draw_fullmap(t_brain *b, double ease_val)
 
 	if (ease_val > 0)
 	{
-		margin = 100;
+		margin = 100 * b->map->scale;
 		scale = ((double)((b->ctx->width - 2 * margin) / (double)b->map->px_width)) ;
 		margin_top = (b->ctx->height - (b->map->height * b->map->bloc_size * scale)) / 2;
 		draw_minimap(b, 
 					margin,
 					margin_top,
 					(b->ctx->width - 2 * margin) * (ease));
-		if (ease < 1)
+		if (ease < 1 && ease + ease_val < 1)
 			ease += ease_val;
 		else
 			ease = 1;

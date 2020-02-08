@@ -1,4 +1,4 @@
-# Cube 3D • Alpha 0.3.2
+# Cube 3D • Alpha 0.3.3
 
 -> make - Compile only
 
@@ -12,15 +12,14 @@
 	————————————————————————————————————
 		Changes:
 	————————————————————————————————————
-	- DRAW WALLS ! (bad display sometimes)
-	- Draw color on sky and floor
-	- Good player movement
+	- No more bad wall height display
+	- Wall color depending of orientation
 
     ————————————————————————————————————
 		Cur State:
 	————————————————————————————————————
 	- Map parsing, without config
-	- Draw walls (bad display sometimes)
+	- Draw walls (bad orientation display sometimes + fish eye)
 	- Minimap display
 	- Player and direction can be displayed
 

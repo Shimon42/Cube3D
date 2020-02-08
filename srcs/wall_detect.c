@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/01/30 22:11:09 by siferrar     #+#   ##    ##    #+#       */
-/*   Updated: 2020/02/06 22:57:12 by siferrar    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/02/08 17:10:12 by siferrar    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -108,60 +108,111 @@ t_point closest_wall_v(t_brain *b, t_point *p, double angle)
 	return (cur_point);
 }
 
-double	dist_to_wall(t_brain *b, t_point *p, double angle)
+char		get_wall_side(double angle, int closest)
+{
+	if (angle >= 0 & angle < PI)
+	{
+		if (closest == 'h')
+			return ('n');
+		if (angle >= 0 && angle < PI / 2)
+			return ('w');
+		else
+			return ('e');
+	} else
+	{
+		if (closest == 'h')
+			return ('s');
+		if (angle >= PI && angle < 2 * PI * 0.75)
+			return ('e');
+		else
+			return ('w');
+	}
+	return ('z');
+}
+
+t_detect	dist_to_wall(t_brain *b, t_point *p, double angle)
 {
 	t_point closest_h;
 	t_point closest_v;
 	t_point dists;
+	t_detect wall;
 	double bad_dist;
-	
+
 	closest_h = closest_wall_h(b, p, angle);
 	closest_v = closest_wall_v(b, p, angle);
-	dists.x = fabs((p->x - closest_h.x) / cos(angle));
-	dists.y = fabs((p->x - closest_v.x) / cos(angle));
+	dists.x = calc_dist(*p, closest_h);
+	dists.y = calc_dist(*p, closest_v);
 	if (dists.x < dists.y)
+	{
 		bad_dist = dists.x;
+		wall.w_side_hit = get_wall_side(angle, 'h');
+	}
 	else
+	{
 		bad_dist = dists.y;
-//dprintf(1, "Closest wall: %f\n", bad_dist);
+		wall.w_side_hit = get_wall_side(angle, 'v');
+	}
+
+	wall.dist = bad_dist;
+//	dprintf(1, "HIT: %c\n", wall.w_side_hit);
 	
-	return (bad_dist);
+	return (wall);
+}
+
+int		get_wall_color(t_map *m, char w_side)
+{
+	if (w_side == 'n')
+		return (m->w_n);
+	if (w_side == 'e')
+		return (m->w_e);
+	if (w_side == 's')
+		return (m->w_s);
+	if (w_side == 'w')
+		return (m->w_w);
+	return (0);
 }
 
 void	draw_walls(t_brain *b, t_ctx *c)
 {
 	double w_height;
+	t_detect wall;
 	double dist;
 	double cur_col;
 	double col_step;
 	double cur_angle;
 
 	cur_col = 0;
-	col_step = b->player->cam->fov / c->width;
+	col_step = b->player->cam->fov/ c->width;
+	//printf("START DRAW WALLS\n");
 	while (cur_col < c->width)
 	{
 		cur_angle = b->player->angle - (b->player->cam->fov / 2) + (col_step * cur_col);
-		dist = dist_to_wall(b, b->player->pos, cur_angle);
+		wall = dist_to_wall(b, b->player->pos, cur_angle);
+		dist = wall.dist;
 		if (cur_col < c->width / 2)
 			dist = dist * cos (b->player->cam->fov/2);
 		else
 			dist = dist * cos (-(b->player->cam->fov/2));
 		w_height = ((b->map->bloc_size) / dist) * b->player->cam->proj_dist;
 		//dprintf(1, "Wall Height: %f\n", w_height);
-		c->color = 0x900C3F;
+		c->color = 0;
 		if (w_height < c->height)
 		{
 			c->color = 0x388FBA;
 			c->line(new_point(cur_col, 0), new_point(cur_col, c->height/2 - w_height/2), c);
 			
-			c->color = 0x900C3F;
+			c->color = get_wall_color(b->map, wall.w_side_hit);
 			c->line(new_point(cur_col, c->height/2 - w_height/2), new_point(cur_col, c->height/2 + w_height/2), c);
 			
 			c->color = 0x91672C;
 			c->line(new_point(cur_col, c->height/2 + w_height/2), new_point(cur_col, c->height), c);
 		
-		}else
+		}else{
+			c->color = get_wall_color(b->map, wall.w_side_hit);
 			c->line(new_point(cur_col, 0), new_point(cur_col, c->height), c);
+		}
 		cur_col++;
 	}
 }
+
+
