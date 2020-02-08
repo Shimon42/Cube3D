@@ -16,6 +16,8 @@
 
 ![Cube3D Minimap expanded](/images/screen2.png)
 
+<hr>
+## Changes:
 
 ————————————————————————————————————
 	Changes:
