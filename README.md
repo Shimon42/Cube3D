@@ -16,25 +16,22 @@
 
 ![Cube3D Minimap expanded](/images/screen2.png)
 
-<hr>
-## Changes:
 
-————————————————————————————————————
-	Changes:
-————————————————————————————————————
-- No more bad wall height display
-- Wall color depending of orientation
+	————————————————————————————————————
+		Changes:
+	————————————————————————————————————
+	- No more bad wall height display
+	- Wall color depending of orientation
 
-<hr>
-	##Current State:
-————————————————————————————————————
+    ————————————————————————————————————
+		Cur State:
+	————————————————————————————————————
+	- Map parsing, without config
+	- Draw walls (bad orientation display sometimes + fish eye)
+	- Minimap display
+	- Player and direction can be displayed
 
-- [x] Map parsing, without config
-- [x] Draw walls (bad orientation display sometimes + fish eye)
-- [x] Minimap display
-- [x] Player movement
-
-————————————————————————————————————
-	Known Bugs:
-————————————————————————————————————
-- Line drawn after end of win width is drawn on the other side of the window
+	————————————————————————————————————
+    	Known Bugs:
+	————————————————————————————————————
+	- Line drawn after end of win width is drawn on the other side of the window
