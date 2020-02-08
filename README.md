@@ -12,7 +12,10 @@
 [F] - expand map
 
 [Z] - Move forward
+
 [S] - Move backward
+
+[LEFT] [RIGHT] - Rotate camera
 
 ![Cube3D Minimap expanded](/images/screen2.png)
 
