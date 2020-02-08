@@ -11,6 +11,9 @@
 
 [F] - expand map
 
+[Z] - Move forward
+[S] - Move backward
+
 ![Cube3D Minimap expanded](/images/screen2.png)
 
 
