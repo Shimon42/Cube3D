@@ -26,10 +26,10 @@
     ————————————————————————————————————
 		Cur State:
 	————————————————————————————————————
-	- Map parsing, without config
-	- Draw walls (bad orientation display sometimes + fish eye)
-	- Minimap display
-	- Player and direction can be displayed
+	- [x] Map parsing, without config
+	- [x] Draw walls (bad orientation display sometimes + fish eye)
+	- [x] Minimap display
+	- [x] Player movement
 
 	————————————————————————————————————
     	Known Bugs:
