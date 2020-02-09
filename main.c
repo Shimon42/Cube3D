@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/01/09 21:29:11 by siferrar     #+#   ##    ##    #+#       */
-/*   Updated: 2020/02/08 15:33:08 by siferrar    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/02/09 21:09:58 by siferrar    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -148,7 +148,7 @@ t_brain *new_brain(int width, int height, char * name)
 	return (new);
 }
 
-int		calc_dist(t_point p1, t_point p2)
+double		calc_dist(t_point p1, t_point p2)
 {
 	return ( sqrt( pow((p2.x - p1.x),2) + pow((p2.y - p1.y),2)));
 }
