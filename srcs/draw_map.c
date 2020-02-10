@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/01/14 22:43:45 by siferrar     #+#   ##    ##    #+#       */
-/*   Updated: 2020/02/08 16:14:57 by siferrar    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/02/10 16:50:01 by siferrar    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -147,9 +147,10 @@ void	draw_minimap_closest(t_brain *b, t_point disp)
 			b->ctx);
 
 		b->ctx->color = 0xFF0000;
-		b->ctx->circle(disp.x + close_h.x, disp.y + close_h.y, (b->map->bloc_size * 0.1) * b->map->scale, 1, b->ctx);
+		b->ctx->circle(disp.x + close_h.x, disp.y + close_h.y, (b->map->bloc_size * 0.12) * b->map->scale, 1, b->ctx);
+
 		b->ctx->color = 0x00FFFF;
-		b->ctx->circle(disp.x + close_v.x, disp.y + close_v.y, (b->map->bloc_size * 0.1) * b->map->scale, 1, b->ctx);
+		b->ctx->circle(disp.x + close_v.x, disp.y + close_v.y, (b->map->bloc_size * 0.12) * b->map->scale, 1, b->ctx);
 		b->ctx->color = 0x00FFFF;
 }
 
