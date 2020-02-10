@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/01/22 22:24:57 by siferrar     #+#   ##    ##    #+#       */
-/*   Updated: 2020/02/10 16:51:00 by siferrar    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/02/10 21:21:27 by siferrar    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -54,7 +54,7 @@ int		init_player(t_brain *b, int pos_x)
 	b->player->ctx = b->ctx;
 	b->player->speed = 3;
 	b->player->angle = PI*0.75*2;
-	b->player->rot_speed = (3 * PI) / 180;
+	b->player->rot_speed = (1 * PI) / 180;
 	b->player->inited = 1;
 	b->player->step = malloc(sizeof(t_point));
 	b->player->step->x = 1;

@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/01/14 22:43:45 by siferrar     #+#   ##    ##    #+#       */
-/*   Updated: 2020/02/10 16:50:01 by siferrar    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/02/10 20:50:16 by siferrar    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -80,6 +80,15 @@ void            draw_frame(t_brain *b, int x, int y, double scale)
 	//disp_map_s(b->map);
 }
 
+void		point_on_map(t_brain *b, int x, int y, int color)
+{
+	t_point p;
+	
+	p = new_point(x, y);
+	p = map_scaled(&p, b->map);
+	b->ctx->color = color;
+	b->ctx->circle(b->map->disp.x + p.x, b->map->disp.y + p.y, (b->map->bloc_size * 0.06) * b->map->scale, 1, b->ctx);
+}
 
 void		draw_elems(t_brain *b, int disp_x, int disp_y, double scale)
 {
@@ -198,6 +207,8 @@ void			draw_minimap(t_brain *b, int x, int y, int width)
 	//ft_putstr("Draw frame - ");
 	scale = ((double)(width / (double)b->map->px_width)) ;
 	b->map->scale = scale;
+	b->map->disp.x = x;
+	b->map->disp.y = y;
 	
     draw_frame(b, x, y, scale);
 	//ft_putstr("OK\n");

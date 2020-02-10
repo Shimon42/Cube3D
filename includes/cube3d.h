@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/01/09 21:30:44 by siferrar     #+#   ##    ##    #+#       */
-/*   Updated: 2020/02/09 21:10:05 by siferrar    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/02/10 21:18:43 by siferrar    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -70,6 +70,7 @@ void            draw_frame(t_brain *b, int x, int y, double scale);
 t_point			map_scaled(t_point *p, t_map *m);
 int				get_grid(t_map *m, int x, int y, int need_rescale);
 t_point			to_grid(int x, int y, t_map *m);
+void			point_on_map(t_brain *b, int x, int y, int color);
 
 int				init_player(t_brain *b, int pos_x);
 void			move(struct s_player*, int dir);
