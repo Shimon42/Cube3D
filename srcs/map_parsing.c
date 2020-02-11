@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/01/14 20:36:43 by siferrar     #+#   ##    ##    #+#       */
-/*   Updated: 2020/02/08 15:24:15 by siferrar    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/02/11 16:38:39 by siferrar    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -22,9 +22,9 @@ int				init_map(t_map **map)
 	(*map)->scale = 1;
 	(*map)->bloc_size = 64;
 	(*map)->w_n = 0xFF0000;
-	(*map)->w_e = 0x00FF00;
+	(*map)->w_e = 0xFFFF00;
 	(*map)->w_s = 0x0000FF;
-	(*map)->w_w = 0xFFFF00;
+	(*map)->w_w = 0x00FF00;
 	return (1);
 }
 

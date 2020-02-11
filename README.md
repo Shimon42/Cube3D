@@ -1,6 +1,6 @@
 # Cube 3D • Alpha 0.3.5
 
-![Cube3D Screenshot](/images/screen.png)
+![Cube3D Screenshot](/images/screen3.png)
 
 -> make - Compile only
 
