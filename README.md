@@ -19,7 +19,7 @@
 
 [D] - Move Right
 
-[LEFT] [RIGHT] - Rotate camera ( + [SHIFT] - Rotate / 10)
+[LEFT] [RIGHT] - Rotate camera ( + [SHIFT] to rotate/10)
 
 ![Cube3D Minimap expanded](/images/screen2.png)
 
