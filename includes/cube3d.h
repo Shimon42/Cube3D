@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/01/09 21:30:44 by siferrar     #+#   ##    ##    #+#       */
-/*   Updated: 2020/02/11 16:18:30 by siferrar    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/02/11 22:44:43 by siferrar    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -48,7 +48,7 @@ typedef struct	s_player
     double      speed;
 	t_ctx		*ctx;
 	void		*brain;
-	void		(*rot)(struct s_player *, int);
+	void		(*rot)(struct s_player *, double);
 	void		(*move)(struct s_player *, int);
 	void		(*sidemove)(struct s_player *, int);
 	void		(*draw)(struct s_player *, t_ctx *);
@@ -73,10 +73,10 @@ t_fpoint		map_fscaled(t_fpoint *p, t_map *m);
 int				get_grid(t_map *m, int x, int y, int need_rescale);
 t_point			to_grid(int x, int y, t_map *m);
 void			point_on_map(t_brain *b, int x, int y, int color);
-t_fpoint to_fpoint(t_point *p);
-int				init_player(t_brain *b, int pos_x);
+t_fpoint		to_fpoint(t_point *p);
+int				init_player(t_brain *b, int pos_x, char angle);
 void			move(struct s_player*, int dir);
-void			rotate(struct s_player *p, int dir);
+void			rotate(struct s_player *p, double angle);
 void			draw_player(struct s_player *p, t_ctx *ctx);
 void			side_move(struct s_player *p, int dir);
 

@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/01/22 22:24:57 by siferrar     #+#   ##    ##    #+#       */
-/*   Updated: 2020/02/11 16:27:17 by siferrar    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/02/11 22:59:55 by siferrar    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -26,7 +26,21 @@ int		init_cam(t_brain *b)
 	return (1);
 }
 
-int		init_player(t_brain *b, int pos_x)
+double get_player_angle(char dir)
+{
+	if (dir == 'N')
+		return (2 * PI * 0.75);
+	if (dir == 'E')
+		return (0);
+	if (dir == 'S')
+		return (PI / 2);
+	if (dir == 'W')
+		return (PI);
+	ft_putstr(RED"WRONG DIR\n");
+	return (0);
+}
+
+int		init_player(t_brain *b, int pos_x, char angle)
 {
 	printf(DCYAN" -> Init player ");
 	if ((b->player = malloc(sizeof(t_player))) == NULL)
@@ -44,22 +58,24 @@ int		init_player(t_brain *b, int pos_x)
 		ft_putstr(RED"FAILED TO MALLOC PLAYER POS\n"RST);
 		exit(0);
 	}
-	b->player->r_pos->x = (pos_x * b->map->bloc_size) - (b->map->bloc_size/2);
+	b->player->r_pos->x = ((pos_x + 1) * b->map->bloc_size) - (b->map->bloc_size/2);
+	b->player->pos->x = (int)floor(b->player->r_pos->x);
 	b->player->r_pos->y = (b->map->height * b->map->bloc_size) - b->map->bloc_size/2;
+	b->player->pos->y = (int)floor(b->player->r_pos->y);
 	disp_point(b->player->pos);
 	init_cam(b);
+	ft_putstr("Init Cam OK\n");
 	b->player->move = &move;
 	b->player->sidemove = &side_move;
 	b->player->rot = &rotate;
 	b->player->draw = &draw_player;
 	b->player->ctx = b->ctx;
 	b->player->speed = 4;
-	b->player->angle = PI*0.75*2;
+	b->player->angle = get_player_angle(angle);
 	b->player->rot_speed = (1 * PI) / 180;
 	b->player->inited = 1;
-	b->player->step = malloc(sizeof(t_point));
-	b->player->step->x = 1;
-	b->player->step->y = 1;
+	b->player->step = malloc(sizeof(t_point *));
+	b->player->rot(b->player, 0);
 	b->player->brain = b;
 	printf(" - OK\n");
 	return (1);
@@ -160,17 +176,12 @@ void	move(struct s_player *p, int dir)
 	p->pos->y = p->r_pos->y;
 }
 
-void	rotate(struct s_player *p, int dir)
+void	rotate(struct s_player *p, double angle)
 {
-	//double dist;
-
-	if (dir < 0)
-		p->angle -= p->rot_speed;
-	else
-		p->angle += p->rot_speed;
+	p->angle += angle;
 	if (p->angle > 2*PI)
 		p->angle = p->angle - 2 * PI;
-	if (p->angle < 0)
+	if (p->angle <= 0)
 		p->angle = 2 * PI - p->angle;
 
 	//dist = calc_dist(*p->pos, new_point(p->pos->x + p->speed * cos(p->angle), p->pos->y + p->speed * sin(p->angle)));

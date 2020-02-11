@@ -1,4 +1,4 @@
-# Cube 3D • Alpha 0.3.5
+# Cube 3D • Alpha 0.3.6
 
 ![Cube3D Screenshot](/images/screen3.png)
 
@@ -19,7 +19,7 @@
 
 [D] - Move Right
 
-[LEFT] [RIGHT] - Rotate camera
+[LEFT] [RIGHT] - Rotate camera ( + [SHIFT] - Rotate / 10)
 
 ![Cube3D Minimap expanded](/images/screen2.png)
 
@@ -27,9 +27,9 @@
 	————————————————————————————————————
 		Changes:
 	————————————————————————————————————
-	- No more space between wall edges
-	- Weird wall display with some angle
-	- Player can move sideway
+	- Player spawn and direction
+	- Draw wall is a little better
+		-> Bad drawing on the left side when angle > 0
 
     ————————————————————————————————————
 		Cur State:

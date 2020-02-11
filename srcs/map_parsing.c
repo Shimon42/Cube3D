@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/01/14 20:36:43 by siferrar     #+#   ##    ##    #+#       */
-/*   Updated: 2020/02/11 16:38:39 by siferrar    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/02/11 20:52:39 by siferrar    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -33,17 +33,18 @@ int				open_map(t_brain *b, char *map_path)
 	char	*line;
 	int		file;
 	int		ret;
-	int		as_player;
+	t_player_detect *player;
 
 	init_map(&b->map);
-
+	player = malloc(sizeof(t_player_detect));
 	file = open(map_path, O_RDONLY);
 	while ((ret = get_next_line(file, &line)) != -1)
 	{
-		if ((as_player = add_map_row(b->map, line)) >= 0)
+		player = add_map_row(b->map, line);
+		if (player != NULL)
 		{
-			printf(CYAN"Player found: %d"RST"\n", as_player);
-			init_player(b, as_player);
+			printf(CYAN"Player found: %d"RST"\n", player->pos_x);
+			init_player(b, player->pos_x, player->direction);
 		}
 		if (!ret)
 		{
@@ -63,6 +64,7 @@ int				open_map(t_brain *b, char *map_path)
 	printf("Real Width: %d\n", b->map->px_width);
 	printf("Real Height: %d\n", b->map->px_height);
 	ft_putstr("Map Parsing OK\n");
+	free(player);
 	//draw_minimap(b, 10, 10, 1);
 	return (1);
 }
@@ -78,17 +80,17 @@ size_t		line_length(char *line)
 	return (len);
 }
 
-int			add_map_row(t_map *map, char *line)
+t_player_detect		*add_map_row(t_map *map, char *line)
 {
 	char	*new;
 	char	*temp;
 	int		i;
 	int		real;
-	int		as_player;
+	t_player_detect	*player;
 
 	i = 0;
 	real = 0;
-	as_player = -1;
+	player = NULL;
 	new = NULL;
 	if (!map->grid)
 		map->grid = ft_calloc(line_length(line) + 1, sizeof(char));
@@ -103,12 +105,16 @@ int			add_map_row(t_map *map, char *line)
 			free(new);
 			new = temp;
 			if (line[i] == 'N' || line[i] == 'E' || line[i] == 'S' || line[i] == 'W')
-				as_player = real;
+			{
+				player = malloc(sizeof(t_player_detect));
+				player->pos_x = real;
+				player->direction = line[i];
+			}
 			real++;
 		}
 		i++;
 	}
 	map->height++;
 	map->grid = new;
-	return (as_player);
+	return (player);
 }

@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/01/09 21:29:11 by siferrar     #+#   ##    ##    #+#       */
-/*   Updated: 2020/02/11 16:15:52 by siferrar    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/02/11 22:53:35 by siferrar    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -85,6 +85,8 @@ int	key_press(int key, void *param)
 	t_brain *b;	
 
 	b = (t_brain*)param;
+	if (key == 53)
+		exit(1);
 	if (key != -1 && is_key_pressed(b, key) == -1)
 	{
 		printf(CYAN"Key [%d] pressed"RST"\n", key);
@@ -92,21 +94,25 @@ int	key_press(int key, void *param)
 	}
 	if (b && b->inited && b->player && b->player->inited)
 	{
-		if (is_key_pressed(b, 13) >= 0)
+		if ((key = is_key_pressed(b, 13)) >= 0)
 			b->player->move(b->player, 1);
-		if (is_key_pressed(b, 1) >= 0)
+		if ((key = is_key_pressed(b, 1)) >= 0)
 			b->player->move(b->player, -1);
-		if (is_key_pressed(b, 123) >= 0)
-			b->player->rot(b->player, -1);
-		if (is_key_pressed(b, 124) >= 0)
-			b->player->rot(b->player, 1);
-		if (is_key_pressed(b, 0) >= 0)
+
+		if ((key = is_key_pressed(b, 123)) >= 0 && is_key_pressed(b, 257) >= 0)
+			b->player->rot(b->player, -b->player->rot_speed / 10);
+		else if (key >= 0)
+			b->player->rot(b->player, -b->player->rot_speed);
+		if ((key = is_key_pressed(b, 124)) >= 0 && is_key_pressed(b, 257) >= 0)
+			b->player->rot(b->player, b->player->rot_speed / 10);
+		else if (key >= 0)
+			b->player->rot(b->player, b->player->rot_speed);
+
+		if ((key = is_key_pressed(b, 0)) >= 0)
 			b->player->sidemove(b->player, -1);
-		if (is_key_pressed(b, 2) >= 0)
+		if ((key = is_key_pressed(b, 2)) >= 0)
 			b->player->sidemove(b->player, 1);		
 	}
-	if (key == 53)
-		exit(1);
 	return (0);
 }
 
@@ -217,13 +223,14 @@ int	main(int ac, char **av)
 	b = new_brain(1920, 1080, "Cube3D");
 	printf(GRN"Opening %s\n\n"RST, av[1]);
 	open_map(b, av[1]);
+	disp_point(b->player->pos);
 	
+	ft_putstr("Loop Init\n");
 	mlx_loop_hook(b->ctx->mlx_ptr, &loop_hook, b);
 	mlx_hook(b->ctx->win_ptr, InputOnly, KeyPress, &key_press, b);
 	mlx_key_hook(b->ctx->win_ptr, &key_release, b);
-
-	//mlx_key_hook(b->ctx->win_ptr, key_gest, b);
 	mlx_do_key_autorepeaton(b->ctx->mlx_ptr);
 	mlx_loop(b->ctx->mlx_ptr);
+	ft_putstr("Loop Init OK\n");
 	return (0);
 }

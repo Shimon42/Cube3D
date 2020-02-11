@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/01/14 22:43:45 by siferrar     #+#   ##    ##    #+#       */
-/*   Updated: 2020/02/11 15:46:17 by siferrar    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/02/11 23:03:47 by siferrar    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -24,19 +24,23 @@ int get_grid(t_map *m, int x, int y, int need_rescale)
 	ft_putstr("] - ");*/
 	if (x > 0 && y > 0)
 	{
-		if (need_rescale)
+		if (need_rescale && x < m->px_width && y < m->px_height)
 		{
 			scaled = to_grid(x, y, m);
 			x = scaled.x;
 			y = scaled.y;
-		}
+		}else
+
+			//ft_putstr(RED"OUT OF GRID\n"RST);
+		
+			return (-1);
 	//	ft_putstr(GRN"OK -> "YELO);
 		//ft_putchar(m->grid[y * m->width + x]);
 		//ft_putstr("\n"RST);
 		return (m->grid[y * m->width + x] - '0');
 	}else
 	{
-		//ft_putstr(RED"BAD\n"RST);
+		//ft_putstr(RED"OUT OF GRID\n"RST);
 		return (-1);
 	}
 }
@@ -129,7 +133,7 @@ void		draw_elems(t_brain *b, int disp_x, int disp_y, double scale)
 						b->map->bloc_size * scale,
 						1,
 						b->ctx);
-			b->ctx->color = 0;
+			b->ctx->color = 0x333333;
 			b->ctx->rect(floor(disp_x + (x * (b->map->bloc_size * scale))),
 						floor(disp_y + (y * (b->map->bloc_size * scale))),
 						b->map->bloc_size * scale,
@@ -155,19 +159,32 @@ void	draw_minimap_closest(t_brain *b, t_point disp)
 		t_fpoint close_h = closest_grid_h(b->player->pos, b->map, b->player->angle);
 		t_fpoint close_v = closest_grid_v(b->player->pos, b->map, b->player->angle);
 		t_point p_pos = map_scaled(b->player->pos, b->map);
-		int ray_length = 500;
+		t_detect wall;
+
+		//int ray_length = 500;
 		close_h = map_fscaled(&close_h, b->map);
 		close_v = map_fscaled(&close_v, b->map);
 
+		wall = dist_to_wall(b, b->player->pos, b->player->angle);
 		b->ctx->color = 0xFFFFFF;
 		b->ctx->line(new_point(disp.x + p_pos.x, disp.y + p_pos.y),
-			new_point(disp.x + p_pos.x  + (ray_length * b->map->scale) * cos(b->player->angle), disp.y + p_pos.y + (ray_length * b->map->scale) * sin(b->player->angle) ),
+			new_point(disp.x + p_pos.x  + (wall.dist * b->map->scale) * cos(b->player->angle), disp.y + p_pos.y + (wall.dist * b->map->scale) * sin(b->player->angle) ),
+			b->ctx);
+		wall = dist_to_wall(b, b->player->pos, b->player->angle - b->player->cam->fov /2);
+		b->ctx->color = 0xFF0000;
+		b->ctx->line(new_point(disp.x + p_pos.x, disp.y + p_pos.y),
+			new_point(disp.x + p_pos.x  + (wall.dist * b->map->scale) * cos(b->player->angle - b->player->cam->fov /2), disp.y + p_pos.y + (wall.dist * b->map->scale) * sin(b->player->angle - b->player->cam->fov /2) ),
+			b->ctx);
+		wall = dist_to_wall(b, b->player->pos, b->player->angle + b->player->cam->fov /2);
+		b->ctx->color = 0x00FF00;
+		b->ctx->line(new_point(disp.x + p_pos.x, disp.y + p_pos.y),
+			new_point(disp.x + p_pos.x  + (wall.dist * b->map->scale) * cos(b->player->angle + b->player->cam->fov / 2), disp.y + p_pos.y + (wall.dist * b->map->scale) * sin(b->player->angle + b->player->cam->fov / 2) ),
 			b->ctx);
 
-		b->ctx->color = 0xFF0000;
+		b->ctx->color = 0xFF0000; // RED H
 		b->ctx->circle(disp.x + close_h.x, disp.y + close_h.y, (b->map->bloc_size * 0.08) * b->map->scale, 1, b->ctx);
 
-		b->ctx->color = 0x00FFFF;
+		b->ctx->color = 0x00FFFF; // YELLO V
 		b->ctx->circle(disp.x + close_v.x, disp.y + close_v.y, (b->map->bloc_size * 0.08) * b->map->scale, 1, b->ctx);
 		b->ctx->color = 0x00FFFF;
 }
