@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/01/09 21:29:11 by siferrar     #+#   ##    ##    #+#       */
-/*   Updated: 2020/02/09 21:09:58 by siferrar    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/02/11 16:15:52 by siferrar    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -100,6 +100,10 @@ int	key_press(int key, void *param)
 			b->player->rot(b->player, -1);
 		if (is_key_pressed(b, 124) >= 0)
 			b->player->rot(b->player, 1);
+		if (is_key_pressed(b, 0) >= 0)
+			b->player->sidemove(b->player, -1);
+		if (is_key_pressed(b, 2) >= 0)
+			b->player->sidemove(b->player, 1);		
 	}
 	if (key == 53)
 		exit(1);
@@ -149,6 +153,11 @@ t_brain *new_brain(int width, int height, char * name)
 }
 
 double		calc_dist(t_point p1, t_point p2)
+{
+	return ( sqrt( pow((p2.x - p1.x),2) + pow((p2.y - p1.y),2)));
+}
+
+double		calc_fdist(t_fpoint p1, t_fpoint p2)
 {
 	return ( sqrt( pow((p2.x - p1.x),2) + pow((p2.y - p1.y),2)));
 }

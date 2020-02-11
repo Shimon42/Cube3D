@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/01/22 22:24:57 by siferrar     #+#   ##    ##    #+#       */
-/*   Updated: 2020/02/10 21:21:27 by siferrar    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/02/11 16:27:17 by siferrar    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -49,10 +49,11 @@ int		init_player(t_brain *b, int pos_x)
 	disp_point(b->player->pos);
 	init_cam(b);
 	b->player->move = &move;
+	b->player->sidemove = &side_move;
 	b->player->rot = &rotate;
 	b->player->draw = &draw_player;
 	b->player->ctx = b->ctx;
-	b->player->speed = 3;
+	b->player->speed = 4;
 	b->player->angle = PI*0.75*2;
 	b->player->rot_speed = (1 * PI) / 180;
 	b->player->inited = 1;
@@ -99,6 +100,35 @@ void	draw_player(struct s_player *p, t_ctx *ctx)
 {
 	ctx->circle(p->pos->x, p->pos->y, 5, 1, ctx);
 	draw_rays(p, ctx);
+}
+
+void	side_move(struct s_player *p, int dir)
+{
+	t_map *map;
+	t_brain *b;
+
+	b = (t_brain *)p->brain;
+	map = b->map;
+
+	if (p->r_pos->y < map->px_height)
+	{
+		p->r_pos->y +=  p->speed * (sin(p->angle + (ft_inrad(90)) * dir));
+		if (p->r_pos->y < 0)
+			p->r_pos->y = 0;
+	}
+	else
+		p->r_pos->y = map->px_height - 1;
+
+	if (p->r_pos->x < map->px_width)
+	{
+		p->r_pos->x +=  p->speed * (cos(p->angle + (ft_inrad(90)) * dir));
+		if (p->r_pos->x < 0)
+			p->r_pos->x = 0;
+	}
+	else
+		p->r_pos->x = map->px_width - 1;
+	p->pos->x = p->r_pos->x;
+	p->pos->y = p->r_pos->y;
 }
 
 void	move(struct s_player *p, int dir)

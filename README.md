@@ -1,4 +1,4 @@
-# Cube 3D • Alpha 0.3.3
+# Cube 3D • Alpha 0.3.5
 
 ![Cube3D Screenshot](/images/screen.png)
 
@@ -15,6 +15,10 @@
 
 [S] - Move backward
 
+[A] - Move Left
+
+[D] - Move Right
+
 [LEFT] [RIGHT] - Rotate camera
 
 ![Cube3D Minimap expanded](/images/screen2.png)
@@ -23,8 +27,9 @@
 	————————————————————————————————————
 		Changes:
 	————————————————————————————————————
-	- No more bad wall height display
-	- Wall color depending of orientation
+	- No more space between wall edges
+	- Weird wall display with some angle
+	- Player can move sideway
 
     ————————————————————————————————————
 		Cur State:
@@ -32,7 +37,6 @@
 	- Map parsing, without config
 	- Draw walls (bad orientation display sometimes + fish eye)
 	- Minimap display
-	- Player and direction can be displayed
 
 	————————————————————————————————————
     	Known Bugs:
