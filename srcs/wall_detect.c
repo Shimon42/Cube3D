@@ -6,13 +6,19 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/01/30 22:11:09 by siferrar     #+#   ##    ##    #+#       */
-/*   Updated: 2020/02/11 23:01:28 by siferrar    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/02/12 16:03:35 by siferrar    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "../includes/cube3d.h"
 
+double to_360(double angle)
+{
+	if (angle < 0)
+		angle = 2 * PI - angle;
+	return (angle);
+}
 
 t_fpoint to_fpoint(t_point *p)
 {
@@ -37,15 +43,16 @@ t_fpoint	closest_grid_h(t_point *p, t_map *m, double angle)
 	t_fpoint closest;
 	
 	if (angle > PI && angle < 2 * PI)
+	{
 		closest.y = floor(p->y / m->bloc_size) * m->bloc_size;
-	else
-		closest.y = floor(p->y / m->bloc_size) * m->bloc_size  + m->bloc_size;
-	if (tan(angle) != 0)
 		closest.x = p->x - (p->y - closest.y) / tan(angle);
-	if (closest.x < 0)
-		closest.x = 0;
-	if (closest.y < 0)
-		closest.y = 0;
+	}
+	else
+	{
+		if (tan(angle) != 0)
+			closest.x = p->x - (p->y - closest.y) / tan(angle);
+		closest.y = floor(p->y / m->bloc_size) * m->bloc_size + m->bloc_size;
+	}
 	return (closest);
 }
 
@@ -53,15 +60,14 @@ t_fpoint	 closest_grid_v(t_point *p, t_map *m, double angle)
 {
 	t_fpoint closest;
 	
-	if (angle > PI / 2.0 && angle < 2 * PI * 0.75)
+	if (angle > PI / 2 && angle < 2 * PI * 0.75)
+	{
 		closest.x = floor(p->x / m->bloc_size) * m->bloc_size;
-	else
+		closest.y = p->y + (p->x - closest.x) * tan(angle);
+	}else{
 		closest.x = floor(p->x / m->bloc_size) * m->bloc_size + m->bloc_size;
-	closest.y = p->y - (p->x - closest.x) * tan(angle);
-	if (closest.x < 0)
-		closest.x = 0;
-	if (closest.y < 0)
-		closest.y = 0;
+		closest.y = p->y - (p->x - closest.x) * tan(angle);
+	}
 	return (closest);
 }
 
@@ -81,15 +87,15 @@ t_fpoint closest_wall_h(t_brain *b, t_point *p, double angle)
 	else
 	{
 		offset.y = b->map->bloc_size;
-		offset.x = (b->map->bloc_size / tan(angle)) * 1;
+		offset.x = (b->map->bloc_size / tan(angle));
 	}
 
 	while (is_wall == 0 && cur_point.x < b->map->px_width && cur_point.x > 0)
 	{
-		is_wall = (get_grid(b->map, cur_point.x, cur_point.y + 1, 1) == 1 || get_grid(b->map, cur_point.x, cur_point.y - 1, 1) == 1);
+		is_wall = (get_grid(b->map, cur_point.x, cur_point.y + 5, 1) == 1 || get_grid(b->map, cur_point.x, cur_point.y - 5, 1) == 1);
+		point_on_map(b, cur_point.x, cur_point.y, 0xFF00FF);
 		if (is_wall == -1 || is_wall == 1)
 			break;
-		point_on_map(b, cur_point.x, cur_point.y, 0xFF0000);
 		if (cur_point.x + offset.x < b->map->px_width && cur_point.y + offset.y < b->map->px_height)
 		{
 			cur_point.x += offset.x;
@@ -115,21 +121,18 @@ t_fpoint closest_wall_v(t_brain *b, t_point *p, double angle)
 	{
 		offset.x = -b->map->bloc_size;
 		offset.y = (b->map->bloc_size * tan(angle)) * -1;
-	}else{
-		offset.x = b->map->bloc_size;
-		offset.y = (b->map->bloc_size * tan(angle));
 	}
-//	ft_putstr("Cur point (closest grid h):\n");
-	//disp_point(&cur_point);
-//	ft_putstr("Offset:\n");
-//	disp_point(&offset);
-	//ft_putint("Angle: ", ft_indeg(angle));
+	else
+	{
+		offset.x = b->map->bloc_size;
+		offset.y = b->map->bloc_size * tan(angle);
+	}
 	while (is_wall == 0 && cur_point.y < b->map->px_height && cur_point.y > 0)
 	{
-		is_wall = (get_grid(b->map, cur_point.x - 1, cur_point.y, 1) == 1 || get_grid(b->map, cur_point.x + 1, cur_point.y, 1) == 1);
+		is_wall = (get_grid(b->map, cur_point.x, cur_point.y, 1) == 1 || get_grid(b->map, cur_point.x - 5, cur_point.y, 1) == 1 || get_grid(b->map, cur_point.x + 5, cur_point.y, 1) == 1);
+		point_on_map(b, cur_point.x, cur_point.y, 0x00FFFF);
 		if (is_wall == 1 || is_wall == -1) 
 			break;
-		point_on_map(b, cur_point.x, cur_point.y, 0x00FFFF);
 		if (cur_point.x + offset.x < b->map->px_width && cur_point.y + offset.y < b->map->px_height)
 		{
 			cur_point.x += offset.x;
@@ -207,6 +210,7 @@ int		get_wall_color(t_map *m, char w_side)
 	return (0);
 }
 
+
 void	draw_walls(t_brain *b, t_ctx *c)
 {
 	double w_height;
@@ -227,7 +231,7 @@ void	draw_walls(t_brain *b, t_ctx *c)
 		if (cur_col < c->width / 2)
 			dist = dist * cos(-(b->player->angle - cur_angle));
 		else
-			dist = dist * cos ((b->player->angle - cur_angle));
+			dist = dist * cos (cur_angle - b->player->angle);
 		w_height = ((b->map->bloc_size) / dist) * b->player->cam->proj_dist;
 		//dprintf(1, "Wall Height: %f\n", w_height);
 		c->color = 0;
