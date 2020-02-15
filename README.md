@@ -1,6 +1,6 @@
-# Cube 3D • Alpha 0.4.0
+# Cube 3D • Alpha 0.4.1
 
-![Cube3D Screenshot](/images/screen3.png)
+![Cube3D Screenshot](/images/textured.png)
 
 -> make - Compile only
 
@@ -27,18 +27,27 @@
 	————————————————————————————————————
 		Changes:
 	————————————————————————————————————
-	- Draw Wall OK !
-	- Draw fov on map
+	- Begin of walls textures
+	- Begin of wall shadow gest
 
     ————————————————————————————————————
 		Cur State:
 	————————————————————————————————————
 	- Map parsing, without config
 	- Draw walls (bad orientation display sometimes + fish eye)
+	- Wall Texture (Bad scaled & texture isn't attached to block)
 	- Minimap display
+	
 	————————————————————————————————————
     	Known Bugs:
 	————————————————————————————————————
+	Drawing: 
 	- Line drawn after end of win width is drawn on the other side of the window
 	- One line appear in center of screen for angles 0, 90, 180
+	
+	Moving:
 	- Double speed if walk on side and move forward
+
+	Textures:
+	- Only work with one texture (problem with texture malloc)
+	- Bad texture scale

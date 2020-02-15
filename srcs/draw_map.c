@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/01/14 22:43:45 by siferrar     #+#   ##    ##    #+#       */
-/*   Updated: 2020/02/15 17:27:36 by siferrar    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/02/15 23:12:29 by siferrar    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -277,7 +277,7 @@ void			draw_minimap(t_brain *b, int x, int y, int width)
 	//ft_putstr("OK\n");
     draw_elems(b, x, y, scale);
 	draw_player_map(b, b->player, new_point(x, y));
-	draw_fov_map(b, b->ctx);
+	//draw_fov_map(b, b->ctx);
 }
 
 void			draw_fullmap(t_brain *b, double ease_val)

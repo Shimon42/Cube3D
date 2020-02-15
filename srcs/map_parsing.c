@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/01/14 20:36:43 by siferrar     #+#   ##    ##    #+#       */
-/*   Updated: 2020/02/11 20:52:39 by siferrar    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/02/15 23:06:20 by siferrar    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -21,11 +21,21 @@ int				init_map(t_map **map)
 	(*map)->grid = NULL;
 	(*map)->scale = 1;
 	(*map)->bloc_size = 64;
-	(*map)->w_n = 0xFF0000;
-	(*map)->w_e = 0xFFFF00;
-	(*map)->w_s = 0x0000FF;
-	(*map)->w_w = 0x00FF00;
+	(*map)->w_n = 0;
+	(*map)->w_e = 0;
+	(*map)->w_s = 0;
+	(*map)->w_w = 0;
 	return (1);
+}
+
+void init_texture(t_brain *b, char *path, t_buff **t)
+{
+	(*t) = malloc(sizeof(t_buff));
+	(*t)->img = mlx_xpm_file_to_image(b->ctx->mlx_ptr, path, &b->map->w_n->width, &b->map->w_n->height);
+	if (!(*t)->img)
+		exit(4);
+	(*t)->addr = mlx_get_data_addr((*t)->img, &(*t)->bits_per_pixel, &(*t)->line_length,
+                                 &(*t)->endian);
 }
 
 int				open_map(t_brain *b, char *map_path)
@@ -36,6 +46,10 @@ int				open_map(t_brain *b, char *map_path)
 	t_player_detect *player;
 
 	init_map(&b->map);
+	init_texture(b, "./assets/textures/walls/stone_bricks.xpm", &b->map->w_n);
+	init_texture(b, "./assets/textures/walls/stone_bricks.xpm", &b->map->w_e);
+	init_texture(b, "./assets/textures/walls/stone_bricks.xpm", &b->map->w_s);
+	init_texture(b, "./assets/textures/walls/stone_bricks.xpm", &b->map->w_w);
 	player = malloc(sizeof(t_player_detect));
 	file = open(map_path, O_RDONLY);
 	while ((ret = get_next_line(file, &line)) != -1)

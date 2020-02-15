@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/01/30 22:11:09 by siferrar     #+#   ##    ##    #+#       */
-/*   Updated: 2020/02/15 17:29:13 by siferrar    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/02/15 23:07:28 by siferrar    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -83,22 +83,17 @@ t_fpoint closest_wall_h(t_brain *b, t_point *p, double angle)
 		offset.y = b->map->bloc_size;
 		offset.x = (b->map->bloc_size / tan(angle)) * 1;
 	}
-
 	while (is_wall == 0 && cur_point.x < b->map->px_width && cur_point.x > 0)
 	{
 		is_wall = (get_grid(b->map, cur_point.x, cur_point.y + 1, 1) == 1 || get_grid(b->map, cur_point.x, cur_point.y - 1, 1) == 1);
 		if (is_wall == -1 || is_wall == 1)
 			break;
-		//point_on_map(b, cur_point.x, cur_point.y, 0xFFFFFF);
 		if (cur_point.x + offset.x < b->map->px_width && cur_point.y + offset.y < b->map->px_height)
 		{
 			cur_point.x += offset.x;
 			cur_point.y += offset.y;
 		} else {
-			if (cur_point.x < 0)
-				cur_point.x = 0;
-			else
-				cur_point.x = b->map->px_width;
+			cur_point.x = b->map->px_width;
 			cur_point.y += offset.y;
 		 	break;
 		}
@@ -122,26 +117,17 @@ t_fpoint closest_wall_v(t_brain *b, t_point *p, double angle)
 		offset.x = b->map->bloc_size;
 		offset.y = (b->map->bloc_size * tan(angle));
 	}
-//	ft_putstr("Cur point (closest grid h):\n");
-	//disp_point(&cur_point);
-//	ft_putstr("Offset:\n");
-//	disp_point(&offset);
-	//ft_putint("Angle: ", ft_indeg(angle));
 	while (is_wall == 0 && cur_point.y < b->map->px_height && cur_point.y > 0)
 	{
 		is_wall = (get_grid(b->map, cur_point.x - 1, cur_point.y, 1) == 1 || get_grid(b->map, cur_point.x + 1, cur_point.y, 1) == 1);
 		if (is_wall == 1 || is_wall == -1) 
 			break;
-		//point_on_map(b, cur_point.x, cur_point.y, 0x00FFFF);
 		if (cur_point.x + offset.x < b->map->px_width && cur_point.y + offset.y < b->map->px_height)
 		{
 			cur_point.x += offset.x;
 			cur_point.y += offset.y;
 		} else {
-			if (cur_point.y < 0)
-				cur_point.y = 0;
-			else
-				cur_point.y = b->map->px_height;
+			cur_point.y = b->map->px_height;
 			cur_point.x += offset.x;
 		 	break;
 		}
@@ -197,29 +183,30 @@ t_detect	dist_to_wall(t_brain *b, t_point *p, double angle)
 	{
 		bad_dist = dists.x;
 		wall.w_side_hit = get_wall_side(angle, 'h');
+		wall.from = 'h';
+		wall.hit = closest_h;
 	}
 	else
 	{
 		bad_dist = dists.y;
 		wall.w_side_hit = get_wall_side(angle, 'v');
+		wall.from = 'v';
+		wall.hit = closest_v;
 	}
-
 	wall.dist = bad_dist;
-//	dprintf(1, "HIT: %c\n", wall.w_side_hit);
-	
 	return (wall);
 }
 
-int		get_wall_color(t_map *m, char w_side)
+t_buff		**get_wall_texture(t_map *m, char w_side)
 {
 	if (w_side == 'n')
-		return (m->w_n);
+		return (&m->w_n);
 	if (w_side == 'e')
-		return (m->w_e);
+		return (&m->w_e);
 	if (w_side == 's')
-		return (m->w_s);
+		return (&m->w_s);
 	if (w_side == 'w')
-		return (m->w_w);
+		return (&m->w_w);
 	return (0);
 }
 
@@ -254,18 +241,43 @@ void	draw_walls(t_brain *b, t_ctx *c)
 			c->color = 0x388FBA;
 			c->line(new_point(cur_col, 0), new_point(cur_col, c->height/2 - w_height/2), c);
 			
-			c->color = get_wall_color(b->map, wall.w_side_hit);
-			c->line(new_point(cur_col, c->height/2 - w_height/2), new_point(cur_col, c->height/2 + w_height/2), c);
-			
+			draw_col(b, w_height,  cur_col, wall);
 			c->color = 0x91672C;
 			c->line(new_point(cur_col, c->height/2 + w_height/2), new_point(cur_col, c->height), c);
 		
 		}else{
-			c->color = get_wall_color(b->map, wall.w_side_hit);
-			c->line(new_point(cur_col, 0), new_point(cur_col, c->height), c);
+			draw_col(b, c->height,  cur_col, wall);
 		}
 		cur_col++;
 	}
 }
 
+void draw_col(t_brain *b, double w_height, double cur_col, t_detect w)
+{
+	int i;
+	double ratio;
+	int color;
+	t_buff **texture;
+	
+	texture = NULL;
+	texture = &b->map->w_n;
+	
+	ratio = ((*texture)->height / w_height);
+	//dprintf(1, "b_size %d - w_height: %f - cur_c %f - ratio %f\n", b->map->bloc_size, w_height, cur_col, ratio);
+	i = 0;
+	while (i <= w_height)
+	{
+		color = pixel_get(*texture, round(cur_col * ratio), round(i * ratio));
+		if (w.w_side_hit == 'n')
+			color -= 0x555555;
+		else if (w.w_side_hit == 'e')
+			color -= 0x404040;
+		else if (w.w_side_hit == 's')
+			color -= 0x111111;
+		else if (w.w_side_hit == 'w')
+			color -= 0x323232;
 
+		pixel_put_buff(cur_col, (b->ctx->height/2 - w_height/2 + 1) + i, color, b->ctx->buff);
+		i++;
+	}
+}

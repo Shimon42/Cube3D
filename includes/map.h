@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/01/14 22:46:16 by siferrar     #+#   ##    ##    #+#       */
-/*   Updated: 2020/02/11 20:52:20 by siferrar    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/02/15 22:38:08 by siferrar    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -19,7 +19,9 @@
 typedef struct	s_detect
 {
 	double		dist;
+	t_fpoint		hit;
 	char		w_side_hit;
+	char		from;
 }				t_detect;
 
 typedef struct	s_player_detect
@@ -39,10 +41,10 @@ typedef struct	s_map
 	double		scale;
 	t_point		disp;
 	int			mini_map_width;
-	int			w_n;
-	int			w_e;
-	int			w_s;
-	int			w_w;
+	t_buff		*w_n;
+	t_buff		*w_e;
+	t_buff		*w_s;
+	t_buff		*w_w;
 }				t_map;
 
 int				init_map(t_map **map);

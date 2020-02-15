@@ -3,10 +3,10 @@
 /*                                                              /             */
 /*   context.c                                        .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
-/*   By: simeon <simeon@student.le-101.fr>          +:+   +:    +:    +:+     */
+/*   By: siferrar <siferrar@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/01/15 18:42:08 by siferrar     #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/29 15:34:46 by simeon      ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/02/15 21:38:07 by siferrar    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -104,4 +104,19 @@ void            pixel_put_buff(int x, int y, int color, t_buff *buff)
 		*(unsigned int*)dst = color;
 	}
 	//color = 0;
+}
+
+int		pixel_get(t_buff *img, int x, int y)
+{
+    char    *dst;
+	int addr_index;
+	int *color;
+	addr_index = (y * img->line_length + x * (img->bits_per_pixel / 8));
+	if(addr_index > 0 && addr_index < img->line_length * img->height)
+	{
+    	dst = img->addr + addr_index;
+		color = (int*)(dst);
+		return(*color);
+	}
+	return (-1);
 }
