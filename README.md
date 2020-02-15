@@ -21,7 +21,7 @@
 
 [LEFT] [RIGHT] - Rotate camera ( + [SHIFT] to rotate/10)
 
-![Cube3D Minimap expanded](/images/screen2.png)
+![Cube3D Minimap expanded](/images/minimap.png)
 
 
 	————————————————————————————————————
