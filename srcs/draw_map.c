@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/01/14 22:43:45 by siferrar     #+#   ##    ##    #+#       */
-/*   Updated: 2020/02/12 15:50:56 by siferrar    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/02/15 17:27:36 by siferrar    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -78,16 +78,16 @@ t_point			map_scaled(t_point *p, t_map *m)
 	return(ret);
 }
 
-void            draw_frame(t_brain *b, int x, int y, double scale)
+void            draw_frame(t_brain *b)
 {
 	//disp_map_s(b->map);
 	//printf("x: [%d]\ny: [%d]\n", x, y);
 	//printf("x: [%f]\ny: [%f]\n", (double)x, (double)y);
 	b->ctx->color = 0x000000;
-    b->ctx->rect(x,
-                y,
-                b->map->bloc_size * b->map->width * scale,
-                b->map->bloc_size * b->map->height * scale,
+    b->ctx->rect(b->map->disp.x,
+                b->map->disp.y,
+                b->map->bloc_size * b->map->width * b->map->scale,
+                b->map->bloc_size * b->map->height * b->map->scale,
                 1,
 				b->ctx);
 	//disp_map_s(b->map);
@@ -158,6 +158,14 @@ void		draw_elems(t_brain *b, int disp_x, int disp_y, double scale)
 				b->ctx);
 }
 
+void	line_on_map(t_brain *b, t_point p1, t_point p2)
+{
+	p1 = map_scaled(&p1, b->map);
+	p2 = map_scaled(&p2, b->map);
+	b->ctx->line(new_point(b->map->disp.x + p1.x, b->map->disp.y + p1.y),
+			new_point(b->map->disp.x + p2.x, b->map->disp.y + p2.y),
+			b->ctx);	
+}
 
 void	draw_minimap_closest(t_brain *b, t_point disp, double angle)
 {
@@ -219,10 +227,40 @@ void			draw_player_map(t_brain *b, t_player *p, t_point m_pos)
 	
 	draw_minimap_closest(b, m_pos, p->angle);
 	b->ctx->color = 0xFF0000;
-	draw_minimap_closest(b, m_pos, p->angle - p->cam->fov / 2);
+	draw_minimap_closest(b, m_pos, to_360(p->angle - p->cam->fov / 2));
 	b->ctx->color = 0x00FF00;
 	draw_minimap_closest(b, m_pos, p->angle + p->cam->fov / 2);
-	//draw_minimap_rays(b, m_pos);
+	draw_minimap_rays(b, m_pos);
+}
+
+void	draw_fov_map(t_brain *b, t_ctx *c)
+{
+	t_detect wall;
+	double dist;
+	double cur_col;
+	double col_step;
+	double cur_angle;
+
+	cur_col = 0;
+	col_step = b->player->cam->fov/ c->width;
+	//printf("START DRAW WALLS\n");
+	while (cur_col < c->width)
+	{
+		cur_angle = b->player->angle - (b->player->cam->fov / 2) + (col_step * cur_col);
+
+		wall = dist_to_wall(b, b->player->pos, cur_angle);
+		dist = wall.dist;
+
+		b->ctx->color = 0xFF00FF;
+		line_on_map(b,
+			*b->player->pos,
+			new_point(b->player->pos->x + (wall.dist) * cos(cur_angle), b->player->pos->y + (wall.dist) * sin(cur_angle)));	
+		if (cur_col < c->width / 2)
+			dist = dist * cos(-(b->player->angle - cur_angle));
+		else
+			dist = dist * cos ((b->player->angle - cur_angle));
+		cur_col+=c->width / 10;
+	}
 }
 
 void			draw_minimap(t_brain *b, int x, int y, int width)
@@ -235,11 +273,11 @@ void			draw_minimap(t_brain *b, int x, int y, int width)
 	b->map->disp.x = x;
 	b->map->disp.y = y;
 	
-    draw_frame(b, x, y, scale);
+    draw_frame(b);
 	//ft_putstr("OK\n");
     draw_elems(b, x, y, scale);
 	draw_player_map(b, b->player, new_point(x, y));
-	
+	draw_fov_map(b, b->ctx);
 }
 
 void			draw_fullmap(t_brain *b, double ease_val)

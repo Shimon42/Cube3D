@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/01/09 21:30:44 by siferrar     #+#   ##    ##    #+#       */
-/*   Updated: 2020/02/11 22:44:43 by siferrar    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/02/15 17:27:30 by siferrar    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -67,19 +67,22 @@ typedef struct	s_brain
 int				open_map(t_brain *b, char *map_path);
 void			draw_minimap(t_brain *b, int x, int y, int width);
 void			draw_fullmap(t_brain *b, double ease_val);
-void            draw_frame(t_brain *b, int x, int y, double scale);
+void            draw_frame(t_brain *b);
 t_point			map_scaled(t_point *p, t_map *m);
 t_fpoint		map_fscaled(t_fpoint *p, t_map *m);
 int				get_grid(t_map *m, int x, int y, int need_rescale);
 t_point			to_grid(int x, int y, t_map *m);
 void			point_on_map(t_brain *b, int x, int y, int color);
+void	line_on_map(t_brain *b, t_point p1, t_point p2);
+void	draw_fov_map(t_brain *b, t_ctx *c);
+
 t_fpoint		to_fpoint(t_point *p);
 int				init_player(t_brain *b, int pos_x, char angle);
 void			move(struct s_player*, int dir);
 void			rotate(struct s_player *p, double angle);
 void			draw_player(struct s_player *p, t_ctx *ctx);
 void			side_move(struct s_player *p, int dir);
-
+double to_360(double angle);
 double			calc_dist(t_point p1, t_point p2);
 double			calc_fdist(t_fpoint p1, t_fpoint p2);
 
