@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/01/22 22:24:57 by siferrar     #+#   ##    ##    #+#       */
-/*   Updated: 2020/02/17 20:23:21 by siferrar    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/02/17 23:04:52 by siferrar    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -77,6 +77,7 @@ int		init_player(t_brain *b, int pos_x, char angle)
 	b->player->step = malloc(sizeof(t_point *));
 	b->player->rot(b->player, 0);
 	b->player->brain = b;
+	b->player->as_move = 1;
 	printf(" - OK\n");
 	return (1);
 }
@@ -145,6 +146,7 @@ void	side_move(struct s_player *p, int dir)
 		p->r_pos->x = map->px_width - 1;
 	p->pos->x = p->r_pos->x;
 	p->pos->y = p->r_pos->y;
+	p->as_move = 1;
 }
 
 void	move(struct s_player *p, int dir)
@@ -180,6 +182,7 @@ void	move(struct s_player *p, int dir)
 		p->r_pos->x = p->pos->x;
 		p->r_pos->y = p->pos->y;
 	}
+	p->as_move = 1;
 }
 
 void	rotate(struct s_player *p, double angle)
@@ -197,5 +200,6 @@ void	rotate(struct s_player *p, double angle)
 	p->step->y = (p->pos->y + p->speed * sin(p->angle)) - p->pos->y;
 	ft_putint("Step.y; ", p->step->y);
 	printf("Angle: %f\n", rad_to_deg(p->angle));
+	p->as_move = 1;
 	//p->draw(p, ctx);
 }

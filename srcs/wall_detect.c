@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/01/30 22:11:09 by siferrar     #+#   ##    ##    #+#       */
-/*   Updated: 2020/02/17 21:43:17 by siferrar    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/02/17 23:05:52 by siferrar    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -221,6 +221,7 @@ void	draw_walls(t_brain *b, t_ctx *c)
 
 	cur_col = 0;
 	col_step = b->player->cam->fov/ c->width;
+	c->cur_buff = b->map->frame;
 	//printf("START DRAW WALLS\n");
 	while (cur_col < c->width)
 	{
@@ -262,12 +263,13 @@ void draw_col(t_brain *b, double w_height, double cur_col, t_detect w)
 		i = (-(b->ctx->height/2 - w_height/2 + 1)) * -1;
 	if (cur_col == 1)
 	{
-		dprintf(1, "W_height: %f - ", w_height);
-		dprintf(1, "start: %d - ", i);
+		//dprintf(1, "W_height: %f - ", w_height);
+		//dprintf(1, "start: %d - ", i);
 	}
 	while (i <= w_height)
 	{
 		color = pixel_get(*texture, round(cur_col * ratio), round(i * ratio));
+		//color = 0xFFFFFF;
 		if (w.w_side_hit == 'n')
 			color -= 0x555555;
 		else if (w.w_side_hit == 'e')
@@ -278,13 +280,13 @@ void draw_col(t_brain *b, double w_height, double cur_col, t_detect w)
 			color -= 0x323232;
 
 		if ((b->ctx->height/2 - w_height/2 + 1) + i > 0 )
-			pixel_put_buff(cur_col, (b->ctx->height/2 - w_height/2 + 1) + i, color, b->ctx->buff);
+			pixel_put_buff(cur_col, (b->ctx->height/2 - w_height/2 + 1) + i, color, b->map->frame);
 		if ((b->ctx->height/2 - w_height/2 + 1) + i > b->ctx->height)
 			break;
 		i++;
 	}
 	if (cur_col == 1)
 	{
-		dprintf(1, "end: %d\n", i);
+		//dprintf(1, "end: %d\n", i);
 	}
 }

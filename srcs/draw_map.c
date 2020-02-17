@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/01/14 22:43:45 by siferrar     #+#   ##    ##    #+#       */
-/*   Updated: 2020/02/17 21:17:09 by siferrar    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/02/17 23:39:53 by siferrar    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -225,12 +225,12 @@ void			draw_player_map(t_brain *b, t_player *p, t_point m_pos)
 					1,
 					b->ctx);
 	
-	//draw_minimap_closest(b, m_pos, p->angle);
-	//b->ctx->color = 0xFF0000;
-	//draw_minimap_closest(b, m_pos, to_360(p->angle - p->cam->fov / 2));
-	//b->ctx->color = 0x00FF00;
-	//draw_minimap_closest(b, m_pos, p->angle + p->cam->fov / 2);
-	//draw_minimap_rays(b, m_pos);
+	draw_minimap_closest(b, m_pos, p->angle);
+	b->ctx->color = 0xFF0000;
+	draw_minimap_closest(b, m_pos, to_360(p->angle - p->cam->fov / 2));
+	b->ctx->color = 0x00FF00;
+	draw_minimap_closest(b, m_pos, p->angle + p->cam->fov / 2);
+	draw_minimap_rays(b, m_pos);
 }
 
 void	draw_fov_map(t_brain *b, t_ctx *c)
@@ -287,6 +287,7 @@ void			draw_fullmap(t_brain *b, double ease_val)
 	double margin_top;
 	static double ease = 0;
 
+	
 	if (ease_val > 0)
 	{
 		margin = 100 * b->map->scale;
@@ -297,10 +298,18 @@ void			draw_fullmap(t_brain *b, double ease_val)
 					margin_top,
 					(b->ctx->width - 2 * margin) * (ease));
 		if (ease < 1 && ease + ease_val < 1)
+		{
 			ease += ease_val;
-		else
+			b->player->as_move = 1;
+		}else if (ease_val != 1)
+		{
+			b->player->as_move = 1;
 			ease = 1;
+		} else
+			b->player->as_move = 0;
 	}
-	else
+	else {
 		ease = 0;
+		b->player->as_move = 1;
+	}
 }
