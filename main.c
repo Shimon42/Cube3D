@@ -6,12 +6,38 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/01/09 21:29:11 by siferrar     #+#   ##    ##    #+#       */
-/*   Updated: 2020/02/15 22:16:07 by siferrar    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/02/17 21:41:51 by siferrar    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "includes/cube3d.h"
+#include <time.h>
+
+void		fps_count(t_ctx *c)
+{
+	static time_t str_time = 0;
+	static int count = 0;
+	static char *str = NULL;
+
+	if (str_time == 0)
+		str_time = time(0);
+	if (time(0) - str_time == 1)
+	{
+		str_time = time(0);
+		free(str);
+		str = ft_itoa(count);
+		
+		count = 0;
+	} else
+		count++;
+	if (str != NULL)
+	{
+		c->color = 0;
+		c->text("FPS:", 10, 2, c);
+		c->text(str, 50, 2, c);
+	}
+}
 
 void	disp_keys(t_brain *b)
 {
@@ -152,6 +178,7 @@ t_brain *new_brain(int width, int height, char * name)
 	new->ctx = new_ctx(width, height);
 	new->ctx->win_ptr = mlx_new_window(new->ctx->mlx_ptr, width, height, name);
 	new->ctx->color = 0x00FFFF;
+	init_buff(new->ctx, &new->ctx->buff, new->ctx->width, new->ctx->height);
 	new->keys = ft_calloc(10, sizeof(int));
 	init_keys(new);
 	new->inited = 1;
@@ -199,7 +226,7 @@ int loop_hook(t_brain *b)
 {
 	key_press(-1, b);
 	mlx_clear_window(b->ctx->mlx_ptr, b->ctx->win_ptr);
-	init_buff(b->ctx);
+	
 	//b->player->draw(b->player, b->ctx);
 	draw_walls(b, b->ctx);
 	if (is_key_pressed(b, 3) != -1)
@@ -207,10 +234,11 @@ int loop_hook(t_brain *b)
 	else
 	{
 		draw_fullmap(b, 0);
-		draw_minimap(b, 10, 10, b->ctx->width * 0.2);
+		draw_minimap(b, 10, 25, b->ctx->width * 0.2);
 	}
 	mlx_put_image_to_window(b->ctx->mlx_ptr , b->ctx->win_ptr, b->ctx->buff->img, 0, 0);
-	mlx_destroy_image(b->ctx->mlx_ptr, b->ctx->buff->img);
+	fps_count(b->ctx);
+	//mlx_destroy_image(b->ctx->mlx_ptr, b->ctx->buff->img);
 	return (b->inited);
 }
 

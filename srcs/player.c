@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/01/22 22:24:57 by siferrar     #+#   ##    ##    #+#       */
-/*   Updated: 2020/02/11 22:59:55 by siferrar    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/02/17 20:23:21 by siferrar    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -172,8 +172,14 @@ void	move(struct s_player *p, int dir)
 	}
 	else
 		p->r_pos->x = map->px_width - 1;
-	p->pos->x = p->r_pos->x;
-	p->pos->y = p->r_pos->y;
+	if (get_grid(map,p->r_pos->x, p->r_pos->y, 1) != 1)
+	{
+		p->pos->x = p->r_pos->x;
+		p->pos->y = p->r_pos->y;
+	} else {
+		p->r_pos->x = p->pos->x;
+		p->r_pos->y = p->pos->y;
+	}
 }
 
 void	rotate(struct s_player *p, double angle)

@@ -1,4 +1,4 @@
-# Cube 3D • Alpha 0.4.1
+# Cube 3D • Alpha 0.4.2
 
 ![Cube3D Screenshot](/images/textured.png)
 
@@ -27,15 +27,16 @@
 	————————————————————————————————————
 		Changes:
 	————————————————————————————————————
-	- Begin of walls textures
-	- Begin of wall shadow gest
+	- Add FPS counter
+	- Fixed "texture isn't 'attached' to block" bug
+	- Better init_buff (More generic)
 
     ————————————————————————————————————
 		Cur State:
 	————————————————————————————————————
 	- Map parsing, without config
-	- Draw walls (bad orientation display sometimes + fish eye)
-	- Wall Texture (Bad scaled & texture isn't attached to block)
+	- Draw walls (fish eye sort of corrected)
+	- Wall Texture (Bad scaled)
 	- Minimap display
 	
 	————————————————————————————————————

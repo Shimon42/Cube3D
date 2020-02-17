@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/01/15 18:42:08 by siferrar     #+#   ##    ##    #+#       */
-/*   Updated: 2020/02/15 21:38:07 by siferrar    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/02/17 21:38:02 by siferrar    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -56,7 +56,7 @@ void	set_context(t_ctx **cur, t_ctx **new_ctx, char *name)
 	else
 		write(1, "Context Already SET\n", 20);
 }
-
+/*
 void init_buff(t_ctx *ctx)
 {
 	ctx->buff = malloc(sizeof(t_buff));
@@ -65,6 +65,16 @@ void init_buff(t_ctx *ctx)
 	ctx->buff->img = mlx_new_image(ctx->mlx_ptr, ctx->width, ctx->height);
 	ctx->buff->addr = mlx_get_data_addr(ctx->buff->img, &ctx->buff->bits_per_pixel, &ctx->buff->line_length,
                                  &ctx->buff->endian);
+}
+*/
+void init_buff(t_ctx * ctx, t_buff **buff, int width, int height)
+{
+	(*buff) = malloc(sizeof(t_buff));
+	(*buff)->width = width;
+	(*buff)->height = height;
+	(*buff)->img = mlx_new_image(ctx->mlx_ptr, ctx->width, ctx->height);
+	(*buff)->addr = mlx_get_data_addr((*buff)->img, &(*buff)->bits_per_pixel, &(*buff)->line_length,
+                                 &(*buff)->endian);
 }
 
 t_ctx	*new_ctx(int width, int height)
@@ -81,8 +91,8 @@ t_ctx	*new_ctx(int width, int height)
 	ctx->circle = &draw_circle;
 	ctx->text = &put_text;
 	ctx->clear = &clear_ctx;
-	init_buff(ctx);
-	disp_buff(ctx->buff);
+	
+	//disp_buff(ctx->buff);
 	return(ctx);
 }
 

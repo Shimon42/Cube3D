@@ -6,14 +6,14 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/01/14 20:36:43 by siferrar     #+#   ##    ##    #+#       */
-/*   Updated: 2020/02/15 23:06:20 by siferrar    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/02/17 21:41:13 by siferrar    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "../includes/cube3d.h"
 
-int				init_map(t_map **map)
+int				init_map(t_ctx *ctx, t_map **map)
 {
 	(*map) = malloc(sizeof(t_map));
 	(*map)->height = 0;
@@ -25,6 +25,7 @@ int				init_map(t_map **map)
 	(*map)->w_e = 0;
 	(*map)->w_s = 0;
 	(*map)->w_w = 0;
+	init_buff(ctx, &(*map)->frame, ctx->width, ctx->height);
 	return (1);
 }
 
@@ -45,7 +46,7 @@ int				open_map(t_brain *b, char *map_path)
 	int		ret;
 	t_player_detect *player;
 
-	init_map(&b->map);
+	init_map(b->ctx, &b->map);
 	init_texture(b, "./assets/textures/walls/stone_bricks.xpm", &b->map->w_n);
 	init_texture(b, "./assets/textures/walls/stone_bricks.xpm", &b->map->w_e);
 	init_texture(b, "./assets/textures/walls/stone_bricks.xpm", &b->map->w_s);
