@@ -1,15 +1,15 @@
 /* ************************************************************************** */
-/*                                                          LE - /            */
-/*                                                              /             */
-/*   draw_map.c                                       .::    .:/ .      .::   */
-/*                                                 +:+:+   +:    +:  +:+:+    */
-/*   By: siferrar <siferrar@student.le-101.fr>      +:+   +:    +:    +:+     */
-/*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2020/01/14 22:43:45 by siferrar     #+#   ##    ##    #+#       */
-/*   Updated: 2020/02/17 23:39:53 by siferrar    ###    #+. /#+    ###.fr     */
-/*                                                         /                  */
-/*                                                        /                   */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   draw_map.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: siferrar <siferrar@student.le-101.fr>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/01/14 22:43:45 by siferrar          #+#    #+#             */
+/*   Updated: 2020/02/18 16:25:44 by siferrar         ###   ########lyon.fr   */
+/*                                                                            */
 /* ************************************************************************** */
+
 
 #include "../includes/cube3d.h"
 
@@ -230,7 +230,7 @@ void			draw_player_map(t_brain *b, t_player *p, t_point m_pos)
 	draw_minimap_closest(b, m_pos, to_360(p->angle - p->cam->fov / 2));
 	b->ctx->color = 0x00FF00;
 	draw_minimap_closest(b, m_pos, p->angle + p->cam->fov / 2);
-	draw_minimap_rays(b, m_pos);
+	//draw_minimap_rays(b, m_pos);
 }
 
 void	draw_fov_map(t_brain *b, t_ctx *c)
@@ -267,6 +267,7 @@ void			draw_minimap(t_brain *b, int x, int y, int width)
 {
 	double scale;
 
+	b->ctx->cur_buff = b->map->frame;
 	//ft_putstr("Draw frame - ");
 	scale = ((double)(width / (double)b->map->px_width)) ;
 	b->map->scale = scale;
@@ -297,19 +298,25 @@ void			draw_fullmap(t_brain *b, double ease_val)
 					margin,
 					margin_top,
 					(b->ctx->width - 2 * margin) * (ease));
-		if (ease < 1 && ease + ease_val < 1)
+		if (ease < 1 && ease + ease_val <= 1)
 		{
 			ease += ease_val;
 			b->player->as_move = 1;
-		}else if (ease_val != 1)
+		} else if (b->player->as_move == 0 && ease == 1)
 		{
 			b->player->as_move = 1;
+			ease = 1.000001;
+		}else if (ease != 1 && ease != 1.000001)
+		{
 			ease = 1;
-		} else
-			b->player->as_move = 0;
+			b->player->as_move = 1;
+		}
 	}
 	else {
+		if (ease != 0)
+			b->player->as_move = 1;
+		else
+			b->player->as_move = 0;
 		ease = 0;
-		b->player->as_move = 1;
 	}
 }

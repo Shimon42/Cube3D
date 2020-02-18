@@ -1,15 +1,15 @@
 /* ************************************************************************** */
-/*                                                          LE - /            */
-/*                                                              /             */
-/*   wall_detect.c                                    .::    .:/ .      .::   */
-/*                                                 +:+:+   +:    +:  +:+:+    */
-/*   By: siferrar <siferrar@student.le-101.fr>      +:+   +:    +:    +:+     */
-/*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2020/01/30 22:11:09 by siferrar     #+#   ##    ##    #+#       */
-/*   Updated: 2020/02/17 23:05:52 by siferrar    ###    #+. /#+    ###.fr     */
-/*                                                         /                  */
-/*                                                        /                   */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   wall_detect.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: siferrar <siferrar@student.le-101.fr>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/01/30 22:11:09 by siferrar          #+#    #+#             */
+/*   Updated: 2020/02/18 15:36:12 by siferrar         ###   ########lyon.fr   */
+/*                                                                            */
 /* ************************************************************************** */
+
 
 #include "../includes/cube3d.h"
 
@@ -260,11 +260,11 @@ void draw_col(t_brain *b, double w_height, double cur_col, t_detect w)
 	//dprintf(1, "b_size %d - w_height: %f - cur_c %f - ratio %f\n", b->map->bloc_size, w_height, cur_col, ratio);
 	i = 0;
 	if ((b->ctx->height/2 - w_height/2 + 1) < 0)
-		i = (-(b->ctx->height/2 - w_height/2 + 1)) * -1;
+		i = ((b->ctx->height/2 - w_height/2 + 1)) * -1;
 	if (cur_col == 1)
 	{
-		//dprintf(1, "W_height: %f - ", w_height);
-		//dprintf(1, "start: %d - ", i);
+		dprintf(1, "W_height: %f - ", w_height);
+		dprintf(1, "start: %d - ", i);
 	}
 	while (i <= w_height)
 	{
@@ -287,6 +287,6 @@ void draw_col(t_brain *b, double w_height, double cur_col, t_detect w)
 	}
 	if (cur_col == 1)
 	{
-		//dprintf(1, "end: %d\n", i);
+		dprintf(1, "end: %d\n", i);
 	}
 }
