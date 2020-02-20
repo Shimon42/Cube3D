@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 22:11:09 by siferrar          #+#    #+#             */
-/*   Updated: 2020/02/18 15:36:12 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/02/20 17:33:48 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ t_fpoint closest_wall_h(t_brain *b, t_point *p, double angle)
 			cur_point.y += offset.y;
 		} else {
 			cur_point.x = b->map->px_width;
-			cur_point.y += offset.y;
+
 		 	break;
 		}
 	}
@@ -128,7 +128,7 @@ t_fpoint closest_wall_v(t_brain *b, t_point *p, double angle)
 			cur_point.y += offset.y;
 		} else {
 			cur_point.y = b->map->px_height;
-			cur_point.x += offset.x;
+
 		 	break;
 		}
 	}
@@ -252,10 +252,11 @@ void draw_col(t_brain *b, double w_height, double cur_col, t_detect w)
 	double ratio;
 	int color;
 	t_buff **texture;
-	
+	int texture_col;
+
+	texture_col = (int)w.hit.x % 64;
 	texture = NULL;
 	texture = &b->map->w_n;
-	
 	ratio = ((*texture)->height / w_height);
 	//dprintf(1, "b_size %d - w_height: %f - cur_c %f - ratio %f\n", b->map->bloc_size, w_height, cur_col, ratio);
 	i = 0;
@@ -265,8 +266,10 @@ void draw_col(t_brain *b, double w_height, double cur_col, t_detect w)
 	{
 		dprintf(1, "W_height: %f - ", w_height);
 		dprintf(1, "start: %d - ", i);
+		dprintf(1, "text_col: %d - ", texture_col);
 	}
-	while (i <= w_height)
+	i--;
+	while (i <= w_height + 1)
 	{
 		color = pixel_get(*texture, round(cur_col * ratio), round(i * ratio));
 		//color = 0xFFFFFF;
