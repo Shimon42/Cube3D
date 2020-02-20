@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/01/14 20:36:43 by siferrar     #+#   ##    ##    #+#       */
-/*   Updated: 2020/02/17 21:41:13 by siferrar    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/02/20 21:14:10 by siferrar    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -48,7 +48,7 @@ int				open_map(t_brain *b, char *map_path)
 
 	init_map(b->ctx, &b->map);
 	init_texture(b, "./assets/textures/walls/stone_bricks.xpm", &b->map->w_n);
-	init_texture(b, "./assets/textures/walls/stone_bricks.xpm", &b->map->w_e);
+	init_texture(b, "./assets/textures/walls/blue.xpm", &b->map->w_e);
 	init_texture(b, "./assets/textures/walls/stone_bricks.xpm", &b->map->w_s);
 	init_texture(b, "./assets/textures/walls/stone_bricks.xpm", &b->map->w_w);
 	player = malloc(sizeof(t_player_detect));

@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/01/15 17:33:03 by siferrar     #+#   ##    ##    #+#       */
-/*   Updated: 2020/02/17 21:37:14 by siferrar    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/02/17 22:13:57 by siferrar    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -49,7 +49,7 @@ typedef struct	s_ctx
 	void		*mlx_ptr;
 	void		*win_ptr;
 	t_buff		*buff;
-	t_buff		*buff_to_put;
+	t_buff		*cur_buff;
 	void		(*line)(t_point, t_point, struct s_ctx *);
 	void		(*rect)(int, int, int, int, int, struct s_ctx *);
 	void		(*circle)(double, double, int, int, struct s_ctx *);

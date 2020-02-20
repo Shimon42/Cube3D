@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/01/15 18:42:08 by siferrar     #+#   ##    ##    #+#       */
-/*   Updated: 2020/02/17 21:38:02 by siferrar    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/02/17 22:05:16 by siferrar    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -72,6 +72,7 @@ void init_buff(t_ctx * ctx, t_buff **buff, int width, int height)
 	(*buff) = malloc(sizeof(t_buff));
 	(*buff)->width = width;
 	(*buff)->height = height;
+	dprintf(1, "INIT BUFF %dx%d\n", width, height);
 	(*buff)->img = mlx_new_image(ctx->mlx_ptr, ctx->width, ctx->height);
 	(*buff)->addr = mlx_get_data_addr((*buff)->img, &(*buff)->bits_per_pixel, &(*buff)->line_length,
                                  &(*buff)->endian);
@@ -107,7 +108,7 @@ void            pixel_put_buff(int x, int y, int color, t_buff *buff)
 	int addr_index;
 
 	addr_index = (y * buff->line_length + x * (buff->bits_per_pixel / 8));
-	//printf("offset: %d\n", addr_index);
+//	printf("offset: %d\n", addr_index);
 	if(addr_index > 0 && addr_index < buff->line_length * buff->height)
 	{
     	dst = buff->addr + addr_index;

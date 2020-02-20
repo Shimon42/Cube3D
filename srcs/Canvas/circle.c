@@ -1,15 +1,15 @@
 /* ************************************************************************** */
-/*                                                          LE - /            */
-/*                                                              /             */
-/*   circle.c                                         .::    .:/ .      .::   */
-/*                                                 +:+:+   +:    +:  +:+:+    */
-/*   By: siferrar <siferrar@student.le-101.fr>      +:+   +:    +:    +:+     */
-/*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2020/01/23 16:58:38 by siferrar     #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/28 21:55:40 by siferrar    ###    #+. /#+    ###.fr     */
-/*                                                         /                  */
-/*                                                        /                   */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   circle.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: siferrar <siferrar@student.le-101.fr>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/01/23 16:58:38 by siferrar          #+#    #+#             */
+/*   Updated: 2020/02/18 16:20:42 by siferrar         ###   ########lyon.fr   */
+/*                                                                            */
 /* ************************************************************************** */
+
 
 #include "../../includes/my_canvas.h"
 
@@ -26,14 +26,14 @@ void	draw_circle(double c_x, double c_y, int ray, int fill, t_ctx *ctx)
         d = ray - 1;
         while(y >= x)
         {
-            pixel_put_buff(c_x + x, c_y + y, ctx->color, ctx->buff);
-            pixel_put_buff(c_x + y, c_y + x, ctx->color, ctx->buff);
-            pixel_put_buff(c_x - x, c_y + y, ctx->color, ctx->buff);
-            pixel_put_buff(c_x - y, c_y + x, ctx->color, ctx->buff);
-            pixel_put_buff(c_x + x, c_y - y, ctx->color, ctx->buff);
-            pixel_put_buff(c_x + y, c_y - x, ctx->color, ctx->buff);
-            pixel_put_buff(c_x - x, c_y - y, ctx->color, ctx->buff);
-            pixel_put_buff(c_x - y, c_y - x, ctx->color, ctx->buff);
+            pixel_put_buff(c_x + x, c_y + y, ctx->color, ctx->cur_buff);
+            pixel_put_buff(c_x + y, c_y + x, ctx->color, ctx->cur_buff);
+            pixel_put_buff(c_x - x, c_y + y, ctx->color, ctx->cur_buff);
+            pixel_put_buff(c_x - y, c_y + x, ctx->color, ctx->cur_buff);
+            pixel_put_buff(c_x + x, c_y - y, ctx->color, ctx->cur_buff);
+            pixel_put_buff(c_x + y, c_y - x, ctx->color, ctx->cur_buff);
+            pixel_put_buff(c_x - x, c_y - y, ctx->color, ctx->cur_buff);
+            pixel_put_buff(c_x - y, c_y - x, ctx->color, ctx->cur_buff);
             
             if (d >= 2 * x)
             {
@@ -56,5 +56,5 @@ void	draw_circle(double c_x, double c_y, int ray, int fill, t_ctx *ctx)
             return ;
         ray--;
     }
-    pixel_put_buff(c_x, c_y, ctx->color, ctx->buff);
+    pixel_put_buff(c_x, c_y, ctx->color, ctx->cur_buff);
 }

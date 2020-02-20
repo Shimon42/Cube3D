@@ -37,9 +37,6 @@ void do_loop_flush(CFRunLoopObserverRef observer, CFRunLoopActivity activity, vo
     }
 }
 
-
-
-
 void *mlx_init()
 {
   mlx_ptr_t	*new_mlx;

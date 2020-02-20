@@ -1,15 +1,15 @@
 /* ************************************************************************** */
-/*                                                          LE - /            */
-/*                                                              /             */
-/*   map.h                                            .::    .:/ .      .::   */
-/*                                                 +:+:+   +:    +:  +:+:+    */
-/*   By: siferrar <siferrar@student.le-101.fr>      +:+   +:    +:    +:+     */
-/*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2020/01/14 22:46:16 by siferrar     #+#   ##    ##    #+#       */
-/*   Updated: 2020/02/17 21:40:35 by siferrar    ###    #+. /#+    ###.fr     */
-/*                                                         /                  */
-/*                                                        /                   */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   map.h                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: siferrar <siferrar@student.le-101.fr>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/01/14 22:46:16 by siferrar          #+#    #+#             */
+/*   Updated: 2020/02/20 16:47:03 by siferrar         ###   ########lyon.fr   */
+/*                                                                            */
 /* ************************************************************************** */
+
 
 #ifndef MAP_H
 # define MAP_H
@@ -19,7 +19,7 @@
 typedef struct	s_detect
 {
 	double		dist;
-	t_fpoint		hit;
+	t_fpoint	hit;
 	char		w_side_hit;
 	char		from;
 }				t_detect;
