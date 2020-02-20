@@ -1,15 +1,15 @@
 /* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   wall_detect.c                                      :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: siferrar <siferrar@student.le-101.fr>      +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/30 22:11:09 by siferrar          #+#    #+#             */
-/*   Updated: 2020/02/20 17:33:48 by siferrar         ###   ########lyon.fr   */
-/*                                                                            */
+/*                                                          LE - /            */
+/*                                                              /             */
+/*   wall_detect.c                                    .::    .:/ .      .::   */
+/*                                                 +:+:+   +:    +:  +:+:+    */
+/*   By: siferrar <siferrar@student.le-101.fr>      +:+   +:    +:    +:+     */
+/*                                                 #+#   #+    #+    #+#      */
+/*   Created: 2020/01/30 22:11:09 by siferrar     #+#   ##    ##    #+#       */
+/*   Updated: 2020/02/20 21:15:21 by siferrar    ###    #+. /#+    ###.fr     */
+/*                                                         /                  */
+/*                                                        /                   */
 /* ************************************************************************** */
-
 
 #include "../includes/cube3d.h"
 
@@ -241,23 +241,33 @@ void	draw_walls(t_brain *b, t_ctx *c)
 		c->line(new_point(cur_col, 0), new_point(cur_col, c->height/2 - w_height/2), c);
 		draw_col(b, w_height,  cur_col, wall);
 		c->color = 0x91672C;
+		//draw_floor(new_point(cur_col, c->height/2 + w_height/2), new_point(cur_col, c->height), c);
 		c->line(new_point(cur_col, c->height/2 + w_height/2), new_point(cur_col, c->height), c);
 		cur_col++;
 	}
 }
-
+/*
+void draw_floor(t_brain *b, double w_height, double cur_col, t_detect w)
+{
+	
+}
+*/
 void draw_col(t_brain *b, double w_height, double cur_col, t_detect w)
 {
 	int i;
-	double ratio;
+	t_fpoint ratio;
 	int color;
 	t_buff **texture;
 	int texture_col;
 
-	texture_col = (int)w.hit.x % 64;
+	if (w.w_side_hit == 'n' || w.w_side_hit == 's')
+		texture_col = (int)w.hit.x % 64;
+	else
+		texture_col = (int)w.hit.y % 64;
 	texture = NULL;
 	texture = &b->map->w_n;
-	ratio = ((*texture)->height / w_height);
+	ratio.y = ((*texture)->height / w_height);
+	ratio.x = ((*texture)->width / b->map->bloc_size);
 	//dprintf(1, "b_size %d - w_height: %f - cur_c %f - ratio %f\n", b->map->bloc_size, w_height, cur_col, ratio);
 	i = 0;
 	if ((b->ctx->height/2 - w_height/2 + 1) < 0)
@@ -271,7 +281,7 @@ void draw_col(t_brain *b, double w_height, double cur_col, t_detect w)
 	i--;
 	while (i <= w_height + 1)
 	{
-		color = pixel_get(*texture, round(cur_col * ratio), round(i * ratio));
+		color = pixel_get(*texture, round(texture_col * ratio.x), round(i * ratio.y));
 		//color = 0xFFFFFF;
 		if (w.w_side_hit == 'n')
 			color -= 0x555555;

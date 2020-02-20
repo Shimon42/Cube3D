@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/01/22 22:24:57 by siferrar     #+#   ##    ##    #+#       */
-/*   Updated: 2020/02/17 23:04:52 by siferrar    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/02/20 21:15:02 by siferrar    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -144,8 +144,14 @@ void	side_move(struct s_player *p, int dir)
 	}
 	else
 		p->r_pos->x = map->px_width - 1;
-	p->pos->x = p->r_pos->x;
-	p->pos->y = p->r_pos->y;
+	if (get_grid(map,p->r_pos->x + (p->speed + 5) * (cos(p->angle + (ft_inrad(90)) * dir)), p->r_pos->y + (p->speed + 5) * (sin(p->angle + (ft_inrad(90)) * dir)), 1) != 1)
+	{
+		p->pos->x = p->r_pos->x;
+		p->pos->y = p->r_pos->y;
+	} else {
+		p->r_pos->x = (double)p->pos->x;
+		p->r_pos->y = (double)p->pos->y;
+	}
 	p->as_move = 1;
 }
 
@@ -174,13 +180,13 @@ void	move(struct s_player *p, int dir)
 	}
 	else
 		p->r_pos->x = map->px_width - 1;
-	if (get_grid(map,p->r_pos->x, p->r_pos->y, 1) != 1)
+	if (get_grid(map,p->r_pos->x + (p->speed + 5) * (cos(p->angle + (ft_inrad(90)) * dir)), p->r_pos->y + (p->speed + 5) * (sin(p->angle + (ft_inrad(90)) * dir)), 1) != 1)
 	{
 		p->pos->x = p->r_pos->x;
 		p->pos->y = p->r_pos->y;
 	} else {
-		p->r_pos->x = p->pos->x;
-		p->r_pos->y = p->pos->y;
+		p->r_pos->x = (double)p->pos->x;
+		p->r_pos->y = (double)p->pos->y;
 	}
 	p->as_move = 1;
 }
