@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/01/30 22:11:09 by siferrar     #+#   ##    ##    #+#       */
-/*   Updated: 2020/02/20 21:15:21 by siferrar    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/02/20 21:47:50 by siferrar    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -265,7 +265,7 @@ void draw_col(t_brain *b, double w_height, double cur_col, t_detect w)
 	else
 		texture_col = (int)w.hit.y % 64;
 	texture = NULL;
-	texture = &b->map->w_n;
+	texture = get_wall_texture(b->map, w.w_side_hit);
 	ratio.y = ((*texture)->height / w_height);
 	ratio.x = ((*texture)->width / b->map->bloc_size);
 	//dprintf(1, "b_size %d - w_height: %f - cur_c %f - ratio %f\n", b->map->bloc_size, w_height, cur_col, ratio);
@@ -282,15 +282,6 @@ void draw_col(t_brain *b, double w_height, double cur_col, t_detect w)
 	while (i <= w_height + 1)
 	{
 		color = pixel_get(*texture, round(texture_col * ratio.x), round(i * ratio.y));
-		//color = 0xFFFFFF;
-		if (w.w_side_hit == 'n')
-			color -= 0x555555;
-		else if (w.w_side_hit == 'e')
-			color -= 0x404040;
-		else if (w.w_side_hit == 's')
-			color -= 0x111111;
-		else if (w.w_side_hit == 'w')
-			color -= 0x323232;
 
 		if ((b->ctx->height/2 - w_height/2 + 1) + i > 0 )
 			pixel_put_buff(cur_col, (b->ctx->height/2 - w_height/2 + 1) + i, color, b->map->frame);

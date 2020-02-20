@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/01/14 20:36:43 by siferrar     #+#   ##    ##    #+#       */
-/*   Updated: 2020/02/20 21:14:10 by siferrar    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/02/20 21:48:03 by siferrar    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -21,10 +21,10 @@ int				init_map(t_ctx *ctx, t_map **map)
 	(*map)->grid = NULL;
 	(*map)->scale = 1;
 	(*map)->bloc_size = 64;
-	(*map)->w_n = 0;
-	(*map)->w_e = 0;
-	(*map)->w_s = 0;
-	(*map)->w_w = 0;
+	(*map)->w_n = NULL;
+	(*map)->w_e = NULL;
+	(*map)->w_s = NULL;
+	(*map)->w_w = NULL;
 	init_buff(ctx, &(*map)->frame, ctx->width, ctx->height);
 	return (1);
 }
@@ -32,7 +32,7 @@ int				init_map(t_ctx *ctx, t_map **map)
 void init_texture(t_brain *b, char *path, t_buff **t)
 {
 	(*t) = malloc(sizeof(t_buff));
-	(*t)->img = mlx_xpm_file_to_image(b->ctx->mlx_ptr, path, &b->map->w_n->width, &b->map->w_n->height);
+	(*t)->img = mlx_xpm_file_to_image(b->ctx->mlx_ptr, path, &(*t)->width, &(*t)->height);
 	if (!(*t)->img)
 		exit(4);
 	(*t)->addr = mlx_get_data_addr((*t)->img, &(*t)->bits_per_pixel, &(*t)->line_length,
@@ -47,10 +47,10 @@ int				open_map(t_brain *b, char *map_path)
 	t_player_detect *player;
 
 	init_map(b->ctx, &b->map);
-	init_texture(b, "./assets/textures/walls/stone_bricks.xpm", &b->map->w_n);
-	init_texture(b, "./assets/textures/walls/blue.xpm", &b->map->w_e);
-	init_texture(b, "./assets/textures/walls/stone_bricks.xpm", &b->map->w_s);
-	init_texture(b, "./assets/textures/walls/stone_bricks.xpm", &b->map->w_w);
+	init_texture(b, "./assets/textures/walls/yellow.xpm", &b->map->w_n);
+	init_texture(b, "./assets/textures/walls/red.xpm", &b->map->w_e);
+	init_texture(b, "./assets/textures/walls/green.xpm", &b->map->w_s);
+	init_texture(b, "./assets/textures/walls/blue.xpm", &b->map->w_w);
 	player = malloc(sizeof(t_player_detect));
 	file = open(map_path, O_RDONLY);
 	while ((ret = get_next_line(file, &line)) != -1)

@@ -1,4 +1,4 @@
-# Cube 3D • Alpha 0.4.3
+# Cube 3D • Alpha 0.4.4
 
 ![Cube3D Screenshot](/images/textured.png)
 
@@ -27,9 +27,8 @@
 	————————————————————————————————————
 		Changes:
 	————————————————————————————————————
-	- Gest hitbox sideway
-	- Fixed "texture isn't 'attached' to block" bug
-	
+	- One texture by wall side !
+
     ————————————————————————————————————
 		Cur State:
 	————————————————————————————————————
@@ -48,5 +47,3 @@
 	Moving:
 	- Double speed if walk on side and move forward
 
-	Textures:
-	- Only work with one texture (problem with texture malloc)
