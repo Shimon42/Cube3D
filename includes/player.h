@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/01/23 18:52:51 by siferrar     #+#   ##    ##    #+#       */
-/*   Updated: 2020/02/17 23:01:21 by siferrar    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/02/23 20:01:13 by siferrar    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -28,6 +28,7 @@ typedef struct	s_player
 	int			inited;
 	int			as_move;
 	t_point		*pos;
+	double		z;
 	t_fpoint	*r_pos;
 	t_camera	*cam;
     double      angle;
@@ -39,6 +40,8 @@ typedef struct	s_player
 	void		(*rot)(struct s_player *, double);
 	void		(*move)(struct s_player *, int);
 	void		(*sidemove)(struct s_player *, int);
+	void		(*jump)(struct s_player *, double);
 	void		(*draw)(struct s_player *, t_ctx *);
 }				t_player;
+
 #endif

@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/01/30 22:11:09 by siferrar     #+#   ##    ##    #+#       */
-/*   Updated: 2020/02/20 21:47:50 by siferrar    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/02/23 20:06:10 by siferrar    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -238,11 +238,13 @@ void	draw_walls(t_brain *b, t_ctx *c)
 		c->color = 0;
 		
 		c->color = 0x388FBA;
-		c->line(new_point(cur_col, 0), new_point(cur_col, c->height/2 - w_height/2), c);
+		c->line(new_point(cur_col, 0), new_point(cur_col, c->height/2 - w_height/2 + b->player->z), c);
+		
 		draw_col(b, w_height,  cur_col, wall);
+		
 		c->color = 0x91672C;
 		//draw_floor(new_point(cur_col, c->height/2 + w_height/2), new_point(cur_col, c->height), c);
-		c->line(new_point(cur_col, c->height/2 + w_height/2), new_point(cur_col, c->height), c);
+		c->line(new_point(cur_col, c->height/2 + w_height/2 + b->player->z), new_point(cur_col, c->height), c);
 		cur_col++;
 	}
 }
@@ -272,7 +274,7 @@ void draw_col(t_brain *b, double w_height, double cur_col, t_detect w)
 	i = 0;
 	if ((b->ctx->height/2 - w_height/2 + 1) < 0)
 		i = ((b->ctx->height/2 - w_height/2 + 1)) * -1;
-	if (cur_col == 1)
+	if (cur_col == -1)
 	{
 		dprintf(1, "W_height: %f - ", w_height);
 		dprintf(1, "start: %d - ", i);
@@ -284,12 +286,12 @@ void draw_col(t_brain *b, double w_height, double cur_col, t_detect w)
 		color = pixel_get(*texture, round(texture_col * ratio.x), round(i * ratio.y));
 
 		if ((b->ctx->height/2 - w_height/2 + 1) + i > 0 )
-			pixel_put_buff(cur_col, (b->ctx->height/2 - w_height/2 + 1) + i, color, b->map->frame);
+			pixel_put_buff(cur_col, (b->ctx->height/2 - w_height/2 + 1) + i + b->player->z, color, b->map->frame);
 		if ((b->ctx->height/2 - w_height/2 + 1) + i > b->ctx->height)
 			break;
 		i++;
 	}
-	if (cur_col == 1)
+	if (cur_col == -1)
 	{
 		dprintf(1, "end: %d\n", i);
 	}

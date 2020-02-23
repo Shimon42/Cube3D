@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/01/22 22:24:57 by siferrar     #+#   ##    ##    #+#       */
-/*   Updated: 2020/02/20 21:15:02 by siferrar    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/02/23 20:27:26 by siferrar    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -68,6 +68,7 @@ int		init_player(t_brain *b, int pos_x, char angle)
 	b->player->move = &move;
 	b->player->sidemove = &side_move;
 	b->player->rot = &rotate;
+	b->player->jump = &jump;
 	b->player->draw = &draw_player;
 	b->player->ctx = b->ctx;
 	b->player->speed = 4;
@@ -208,4 +209,34 @@ void	rotate(struct s_player *p, double angle)
 	printf("Angle: %f\n", rad_to_deg(p->angle));
 	p->as_move = 1;
 	//p->draw(p, ctx);
+}
+
+void	jump(t_player *p, double speed)
+{
+	static int jumping = 0;
+	t_brain *b;
+
+	b = (t_brain *)p->brain;
+
+	dprintf(1, "jump: %d  -- jumpingof %f  -- z: %f\n", jumping, speed, p->z);
+	if (speed > 0 && jumping == 0)
+		jumping = 1;
+	else if (speed < 0)
+		jumping = -1;
+	if (p->z > 0 && speed < 0 && jumping == -1)
+	{
+		p->z += speed;
+		jumping = -1;
+	}
+	else if (jumping == -1 && p->z < 0) {
+		p->z = 0;
+		jumping = 0;
+	}
+	if (jumping && speed > 0 && p->z < b->map->bloc_size * 0.5)
+		p->z += speed * jumping;
+	else if (jumping)
+		jumping = -1;
+
+	if (jumping != 0)
+		p->as_move = 1;
 }

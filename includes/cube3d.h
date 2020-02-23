@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/01/09 21:30:44 by siferrar     #+#   ##    ##    #+#       */
-/*   Updated: 2020/02/17 21:22:10 by siferrar    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/02/23 20:01:21 by siferrar    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -52,14 +52,16 @@ void	line_on_map(t_brain *b, t_point p1, t_point p2);
 void	draw_fov_map(t_brain *b, t_ctx *c);
 
 t_fpoint		to_fpoint(t_point *p);
+double to_360(double angle);
+double			calc_dist(t_point p1, t_point p2);
+double			calc_fdist(t_fpoint p1, t_fpoint p2);
+
 int				init_player(t_brain *b, int pos_x, char angle);
 void			move(struct s_player*, int dir);
 void			rotate(struct s_player *p, double angle);
 void			draw_player(struct s_player *p, t_ctx *ctx);
 void			side_move(struct s_player *p, int dir);
-double to_360(double angle);
-double			calc_dist(t_point p1, t_point p2);
-double			calc_fdist(t_fpoint p1, t_fpoint p2);
+void			jump(t_player *p, double speed);
 
 t_fpoint		closest_grid_h(t_point *p, t_map *m, double angle);
 t_fpoint		closest_grid_v(t_point *p, t_map *m, double angle);
