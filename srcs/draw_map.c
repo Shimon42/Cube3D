@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/14 22:43:45 by siferrar          #+#    #+#             */
-/*   Updated: 2020/02/18 16:25:44 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/02/24 09:10:25 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,6 @@ int get_grid(t_map *m, int x, int y, int need_rescale)
 {
 	t_point scaled;
 
-	/*ft_putstr("Wanting val of grid [");
-	ft_putnbr(x);
-	ft_putstr("][");
-	ft_putnbr(y);
-	ft_putstr("] - ");*/
 	if (x > 0 && y > 0)
 	{
 		if (need_rescale && x < m->px_width && y < m->px_height)
@@ -29,20 +24,13 @@ int get_grid(t_map *m, int x, int y, int need_rescale)
 			scaled = to_grid(x, y, m);
 			x = scaled.x;
 			y = scaled.y;
-		}else
-
-			//ft_putstr(RED"OUT OF GRID\n"RST);
-		
+		}
+		else
 			return (-1);
-	//	ft_putstr(GRN"OK -> "YELO);
-		//ft_putchar(m->grid[y * m->width + x]);
-		//ft_putstr("\n"RST);
 		return (m->grid[y * m->width + x] - '0');
-	}else
-	{
-		//ft_putstr(RED"OUT OF GRID\n"RST);
-		return (-1);
 	}
+	else
+		return (-1);
 }
 
 t_point			to_grid(int x, int y, t_map *m)
@@ -52,11 +40,6 @@ t_point			to_grid(int x, int y, t_map *m)
 	
 	ret.x = x / m->bloc_size;
 	ret.y = y / m->bloc_size;
-	//ft_putstr("TOGRID[");
-	//ft_putnbr(ret.x);
-	//ft_putstr("][");
-	//ft_putnbr(ret.y);
-	//ft_putstr("] \n");
 	return(ret);
 }
 
@@ -80,9 +63,6 @@ t_point			map_scaled(t_point *p, t_map *m)
 
 void            draw_frame(t_brain *b)
 {
-	//disp_map_s(b->map);
-	//printf("x: [%d]\ny: [%d]\n", x, y);
-	//printf("x: [%f]\ny: [%f]\n", (double)x, (double)y);
 	b->ctx->color = 0x000000;
     b->ctx->rect(b->map->disp.x,
                 b->map->disp.y,
@@ -90,7 +70,6 @@ void            draw_frame(t_brain *b)
                 b->map->bloc_size * b->map->height * b->map->scale,
                 1,
 				b->ctx);
-	//disp_map_s(b->map);
 }
 
 void		point_on_map(t_brain *b, int x, int y, int color)
@@ -131,19 +110,18 @@ void		draw_elems(t_brain *b, int disp_x, int disp_y, double scale)
 			} else
 				b->ctx->color = 0xFF0000;
 
-			b->ctx->rect(floor(disp_x + (x * (b->map->bloc_size * scale))),
-						floor(disp_y + (y * (b->map->bloc_size * scale))),
+			b->ctx->rect(disp_x + (x * (b->map->bloc_size * scale)),
+						disp_y + (y * (b->map->bloc_size * scale)),
 						b->map->bloc_size * scale,
 						b->map->bloc_size * scale,
 						1,
 						b->ctx);
-			b->ctx->color = 0x333333;
-			b->ctx->rect(floor(disp_x + (x * (b->map->bloc_size * scale))),
+			/*b->ctx->rect(floor(disp_x + (x * (b->map->bloc_size * scale))),
 						floor(disp_y + (y * (b->map->bloc_size * scale))),
 						b->map->bloc_size * scale,
 						b->map->bloc_size * scale,
 						0,
-						b->ctx);
+						b->ctx);*/
 			i++;
 			x++;
 		};
@@ -175,10 +153,8 @@ void	draw_minimap_closest(t_brain *b, t_point disp, double angle)
 		t_point p_pos = map_scaled(b->player->pos, b->map);
 		t_detect wall;
 
-		//int ray_length = 500;
 		close_h = map_fscaled(&close_h, b->map);
 		close_v = map_fscaled(&close_v, b->map);
-
 		wall = dist_to_wall(b, b->player->pos, angle);
 		b->ctx->color = color;
 		b->ctx->line(new_point(disp.x + p_pos.x, disp.y + p_pos.y),
@@ -196,24 +172,13 @@ void	draw_minimap_rays(t_brain *b, t_point disp)
 {
 		t_fpoint close_h = closest_wall_h(b, b->player->pos, b->player->angle);
 		t_fpoint close_v = closest_wall_v(b, b->player->pos, b->player->angle);
-		//t_point p_pos = map_scaled(b->player->pos, b->map);
-		//int ray_length = 500;
 
 		close_h = map_fscaled(&close_h, b->map);
 		close_v = map_fscaled(&close_v, b->map);
-
 		b->ctx->color = 0xFFFF00;
 		b->ctx->circle(disp.x + close_h.x, disp.y + close_h.y, (b->map->bloc_size * 0.1) * b->map->scale, 1, b->ctx);
-		//b->ctx->line(new_point(disp.x + p_pos.x, disp.y + p_pos.y),
-		//	new_point(disp.x + close_h.x , disp.y + close_h.y ),
-		//	b->ctx);
-
 		b->ctx->color = 0xFF00FF;
 		b->ctx->circle(disp.x + close_v.x, disp.y + close_v.y, (b->map->bloc_size * 0.1) * b->map->scale, 1, b->ctx);
-		//b->ctx->line(new_point(disp.x + p_pos.x, disp.y + p_pos.y),
-		//	new_point(disp.x + close_v.x , disp.y + close_v.y ),
-		//	b->ctx);
-
 }
 
 void			draw_player_map(t_brain *b, t_player *p, t_point m_pos)
@@ -230,7 +195,6 @@ void			draw_player_map(t_brain *b, t_player *p, t_point m_pos)
 	draw_minimap_closest(b, m_pos, to_360(p->angle - p->cam->fov / 2));
 	b->ctx->color = 0x00FF00;
 	draw_minimap_closest(b, m_pos, p->angle + p->cam->fov / 2);
-	//draw_minimap_rays(b, m_pos);
 }
 
 void	draw_fov_map(t_brain *b, t_ctx *c)
@@ -243,14 +207,11 @@ void	draw_fov_map(t_brain *b, t_ctx *c)
 
 	cur_col = 0;
 	col_step = b->player->cam->fov/ c->width;
-	//printf("START DRAW WALLS\n");
 	while (cur_col < c->width)
 	{
 		cur_angle = b->player->angle - (b->player->cam->fov / 2) + (col_step * cur_col);
-
 		wall = dist_to_wall(b, b->player->pos, cur_angle);
 		dist = wall.dist;
-
 		b->ctx->color = 0xFF00FF;
 		line_on_map(b,
 			*b->player->pos,
@@ -268,14 +229,17 @@ void			draw_minimap(t_brain *b, int x, int y, int width)
 	double scale;
 
 	b->ctx->cur_buff = b->map->frame;
-	//ft_putstr("Draw frame - ");
-	scale = ((double)(width / (double)b->map->px_width)) ;
+	scale = ((double)(width / (double)b->map->px_width));
+	if (b->map->px_height * scale > b->ctx->height)
+	{
+		scale = ((double)((b->ctx->height - 2 * (100 * b->map->scale)) / (double)b->map->px_height));
+		x = (b->ctx->width - (b->map->width * b->map->bloc_size * scale)) / 2;;
+		y = (b->ctx->height - (b->map->height * b->map->bloc_size * scale)) / 2;
+	}
 	b->map->scale = scale;
 	b->map->disp.x = x;
 	b->map->disp.y = y;
-	
     draw_frame(b);
-	//ft_putstr("OK\n");
     draw_elems(b, x, y, scale);
 	draw_player_map(b, b->player, new_point(x, y));
 	//draw_fov_map(b, b->ctx);
@@ -288,11 +252,13 @@ void			draw_fullmap(t_brain *b, double ease_val)
 	double margin_top;
 	static double ease = 0;
 
-	
 	if (ease_val > 0)
 	{
 		margin = 100 * b->map->scale;
-		scale = ((double)((b->ctx->width - 2 * margin) / (double)b->map->px_width)) ;
+		scale = ((double)((b->ctx->width - 2 * margin) / (double)b->map->px_width));
+		if (b->map->px_width * scale > b->ctx->width)
+			scale = ((double)((b->ctx->height - 2 * margin) / (double)b->map->px_height));
+		b->map->scale = scale;
 		margin_top = (b->ctx->height - (b->map->height * b->map->bloc_size * scale)) / 2;
 		draw_minimap(b, 
 					margin,

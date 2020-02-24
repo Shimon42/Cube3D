@@ -1,15 +1,15 @@
 /* ************************************************************************** */
-/*                                                          LE - /            */
-/*                                                              /             */
-/*   cube3d.h                                         .::    .:/ .      .::   */
-/*                                                 +:+:+   +:    +:  +:+:+    */
-/*   By: siferrar <siferrar@student.le-101.fr>      +:+   +:    +:    +:+     */
-/*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2020/01/09 21:30:44 by siferrar     #+#   ##    ##    #+#       */
-/*   Updated: 2020/02/23 20:01:21 by siferrar    ###    #+. /#+    ###.fr     */
-/*                                                         /                  */
-/*                                                        /                   */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cube3d.h                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: siferrar <siferrar@student.le-101.fr>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/01/09 21:30:44 by siferrar          #+#    #+#             */
+/*   Updated: 2020/02/24 08:20:02 by siferrar         ###   ########lyon.fr   */
+/*                                                                            */
 /* ************************************************************************** */
+
 
 #ifndef CUBE_3D_H
 # define CUBE_3D_H
@@ -38,6 +38,17 @@ typedef struct	s_brain
 	int			*keys;
 	
 }				t_brain;
+
+typedef struct	mlx_win_list_s
+{
+  void			*winid;
+  void		*img_list;
+  int			nb_flush;
+  int			pixmgt;
+  struct mlx_win_list_s	*next;
+  int size_x;
+  int size_y;
+} mlx_win_list_t;
 
 int				open_map(t_brain *b, char *map_path);
 void			draw_minimap(t_brain *b, int x, int y, int width);

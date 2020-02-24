@@ -643,7 +643,8 @@ void *mlx_new_window(mlx_ptr_t *mlx_ptr, int size_x, int size_y, char *title)
 {
   mlx_win_list_t	*newwin;
   NSString		*str;
-
+  int H;
+  int W;
   if ((newwin = malloc(sizeof(*newwin))) == NULL)
     return ((void *)0);
   newwin->img_list = NULL;
@@ -652,7 +653,19 @@ void *mlx_new_window(mlx_ptr_t *mlx_ptr, int size_x, int size_y, char *title)
   newwin->pixmgt = 1;
   mlx_ptr->win_list = newwin;
 
-  NSRect windowRect = NSMakeRect(100, 100, size_x, size_y);
+  NSRect e = [[NSScreen mainScreen] frame];
+  H = (int)e.size.height;
+  W = (int)e.size.width;
+
+  if (size_x > W || size_y > H)
+  {
+    size_x = W;
+    size_y = H;
+   
+  }
+  newwin->size_x = size_x;
+  newwin->size_y = size_y;
+  NSRect windowRect = NSMakeRect((W - size_x) / 2, (H - size_y) / 2, size_x, size_y);
   str = [NSString stringWithCString:title encoding:NSASCIIStringEncoding];
   newwin->winid = [[MlxWin alloc] initWithRect:windowRect andTitle:str pfaAttrs:pfa_attrs];
   if (newwin->winid)

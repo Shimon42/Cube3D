@@ -1,15 +1,15 @@
 /* ************************************************************************** */
-/*                                                          LE - /            */
-/*                                                              /             */
-/*   player.c                                         .::    .:/ .      .::   */
-/*                                                 +:+:+   +:    +:  +:+:+    */
-/*   By: siferrar <siferrar@student.le-101.fr>      +:+   +:    +:    +:+     */
-/*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2020/01/22 22:24:57 by siferrar     #+#   ##    ##    #+#       */
-/*   Updated: 2020/02/23 20:27:26 by siferrar    ###    #+. /#+    ###.fr     */
-/*                                                         /                  */
-/*                                                        /                   */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   player.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: siferrar <siferrar@student.le-101.fr>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/01/22 22:24:57 by siferrar          #+#    #+#             */
+/*   Updated: 2020/02/24 09:33:11 by siferrar         ###   ########lyon.fr   */
+/*                                                                            */
 /* ************************************************************************** */
+
 
 #include "../includes/cube3d.h"
 
@@ -166,7 +166,7 @@ void	move(struct s_player *p, int dir)
 
 	if (p->r_pos->y < map->px_height)
 	{
-		p->r_pos->y += p->step->y * dir;
+		p->r_pos->y += p->step->y * (double)dir;
 		if (p->r_pos->y < 0)
 			p->r_pos->y = 0;
 	}
@@ -175,7 +175,7 @@ void	move(struct s_player *p, int dir)
 
 	if (p->r_pos->x < map->px_width)
 	{
-		p->r_pos->x += p->step->x * dir;
+		p->r_pos->x += p->step->x * (double)dir;
 		if (p->r_pos->x < 0)
 			p->r_pos->x = 0;
 	}
@@ -203,9 +203,9 @@ void	rotate(struct s_player *p, double angle)
 	//dist = calc_dist(*p->pos, new_point(p->pos->x + p->speed * cos(p->angle), p->pos->y + p->speed * sin(p->angle)));
 
 	p->step->x = (p->pos->x + p->speed * cos(p->angle)) - p->pos->x;
-	ft_putint("Step->x; ", p->step->x);
+	dprintf(1, "Step->x: %f \n", p->step->x);
 	p->step->y = (p->pos->y + p->speed * sin(p->angle)) - p->pos->y;
-	ft_putint("Step.y; ", p->step->y);
+	dprintf(1, "Step->y: %f \n", p->step->y);
 	printf("Angle: %f\n", rad_to_deg(p->angle));
 	p->as_move = 1;
 	//p->draw(p, ctx);

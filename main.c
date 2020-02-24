@@ -1,15 +1,15 @@
 /* ************************************************************************** */
-/*                                                          LE - /            */
-/*                                                              /             */
-/*   main.c                                           .::    .:/ .      .::   */
-/*                                                 +:+:+   +:    +:  +:+:+    */
-/*   By: siferrar <siferrar@student.le-101.fr>      +:+   +:    +:    +:+     */
-/*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2020/01/09 21:29:11 by siferrar     #+#   ##    ##    #+#       */
-/*   Updated: 2020/02/23 21:18:47 by siferrar    ###    #+. /#+    ###.fr     */
-/*                                                         /                  */
-/*                                                        /                   */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: siferrar <siferrar@student.le-101.fr>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/01/09 21:29:11 by siferrar          #+#    #+#             */
+/*   Updated: 2020/02/24 09:11:52 by siferrar         ###   ########lyon.fr   */
+/*                                                                            */
 /* ************************************************************************** */
+
 
 #include "includes/cube3d.h"
 #include <time.h>
@@ -259,7 +259,7 @@ int loop_hook(t_brain *b)
 	{
 		draw_walls(b, b->ctx);
 		if (is_key_pressed(b, 3) == -1)
-			draw_minimap(b, 10, 25, b->ctx->width * 0.2);
+			draw_minimap(b, 10, 25, 200);
 		b->player->as_move = 0;
 	} 
 	if (is_key_pressed(b, 3) != -1)
@@ -276,10 +276,15 @@ int loop_hook(t_brain *b)
 int	main(int ac, char **av)
 {
 	t_brain *b;
+	mlx_win_list_t *win;
 
 	if(ac != 2)
 		return (-1);
 	b = new_brain(1920, 1080, "Cube3D");
+	win = (mlx_win_list_t *)b->ctx->win_ptr;
+	dprintf(1, "%d - %d\n", win->size_x, win->size_y);
+	b->ctx->width = win->size_x;
+	b->ctx->height = win->size_y;
 	printf(GRN"Opening %s\n\n"RST, av[1]);
 	open_map(b, av[1]);
 	disp_point(b->player->pos);

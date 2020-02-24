@@ -1,15 +1,15 @@
 /* ************************************************************************** */
-/*                                                          LE - /            */
-/*                                                              /             */
-/*   player.h                                         .::    .:/ .      .::   */
-/*                                                 +:+:+   +:    +:  +:+:+    */
-/*   By: siferrar <siferrar@student.le-101.fr>      +:+   +:    +:    +:+     */
-/*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2020/01/23 18:52:51 by siferrar     #+#   ##    ##    #+#       */
-/*   Updated: 2020/02/23 20:01:13 by siferrar    ###    #+. /#+    ###.fr     */
-/*                                                         /                  */
-/*                                                        /                   */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   player.h                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: siferrar <siferrar@student.le-101.fr>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/01/23 18:52:51 by siferrar          #+#    #+#             */
+/*   Updated: 2020/02/24 09:02:35 by siferrar         ###   ########lyon.fr   */
+/*                                                                            */
 /* ************************************************************************** */
+
 
 #ifndef PLAYER_H
 # define PLAYER_H
@@ -32,7 +32,7 @@ typedef struct	s_player
 	t_fpoint	*r_pos;
 	t_camera	*cam;
     double      angle;
-	t_point		*step;
+	t_fpoint	*step;
     double      rot_speed;
     double      speed;
 	t_ctx		*ctx;

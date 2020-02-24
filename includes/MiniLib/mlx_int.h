@@ -75,6 +75,8 @@ typedef struct	mlx_win_list_s
   int			nb_flush;
   int			pixmgt;
   struct mlx_win_list_s	*next;
+  int size_x;
+  int size_y;
 } mlx_win_list_t;
 
 
