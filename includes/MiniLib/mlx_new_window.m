@@ -636,9 +636,6 @@ int get_mouse_button(NSEventType eventtype)
 @end
 
 
-// mlx API
- 
-
 void *mlx_new_window(mlx_ptr_t *mlx_ptr, int size_x, int size_y, char *title)
 {
   mlx_win_list_t	*newwin;
@@ -654,14 +651,14 @@ void *mlx_new_window(mlx_ptr_t *mlx_ptr, int size_x, int size_y, char *title)
   mlx_ptr->win_list = newwin;
 
   NSRect e = [[NSScreen mainScreen] frame];
+
   H = (int)e.size.height;
   W = (int)e.size.width;
 
   if (size_x > W || size_y > H)
   {
     size_x = W;
-    size_y = H;
-   
+    size_y = H - 45;
   }
   newwin->size_x = size_x;
   newwin->size_y = size_y;

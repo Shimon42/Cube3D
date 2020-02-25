@@ -1,4 +1,4 @@
-NAME =		Cube3D
+NAME =		Cub3D
 
 SRCSPATH =	srcs/
 INCPATH =	includes/
@@ -62,10 +62,11 @@ $(NAME):	$(OBJS) $(INCLUDES)
 			make -C $(LIBFT)
 			gcc -c $(GNL_SRCS) -D BUFFER_SIZE=128
 			cp $(MINILIB)libmlx.a .
+			cp $(LIBFT)libft.a .
 			ar rc $(NAME).a $(OBJS) get_next_line.o get_next_line_utils.o
 
 comp:		all
-			gcc $(CFLAGS) main.c $(NAME).a $(LIBFT)libft.a libmlx.a -o $(NAME) -framework OpenGL -framework AppKit
+			gcc $(CFLAGS) main.c $(NAME).a libft.a libmlx.a -o $(NAME) -framework OpenGL -framework AppKit
 
 launch:		comp
 			clear
@@ -80,7 +81,7 @@ launch:		comp
 			@echo "|  |____________$(COL_TXT)\_____/\__,_|_.__/ \___| \____/|____/ $(COL_CUBE)___________|  |"
 			@echo "| / $(COL_SHADOW)           /////// ////////// | \\\\\\\\\\\\\\\\\\ \\\\\\\\\\\\\\\\\\\\ \\\\\\\\\\\\\\\\\\\\\\\\$(COL_CUBE)            \ |"
 			@echo "+–––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––+\033[0m"
-			@./Cube3D $(MAP2)
+			@./$(NAME) $(MAP2)
 
 minilib:	
 			@make -C $(MINILIB)

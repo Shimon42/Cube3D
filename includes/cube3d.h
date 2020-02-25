@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 21:30:44 by siferrar          #+#    #+#             */
-/*   Updated: 2020/02/25 09:31:19 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/02/25 19:18:30 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #ifndef CUBE_3D_H
 # define CUBE_3D_H
 
+# include <pthread.h>
 # include <stdlib.h>
 # include <unistd.h>
 # include <fcntl.h>
