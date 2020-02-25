@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 21:30:44 by siferrar          #+#    #+#             */
-/*   Updated: 2020/02/24 08:20:02 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/02/25 09:31:19 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,17 +54,17 @@ int				open_map(t_brain *b, char *map_path);
 void			draw_minimap(t_brain *b, int x, int y, int width);
 void			draw_fullmap(t_brain *b, double ease_val);
 void            draw_frame(t_brain *b);
-t_point			map_scaled(t_point *p, t_map *m);
+t_fpoint			map_scaled(t_fpoint *p, t_map *m);
 t_fpoint		map_fscaled(t_fpoint *p, t_map *m);
 int				get_grid(t_map *m, int x, int y, int need_rescale);
-t_point			to_grid(int x, int y, t_map *m);
+t_fpoint			to_grid(int x, int y, t_map *m);
 void			point_on_map(t_brain *b, int x, int y, int color);
-void	line_on_map(t_brain *b, t_point p1, t_point p2);
+void	line_on_map(t_brain *b, t_fpoint p1, t_fpoint p2);
 void	draw_fov_map(t_brain *b, t_ctx *c);
 
-t_fpoint		to_fpoint(t_point *p);
+t_fpoint		to_fpoint(t_fpoint *p);
 double to_360(double angle);
-double			calc_dist(t_point p1, t_point p2);
+double			calc_dist(t_fpoint p1, t_fpoint p2);
 double			calc_fdist(t_fpoint p1, t_fpoint p2);
 
 int				init_player(t_brain *b, int pos_x, char angle);
@@ -74,17 +74,17 @@ void			draw_player(struct s_player *p, t_ctx *ctx);
 void			side_move(struct s_player *p, int dir);
 void			jump(t_player *p, double speed);
 
-t_fpoint		closest_grid_h(t_point *p, t_map *m, double angle);
-t_fpoint		closest_grid_v(t_point *p, t_map *m, double angle);
-t_fpoint		closest_wall_h(t_brain *b, t_point *p, double angle);
-t_fpoint		closest_wall_v(t_brain *b, t_point *p, double angle);
-t_detect		dist_to_wall(t_brain *b, t_point *p, double angle);
+t_fpoint		closest_grid_h(t_fpoint *p, t_map *m, double angle);
+t_fpoint		closest_grid_v(t_fpoint *p, t_map *m, double angle);
+t_fpoint		closest_wall_h(t_brain *b, t_fpoint *p, double angle);
+t_fpoint		closest_wall_v(t_brain *b, t_fpoint *p, double angle);
+t_detect		dist_to_wall(t_brain *b, t_fpoint *p, double angle);
 void			draw_walls(t_brain *b, t_ctx *c);
 void draw_col(t_brain *b, double w_height, double cur_col, t_detect w);
 
 int		pixel_get(t_buff *img, int x, int y);
 void			draw_ray(t_player *p, t_map *m, double angle);
-void			draw_minimap_rays(t_brain *b, t_point disp);
+void			draw_minimap_rays(t_brain *b, t_fpoint disp);
 
 /* ---------------- DEBUG ---------*/
 void    		print_map_debug(char *line);

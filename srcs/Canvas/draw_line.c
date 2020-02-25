@@ -1,19 +1,19 @@
 /* ************************************************************************** */
-/*                                                          LE - /            */
-/*                                                              /             */
-/*   draw_line.c                                      .::    .:/ .      .::   */
-/*                                                 +:+:+   +:    +:  +:+:+    */
-/*   By: siferrar <siferrar@student.le-101.fr>      +:+   +:    +:    +:+     */
-/*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2020/01/13 21:20:40 by siferrar     #+#   ##    ##    #+#       */
-/*   Updated: 2020/02/17 22:14:25 by siferrar    ###    #+. /#+    ###.fr     */
-/*                                                         /                  */
-/*                                                        /                   */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   draw_line.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: siferrar <siferrar@student.le-101.fr>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/01/13 21:20:40 by siferrar          #+#    #+#             */
+/*   Updated: 2020/02/25 09:31:19 by siferrar         ###   ########lyon.fr   */
+/*                                                                            */
 /* ************************************************************************** */
+
 
 #include "../../includes/my_canvas.h"
 
-void calc_first_quad(t_ctx *ctx, t_point p1, t_point p2, t_point diff)
+void calc_first_quad(t_ctx *ctx, t_fpoint p1, t_fpoint p2, t_fpoint diff)
 {
 	int		e;
 	
@@ -50,7 +50,7 @@ void calc_first_quad(t_ctx *ctx, t_point p1, t_point p2, t_point diff)
 		}
 	}
 }
-void calc_fourth_quad(t_ctx *ctx, t_point p1, t_point p2, t_point diff)
+void calc_fourth_quad(t_ctx *ctx, t_fpoint p1, t_fpoint p2, t_fpoint diff)
 {
 	int		e;
 	
@@ -88,7 +88,7 @@ void calc_fourth_quad(t_ctx *ctx, t_point p1, t_point p2, t_point diff)
 	}
 }
 
-void calc_second_quad(t_ctx *ctx, t_point p1, t_point p2, t_point diff)
+void calc_second_quad(t_ctx *ctx, t_fpoint p1, t_fpoint p2, t_fpoint diff)
 {
 	int		e;
 	
@@ -125,7 +125,7 @@ void calc_second_quad(t_ctx *ctx, t_point p1, t_point p2, t_point diff)
 		}
 	}
 }
-void calc_third_quad(t_ctx *ctx, t_point p1, t_point p2, t_point diff)
+void calc_third_quad(t_ctx *ctx, t_fpoint p1, t_fpoint p2, t_fpoint diff)
 {
 	int		e;
 	
@@ -163,9 +163,9 @@ void calc_third_quad(t_ctx *ctx, t_point p1, t_point p2, t_point diff)
 	}
 }
 
-void draw_line(t_point p1, t_point p2, t_ctx *ctx)
+void draw_line(t_fpoint p1, t_fpoint p2, t_ctx *ctx)
 {
-	t_point diff;
+	t_fpoint diff;
 
 	diff = new_point(0, 0);
 	if ((diff.x = p2.x - p1.x) != 0)

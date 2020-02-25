@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/14 22:43:45 by siferrar          #+#    #+#             */
-/*   Updated: 2020/02/24 09:10:25 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/02/25 10:02:24 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 int get_grid(t_map *m, int x, int y, int need_rescale)
 {
-	t_point scaled;
+	t_fpoint scaled;
 
 	if (x > 0 && y > 0)
 	{
@@ -33,9 +33,9 @@ int get_grid(t_map *m, int x, int y, int need_rescale)
 		return (-1);
 }
 
-t_point			to_grid(int x, int y, t_map *m)
+t_fpoint			to_grid(int x, int y, t_map *m)
 {
-	t_point ret;
+	t_fpoint ret;
 
 	
 	ret.x = x / m->bloc_size;
@@ -52,9 +52,9 @@ t_fpoint			map_fscaled(t_fpoint *p, t_map *m)
 	return(ret);
 }
 
-t_point			map_scaled(t_point *p, t_map *m)
+t_fpoint			map_scaled(t_fpoint *p, t_map *m)
 {
-	t_point ret;
+	t_fpoint ret;
 
 	ret.x = p->x * m->scale;
 	ret.y = p->y * m->scale;
@@ -74,7 +74,7 @@ void            draw_frame(t_brain *b)
 
 void		point_on_map(t_brain *b, int x, int y, int color)
 {
-	t_point p;
+	t_fpoint p;
 	
 	p = new_point(x, y);
 	p = map_scaled(&p, b->map);
@@ -88,7 +88,7 @@ void		draw_elems(t_brain *b, int disp_x, int disp_y, double scale)
 	int x;
 	int i;
 	char val;
-	t_point p_pos;
+	t_fpoint p_pos;
 	i = 0;
 	y = 0;
 	p_pos = to_grid(b->player->pos->x, b->player->pos->y, b->map);
@@ -110,18 +110,22 @@ void		draw_elems(t_brain *b, int disp_x, int disp_y, double scale)
 			} else
 				b->ctx->color = 0xFF0000;
 
-			b->ctx->rect(disp_x + (x * (b->map->bloc_size * scale)),
+			b->ctx->rect((disp_x + (x * (b->map->bloc_size * scale))),
 						disp_y + (y * (b->map->bloc_size * scale)),
 						b->map->bloc_size * scale,
 						b->map->bloc_size * scale,
 						1,
 						b->ctx);
-			/*b->ctx->rect(floor(disp_x + (x * (b->map->bloc_size * scale))),
-						floor(disp_y + (y * (b->map->bloc_size * scale))),
-						b->map->bloc_size * scale,
-						b->map->bloc_size * scale,
-						0,
-						b->ctx);*/
+			if (b->map->scale > 0.5)
+			{
+				b->ctx->color = 0x222222;
+				b->ctx->rect(floor(disp_x + (x * (b->map->bloc_size * scale))),
+							floor(disp_y + (y * (b->map->bloc_size * scale))),
+							b->map->bloc_size * scale,
+							b->map->bloc_size * scale,
+							0,
+							b->ctx);
+			}
 			i++;
 			x++;
 		};
@@ -136,7 +140,7 @@ void		draw_elems(t_brain *b, int disp_x, int disp_y, double scale)
 				b->ctx);
 }
 
-void	line_on_map(t_brain *b, t_point p1, t_point p2)
+void	line_on_map(t_brain *b, t_fpoint p1, t_fpoint p2)
 {
 	p1 = map_scaled(&p1, b->map);
 	p2 = map_scaled(&p2, b->map);
@@ -145,12 +149,12 @@ void	line_on_map(t_brain *b, t_point p1, t_point p2)
 			b->ctx);	
 }
 
-void	draw_minimap_closest(t_brain *b, t_point disp, double angle)
+void	draw_minimap_closest(t_brain *b, t_fpoint disp, double angle)
 {
 		int color = b->ctx->color;
 		t_fpoint close_h = closest_grid_h(b->player->pos, b->map, angle);
 		t_fpoint close_v = closest_grid_v(b->player->pos, b->map, angle);
-		t_point p_pos = map_scaled(b->player->pos, b->map);
+		t_fpoint p_pos = map_scaled(b->player->pos, b->map);
 		t_detect wall;
 
 		close_h = map_fscaled(&close_h, b->map);
@@ -168,7 +172,7 @@ void	draw_minimap_closest(t_brain *b, t_point disp, double angle)
 }
 
 
-void	draw_minimap_rays(t_brain *b, t_point disp)
+void	draw_minimap_rays(t_brain *b, t_fpoint disp)
 {
 		t_fpoint close_h = closest_wall_h(b, b->player->pos, b->player->angle);
 		t_fpoint close_v = closest_wall_v(b, b->player->pos, b->player->angle);
@@ -181,7 +185,7 @@ void	draw_minimap_rays(t_brain *b, t_point disp)
 		b->ctx->circle(disp.x + close_v.x, disp.y + close_v.y, (b->map->bloc_size * 0.1) * b->map->scale, 1, b->ctx);
 }
 
-void			draw_player_map(t_brain *b, t_player *p, t_point m_pos)
+void			draw_player_map(t_brain *b, t_player *p, t_fpoint m_pos)
 {
 	b->ctx->color = 0xFFFFFF;
 	b->ctx->circle(m_pos.x + (p->pos->x * b->map->scale),
@@ -237,8 +241,8 @@ void			draw_minimap(t_brain *b, int x, int y, int width)
 		y = (b->ctx->height - (b->map->height * b->map->bloc_size * scale)) / 2;
 	}
 	b->map->scale = scale;
-	b->map->disp.x = x;
-	b->map->disp.y = y;
+	b->map->disp.x = floor(x);
+	b->map->disp.y = floor(y);
     draw_frame(b);
     draw_elems(b, x, y, scale);
 	draw_player_map(b, b->player, new_point(x, y));

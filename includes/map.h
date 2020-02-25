@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/14 22:46:16 by siferrar          #+#    #+#             */
-/*   Updated: 2020/02/20 16:47:03 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/02/25 09:31:19 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ typedef struct	s_map
 	int			px_height;
 	int			bloc_size;		
 	double		scale;
-	t_point		disp;
+	t_fpoint		disp;
 	int			mini_map_width;
 	t_buff		*w_n;
 	t_buff		*w_e;

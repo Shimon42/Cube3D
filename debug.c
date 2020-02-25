@@ -1,15 +1,15 @@
 /* ************************************************************************** */
-/*                                                          LE - /            */
-/*                                                              /             */
-/*   debug.c                                          .::    .:/ .      .::   */
-/*                                                 +:+:+   +:    +:  +:+:+    */
-/*   By: siferrar <siferrar@student.le-101.fr>      +:+   +:    +:    +:+     */
-/*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2019/11/20 15:53:12 by siferrar     #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/29 22:12:12 by siferrar    ###    #+. /#+    ###.fr     */
-/*                                                         /                  */
-/*                                                        /                   */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   debug.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: siferrar <siferrar@student.le-101.fr>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/11/20 15:53:12 by siferrar          #+#    #+#             */
+/*   Updated: 2020/02/25 09:31:54 by siferrar         ###   ########lyon.fr   */
+/*                                                                            */
 /* ************************************************************************** */
+
 
 #include "includes/cube3d.h"
 #include "debug.h"
@@ -18,9 +18,9 @@
 #include <stdlib.h>
 #include <string.h>
 
-void	disp_point(t_point *p)
+void	disp_point(t_fpoint *p)
 {
-	printf("{ x:%6d, y:%6d }\n", p->x, p->y);
+	printf("{ x:%6f, y:%6f }\n", p->x, p->y);
 }
 
 void	disp_map_s(t_map *m)

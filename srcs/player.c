@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/22 22:24:57 by siferrar          #+#    #+#             */
-/*   Updated: 2020/02/24 09:33:11 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/02/25 09:44:00 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,12 +48,12 @@ int		init_player(t_brain *b, int pos_x, char angle)
 		ft_putstr(RED"FAILED TO MALLOC PLAYER\n"RST);
 		exit(0);
 	}
-	if ((b->player->pos = malloc(sizeof(t_point))) == NULL)
+	if ((b->player->pos = malloc(sizeof(t_fpoint))) == NULL)
 	{
 		ft_putstr(RED"FAILED TO MALLOC PLAYER POS\n"RST);
 		exit(0);
 	}
-	if ((b->player->r_pos = malloc(sizeof(t_point))) == NULL)
+	if ((b->player->r_pos = malloc(sizeof(t_fpoint))) == NULL)
 	{
 		ft_putstr(RED"FAILED TO MALLOC PLAYER POS\n"RST);
 		exit(0);
@@ -74,11 +74,11 @@ int		init_player(t_brain *b, int pos_x, char angle)
 	b->player->speed = 4;
 	b->player->angle = get_player_angle(angle);
 	b->player->rot_speed = (1 * PI) / 180;
-	b->player->inited = 1;
-	b->player->step = malloc(sizeof(t_point *));
+	b->player->step = malloc(sizeof(t_fpoint *));
 	b->player->rot(b->player, 0);
 	b->player->brain = b;
 	b->player->as_move = 1;
+	b->player->inited = 1;
 	printf(" - OK\n");
 	return (1);
 }
@@ -183,8 +183,8 @@ void	move(struct s_player *p, int dir)
 		p->r_pos->x = map->px_width - 1;
 	if (get_grid(map,p->r_pos->x + (p->speed + 5) * (cos(p->angle + (ft_inrad(90)) * dir)), p->r_pos->y + (p->speed + 5) * (sin(p->angle + (ft_inrad(90)) * dir)), 1) != 1)
 	{
-		p->pos->x = p->r_pos->x;
-		p->pos->y = p->r_pos->y;
+		p->pos->x = (p->r_pos->x);
+		p->pos->y = (p->r_pos->y);
 	} else {
 		p->r_pos->x = (double)p->pos->x;
 		p->r_pos->y = (double)p->pos->y;
@@ -199,8 +199,6 @@ void	rotate(struct s_player *p, double angle)
 		p->angle = p->angle - 2 * PI;
 	if (p->angle <= 0)
 		p->angle = 2 * PI - p->angle;
-
-	//dist = calc_dist(*p->pos, new_point(p->pos->x + p->speed * cos(p->angle), p->pos->y + p->speed * sin(p->angle)));
 
 	p->step->x = (p->pos->x + p->speed * cos(p->angle)) - p->pos->x;
 	dprintf(1, "Step->x: %f \n", p->step->x);
@@ -232,7 +230,7 @@ void	jump(t_player *p, double speed)
 		p->z = 0;
 		jumping = 0;
 	}
-	if (jumping && speed > 0 && p->z < b->map->bloc_size * 0.5)
+	if (jumping && speed > 0 && p->z < b->map->bloc_size * 0.75)
 		p->z += speed * jumping;
 	else if (jumping)
 		jumping = -1;

@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 22:11:09 by siferrar          #+#    #+#             */
-/*   Updated: 2020/02/24 09:36:19 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/02/25 10:26:08 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "../includes/cube3d.h"
 
 
-t_fpoint to_fpoint(t_point *p)
+t_fpoint to_fpoint(t_fpoint *p)
 {
 	t_fpoint ret;
 
@@ -23,16 +23,16 @@ t_fpoint to_fpoint(t_point *p)
 	return (ret);
 }
 
-t_point to_point(t_fpoint *p)
+t_fpoint to_point(t_fpoint *p)
 {
-	t_point ret;
+	t_fpoint ret;
 
 	ret.x = (int)floor(p->x);
 	ret.y = (int)floor(p->y);
 	return (ret);
 }
 
-t_fpoint	closest_grid_h(t_point *p, t_map *m, double angle)
+t_fpoint	closest_grid_h(t_fpoint *p, t_map *m, double angle)
 {
 	t_fpoint closest;
 	
@@ -49,7 +49,7 @@ t_fpoint	closest_grid_h(t_point *p, t_map *m, double angle)
 	return (closest);
 }
 
-t_fpoint	 closest_grid_v(t_point *p, t_map *m, double angle)
+t_fpoint	 closest_grid_v(t_fpoint *p, t_map *m, double angle)
 {
 	t_fpoint closest;
 	
@@ -65,7 +65,7 @@ t_fpoint	 closest_grid_v(t_point *p, t_map *m, double angle)
 	return (closest);
 }
 
-t_fpoint closest_wall_h(t_brain *b, t_point *p, double angle)
+t_fpoint closest_wall_h(t_brain *b, t_fpoint *p, double angle)
 {
 	t_fpoint offset;
 	t_fpoint cur_point;
@@ -101,7 +101,7 @@ t_fpoint closest_wall_h(t_brain *b, t_point *p, double angle)
 	return (cur_point);
 }
 
-t_fpoint closest_wall_v(t_brain *b, t_point *p, double angle)
+t_fpoint closest_wall_v(t_brain *b, t_fpoint *p, double angle)
 {
 	t_fpoint cur_point;
 	t_fpoint offset;
@@ -166,7 +166,7 @@ double to_360(double angle)
 	return (angle);
 }
 
-t_detect	dist_to_wall(t_brain *b, t_point *p, double angle)
+t_detect	dist_to_wall(t_brain *b, t_fpoint *p, double angle)
 {
 	t_fpoint closest_h;
 	t_fpoint closest_v;
@@ -177,8 +177,8 @@ t_detect	dist_to_wall(t_brain *b, t_point *p, double angle)
 	angle = to_360(angle);
 	closest_h = closest_wall_h(b, p, angle);
 	closest_v = closest_wall_v(b, p, angle);
-	dists.x = calc_fdist(to_fpoint(p), closest_h);
-	dists.y = calc_fdist(to_fpoint(p), closest_v);
+	dists.x = calc_fdist(*p, closest_h);
+	dists.y = calc_fdist(*p, closest_v);
 	if (dists.x < dists.y)
 	{
 		bad_dist = dists.x;
@@ -238,7 +238,7 @@ void	draw_walls(t_brain *b, t_ctx *c)
 		c->color = 0;
 		
 		c->color = 0x388FBA;
-		c->line(new_point(cur_col, 0), new_point(cur_col, c->height/2 - w_height/2 + b->player->z + 100), c);
+		c->line(new_point(cur_col, 0), new_point(cur_col, c->height/2 - w_height/2 + b->player->z), c);
 		
 		draw_col(b, w_height,  cur_col, wall);
 		
@@ -274,7 +274,7 @@ void draw_col(t_brain *b, double w_height, double cur_col, t_detect w)
 	i = 0;
 	if ((b->ctx->height/2 - w_height/2 + 1) < 0)
 		i = ((b->ctx->height/2 - w_height/2 + 1)) * -1;
-	if (cur_col == -1)
+	if (cur_col == 1)
 	{
 		dprintf(1, "W_height: %f - ", w_height);
 		dprintf(1, "start: %d - ", i);
@@ -284,7 +284,7 @@ void draw_col(t_brain *b, double w_height, double cur_col, t_detect w)
 	i--;
 	while (i <= w_height + 1)
 	{
-		color = pixel_get(*texture, floor((texture_col + 1) * ratio.x), floor((i + 1) * ratio.y));
+		color = pixel_get(*texture, (texture_col + 1) * ratio.x, (i + 1) * ratio.y);
 
 		if ((b->ctx->height/2 - w_height/2 + 1) + i > 0 )
 			pixel_put_buff(cur_col, (b->ctx->height/2 - w_height/2) + i + b->player->z, color, b->map->frame);
@@ -292,7 +292,7 @@ void draw_col(t_brain *b, double w_height, double cur_col, t_detect w)
 			break;
 		i++;
 	}
-	if (cur_col == -1)
+	if (cur_col == 1)
 	{
 		dprintf(1, "end: %d\n", i);
 	}

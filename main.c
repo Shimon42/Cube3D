@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 21:29:11 by siferrar          #+#    #+#             */
-/*   Updated: 2020/02/24 09:11:52 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/02/25 10:08:28 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,7 +133,9 @@ int	key_press(int key, void *param)
 		if ((key = is_key_pressed(b, 126)) >= 0 && b->player->cam->fov != ft_inrad(160))
 		{
 			b->player->as_move = 1;
-			b->player->cam->fov = ft_inrad(160);
+			b->player->cam->fov = ft_inrad(170);
+			b->player->cam->proj_size.x = 5000;
+			b->player->cam->proj_size.y = 5000;
 			b->player->cam->proj_dist = (b->player->cam->proj_size.x / 2) / tan(b->player->cam->fov / 2) * 2;
 		}
 	
@@ -172,6 +174,8 @@ int	key_release(int key, void *param)
 	{
 		b->map->bloc_size = 64;
 		b->player->cam->fov = ft_inrad(60);
+		b->player->cam->proj_size.x = b->ctx->width;
+		b->player->cam->proj_size.y = b->ctx->height;
 		b->player->cam->proj_dist = (b->player->cam->proj_size.x / 2) / tan(b->player->cam->fov / 2);
 		b->player->as_move = 1;
 	}
@@ -179,9 +183,9 @@ int	key_release(int key, void *param)
 	return (0);
 }
 
-t_point	new_point(int x, int y)
+t_fpoint	new_point(int x, int y)
 {
-	t_point new;
+	t_fpoint new;
 
 	new.x = x;
 	new.y = y;
@@ -212,7 +216,7 @@ t_brain *new_brain(int width, int height, char * name)
 	return (new);
 }
 
-double		calc_dist(t_point p1, t_point p2)
+double		calc_dist(t_fpoint p1, t_fpoint p2)
 {
 	return ( sqrt( pow((p2.x - p1.x),2) + pow((p2.y - p1.y),2)));
 }
@@ -222,19 +226,19 @@ double		calc_fdist(t_fpoint p1, t_fpoint p2)
 	return ( sqrt( pow((p2.x - p1.x),2) + pow((p2.y - p1.y),2)));
 }
 
-double	calc_norm(t_point p)
+double	calc_norm(t_fpoint p)
 {
 	return(sqrt(pow(p.x, 2) + pow(p.y, 2)));
 }
 
-int		calc_scal(t_point p1, t_point p2)
+int		calc_scal(t_fpoint p1, t_fpoint p2)
 {
 	return (p1.x * p2.x) + (p1.y * p2.y);
 }
 
-t_point	calc_diff(t_point p1, t_point p2)
+t_fpoint	calc_diff(t_fpoint p1, t_fpoint p2)
 {
-	t_point ret;
+	t_fpoint ret;
 
 	ret.x = p1.x - p2.x;
 	ret.y = p1.y - p2.y;
