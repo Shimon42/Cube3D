@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 21:29:11 by siferrar          #+#    #+#             */
-/*   Updated: 2020/02/25 19:17:36 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/02/26 08:08:17 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -221,30 +221,6 @@ double		calc_dist(t_fpoint p1, t_fpoint p2)
 	return ( sqrt( pow((p2.x - p1.x),2) + pow((p2.y - p1.y),2)));
 }
 
-double		calc_fdist(t_fpoint p1, t_fpoint p2)
-{
-	return ( sqrt( pow((p2.x - p1.x),2) + pow((p2.y - p1.y),2)));
-}
-
-double	calc_norm(t_fpoint p)
-{
-	return(sqrt(pow(p.x, 2) + pow(p.y, 2)));
-}
-
-int		calc_scal(t_fpoint p1, t_fpoint p2)
-{
-	return (p1.x * p2.x) + (p1.y * p2.y);
-}
-
-t_fpoint	calc_diff(t_fpoint p1, t_fpoint p2)
-{
-	t_fpoint ret;
-
-	ret.x = p1.x - p2.x;
-	ret.y = p1.y - p2.y;
-	return (ret);
-}
-
 void meditate(t_brain *b)
 {
 	free(b->ctx->win_ptr);
@@ -280,12 +256,12 @@ int loop_hook(t_brain *b)
 int	main(int ac, char **av)
 {
 	t_brain *b;
-	mlx_win_list_t *win;
+	t_mlx_win_list *win;
 
 	if(ac != 2)
 		return (-1);
-	b = new_brain(3000, 3080, "Cube3D");
-	win = (mlx_win_list_t *)b->ctx->win_ptr;
+	b = new_brain(1920, 1080, "Cube3D");
+	win = (t_mlx_win_list *)b->ctx->win_ptr;
 	dprintf(1, "%d - %d\n", win->size_x, win->size_y);
 	b->ctx->width = win->size_x;
 	b->ctx->height = win->size_y;

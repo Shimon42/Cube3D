@@ -1,4 +1,4 @@
-# Cube 3D • Alpha 0.4.4
+# Cube 3D • Alpha 0.4.5
 
 ![Cube3D Screenshot](/images/textured.png)
 
@@ -7,9 +7,9 @@
 -> make launch - Compile changes & launch
 
 
-[ESC] - quit (brutal killing)
+[ESC] - Quit (brutal killing)
 
-[F] - expand map
+[F] - Expand map
 
 [Z] - Move forward
 
@@ -21,13 +21,20 @@
 
 [LEFT] [RIGHT] - Rotate camera ( + [SHIFT] to rotate/10)
 
+[UP] - Maxi FOV
+
+[SPACE] - Jump (WYP)
+
+
 ![Cube3D Minimap expanded](/images/minimap.png)
 
 
 	————————————————————————————————————
 		Changes:
 	————————————————————————————————————
-	- One texture by wall side !
+	- Good player move
+	- Fixed "One line appear in center of screen for angles 0, 90, 180"
+	- Gest Expanded minimap size never off screen
 
     ————————————————————————————————————
 		Cur State:
@@ -42,8 +49,11 @@
 	————————————————————————————————————
 	Drawing: 
 	- Line drawn after end of win width is drawn on the other side of the window
-	- One line appear in center of screen for angles 0, 90, 180
 	
 	Moving:
 	- Double speed if walk on side and move forward
+
+	Perf:
+	- FPS drop if too close from wall
+		-> Crash if player is in the wall
 

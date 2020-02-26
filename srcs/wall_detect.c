@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 22:11:09 by siferrar          #+#    #+#             */
-/*   Updated: 2020/02/25 10:26:08 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/02/26 08:42:13 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,12 +40,8 @@ t_fpoint	closest_grid_h(t_fpoint *p, t_map *m, double angle)
 		closest.y = floor(p->y / m->bloc_size) * m->bloc_size;
 	else
 		closest.y = floor(p->y / m->bloc_size) * m->bloc_size  + m->bloc_size;
-	if (tan(angle) != 0)
-		closest.x = p->x - (p->y - closest.y) / tan(angle);
-	if (closest.x < 0)
-		closest.x = 0;
-	if (closest.y < 0)
-		closest.y = 0;
+	closest.x = p->x - (p->y - closest.y) / tan(angle);
+	dprintf(1, "H :Closest x: %f -  y: %f\n", closest.x, closest.y);
 	return (closest);
 }
 
@@ -54,14 +50,11 @@ t_fpoint	 closest_grid_v(t_fpoint *p, t_map *m, double angle)
 	t_fpoint closest;
 	
 	if (angle > PI / 2.0 && angle < 2 * PI * 0.75)
-		closest.x = floor(p->x / m->bloc_size) * m->bloc_size;
+		closest.x = floor(p->x / (double)m->bloc_size) * m->bloc_size;
 	else
-		closest.x = floor(p->x / m->bloc_size) * m->bloc_size + m->bloc_size;
+		closest.x = floor(p->x / (double)m->bloc_size) * m->bloc_size + m->bloc_size;
 	closest.y = p->y - (p->x - closest.x) * tan(angle);
-	if (closest.x < 0)
-		closest.x = 0;
-	if (closest.y < 0)
-		closest.y = 0;
+	dprintf(1, "V :Closest x: %f -  y: %f\n", closest.x, closest.y);
 	return (closest);
 }
 
@@ -76,13 +69,14 @@ t_fpoint closest_wall_h(t_brain *b, t_fpoint *p, double angle)
 	if (angle > PI && angle < 2 * PI)
 	{
 		offset.y = -(b->map->bloc_size);
-		offset.x = (b->map->bloc_size / tan(angle)) * -1;
+		offset.x = ((double)b->map->bloc_size / tan(angle)) * -1;
 	}
 	else
 	{
 		offset.y = b->map->bloc_size;
-		offset.x = (b->map->bloc_size / tan(angle)) * 1;
+		offset.x = ((double)b->map->bloc_size / tan(angle)) * 1;
 	}
+		//dprintf(1, "H :Offset x: %f -  y: %f\n", offset.x, offset.y);
 	while (is_wall == 0 && cur_point.x < b->map->px_width && cur_point.x > 0)
 	{
 		is_wall = (get_grid(b->map, cur_point.x, cur_point.y + 1, 1) == 1 || get_grid(b->map, cur_point.x, cur_point.y - 1, 1) == 1);
@@ -112,11 +106,12 @@ t_fpoint closest_wall_v(t_brain *b, t_fpoint *p, double angle)
 	if (angle < 2 * PI * 0.75 && angle > PI / 2)
 	{
 		offset.x = -b->map->bloc_size;
-		offset.y = (b->map->bloc_size * tan(angle)) * -1;
+		offset.y = ((double)b->map->bloc_size * tan(angle)) * -1;
 	}else{
 		offset.x = b->map->bloc_size;
-		offset.y = (b->map->bloc_size * tan(angle));
+		offset.y = ((double)b->map->bloc_size * tan(angle));
 	}
+		//dprintf(1, "V: Offset x: %f -  y: %f\n", offset.x, offset.y);
 	while (is_wall == 0 && cur_point.y < b->map->px_height && cur_point.y > 0)
 	{
 		is_wall = (get_grid(b->map, cur_point.x - 1, cur_point.y, 1) == 1 || get_grid(b->map, cur_point.x + 1, cur_point.y, 1) == 1);
@@ -159,6 +154,8 @@ char		get_wall_side(double angle, int closest)
 
 double to_360(double angle)
 {
+	if (angle == 0)
+		angle = 0.1;
 	if (angle < 0)
 		return ((2.0 * M_PI) + angle);
 	else if (angle > 2*M_PI)
@@ -177,8 +174,8 @@ t_detect	dist_to_wall(t_brain *b, t_fpoint *p, double angle)
 	angle = to_360(angle);
 	closest_h = closest_wall_h(b, p, angle);
 	closest_v = closest_wall_v(b, p, angle);
-	dists.x = calc_fdist(*p, closest_h);
-	dists.y = calc_fdist(*p, closest_v);
+	dists.x = calc_dist(*p, closest_h);
+	dists.y = calc_dist(*p, closest_v);
 	if (dists.x < dists.y)
 	{
 		bad_dist = dists.x;
@@ -274,7 +271,7 @@ void draw_col(t_brain *b, double w_height, double cur_col, t_detect w)
 	i = 0;
 	if ((b->ctx->height/2 - w_height/2 + 1) < 0)
 		i = ((b->ctx->height/2 - w_height/2 + 1)) * -1;
-	if (cur_col == 1)
+	if (cur_col == -1)
 	{
 		dprintf(1, "W_height: %f - ", w_height);
 		dprintf(1, "start: %d - ", i);
@@ -292,7 +289,7 @@ void draw_col(t_brain *b, double w_height, double cur_col, t_detect w)
 			break;
 		i++;
 	}
-	if (cur_col == 1)
+	if (cur_col == -1)
 	{
 		dprintf(1, "end: %d\n", i);
 	}

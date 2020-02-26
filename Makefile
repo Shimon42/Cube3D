@@ -1,6 +1,7 @@
 NAME =		Cub3D
 
 SRCSPATH =	srcs/
+DEBUGPATH =	debug/
 INCPATH =	includes/
 
 #---------  LIBS --
@@ -9,7 +10,6 @@ LIBFT =		$(INCPATH)Libft/
 
 #---------	INCLUDES --
 INCLUDES =	$(INCPATH)cube3d.h \
-			$(INCPATH)brain.h \
 			$(INCPATH)my_canvas.h \
 			$(INCPATH)map.h \
 			$(INCPATH)player.h \
@@ -18,8 +18,8 @@ INCLUDES =	$(INCPATH)cube3d.h \
 			\
 			$(MINILIB)mlx.h \
 			\
-			debug.h\
-			debug_defines.h
+			$(DEBUGPATH)debug.h\
+			$(DEBUGPATH)debug_defines.h
 
 #--------	SRCS --
 SRCS = 		main.c \
@@ -32,7 +32,7 @@ SRCS = 		main.c \
 			$(SRCSPATH)draw_map.c \
 			$(SRCSPATH)wall_detect.c \
 			$(SRCSPATH)player.c \
-			debug.c
+			$(DEBUGPATH)debug.c
 
 GNL_SRCS =	$(INCPATH)Gnl/get_next_line.c \
 			$(INCPATH)Gnl/get_next_line_utils.c
@@ -61,8 +61,8 @@ $(NAME):	$(OBJS) $(INCLUDES)
 			make -C $(MINILIB)
 			make -C $(LIBFT)
 			gcc -c $(GNL_SRCS) -D BUFFER_SIZE=128
-			cp $(MINILIB)libmlx.a .
-			cp $(LIBFT)libft.a .
+			mv $(MINILIB)libmlx.a .
+			mv $(LIBFT)libft.a .
 			ar rc $(NAME).a $(OBJS) get_next_line.o get_next_line_utils.o
 
 comp:		all
@@ -92,10 +92,10 @@ libft:
 $(OBJS):	$(INCLUDES)
 
 clean:
-			${RM} $(OBJS)
+			${RM} $(OBJS) get_next_line.o get_next_line_utils.o
 
 fclean:		clean
-			${RM} $(NAME)
+			${RM} $(NAME).a $(NAME) libft.a libmlx.a
 
 re:			fclean all
 

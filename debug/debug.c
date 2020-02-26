@@ -6,14 +6,12 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/20 15:53:12 by siferrar          #+#    #+#             */
-/*   Updated: 2020/02/25 09:31:54 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/02/26 07:18:43 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-
-#include "includes/cube3d.h"
+#include "../includes/cube3d.h"
 #include "debug.h"
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -40,17 +38,16 @@ void	disp_buff(t_buff *b)
 	printf("endian: [%d]\n", b->endian);
 }
 
-void print_player_debug(t_brain *b)
+void	print_player_debug(t_brain *b)
 {
 	b->ctx->color = 0x88000000;
 	b->ctx->rect(10,10, 200,100, 1, b->ctx);
 	b->ctx->color = 0xFFFFFF;
 	b->ctx->text("PosX: ", 12, 12, b->ctx);
 	b->ctx->text(ft_itoa(b->player->pos->x), 65, 12, b->ctx);
-
 }
 
-void print_map_debug(char *line)
+void	print_map_debug(char *line)
 {
 	while (*line)
 	{
@@ -67,7 +64,7 @@ void print_map_debug(char *line)
 	ft_putchar('\n');
 }
 
-void		print_map_grid(t_map *map)
+void	print_map_grid(t_map *map)
 {
 	int x;
 	int y;
@@ -102,14 +99,11 @@ void		print_map_grid(t_map *map)
 	}
 }
 
-
-void disp_brain(t_brain *b)
+void	disp_brain(t_brain *b)
 {
     printf(CYAN"┌────────────────────────────\n");
     printf("|----------- BRAIN ----------\n");
     printf("|\n");
-
 	printf("|\tINITED: %d\n", b->inited);
-
     printf("────────────────────────────"RST"\n");
 }

@@ -6,10 +6,9 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/14 22:46:16 by siferrar          #+#    #+#             */
-/*   Updated: 2020/02/25 09:31:19 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/02/26 07:01:14 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #ifndef MAP_H
 # define MAP_H
@@ -37,9 +36,9 @@ typedef struct	s_map
 	int			height;
 	int			px_width;
 	int			px_height;
-	int			bloc_size;		
+	int			bloc_size;
 	double		scale;
-	t_fpoint		disp;
+	t_fpoint	disp;
 	int			mini_map_width;
 	t_buff		*w_n;
 	t_buff		*w_e;
@@ -51,7 +50,7 @@ typedef struct	s_map
 int				init_map(t_ctx *ctx, t_map **map);
 int				parse_map(t_map **map, char *line);
 int				alloc_map(t_map **map);
-t_player_detect		*add_map_row(t_map *map, char *line);
+t_player_detect	*add_map_row(t_map *map, char *line);
 int				**alloc_2d_tab(int width, int height);
 
 #endif

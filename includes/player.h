@@ -6,10 +6,9 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/23 18:52:51 by siferrar          #+#    #+#             */
-/*   Updated: 2020/02/25 09:31:19 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/02/26 06:56:38 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #ifndef PLAYER_H
 # define PLAYER_H
@@ -19,7 +18,7 @@
 typedef struct	s_camera
 {
 	double		fov;
-	t_fpoint		proj_size;
+	t_fpoint	proj_size;
 	double		proj_dist;
 }				t_camera;
 
@@ -27,14 +26,14 @@ typedef struct	s_player
 {
 	int			inited;
 	int			as_move;
-	t_fpoint		*pos;
+	t_fpoint	*pos;
 	double		z;
 	t_fpoint	*r_pos;
 	t_camera	*cam;
-    double      angle;
+	double		angle;
 	t_fpoint	*step;
-    double      rot_speed;
-    double      speed;
+	double		rot_speed;
+	double		speed;
 	t_ctx		*ctx;
 	void		*brain;
 	void		(*rot)(struct s_player *, double);
