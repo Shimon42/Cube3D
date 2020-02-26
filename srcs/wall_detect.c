@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 22:11:09 by siferrar          #+#    #+#             */
-/*   Updated: 2020/02/26 08:42:13 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/02/26 09:37:21 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ t_fpoint	closest_grid_h(t_fpoint *p, t_map *m, double angle)
 	else
 		closest.y = floor(p->y / m->bloc_size) * m->bloc_size  + m->bloc_size;
 	closest.x = p->x - (p->y - closest.y) / tan(angle);
-	dprintf(1, "H :Closest x: %f -  y: %f\n", closest.x, closest.y);
 	return (closest);
 }
 
@@ -54,7 +53,6 @@ t_fpoint	 closest_grid_v(t_fpoint *p, t_map *m, double angle)
 	else
 		closest.x = floor(p->x / (double)m->bloc_size) * m->bloc_size + m->bloc_size;
 	closest.y = p->y - (p->x - closest.x) * tan(angle);
-	dprintf(1, "V :Closest x: %f -  y: %f\n", closest.x, closest.y);
 	return (closest);
 }
 
@@ -219,29 +217,23 @@ void	draw_walls(t_brain *b, t_ctx *c)
 	cur_col = 0;
 	col_step = b->player->cam->fov/ c->width;
 	c->cur_buff = b->map->frame;
-	//printf("START DRAW WALLS\n");
 	while (cur_col < c->width)
 	{
 		cur_angle = b->player->angle - (b->player->cam->fov / 2) + (col_step * cur_col);
-
 		wall = dist_to_wall(b, b->player->pos, cur_angle);
 		dist = wall.dist;
-
 		if (cur_col < c->width / 2)
 			dist = dist * cos(-(b->player->angle - cur_angle));
 		else
 			dist = dist * cos ((b->player->angle - cur_angle));
 		w_height = ((b->map->bloc_size) / dist) * b->player->cam->proj_dist;
-		c->color = 0;
-		
 		c->color = 0x388FBA;
-		c->line(new_point(cur_col, 0), new_point(cur_col, c->height/2 - w_height/2 + b->player->z), c);
-		
+		if (w_height < b->ctx->height)
+			c->line(new_point(cur_col, 0), new_point(cur_col, c->height/2 - w_height/2 + b->player->z), c);
 		draw_col(b, w_height,  cur_col, wall);
-		
 		c->color = 0x91672C;
-		//draw_floor(new_point(cur_col, c->height/2 + w_height/2), new_point(cur_col, c->height), c);
-		c->line(new_point(cur_col, c->height/2 + w_height/2 + b->player->z - 1), new_point(cur_col, c->height), c);
+		if (w_height < b->ctx->height)
+			c->line(new_point(cur_col, c->height/2 + w_height/2 + b->player->z - 1), new_point(cur_col, c->height), c);
 		cur_col++;
 	}
 }
@@ -255,42 +247,25 @@ void draw_col(t_brain *b, double w_height, double cur_col, t_detect w)
 {
 	int i;
 	t_fpoint ratio;
-	int color;
 	t_buff **texture;
 	int texture_col;
+	int mid_wall;
 
-	if (w.w_side_hit == 'n' || w.w_side_hit == 's')
-		texture_col = (int)w.hit.x % 64;
-	else
-		texture_col = (int)w.hit.y % 64;
-	texture = NULL;
+	i = 0;
+	mid_wall = (b->ctx->height/2 - w_height/2 + 1);
+	texture_col = ((w.w_side_hit == 'n' || w.w_side_hit == 's') ? (int)w.hit.x % 64 : (int)w.hit.y % 64);
 	texture = get_wall_texture(b->map, w.w_side_hit);
 	ratio.y = ((*texture)->height / w_height);
-	ratio.x = ((*texture)->width / b->map->bloc_size);
-	//dprintf(1, "b_size %d - w_height: %f - cur_c %f - ratio %f\n", b->map->bloc_size, w_height, cur_col, ratio);
-	i = 0;
-	if ((b->ctx->height/2 - w_height/2 + 1) < 0)
-		i = ((b->ctx->height/2 - w_height/2 + 1)) * -1;
-	if (cur_col == -1)
-	{
-		dprintf(1, "W_height: %f - ", w_height);
-		dprintf(1, "start: %d - ", i);
-		dprintf(1, "text_col: %d - ", texture_col);
-		dprintf(1, "x: %f - y: %f -", floor(texture_col * ratio.x), floor(4 * ratio.y));
-	}
-	i--;
+	ratio.x =  (texture_col + 1) * ((*texture)->width / b->map->bloc_size);
+	if (mid_wall < 0)
+		i = (mid_wall) * -1;
 	while (i <= w_height + 1)
 	{
-		color = pixel_get(*texture, (texture_col + 1) * ratio.x, (i + 1) * ratio.y);
-
-		if ((b->ctx->height/2 - w_height/2 + 1) + i > 0 )
-			pixel_put_buff(cur_col, (b->ctx->height/2 - w_height/2) + i + b->player->z, color, b->map->frame);
-		if ((b->ctx->height/2 - w_height/2 + 1) + i > b->ctx->height)
+		texture_col = pixel_get(*texture, ratio.x, (i + 1) * ratio.y);
+		if (mid_wall + i >= 0)
+			pixel_put_buff(cur_col, (b->ctx->height/2 - w_height/2) + i + b->player->z, texture_col, b->map->frame);
+		if (mid_wall + i > b->ctx->height)
 			break;
 		i++;
-	}
-	if (cur_col == -1)
-	{
-		dprintf(1, "end: %d\n", i);
 	}
 }

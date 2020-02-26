@@ -1,4 +1,4 @@
-# Cube 3D • Alpha 0.4.5
+# Cube 3D • Alpha 0.5.0
 
 ![Cube3D Screenshot](/images/textured.png)
 
@@ -32,9 +32,7 @@
 	————————————————————————————————————
 		Changes:
 	————————————————————————————————————
-	- Good player move
-	- Fixed "One line appear in center of screen for angles 0, 90, 180"
-	- Gest Expanded minimap size never off screen
+	- Fixed "FPS drop if too close from wall", only lose 5 FPS now
 
     ————————————————————————————————————
 		Cur State:
@@ -52,8 +50,4 @@
 	
 	Moving:
 	- Double speed if walk on side and move forward
-
-	Perf:
-	- FPS drop if too close from wall
-		-> Crash if player is in the wall
 

@@ -5,5 +5,6 @@
 *.plist
 *.dSYM
 Cube3D
+Cub3D
 *.DS_Store
 *.json

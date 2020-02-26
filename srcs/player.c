@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/22 22:24:57 by siferrar          #+#    #+#             */
-/*   Updated: 2020/02/25 09:44:00 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/02/26 09:33:45 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ int		init_player(t_brain *b, int pos_x, char angle)
 	b->player->ctx = b->ctx;
 	b->player->speed = 4;
 	b->player->angle = get_player_angle(angle);
-	b->player->rot_speed = (1 * PI) / 180;
+	b->player->rot_speed = (2 * PI) / 180;
 	b->player->step = malloc(sizeof(t_fpoint *));
 	b->player->rot(b->player, 0);
 	b->player->brain = b;
@@ -201,10 +201,10 @@ void	rotate(struct s_player *p, double angle)
 		p->angle = 2 * PI - p->angle;
 
 	p->step->x = (p->pos->x + p->speed * cos(p->angle)) - p->pos->x;
-	dprintf(1, "Step->x: %f \n", p->step->x);
+	//dprintf(1, "Step->x: %f \n", p->step->x);
 	p->step->y = (p->pos->y + p->speed * sin(p->angle)) - p->pos->y;
-	dprintf(1, "Step->y: %f \n", p->step->y);
-	printf("Angle: %f\n", rad_to_deg(p->angle));
+	//dprintf(1, "Step->y: %f \n", p->step->y);
+	//printf("Angle: %f\n", rad_to_deg(p->angle));
 	p->as_move = 1;
 	//p->draw(p, ctx);
 }
@@ -216,7 +216,7 @@ void	jump(t_player *p, double speed)
 
 	b = (t_brain *)p->brain;
 
-	dprintf(1, "jump: %d  -- jumpingof %f  -- z: %f\n", jumping, speed, p->z);
+	//dprintf(1, "jump: %d  -- jumpingof %f  -- z: %f\n", jumping, speed, p->z);
 	if (speed > 0 && jumping == 0)
 		jumping = 1;
 	else if (speed < 0)
