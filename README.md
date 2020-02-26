@@ -32,7 +32,7 @@
 	————————————————————————————————————
 		Changes:
 	————————————————————————————————————
-	- Fixed "FPS drop if too close from wall", only lose 5 FPS now
+	- Fixed "FPS drop if too close from wall", only lose ~5 FPS now
 
     ————————————————————————————————————
 		Cur State:
