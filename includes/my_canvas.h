@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/15 17:33:03 by siferrar          #+#    #+#             */
-/*   Updated: 2020/02/26 06:54:30 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/02/27 08:23:26 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ typedef struct	s_point
 
 typedef struct	s_fpoint
 {
-	double		x;
-	double		y;
+	float		x;
+	float		y;
 }				t_fpoint;
 
 typedef struct	s_buff {
@@ -51,7 +51,7 @@ typedef struct	s_ctx
 	t_buff		*cur_buff;
 	void		(*line)(t_fpoint, t_fpoint, struct s_ctx *);
 	void		(*rect)(int, int, int, int, int, struct s_ctx *);
-	void		(*circle)(double, double, int, int, struct s_ctx *);
+	void		(*circle)(float, float, int, int, struct s_ctx *);
 	void		(*text)(char *, int, int, struct s_ctx *);
 	void		(*clear)(int, struct s_ctx *);
 }				t_ctx;
@@ -65,7 +65,7 @@ int				pixel_get(t_buff *img, int x, int y);
 void			draw_line(t_fpoint p1, t_fpoint p2, t_ctx *ctx);
 void			draw_rect(int x, int y,
 						int width, int height, int fill, t_ctx *ctx);
-void			draw_circle(double c_x, double c_y,
+void			draw_circle(float c_x, float c_y,
 						int ray, int fill, t_ctx *ctx);
 void			put_text(char *str, int x, int y, t_ctx *ctx);
 void			clear_ctx(int color, t_ctx *ctx);

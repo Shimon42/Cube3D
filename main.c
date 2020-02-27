@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 21:29:11 by siferrar          #+#    #+#             */
-/*   Updated: 2020/02/26 08:08:17 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/02/27 08:24:43 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void		fps_count(t_ctx *c)
 
 	if (str_time == 0)
 		str_time = time(0);
-	if (time(0) - str_time == 1)
+	if (time(0) - str_time >= 1)
 	{
 		str_time = time(0);
 		free(str);
@@ -113,7 +113,7 @@ int	key_press(int key, void *param)
 		exit(1);
 	if (key != -1 && is_key_pressed(b, key) == -1)
 	{
-		printf(CYAN"Key [%d] pressed"RST"\n", key);
+		//printf(CYAN"Key [%d] pressed"RST"\n", key);
 		add_key_pressed(b, key);
 	}
 	if (b && b->inited && b->player && b->player->inited)
@@ -216,7 +216,7 @@ t_brain *new_brain(int width, int height, char * name)
 	return (new);
 }
 
-double		calc_dist(t_fpoint p1, t_fpoint p2)
+float		calc_dist(t_fpoint p1, t_fpoint p2)
 {
 	return ( sqrt( pow((p2.x - p1.x),2) + pow((p2.y - p1.y),2)));
 }

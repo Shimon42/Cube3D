@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 21:30:44 by siferrar          #+#    #+#             */
-/*   Updated: 2020/02/26 07:20:45 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/02/27 09:07:22 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 # include "Libft/includes/libft.h"
 # include "my_canvas.h"
 # include "map.h"
+# include "sprites.h" 
 # include "player.h"
 # include "MiniLib/X.h"
 # include "../debug/debug.h"
@@ -63,7 +64,7 @@ typedef struct	s_mlx_win_list
 
 int				open_map(t_brain *b, char *map_path);
 void			draw_minimap(t_brain *b, int x, int y, int width);
-void			draw_fullmap(t_brain *b, double ease_val);
+void			draw_fullmap(t_brain *b, float ease_val);
 void			draw_frame(t_brain *b);
 t_fpoint		map_scaled(t_fpoint *p, t_map *m);
 t_fpoint		map_fscaled(t_fpoint *p, t_map *m);
@@ -72,7 +73,7 @@ t_fpoint		to_grid(int x, int y, t_map *m);
 void			point_on_map(t_brain *b, int x, int y, int color);
 void			line_on_map(t_brain *b, t_fpoint p1, t_fpoint p2);
 void			draw_fov_map(t_brain *b, t_ctx *c);
-void			draw_ray(t_player *p, t_map *m, double angle);
+void			draw_ray(t_player *p, t_map *m, float angle);
 void			draw_minimap_rays(t_brain *b, t_fpoint disp);
 
 /*
@@ -80,9 +81,9 @@ void			draw_minimap_rays(t_brain *b, t_fpoint disp);
 */
 
 t_fpoint		to_fpoint(t_fpoint *p);
-double			to_360(double angle);
-double			calc_dist(t_fpoint p1, t_fpoint p2);
-double			calc_dist(t_fpoint p1, t_fpoint p2);
+float			to_360(float angle);
+float			calc_dist(t_fpoint p1, t_fpoint p2);
+float			calc_dist(t_fpoint p1, t_fpoint p2);
 
 /*
 ** --- Player
@@ -90,23 +91,23 @@ double			calc_dist(t_fpoint p1, t_fpoint p2);
 
 int				init_player(t_brain *b, int pos_x, char angle);
 void			move(struct s_player *p, int dir);
-void			rotate(struct s_player *p, double angle);
+void			rotate(struct s_player *p, float angle);
 void			draw_player(struct s_player *p, t_ctx *ctx);
 void			side_move(struct s_player *p, int dir);
-void			jump(t_player *p, double speed);
+void			jump(t_player *p, float speed);
 
 /*
 ** --- RayCasting
 */
 
-t_fpoint		closest_grid_h(t_fpoint *p, t_map *m, double angle);
-t_fpoint		closest_grid_v(t_fpoint *p, t_map *m, double angle);
-t_fpoint		closest_wall_h(t_brain *b, t_fpoint *p, double angle);
-t_fpoint		closest_wall_v(t_brain *b, t_fpoint *p, double angle);
-t_detect		dist_to_wall(t_brain *b, t_fpoint *p, double angle);
+t_fpoint		closest_grid_h(t_fpoint *p, t_map *m, float angle);
+t_fpoint		closest_grid_v(t_fpoint *p, t_map *m, float angle);
+t_fpoint		closest_wall_h(t_brain *b, t_fpoint *p, float angle);
+t_fpoint		closest_wall_v(t_brain *b, t_fpoint *p, float angle);
+t_detect		dist_to_wall(t_brain *b, t_fpoint *p, float angle);
 void			draw_walls(t_brain *b, t_ctx *c);
-void			draw_col(t_brain *b, double w_height,
-				double cur_col, t_detect w);
+void			draw_col(t_brain *b, float w_height,
+				float cur_col, t_detect w);
 
 /*
 ** --- DEBUG FUNCTIONS

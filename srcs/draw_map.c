@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/14 22:43:45 by siferrar          #+#    #+#             */
-/*   Updated: 2020/02/25 10:02:24 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/02/27 08:23:26 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ void		point_on_map(t_brain *b, int x, int y, int color)
 	b->ctx->circle(b->map->disp.x + p.x, b->map->disp.y + p.y, (b->map->bloc_size * 0.06) * b->map->scale, 1, b->ctx);
 }
 
-void		draw_elems(t_brain *b, int disp_x, int disp_y, double scale)
+void		draw_elems(t_brain *b, int disp_x, int disp_y, float scale)
 {
 	int y;
 	int x;
@@ -149,7 +149,7 @@ void	line_on_map(t_brain *b, t_fpoint p1, t_fpoint p2)
 			b->ctx);	
 }
 
-void	draw_minimap_closest(t_brain *b, t_fpoint disp, double angle)
+void	draw_minimap_closest(t_brain *b, t_fpoint disp, float angle)
 {
 		int color = b->ctx->color;
 		t_fpoint close_h = closest_grid_h(b->player->pos, b->map, angle);
@@ -204,10 +204,10 @@ void			draw_player_map(t_brain *b, t_player *p, t_fpoint m_pos)
 void	draw_fov_map(t_brain *b, t_ctx *c)
 {
 	t_detect wall;
-	double dist;
-	double cur_col;
-	double col_step;
-	double cur_angle;
+	float dist;
+	float cur_col;
+	float col_step;
+	float cur_angle;
 
 	cur_col = 0;
 	col_step = b->player->cam->fov/ c->width;
@@ -230,13 +230,13 @@ void	draw_fov_map(t_brain *b, t_ctx *c)
 
 void			draw_minimap(t_brain *b, int x, int y, int width)
 {
-	double scale;
+	float scale;
 
 	b->ctx->cur_buff = b->map->frame;
-	scale = ((double)(width / (double)b->map->px_width));
+	scale = ((float)(width / (float)b->map->px_width));
 	if (b->map->px_height * scale > b->ctx->height)
 	{
-		scale = ((double)((b->ctx->height - 2 * (100 * b->map->scale)) / (double)b->map->px_height));
+		scale = ((float)((b->ctx->height - 2 * (100 * b->map->scale)) / (float)b->map->px_height));
 		x = (b->ctx->width - (b->map->width * b->map->bloc_size * scale)) / 2;;
 		y = (b->ctx->height - (b->map->height * b->map->bloc_size * scale)) / 2;
 	}
@@ -249,19 +249,19 @@ void			draw_minimap(t_brain *b, int x, int y, int width)
 	//draw_fov_map(b, b->ctx);
 }
 
-void			draw_fullmap(t_brain *b, double ease_val)
+void			draw_fullmap(t_brain *b, float ease_val)
 {
 	int margin;
-	double scale;
-	double margin_top;
-	static double ease = 0;
+	float scale;
+	float margin_top;
+	static float ease = 0;
 
 	if (ease_val > 0)
 	{
 		margin = 100 * b->map->scale;
-		scale = ((double)((b->ctx->width - 2 * margin) / (double)b->map->px_width));
+		scale = ((float)((b->ctx->width - 2 * margin) / (float)b->map->px_width));
 		if (b->map->px_width * scale > b->ctx->width)
-			scale = ((double)((b->ctx->height - 2 * margin) / (double)b->map->px_height));
+			scale = ((float)((b->ctx->height - 2 * margin) / (float)b->map->px_height));
 		b->map->scale = scale;
 		margin_top = (b->ctx->height - (b->map->height * b->map->bloc_size * scale)) / 2;
 		draw_minimap(b, 

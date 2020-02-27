@@ -31,6 +31,7 @@ SRCS = 		main.c \
 			$(SRCSPATH)map_parsing.c \
 			$(SRCSPATH)draw_map.c \
 			$(SRCSPATH)wall_detect.c \
+			$(SRCSPATH)sprites.c \
 			$(SRCSPATH)player.c \
 			$(DEBUGPATH)debug.c
 
@@ -41,12 +42,12 @@ GNL_OBJS =	${GNL_SRCS:.c=.o}
 
 CC =		gcc
 
-CFLAGS	= -Wall -Wextra -Werror
-CFLAGSs	= 
+CFLAGSz	= -Wall -Wextra -Werror
+CFLAGS	= 
 
 OBJS = ${SRCS:.c=.o}
 
-MAPS	= assets/
+MAPS	= assets/maps/
 MAP1 = $(MAPS)map.cub
 MAP2 = $(MAPS)map2.cub
 
@@ -70,17 +71,17 @@ comp:		all
 
 launch:		comp
 			clear
-			@echo "$(COL_CUBE)  .––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––.	"
-			@echo " / |                          $(COL_TITLE)Launching$(COL_CUBE)                          | \	"
-			@echo "+––+–––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––+––+"
-			@echo "|  |$(COL_TXT)             _____       _            _____ ____$(COL_CUBE)             |  |"
-			@echo "|  |$(COL_TXT)            /  __ \     | |          |____ |  _  \ $(COL_CUBE)          |  |"
-			@echo "|  |$(COL_TXT)           |  /  \/_   _| |__   ___      / / | | |$(COL_CUBE)           |  |"
-			@echo "|  |$(COL_TXT)           |  |   | | | | |_ \ / _ \     \ \ | | |$(COL_CUBE)           |  |"
-			@echo "|  |$(COL_TXT)           |  \__/\ |_| | |_) |  __/ .___/ / |_/ /$(COL_CUBE)           |  |"
-			@echo "|  |____________$(COL_TXT)\_____/\__,_|_.__/ \___| \____/|____/ $(COL_CUBE)___________|  |"
-			@echo "| / $(COL_SHADOW)           /////// ////////// | \\\\\\\\\\\\\\\\\\ \\\\\\\\\\\\\\\\\\\\ \\\\\\\\\\\\\\\\\\\\\\\\$(COL_CUBE)            \ |"
-			@echo "+–––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––+\033[0m"
+			@echo "$(COL_CUBE)  .–––––––––––––––––––––––––––––––––––––––––––––––––––––––––.	"
+			@echo " / |                     $(COL_TITLE)Launching$(COL_CUBE)                          | \	"
+			@echo "+––+––––––––––––––––––––––––––––––––––––––––––––––––––––––––+––+"
+			@echo "|  |$(COL_TXT)             _____       _       _____ ____$(COL_CUBE)             |  |"
+			@echo "|  |$(COL_TXT)            /  __ \     | |     |____ |  _  \ $(COL_CUBE)          |  |"
+			@echo "|  |$(COL_TXT)           |  /  \/_   _| |__       / / | | |$(COL_CUBE)           |  |"
+			@echo "|  |$(COL_TXT)           |  |   | | | | |_ \      \ \ | | |$(COL_CUBE)           |  |"
+			@echo "|  |$(COL_TXT)           |  \__/\ |_| | |_) | ____/ / |_/ /$(COL_CUBE)           |  |"
+			@echo "|  |____________$(COL_TXT)\_____/\____|____/  \____/|____/ $(COL_CUBE)___________|  |"
+			@echo "| / $(COL_SHADOW)           /////// /////////     \\\\\\\\\\\\\\\\\\\ \\\\\\\\\\\\\\\\\\\\\\\\$(COL_CUBE)            \ |"
+			@echo "+––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––+\033[0m"
 			@./$(NAME) $(MAP2)
 
 minilib:	

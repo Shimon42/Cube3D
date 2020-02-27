@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/22 22:24:57 by siferrar          #+#    #+#             */
-/*   Updated: 2020/02/26 09:33:45 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/02/27 08:23:26 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int		init_cam(t_brain *b)
 	return (1);
 }
 
-double get_player_angle(char dir)
+float get_player_angle(char dir)
 {
 	if (dir == 'N')
 		return (2 * PI * 0.75);
@@ -83,23 +83,23 @@ int		init_player(t_brain *b, int pos_x, char angle)
 	return (1);
 }
 
-double deg_to_rad(double angle)
+float deg_to_rad(float angle)
 {
 	return ((angle * PI)/ 180);
 }
 
-double rad_to_deg(double angle)
+float rad_to_deg(float angle)
 {
 	return (angle * 180.0 / PI);
 }
 
 void	draw_rays(struct s_player *p, t_ctx *ctx)
 {
-	double fov = deg_to_rad(90);
+	float fov = deg_to_rad(90);
 	int rayDist = 500;
 	int nbrRay = 6;
 	int i = 0;
-	double cur_a = 0;
+	float cur_a = 0;
 
 	while (i < nbrRay/2 + 1)
 	{
@@ -150,8 +150,8 @@ void	side_move(struct s_player *p, int dir)
 		p->pos->x = p->r_pos->x;
 		p->pos->y = p->r_pos->y;
 	} else {
-		p->r_pos->x = (double)p->pos->x;
-		p->r_pos->y = (double)p->pos->y;
+		p->r_pos->x = (float)p->pos->x;
+		p->r_pos->y = (float)p->pos->y;
 	}
 	p->as_move = 1;
 }
@@ -166,7 +166,7 @@ void	move(struct s_player *p, int dir)
 
 	if (p->r_pos->y < map->px_height)
 	{
-		p->r_pos->y += p->step->y * (double)dir;
+		p->r_pos->y += p->step->y * (float)dir;
 		if (p->r_pos->y < 0)
 			p->r_pos->y = 0;
 	}
@@ -175,7 +175,7 @@ void	move(struct s_player *p, int dir)
 
 	if (p->r_pos->x < map->px_width)
 	{
-		p->r_pos->x += p->step->x * (double)dir;
+		p->r_pos->x += p->step->x * (float)dir;
 		if (p->r_pos->x < 0)
 			p->r_pos->x = 0;
 	}
@@ -186,13 +186,13 @@ void	move(struct s_player *p, int dir)
 		p->pos->x = (p->r_pos->x);
 		p->pos->y = (p->r_pos->y);
 	} else {
-		p->r_pos->x = (double)p->pos->x;
-		p->r_pos->y = (double)p->pos->y;
+		p->r_pos->x = (float)p->pos->x;
+		p->r_pos->y = (float)p->pos->y;
 	}
 	p->as_move = 1;
 }
 
-void	rotate(struct s_player *p, double angle)
+void	rotate(struct s_player *p, float angle)
 {
 	p->angle += angle;
 	if (p->angle > 2*PI)
@@ -209,7 +209,7 @@ void	rotate(struct s_player *p, double angle)
 	//p->draw(p, ctx);
 }
 
-void	jump(t_player *p, double speed)
+void	jump(t_player *p, float speed)
 {
 	static int jumping = 0;
 	t_brain *b;

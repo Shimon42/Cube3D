@@ -1,15 +1,15 @@
 /* ************************************************************************** */
-/*                                                          LE - /            */
-/*                                                              /             */
-/*   map_parsing.c                                    .::    .:/ .      .::   */
-/*                                                 +:+:+   +:    +:  +:+:+    */
-/*   By: siferrar <siferrar@student.le-101.fr>      +:+   +:    +:    +:+     */
-/*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2020/01/14 20:36:43 by siferrar     #+#   ##    ##    #+#       */
-/*   Updated: 2020/02/23 19:48:51 by siferrar    ###    #+. /#+    ###.fr     */
-/*                                                         /                  */
-/*                                                        /                   */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   map_parsing.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: siferrar <siferrar@student.le-101.fr>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/01/14 20:36:43 by siferrar          #+#    #+#             */
+/*   Updated: 2020/02/27 09:25:30 by siferrar         ###   ########lyon.fr   */
+/*                                                                            */
 /* ************************************************************************** */
+
 
 #include "../includes/cube3d.h"
 
@@ -25,6 +25,9 @@ int				init_map(t_ctx *ctx, t_map **map)
 	(*map)->w_e = NULL;
 	(*map)->w_s = NULL;
 	(*map)->w_w = NULL;
+	(*map)->sprites_count = 0;
+	(*map)->sprites = NULL;
+	
 	init_buff(ctx, &(*map)->frame, ctx->width, ctx->height);
 	return (1);
 }
@@ -95,7 +98,7 @@ size_t		line_length(char *line)
 	return (len);
 }
 
-t_player_detect		*add_map_row(t_map *map, char *line)
+t_player_detect		*add_map_row(t_map *m, char *line)
 {
 	char	*new;
 	char	*temp;
@@ -107,11 +110,11 @@ t_player_detect		*add_map_row(t_map *map, char *line)
 	real = 0;
 	player = NULL;
 	new = NULL;
-	if (!map->grid)
-		map->grid = ft_calloc(line_length(line) + 1, sizeof(char));
+	if (!m->grid)
+		m->grid = ft_calloc(line_length(line) + 1, sizeof(char));
 	else
-		new = map->grid;
-	map->width = line_length(line);
+		new = m->grid;
+	m->width = line_length(line);
 	while (line[i])
 	{
 		if (line[i] != ' ')
@@ -125,11 +128,15 @@ t_player_detect		*add_map_row(t_map *map, char *line)
 				player->pos_x = real;
 				player->direction = line[i];
 			}
+			if (line[i] == '2')
+			{
+				add_sprite(m, real, 2);
+			}
 			real++;
 		}
 		i++;
 	}
-	map->height++;
-	map->grid = new;
+	m->height++;
+	m->grid = new;
 	return (player);
 }

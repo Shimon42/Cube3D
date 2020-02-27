@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/14 22:46:16 by siferrar          #+#    #+#             */
-/*   Updated: 2020/02/26 07:01:14 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/02/27 09:07:34 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 
 typedef struct	s_detect
 {
-	double		dist;
+	float		dist;
 	t_fpoint	hit;
 	char		w_side_hit;
 	char		from;
@@ -37,9 +37,11 @@ typedef struct	s_map
 	int			px_width;
 	int			px_height;
 	int			bloc_size;
-	double		scale;
+	float		scale;
 	t_fpoint	disp;
 	int			mini_map_width;
+	int			sprites_count;
+	void		*sprites;
 	t_buff		*w_n;
 	t_buff		*w_e;
 	t_buff		*w_s;

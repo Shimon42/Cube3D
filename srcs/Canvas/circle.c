@@ -6,14 +6,14 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/23 16:58:38 by siferrar          #+#    #+#             */
-/*   Updated: 2020/02/18 16:20:42 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/02/27 08:23:26 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 #include "../../includes/my_canvas.h"
 
-void	draw_circle(double c_x, double c_y, int ray, int fill, t_ctx *ctx)
+void	draw_circle(float c_x, float c_y, int ray, int fill, t_ctx *ctx)
 {
     int          x;
     int          y;
