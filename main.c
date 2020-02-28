@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 21:29:11 by siferrar          #+#    #+#             */
-/*   Updated: 2020/02/27 08:24:43 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/02/28 10:59:53 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,11 +140,11 @@ int	key_press(int key, void *param)
 		}
 	
 		if ((key = is_key_pressed(b, 123)) >= 0 && is_key_pressed(b, 257) >= 0)
-			b->player->rot(b->player, -b->player->rot_speed / 10);
+			b->player->rot(b->player, -b->player->rot_speed / 20);
 		else if (key >= 0)
 			b->player->rot(b->player, -b->player->rot_speed);
 		if ((key = is_key_pressed(b, 124)) >= 0 && is_key_pressed(b, 257) >= 0)
-			b->player->rot(b->player, b->player->rot_speed / 10);
+			b->player->rot(b->player, b->player->rot_speed / 20);
 		else if (key >= 0)
 			b->player->rot(b->player, b->player->rot_speed);
 
@@ -262,14 +262,12 @@ int	main(int ac, char **av)
 		return (-1);
 	b = new_brain(1920, 1080, "Cube3D");
 	win = (t_mlx_win_list *)b->ctx->win_ptr;
-	dprintf(1, "%d - %d\n", win->size_x, win->size_y);
 	b->ctx->width = win->size_x;
 	b->ctx->height = win->size_y;
-	printf(GRN"Opening %s\n\n"RST, av[1]);
+	printf(GRN"Opening Map "DCYAN"%s\n"RST, av[1]);
 	open_map(b, av[1]);
-	disp_point(b->player->pos);
 	
-	ft_putstr("Loop Init\n");
+	ft_putstr(RED"\n🔥 L"YELO"O"GRN"O"CYAN"P "BLUE"I"PURP"N"PINK"I"RST"T 🔥\n\n"RST);
 	mlx_loop_hook(b->ctx->mlx_ptr, &loop_hook, b);
 	mlx_hook(b->ctx->win_ptr, InputOnly, KeyPress, &key_press, b);
 	mlx_key_hook(b->ctx->win_ptr, &key_release, b);

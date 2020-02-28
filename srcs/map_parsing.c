@@ -6,40 +6,50 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/14 20:36:43 by siferrar          #+#    #+#             */
-/*   Updated: 2020/02/27 09:25:30 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/02/28 08:59:08 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 #include "../includes/cube3d.h"
 
-int				init_map(t_ctx *ctx, t_map **map)
+int				init_map(t_ctx *ctx, void *brain)
 {
-	(*map) = malloc(sizeof(t_map));
-	(*map)->height = 0;
-	(*map)->width = 0;
-	(*map)->grid = NULL;
-	(*map)->scale = 1;
-	(*map)->bloc_size = 64;
-	(*map)->w_n = NULL;
-	(*map)->w_e = NULL;
-	(*map)->w_s = NULL;
-	(*map)->w_w = NULL;
-	(*map)->sprites_count = 0;
-	(*map)->sprites = NULL;
+	t_brain *b;
+
+	b = (t_brain *)brain;
+	b->map = malloc(sizeof(t_map));
+	b->map->height = 0;
+	b->map->width = 0;
+	b->map->grid = NULL;
+	b->map->scale = 1;
+	b->map->bloc_size = 64;
+	b->map->w_n = NULL;
+	b->map->w_e = NULL;
+	b->map->w_s = NULL;
+	b->map->w_w = NULL;
+	b->map->sprites_count = 0;
+	b->map->sprites = NULL;
+	b->map->brain = b;
 	
-	init_buff(ctx, &(*map)->frame, ctx->width, ctx->height);
+	init_buff(ctx, &b->map->frame, ctx->width, ctx->height);
 	return (1);
 }
 
 void init_texture(t_brain *b, char *path, t_buff **t)
 {
-	(*t) = malloc(sizeof(t_buff));
-	(*t)->img = mlx_xpm_file_to_image(b->ctx->mlx_ptr, path, &(*t)->width, &(*t)->height);
-	if (!(*t)->img)
-		exit(4);
-	(*t)->addr = mlx_get_data_addr((*t)->img, &(*t)->bits_per_pixel, &(*t)->line_length,
-                                 &(*t)->endian);
+	dprintf(1, DCYAN"	-> %s", path);
+	if (((*t) = malloc(sizeof(t_buff))) != NULL)
+	{
+		(*t)->img = mlx_xpm_file_to_image(b->ctx->mlx_ptr, path, &(*t)->width, &(*t)->height);
+		if (!(*t)->img)
+			exit(4);
+		(*t)->addr = mlx_get_data_addr((*t)->img, &(*t)->bits_per_pixel, &(*t)->line_length,
+									&(*t)->endian);
+		dprintf(1, GRN" - OK\n"RST);
+	}
+	else
+		exit (4);
 }
 
 int				open_map(t_brain *b, char *map_path)
@@ -49,7 +59,9 @@ int				open_map(t_brain *b, char *map_path)
 	int		ret;
 	t_player_detect *player;
 
-	init_map(b->ctx, &b->map);
+	init_map(b->ctx, b);
+
+	ft_putstr(CYAN"Init Textures\n");
 	init_texture(b, "./assets/textures/walls/stone_bricks/2.xpm", &b->map->w_n);
 	init_texture(b, "./assets/textures/walls/stone_bricks/4.xpm", &b->map->w_e);
 	init_texture(b, "./assets/textures/walls/stone_bricks/3.xpm", &b->map->w_s);
@@ -61,29 +73,22 @@ int				open_map(t_brain *b, char *map_path)
 		player = add_map_row(b->map, line);
 		if (player != NULL)
 		{
-			printf(CYAN"Player found: %d"RST"\n", player->pos_x);
+			printf(CYAN"Player found: "DCYAN"%d"RST"\n", player->pos_x);
 			init_player(b, player->pos_x, player->direction);
 		}
 		if (!ret)
-		{
-			printf(YELO"End of get map - Code: %d\n"RST, ret);
 			break;
-		}/* else
-			printf("Readed: [%s]\n", line);*/
 	}
 	close(file);
-	//ft_putstr(b->map->grid);
-	printf(GRN"MAP READ - OK"RST"\n");
-	printf(DCYAN" -> Width: [%d]\n", b->map->width);
-	printf(" -> Height:[%d]\n"RST, b->map->height);
+	dprintf(1, CYAN"Map Readed - "GRN"OK - "DYELO"Code: %d\n"RST, ret);
+	dprintf(1, DCYAN"	-> Width: [%d]\n", b->map->width);
+	dprintf(1, "	-> Height:[%d]\n\n"RST, b->map->height);
 	print_map_grid(b->map);
 	b->map->px_width = b->map->width * b->map->bloc_size;
 	b->map->px_height = b->map->height * b->map->bloc_size;
-	printf("Real Width: %d\n", b->map->px_width);
-	printf("Real Height: %d\n", b->map->px_height);
-	ft_putstr("Map Parsing OK\n");
+	dprintf(1,DCYAN"\nReal Size : %d x %d px\n", b->map->px_width, b->map->px_height);
+	ft_putstr(GRN"Map Parsing OK\n"RST);
 	free(player);
-	//draw_minimap(b, 10, 10, 1);
 	return (1);
 }
 

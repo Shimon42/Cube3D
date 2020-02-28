@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/23 18:52:51 by siferrar          #+#    #+#             */
-/*   Updated: 2020/02/27 08:23:26 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/02/28 08:29:52 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ typedef struct	s_player
 	int			as_move;
 	t_fpoint	*pos;
 	float		z;
-	t_fpoint	*r_pos;
 	t_camera	*cam;
 	float		angle;
 	t_fpoint	*step;

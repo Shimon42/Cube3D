@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 22:11:09 by siferrar          #+#    #+#             */
-/*   Updated: 2020/02/27 08:23:26 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/02/28 11:08:57 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,15 +80,8 @@ t_fpoint closest_wall_h(t_brain *b, t_fpoint *p, float angle)
 		is_wall = (get_grid(b->map, cur_point.x, cur_point.y + 1, 1) == 1 || get_grid(b->map, cur_point.x, cur_point.y - 1, 1) == 1);
 		if (is_wall == -1 || is_wall == 1)
 			break;
-		if (cur_point.x + offset.x < b->map->px_width && cur_point.y + offset.y < b->map->px_height)
-		{
-			cur_point.x += offset.x;
-			cur_point.y += offset.y;
-		} else {
-			cur_point.x = b->map->px_width;
-
-		 	break;
-		}
+		cur_point.x += offset.x;
+		cur_point.y += offset.y;
 	}
 	return (cur_point);
 }
@@ -109,21 +102,13 @@ t_fpoint closest_wall_v(t_brain *b, t_fpoint *p, float angle)
 		offset.x = b->map->bloc_size;
 		offset.y = ((float)b->map->bloc_size * tan(angle));
 	}
-		//dprintf(1, "V: Offset x: %f -  y: %f\n", offset.x, offset.y);
 	while (is_wall == 0 && cur_point.y < b->map->px_height && cur_point.y > 0)
 	{
 		is_wall = (get_grid(b->map, cur_point.x - 1, cur_point.y, 1) == 1 || get_grid(b->map, cur_point.x + 1, cur_point.y, 1) == 1);
 		if (is_wall == 1 || is_wall == -1) 
 			break;
-		if (cur_point.x + offset.x < b->map->px_width && cur_point.y + offset.y < b->map->px_height)
-		{
-			cur_point.x += offset.x;
-			cur_point.y += offset.y;
-		} else {
-			cur_point.y = b->map->px_height;
-
-		 	break;
-		}
+		cur_point.x += offset.x;
+		cur_point.y += offset.y;	
 	}
 	return (cur_point);
 }
@@ -230,6 +215,7 @@ void	draw_walls(t_brain *b, t_ctx *c)
 		c->color = 0x388FBA;
 		if (w_height < b->ctx->height)
 			c->line(new_point(cur_col, 0), new_point(cur_col, c->height/2 - w_height/2 + b->player->z), c);
+		//draw_sprite(b, b->map->sprites);
 		draw_col(b, w_height,  cur_col, wall);
 		c->color = 0x91672C;
 		if (w_height < b->ctx->height)

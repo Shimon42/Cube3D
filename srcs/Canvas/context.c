@@ -1,15 +1,15 @@
 /* ************************************************************************** */
-/*                                                          LE - /            */
-/*                                                              /             */
-/*   context.c                                        .::    .:/ .      .::   */
-/*                                                 +:+:+   +:    +:  +:+:+    */
-/*   By: siferrar <siferrar@student.le-101.fr>      +:+   +:    +:    +:+     */
-/*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2020/01/15 18:42:08 by siferrar     #+#   ##    ##    #+#       */
-/*   Updated: 2020/02/17 22:05:16 by siferrar    ###    #+. /#+    ###.fr     */
-/*                                                         /                  */
-/*                                                        /                   */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   context.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: siferrar <siferrar@student.le-101.fr>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/01/15 18:42:08 by siferrar          #+#    #+#             */
+/*   Updated: 2020/02/28 08:14:11 by siferrar         ###   ########lyon.fr   */
+/*                                                                            */
 /* ************************************************************************** */
+
 
 #include "../../includes/my_canvas.h"
 #include "../../includes/cube3d.h"
@@ -56,23 +56,13 @@ void	set_context(t_ctx **cur, t_ctx **new_ctx, char *name)
 	else
 		write(1, "Context Already SET\n", 20);
 }
-/*
-void init_buff(t_ctx *ctx)
-{
-	ctx->buff = malloc(sizeof(t_buff));
-	ctx->buff->width = ctx->width;
-	ctx->buff->height = ctx->height;
-	ctx->buff->img = mlx_new_image(ctx->mlx_ptr, ctx->width, ctx->height);
-	ctx->buff->addr = mlx_get_data_addr(ctx->buff->img, &ctx->buff->bits_per_pixel, &ctx->buff->line_length,
-                                 &ctx->buff->endian);
-}
-*/
+
 void init_buff(t_ctx * ctx, t_buff **buff, int width, int height)
 {
 	(*buff) = malloc(sizeof(t_buff));
 	(*buff)->width = width;
 	(*buff)->height = height;
-	dprintf(1, "INIT BUFF %dx%d\n", width, height);
+	dprintf(1, DCYAN"INIT BUFF %d x %d px\n"RST, width, height);
 	(*buff)->img = mlx_new_image(ctx->mlx_ptr, ctx->width, ctx->height);
 	(*buff)->addr = mlx_get_data_addr((*buff)->img, &(*buff)->bits_per_pixel, &(*buff)->line_length,
                                  &(*buff)->endian);

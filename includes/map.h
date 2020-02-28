@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/14 22:46:16 by siferrar          #+#    #+#             */
-/*   Updated: 2020/02/27 09:07:34 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/02/28 08:58:54 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,10 @@ typedef struct	s_map
 	t_buff		*w_s;
 	t_buff		*w_w;
 	t_buff		*frame;
+	void		*brain;
 }				t_map;
 
-int				init_map(t_ctx *ctx, t_map **map);
+int				init_map(t_ctx *ctx, void *brain);
 int				parse_map(t_map **map, char *line);
 int				alloc_map(t_map **map);
 t_player_detect	*add_map_row(t_map *map, char *line);
