@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 21:29:11 by siferrar          #+#    #+#             */
-/*   Updated: 2020/02/28 10:59:53 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/02/29 19:42:25 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -231,6 +231,9 @@ void meditate(t_brain *b)
 
 int loop_hook(t_brain *b)
 {
+	t_sprite *sprt;
+
+	sprt = (t_sprite *)b->map->sprites;
 	key_press(-1, b);
 	mlx_clear_window(b->ctx->mlx_ptr, b->ctx->win_ptr);
 

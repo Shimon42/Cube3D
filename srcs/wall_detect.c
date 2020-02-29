@@ -6,112 +6,12 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 22:11:09 by siferrar          #+#    #+#             */
-/*   Updated: 2020/02/28 11:08:57 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/02/29 20:54:04 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 #include "../includes/cube3d.h"
-
-
-t_fpoint to_fpoint(t_fpoint *p)
-{
-	t_fpoint ret;
-
-	ret.x = p->x;
-	ret.y = p->y;
-	return (ret);
-}
-
-t_fpoint to_point(t_fpoint *p)
-{
-	t_fpoint ret;
-
-	ret.x = (int)floor(p->x);
-	ret.y = (int)floor(p->y);
-	return (ret);
-}
-
-t_fpoint	closest_grid_h(t_fpoint *p, t_map *m, float angle)
-{
-	t_fpoint closest;
-	
-	if (angle > PI && angle < 2 * PI)
-		closest.y = floor(p->y / m->bloc_size) * m->bloc_size;
-	else
-		closest.y = floor(p->y / m->bloc_size) * m->bloc_size  + m->bloc_size;
-	closest.x = p->x - (p->y - closest.y) / tan(angle);
-	return (closest);
-}
-
-t_fpoint	 closest_grid_v(t_fpoint *p, t_map *m, float angle)
-{
-	t_fpoint closest;
-	
-	if (angle > PI / 2.0 && angle < 2 * PI * 0.75)
-		closest.x = floor(p->x / (float)m->bloc_size) * m->bloc_size;
-	else
-		closest.x = floor(p->x / (float)m->bloc_size) * m->bloc_size + m->bloc_size;
-	closest.y = p->y - (p->x - closest.x) * tan(angle);
-	return (closest);
-}
-
-t_fpoint closest_wall_h(t_brain *b, t_fpoint *p, float angle)
-{
-	t_fpoint offset;
-	t_fpoint cur_point;
-	int is_wall;
-	is_wall = 0;
-
-	cur_point = closest_grid_h(p, b->map, angle);
-	if (angle > PI && angle < 2 * PI)
-	{
-		offset.y = -(b->map->bloc_size);
-		offset.x = ((float)b->map->bloc_size / tan(angle)) * -1;
-	}
-	else
-	{
-		offset.y = b->map->bloc_size;
-		offset.x = ((float)b->map->bloc_size / tan(angle)) * 1;
-	}
-		//dprintf(1, "H :Offset x: %f -  y: %f\n", offset.x, offset.y);
-	while (is_wall == 0 && cur_point.x < b->map->px_width && cur_point.x > 0)
-	{
-		is_wall = (get_grid(b->map, cur_point.x, cur_point.y + 1, 1) == 1 || get_grid(b->map, cur_point.x, cur_point.y - 1, 1) == 1);
-		if (is_wall == -1 || is_wall == 1)
-			break;
-		cur_point.x += offset.x;
-		cur_point.y += offset.y;
-	}
-	return (cur_point);
-}
-
-t_fpoint closest_wall_v(t_brain *b, t_fpoint *p, float angle)
-{
-	t_fpoint cur_point;
-	t_fpoint offset;
-	int is_wall;
-
-	is_wall = 0;
-	cur_point = closest_grid_v(p, b->map, angle);
-	if (angle < 2 * PI * 0.75 && angle > PI / 2)
-	{
-		offset.x = -b->map->bloc_size;
-		offset.y = ((float)b->map->bloc_size * tan(angle)) * -1;
-	}else{
-		offset.x = b->map->bloc_size;
-		offset.y = ((float)b->map->bloc_size * tan(angle));
-	}
-	while (is_wall == 0 && cur_point.y < b->map->px_height && cur_point.y > 0)
-	{
-		is_wall = (get_grid(b->map, cur_point.x - 1, cur_point.y, 1) == 1 || get_grid(b->map, cur_point.x + 1, cur_point.y, 1) == 1);
-		if (is_wall == 1 || is_wall == -1) 
-			break;
-		cur_point.x += offset.x;
-		cur_point.y += offset.y;	
-	}
-	return (cur_point);
-}
 
 char		get_wall_side(float angle, int closest)
 {
@@ -146,10 +46,110 @@ float to_360(float angle)
 	return (angle);
 }
 
+t_fpoint	closest_grid_h(t_fpoint *p, t_map *m, float angle)
+{
+	t_fpoint closest;
+	
+	if (angle > PI && angle < 2 * PI)
+		closest.y = floor(p->y / m->bloc_size) * m->bloc_size;
+	else
+		closest.y = floor(p->y / m->bloc_size) * m->bloc_size  + m->bloc_size;
+	closest.x = p->x - (p->y - closest.y) / tan(angle);
+	return (closest);
+}
+
+t_fpoint	 closest_grid_v(t_fpoint *p, t_map *m, float angle)
+{
+	t_fpoint closest;
+	
+	if (angle > PI / 2.0 && angle < 2 * PI * 0.75)
+		closest.x = floor(p->x / (float)m->bloc_size) * m->bloc_size;
+	else
+		closest.x = floor(p->x / (float)m->bloc_size) * m->bloc_size + m->bloc_size;
+	closest.y = p->y - (p->x - closest.x) * tan(angle);
+	return (closest);
+}
+
+t_detect closest_wall_h(t_brain *b, t_fpoint *p, float angle)
+{
+	t_fpoint offset;
+	t_detect d;
+	int is_wall;
+	int is_sprite;
+
+	is_wall = 0;
+	d.hit = closest_grid_h(p, b->map, angle);
+	d.from = 'h';
+	if (angle > PI && angle < 2 * PI)
+	{
+		offset.y = -(b->map->bloc_size);
+		offset.x = ((float)b->map->bloc_size / tan(angle)) * -1;
+	}
+	else
+	{
+		offset.y = b->map->bloc_size;
+		offset.x = ((float)b->map->bloc_size / tan(angle)) * 1;
+	}
+		//dprintf(1, "H :Offset x: %f -  y: %f\n", offset.x, offset.y);
+	while (is_wall == 0 && d.hit.x < b->map->px_width && d.hit.x > 0)
+	{
+		is_sprite = (get_grid(b->map, d.hit.x, d.hit.y + 1, 1) == 2 || get_grid(b->map, d.hit.x, d.hit.y - 1, 1) == 2);
+		if (is_sprite)
+		{
+			dprintf(1, "Found sprite H!\n");
+			add_spr_to_list(&d.spr_on_path, get_sprite(b->map, d.hit));
+			disp_sprt_list(&d.spr_on_path);
+		}
+		is_wall = (get_grid(b->map, d.hit.x, d.hit.y + 1, 1) == 1 || get_grid(b->map, d.hit.x, d.hit.y - 1, 1) == 1);
+		if (is_wall == -1 || is_wall == 1)
+			break;
+		d.hit.x += offset.x;
+		d.hit.y += offset.y;
+	}
+	return (d);
+}
+
+t_detect closest_wall_v(t_brain *b, t_fpoint *p, float angle)
+{
+	t_detect d;
+	t_fpoint offset;
+	int is_wall;
+	int is_sprite;
+
+	is_wall = 0;
+	d.hit = closest_grid_v(p, b->map, angle);
+	d.from = 'v';
+	d.spr_on_path.next = NULL;
+	if (angle < 2 * PI * 0.75 && angle > PI / 2)
+	{
+		offset.x = -b->map->bloc_size;
+		offset.y = ((float)b->map->bloc_size * tan(angle)) * -1;
+	}else{
+		offset.x = b->map->bloc_size;
+		offset.y = ((float)b->map->bloc_size * tan(angle));
+	}
+	while (is_wall == 0 && d.hit.y < b->map->px_height && d.hit.y > 0)
+	{
+		is_sprite = (get_grid(b->map, d.hit.x, d.hit.y + 1, 1) == 2 || get_grid(b->map, d.hit.x, d.hit.y - 1, 1) == 2);
+		if (is_sprite)
+		{
+			dprintf(1, "Found sprite V!\n");
+			add_spr_to_list(&d.spr_on_path, get_sprite(b->map, d.hit));
+			disp_sprt_list(&d.spr_on_path);
+		}
+		is_wall = (get_grid(b->map, d.hit.x - 1, d.hit.y, 1) == 1 || get_grid(b->map, d.hit.x + 1, d.hit.y, 1) == 1);
+		if (is_wall == 1 || is_wall == -1) 
+			break;
+		d.hit.x += offset.x;
+		d.hit.y += offset.y;	
+	}
+	return (d);
+}
+
 t_detect	dist_to_wall(t_brain *b, t_fpoint *p, float angle)
 {
-	t_fpoint closest_h;
-	t_fpoint closest_v;
+	t_detect closest_h;
+	t_detect closest_v;
 	t_fpoint dists;
 	t_detect wall;
 	float bad_dist;
@@ -157,21 +157,21 @@ t_detect	dist_to_wall(t_brain *b, t_fpoint *p, float angle)
 	angle = to_360(angle);
 	closest_h = closest_wall_h(b, p, angle);
 	closest_v = closest_wall_v(b, p, angle);
-	dists.x = calc_dist(*p, closest_h);
-	dists.y = calc_dist(*p, closest_v);
+	dists.x = calc_dist(*p, closest_h.hit);
+	dists.y = calc_dist(*p, closest_v.hit);
 	if (dists.x < dists.y)
 	{
 		bad_dist = dists.x;
 		wall.w_side_hit = get_wall_side(angle, 'h');
-		wall.from = 'h';
-		wall.hit = closest_h;
+		wall.hit = closest_h.hit;
+		wall.spr_on_path = closest_h.spr_on_path;
 	}
 	else
 	{
 		bad_dist = dists.y;
 		wall.w_side_hit = get_wall_side(angle, 'v');
-		wall.from = 'v';
-		wall.hit = closest_v;
+		wall.hit = closest_v.hit;
+		wall.spr_on_path = closest_v.spr_on_path;
 	}
 	wall.dist = bad_dist;
 	return (wall);
@@ -215,13 +215,14 @@ void	draw_walls(t_brain *b, t_ctx *c)
 		c->color = 0x388FBA;
 		if (w_height < b->ctx->height)
 			c->line(new_point(cur_col, 0), new_point(cur_col, c->height/2 - w_height/2 + b->player->z), c);
-		//draw_sprite(b, b->map->sprites);
+		
 		draw_col(b, w_height,  cur_col, wall);
 		c->color = 0x91672C;
 		if (w_height < b->ctx->height)
 			c->line(new_point(cur_col, c->height/2 + w_height/2 + b->player->z - 1), new_point(cur_col, c->height), c);
 		cur_col++;
 	}
+	draw_sprite(b, b->map->sprites);
 }
 /*
 void draw_floor(t_brain *b, float w_height, float cur_col, t_detect w)

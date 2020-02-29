@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/14 22:46:16 by siferrar          #+#    #+#             */
-/*   Updated: 2020/02/28 08:58:54 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/02/29 20:30:48 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,20 @@
 
 # include "cube3d.h"
 
+typedef struct	s_spr_list
+{
+	void		*s;
+	void		*next;
+	
+}				t_spr_list;
+
 typedef struct	s_detect
 {
 	float		dist;
 	t_fpoint	hit;
 	char		w_side_hit;
 	char		from;
+	t_spr_list	spr_on_path;
 }				t_detect;
 
 typedef struct	s_player_detect

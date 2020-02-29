@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/14 22:43:45 by siferrar          #+#    #+#             */
-/*   Updated: 2020/02/27 08:23:26 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/02/29 20:39:12 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -174,15 +174,15 @@ void	draw_minimap_closest(t_brain *b, t_fpoint disp, float angle)
 
 void	draw_minimap_rays(t_brain *b, t_fpoint disp)
 {
-		t_fpoint close_h = closest_wall_h(b, b->player->pos, b->player->angle);
-		t_fpoint close_v = closest_wall_v(b, b->player->pos, b->player->angle);
+		t_detect close_h = closest_wall_h(b, b->player->pos, b->player->angle);
+		t_detect close_v = closest_wall_v(b, b->player->pos, b->player->angle);
 
-		close_h = map_fscaled(&close_h, b->map);
-		close_v = map_fscaled(&close_v, b->map);
+		close_h.hit = map_fscaled(&close_h.hit, b->map);
+		close_v.hit = map_fscaled(&close_v.hit, b->map);
 		b->ctx->color = 0xFFFF00;
-		b->ctx->circle(disp.x + close_h.x, disp.y + close_h.y, (b->map->bloc_size * 0.1) * b->map->scale, 1, b->ctx);
+		b->ctx->circle(disp.x + close_h.hit.x, disp.y + close_h.hit.y, (b->map->bloc_size * 0.1) * b->map->scale, 1, b->ctx);
 		b->ctx->color = 0xFF00FF;
-		b->ctx->circle(disp.x + close_v.x, disp.y + close_v.y, (b->map->bloc_size * 0.1) * b->map->scale, 1, b->ctx);
+		b->ctx->circle(disp.x + close_v.hit.x, disp.y + close_v.hit.y, (b->map->bloc_size * 0.1) * b->map->scale, 1, b->ctx);
 }
 
 void			draw_player_map(t_brain *b, t_player *p, t_fpoint m_pos)
