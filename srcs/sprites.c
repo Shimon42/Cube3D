@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/27 08:02:21 by siferrar          #+#    #+#             */
-/*   Updated: 2020/02/29 21:01:42 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/03/02 09:31:07 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ t_sprite   *init_sprite(t_map *m, t_fpoint pos, int type)
 	s->pos.y = pos.y * m->bloc_size;
 	s->model = NULL;
 	init_texture(b, "./assets/sprites/barrel.xpm", &s->model);
-	s->type = 1;
+	s->type = 2;
 	s->next = NULL;
 	return (s);
 }
@@ -42,10 +42,12 @@ t_sprite *get_sprite(t_map *m, t_fpoint p)
 {
 	t_sprite **ptr;
 	t_fpoint in_grid;
+	t_sprite *sprites;
 
 	dprintf(1, "Getting sprite\n");
 
-	ptr = &m->sprites;
+	sprites = (t_sprite *)m->sprites;
+	ptr = &sprites;
 	while (*ptr != NULL)
 	{
 		dprintf(1, "Check Sprites x:%f y:%f  VS x:%f y:%f \n", (*ptr)->pos.x, (*ptr)->pos.y, p.x, p.y);
@@ -83,42 +85,34 @@ void    add_sprite(t_map *m, int posX, int type)
 	{
 		s->next = m->sprites;
 		m->sprites = s;
+		m->sprites_count++;
 	}
 	else
 		ft_putstr(RED"Failed to malloc sprite\n"RST);
 }
 
-void	draw_sprite(void *brain, t_sprite *s)
+void	draw_sprite(void *brain, t_sprite *s, float col, int y)
 {
 	t_brain *b;
 	double	s_size;
 	double dist;
-	int x;
-	int y;
 	int color;
 	t_fpoint ratio;
 
+	dprintf(1, "Draw sprite\n");
 	b = (t_brain *)brain;
+	disp_point(&s->pos);
 	dist = calc_dist(*b->player->pos, s->pos);
+	dprintf(1, "Dist sprite\n");
 	s_size = ((b->map->bloc_size) / dist) * b->player->cam->proj_dist;
 	s_size =128;
 	ratio.y = s->model->height / s_size;
-	x = 0;
-	
-	/*
-	while (x < s_size)
-	{
-		ratio.x =  (x % s->model->width + 1) * (s->model->width / b->map->bloc_size);
-		y = 1;
-		while (y < s_size)
-		{
-			color = pixel_get(s->model, x, y);
-			if (color != 0x980088)
-				pixel_put_buff(500 + x, 500 + y , color, b->map->frame);
-			y++;
-		}
-		x++;
-	}*/
+	dprintf(1, "Ratio sprite\n");
+	color = pixel_get(s->model, col, y);
+	if (color != 0x980088)
+		pixel_put_buff(col, y , color, b->map->frame);
+
+	dprintf(1, "sprite OK\n");
 }
 
 void	disp_sprites(t_sprite *s)
@@ -143,30 +137,10 @@ void	disp_sprites(t_sprite *s)
 	}
 }
 
-void	disp_sprt_list(t_spr_list *s_list)
+void	disp_sprite(void *spr)
 {
-	int			i;
-	t_spr_list **ptr;
-	t_sprite	*s;	
-	i = 0;
-	ptr = &s_list;
-	if (*ptr != NULL)
-	{
-		while (*ptr != NULL)
-		{
-			s = (*ptr)->s;
-			dprintf(1, "Sprite %d of type %d\n", i, s->type);
-			disp_point(&(s->pos));
-			ptr = &((*ptr)->next);
-			i++;
-		}
-		dprintf(1, "End of loop\n");
-	} else {
-		dprintf(1, "No sprites in list\n");
-	}
-}
+	t_sprite *s;
 
-void    reorder_sprites(t_map *m)
-{
-	
+	s = (t_sprite *)spr;
+	dprintf(1, "Sprite of type %d\n", s->type);
 }

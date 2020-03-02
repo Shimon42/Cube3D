@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/14 22:46:16 by siferrar          #+#    #+#             */
-/*   Updated: 2020/02/29 20:30:48 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/03/02 07:53:24 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ typedef struct	s_detect
 	t_fpoint	hit;
 	char		w_side_hit;
 	char		from;
-	t_spr_list	spr_on_path;
+	void		**spr_on_path;
 }				t_detect;
 
 typedef struct	s_player_detect
