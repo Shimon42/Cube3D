@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/27 08:02:21 by siferrar          #+#    #+#             */
-/*   Updated: 2020/03/02 09:31:07 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/03/03 07:20:28 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,21 +44,21 @@ t_sprite *get_sprite(t_map *m, t_fpoint p)
 	t_fpoint in_grid;
 	t_sprite *sprites;
 
-	dprintf(1, "Getting sprite\n");
+	//dprintf(1, "Getting sprite\n");
 
 	sprites = (t_sprite *)m->sprites;
 	ptr = &sprites;
 	while (*ptr != NULL)
 	{
-		dprintf(1, "Check Sprites x:%f y:%f  VS x:%f y:%f \n", (*ptr)->pos.x, (*ptr)->pos.y, p.x, p.y);
+		//dprintf(1, "Check Sprites x:%f y:%f  VS x:%f y:%f \n", (*ptr)->pos.x, (*ptr)->pos.y, p.x, p.y);
 		if (compare((*ptr)->pos, p, m->bloc_size + 2))
 		{
-			dprintf(1, "Sprite found\n");
+			//dprintf(1, "Sprite found\n");
 			return (*ptr);
 		}
 		ptr = &((*ptr)->next);
 	}
-	dprintf(1, RED"Sprite NOT found\n"RST);
+	//dprintf(1, RED"Sprite NOT found\n"RST);
 
 	return (NULL);
 }
@@ -91,21 +91,23 @@ void    add_sprite(t_map *m, int posX, int type)
 		ft_putstr(RED"Failed to malloc sprite\n"RST);
 }
 
-void	draw_sprite(void *brain, t_sprite *s, float col, int y)
+void	draw_sprite(void *brain, void *spr, float col, int y)
 {
 	t_brain *b;
+	t_sprite *s;
 	double	s_size;
 	double dist;
 	int color;
 	t_fpoint ratio;
 
+	s = (t_sprite *)spr;
 	dprintf(1, "Draw sprite\n");
 	b = (t_brain *)brain;
 	disp_point(&s->pos);
 	dist = calc_dist(*b->player->pos, s->pos);
 	dprintf(1, "Dist sprite\n");
 	s_size = ((b->map->bloc_size) / dist) * b->player->cam->proj_dist;
-	s_size =128;
+	s_size = 128;
 	ratio.y = s->model->height / s_size;
 	dprintf(1, "Ratio sprite\n");
 	color = pixel_get(s->model, col, y);

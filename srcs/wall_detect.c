@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 22:11:09 by siferrar          #+#    #+#             */
-/*   Updated: 2020/03/02 10:53:32 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/03/03 07:41:12 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ t_detect closest_wall_h(t_brain *b, t_fpoint *p, float angle)
 	is_wall = 0;
 	d.hit = closest_grid_h(p, b->map, angle);
 	d.from = 'h';
-	d.spr_on_path = malloc(b->map->sprites_count * sizeof(t_sprite *));
+	d.spr_on_path = ft_calloc(b->map->sprites_count, sizeof(t_sprite *));
 	if (angle > PI && angle < 2 * PI)
 	{
 		offset.y = -(b->map->bloc_size);
@@ -97,8 +97,8 @@ t_detect closest_wall_h(t_brain *b, t_fpoint *p, float angle)
 		is_sprite = (get_grid(b->map, d.hit.x, d.hit.y + 1, 1) == 2 || get_grid(b->map, d.hit.x, d.hit.y - 1, 1) == 2);
 		if (is_sprite)
 		{
-			d.spr_on_path[0] = get_sprite(b->map, d.hit);
 			dprintf(1, "ADDED H\n");
+			d.spr_on_path[0] = get_sprite(b->map, d.hit);
 		}
 		is_wall = (get_grid(b->map, d.hit.x, d.hit.y + 1, 1) == 1 || get_grid(b->map, d.hit.x, d.hit.y - 1, 1) == 1);
 		if (is_wall == -1 || is_wall == 1)
@@ -119,7 +119,7 @@ t_detect closest_wall_v(t_brain *b, t_fpoint *p, float angle)
 	is_wall = 0;
 	d.hit = closest_grid_v(p, b->map, angle);
 	d.from = 'v';
-	d.spr_on_path = malloc(b->map->sprites_count * sizeof(t_sprite *));
+	d.spr_on_path = ft_calloc(b->map->sprites_count, sizeof(t_sprite *));
 	if (angle < 2 * PI * 0.75 && angle > PI / 2)
 	{
 		offset.x = -b->map->bloc_size;
@@ -133,8 +133,8 @@ t_detect closest_wall_v(t_brain *b, t_fpoint *p, float angle)
 		is_sprite = (get_grid(b->map, d.hit.x, d.hit.y + 1, 1) == 2 || get_grid(b->map, d.hit.x, d.hit.y - 1, 1) == 2);
 		if (is_sprite)
 		{
-			d.spr_on_path[0] = get_sprite(b->map, d.hit);
 			dprintf(1, "ADDED V\n");
+			d.spr_on_path[0] = get_sprite(b->map, d.hit);
 		}
 		is_wall = (get_grid(b->map, d.hit.x - 1, d.hit.y, 1) == 1 || get_grid(b->map, d.hit.x + 1, d.hit.y, 1) == 1);
 		if (is_wall == 1 || is_wall == -1) 
@@ -241,8 +241,11 @@ void draw_col(t_brain *b, float w_height, float cur_col, t_detect w)
 		i = (mid_wall) * -1;
 	while (i <= w_height + 1)
 	{
-		if (w.spr_on_path)
-			draw_sprite(b, (t_sprite *)w.spr_on_path[0], cur_col, i);
+		if (w.spr_on_path[0] != NULL)
+		{
+			disp_point(&w.spr_on_path[0]);
+		//	draw_sprite(b, w.spr_on_path[0], cur_col, i);
+		}
 		texture_col = pixel_get(*texture, ratio.x, (i + 1) * ratio.y);
 		if (mid_wall + i >= 0)
 			pixel_put_buff(cur_col, (b->ctx->height/2 - w_height/2) + i + b->player->z, texture_col, b->map->frame);
