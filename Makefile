@@ -50,6 +50,7 @@ OBJS = ${SRCS:.c=.o}
 MAPS	= assets/maps/
 MAP1 = $(MAPS)map.cub
 MAP2 = $(MAPS)map2.cub
+EMPTY = $(MAPS)empty.cub
 
 COL_TITLE = \033[2;33m
 COL_CUBE = \033[2;32m
@@ -82,7 +83,7 @@ launch:		comp
 			@echo "|  |____________$(COL_TXT)\_____/\____|____/  \____/|____/ $(COL_CUBE)___________|  |"
 			@echo "| / $(COL_SHADOW)           /////// /////////     \\\\\\\\\\\\\\\\\\\ \\\\\\\\\\\\\\\\\\\\\\\\$(COL_CUBE)            \ |"
 			@echo "+––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––+\033[0m"
-			@./$(NAME) $(MAP2)
+			@./$(NAME) $(EMPTY)
 
 minilib:	
 			@make -C $(MINILIB)

@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/27 08:02:21 by siferrar          #+#    #+#             */
-/*   Updated: 2020/03/03 07:20:28 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/03/03 09:06:10 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,36 +91,34 @@ void    add_sprite(t_map *m, int posX, int type)
 		ft_putstr(RED"Failed to malloc sprite\n"RST);
 }
 
-void	draw_sprite(void *brain, void *spr, float col, int y)
+void	draw_sprite(void *brain, t_sprite *s, float col)
 {
-	t_brain *b;
-	t_sprite *s;
-	double	s_size;
-	double dist;
-	int color;
-	t_fpoint ratio;
+	t_brain		*b;
+	double		s_size;
+	double		dist;
+	int			color;
+	t_fpoint	ratio;
+	int			y;
+	int			texture_col;
 
-	s = (t_sprite *)spr;
-	dprintf(1, "Draw sprite\n");
 	b = (t_brain *)brain;
-	disp_point(&s->pos);
 	dist = calc_dist(*b->player->pos, s->pos);
-	dprintf(1, "Dist sprite\n");
-	s_size = ((b->map->bloc_size) / dist) * b->player->cam->proj_dist;
-	s_size = 128;
-	ratio.y = s->model->height / s_size;
-	dprintf(1, "Ratio sprite\n");
-	color = pixel_get(s->model, col, y);
-	if (color != 0x980088)
-		pixel_put_buff(col, y , color, b->map->frame);
-
-	dprintf(1, "sprite OK\n");
+	s_size = ((s->model->height) / dist) * b->player->cam->proj_dist;
+	ratio.y = (s->model->height / s_size);
+	ratio.x = ((s->model)->width / b->map->bloc_size);
+	while (y < s_size)
+	{
+		color = pixel_get(s->model, col + ratio.x, y * ratio.y);
+		if (color != 0x980088)
+			pixel_put_buff(col, (b->ctx->height/2 - s_size/2) + y, color, b->map->frame);
+		y++;
+	}
 }
 
 void	disp_sprites(t_sprite *s)
 {
 	int			i;
-	t_sprite **ptr;
+	t_sprite	**ptr;
 	
 	i = 0;
 	ptr = &s;

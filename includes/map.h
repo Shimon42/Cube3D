@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/14 22:46:16 by siferrar          #+#    #+#             */
-/*   Updated: 2020/03/02 07:53:24 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/03/03 07:58:44 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,22 @@ typedef struct	s_spr_list
 	
 }				t_spr_list;
 
+typedef struct      s_sprite
+{
+	t_fpoint        pos;
+	int			    type;
+	t_buff			*model;
+
+	struct s_sprite	*next;
+}				    t_sprite;
+
 typedef struct	s_detect
 {
 	float		dist;
 	t_fpoint	hit;
 	char		w_side_hit;
 	char		from;
-	void		**spr_on_path;
+	t_sprite	**spr_on_path;
 }				t_detect;
 
 typedef struct	s_player_detect
