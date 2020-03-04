@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/27 08:02:21 by siferrar          #+#    #+#             */
-/*   Updated: 2020/03/03 09:06:10 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/03/04 09:30:38 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,12 +103,12 @@ void	draw_sprite(void *brain, t_sprite *s, float col)
 
 	b = (t_brain *)brain;
 	dist = calc_dist(*b->player->pos, s->pos);
-	s_size = ((s->model->height) / dist) * b->player->cam->proj_dist;
-	ratio.y = (s->model->height / s_size);
-	ratio.x = ((s->model)->width / b->map->bloc_size);
+	s_size = (s->model->height / dist) * b->player->cam->proj_dist;
+	ratio.y = s->model->height / s_size;
+	ratio.x = s->model->width / b->map->bloc_size;
 	while (y < s_size)
 	{
-		color = pixel_get(s->model, col + ratio.x, y * ratio.y);
+		color = pixel_get(s->model, col * ratio.x, y * ratio.y);
 		if (color != 0x980088)
 			pixel_put_buff(col, (b->ctx->height/2 - s_size/2) + y, color, b->map->frame);
 		y++;

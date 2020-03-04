@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 21:29:11 by siferrar          #+#    #+#             */
-/*   Updated: 2020/02/29 19:42:25 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/03/04 09:25:25 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -263,7 +263,7 @@ int	main(int ac, char **av)
 
 	if(ac != 2)
 		return (-1);
-	b = new_brain(1920, 1080, "Cube3D");
+	b = new_brain(1920, 1080, "Cub3D");
 	win = (t_mlx_win_list *)b->ctx->win_ptr;
 	b->ctx->width = win->size_x;
 	b->ctx->height = win->size_y;
