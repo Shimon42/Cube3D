@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/22 22:24:57 by siferrar          #+#    #+#             */
-/*   Updated: 2020/02/28 08:29:48 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/03/05 08:06:09 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,57 +116,30 @@ void	draw_player(struct s_player *p, t_ctx *ctx)
 
 void	side_move(struct s_player *p, int dir)
 {
-	t_map *map;
+	t_map *m;
 	t_brain *b;
 
 	b = (t_brain *)p->brain;
-	map = b->map;
-
-	if (p->pos->y < map->px_height)
-	{
-		p->pos->y +=  p->speed * (sin(p->angle + (ft_inrad(90)) * dir));
-		if (p->pos->y < 0)
-			p->pos->y = 0;
-	}
-	else
-		p->pos->y = map->px_height - 1;
-
-	if (p->pos->x < map->px_width)
-	{
-		p->pos->x +=  p->speed * (cos(p->angle + (ft_inrad(90)) * dir));
-		if (p->pos->x < 0)
-			p->pos->x = 0;
-	}
-	else
-		p->pos->x = map->px_width - 1;
+	m = b->map;
+	if (get_grid(m, p->pos->x + p->speed * (cos(p->angle + (ft_inrad(90)) * dir)), p->pos->y, 1) != 1)
+		p->pos->x += p->speed * (cos(p->angle + (ft_inrad(90)) * dir));
+	if (get_grid(m, p->pos->x, p->pos->y + p->speed * (sin(p->angle + (ft_inrad(90)) * dir)), 1) != 1)
+		p->pos->y += p->speed * (sin(p->angle + (ft_inrad(90)) * dir));
 	p->as_move = 1;
 }
 
 void	move(struct s_player *p, int dir)
 {
-	t_map *map;
+	t_map *m;
 	t_brain *b;
 
 	b = (t_brain *)p->brain;
-	map = b->map;
+	m = b->map;
 
-	if (p->pos->y < map->px_height)
-	{
-		p->pos->y += p->step->y * (float)dir;
-		if (p->pos->y < 0)
-			p->pos->y = 0;
-	}
-	else
-		p->pos->y = map->px_height - 1;
-
-	if (p->pos->x < map->px_width)
-	{
-		p->pos->x += p->step->x * (float)dir;
-		if (p->pos->x < 0)
-			p->pos->x = 0;
-	}
-	else
-		p->pos->x = map->px_width - 1;
+	if (get_grid(m, p->pos->x + p->step->x * dir, p->pos->y, 1) != 1)
+		p->pos->x += p->step->x * dir;
+	if (get_grid(m, p->pos->x, p->pos->y + p->step->y * dir, 1) != 1)
+		p->pos->y += p->step->y * dir;
 	p->as_move = 1;
 }
 
@@ -177,14 +150,9 @@ void	rotate(struct s_player *p, float angle)
 		p->angle = p->angle - 2 * PI;
 	if (p->angle <= 0)
 		p->angle = 2 * PI - p->angle;
-
 	p->step->x = (p->pos->x + p->speed * cos(p->angle)) - p->pos->x;
-	//dprintf(1, "Step->x: %f \n", p->step->x);
 	p->step->y = (p->pos->y + p->speed * sin(p->angle)) - p->pos->y;
-	//dprintf(1, "Step->y: %f \n", p->step->y);
-	//printf("Angle: %f\n", rad_to_deg(p->angle));
 	p->as_move = 1;
-	//p->draw(p, ctx);
 }
 
 void	jump(t_player *p, float speed)

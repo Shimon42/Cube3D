@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/27 08:02:21 by siferrar          #+#    #+#             */
-/*   Updated: 2020/03/04 09:30:38 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/03/05 07:45:24 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ void	draw_sprite(void *brain, t_sprite *s, float col)
 
 	b = (t_brain *)brain;
 	dist = calc_dist(*b->player->pos, s->pos);
-	s_size = (s->model->height / dist) * b->player->cam->proj_dist;
+	s_size = s->model->height * (b->player->cam->proj_dist / dist);
 	ratio.y = s->model->height / s_size;
 	ratio.x = s->model->width / b->map->bloc_size;
 	while (y < s_size)

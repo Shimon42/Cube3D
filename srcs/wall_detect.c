@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 22:11:09 by siferrar          #+#    #+#             */
-/*   Updated: 2020/03/03 08:59:27 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/03/05 07:12:49 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ char		get_wall_side(float angle, int closest)
 			return ('w');
 		else
 			return ('e');
-	} else
+	}
+	else
 	{
 		if (closest == 'h')
 			return ('s');
