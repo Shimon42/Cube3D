@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/22 22:24:57 by siferrar          #+#    #+#             */
-/*   Updated: 2020/03/05 08:06:09 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/03/05 09:20:43 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,7 +146,7 @@ void	move(struct s_player *p, int dir)
 void	rotate(struct s_player *p, float angle)
 {
 	p->angle += angle;
-	if (p->angle > 2*PI)
+	if (p->angle > 2 * PI)
 		p->angle = p->angle - 2 * PI;
 	if (p->angle <= 0)
 		p->angle = 2 * PI - p->angle;

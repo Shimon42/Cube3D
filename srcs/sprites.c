@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/27 08:02:21 by siferrar          #+#    #+#             */
-/*   Updated: 2020/03/05 07:45:24 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/03/05 09:58:46 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,23 +94,39 @@ void    add_sprite(t_map *m, int posX, int type)
 void	draw_sprite(void *brain, t_sprite *s, float col)
 {
 	t_brain		*b;
-	double		s_size;
-	double		dist;
-	int			color;
+	t_fpoint	s_size;
+	t_fpoint	s_dist;
 	t_fpoint	ratio;
+	double		dist;
+	double		angle;
+	double		start_y;
+	int			color;
 	int			y;
 	int			texture_col;
 
 	b = (t_brain *)brain;
+	
 	dist = calc_dist(*b->player->pos, s->pos);
-	s_size = s->model->height * (b->player->cam->proj_dist / dist);
-	ratio.y = s->model->height / s_size;
-	ratio.x = s->model->width / b->map->bloc_size;
-	while (y < s_size)
+
+	s_dist.x = s->pos.x - b->player->pos->x;
+	s_dist.y = s->pos.y - b->player->pos->y;
+	
+	s_size.x = s->model->width * b->ctx->width / dist;
+	s_size.y = s->model->height * b->ctx->height / dist;
+
+	angle = atan2(s_dist.y, s_dist.x);
+	angle = b->player->angle - angle;
+	
+	start_y = (b->ctx->height / 2) * (1 + (1 / dist)) - s_size.y;
+	start_y = 1;
+	ratio.x = s_size.x / b->map->bloc_size;
+	ratio.y = s_size.y / b->map->bloc_size;
+
+	while (y < s_size.y)
 	{
 		color = pixel_get(s->model, col * ratio.x, y * ratio.y);
-		if (color != 0x980088)
-			pixel_put_buff(col, (b->ctx->height/2 - s_size/2) + y, color, b->map->frame);
+
+		pixel_put_buff(col, y, color, b->map->frame);
 		y++;
 	}
 }
