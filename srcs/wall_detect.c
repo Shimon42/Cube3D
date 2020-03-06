@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 22:11:09 by siferrar          #+#    #+#             */
-/*   Updated: 2020/03/05 07:12:49 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/03/06 06:59:20 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -223,11 +223,11 @@ void	draw_walls(t_brain *b, t_ctx *c)
 		c->color = 0x91672C;
 		if (w_height < b->ctx->height)
 			c->line(new_point(cur_col, c->height/2 + w_height/2 + b->player->z - 1), new_point(cur_col, c->height), c);
-		if (wall.spr_on_path[0] != NULL)
+		/*if (wall.spr_on_path[0] != NULL)
 		{
 			//dprintf(1, "sprites on ray\n");
 			draw_sprite(b, wall.spr_on_path[0], cur_col);
-		}
+		}*/
 		cur_col++;
 		free(wall.spr_on_path);
 	}

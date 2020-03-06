@@ -6,11 +6,7 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 21:29:11 by siferrar          #+#    #+#             */
-<<<<<<< Updated upstream
-/*   Updated: 2020/02/28 10:59:53 by siferrar         ###   ########lyon.fr   */
-=======
-/*   Updated: 2020/03/06 06:51:28 by siferrar         ###   ########lyon.fr   */
->>>>>>> Stashed changes
+/*   Updated: 2020/03/06 06:59:41 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -248,7 +244,7 @@ int loop_hook(t_brain *b)
 	//b->player->draw(b->player, b->ctx);
 	if (b->player->as_move == 1)
 	{
-		draw_sky(b, b->ctx);
+		//draw_sky(b, b->ctx);
 		draw_walls(b, b->ctx);
 		if (is_key_pressed(b, 3) == -1)
 			draw_minimap(b, 10, 25, 200);

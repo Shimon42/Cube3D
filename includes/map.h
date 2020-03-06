@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/14 22:46:16 by siferrar          #+#    #+#             */
-/*   Updated: 2020/03/03 07:58:44 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/03/06 06:58:51 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ typedef struct	s_map
 	t_buff		*w_s;
 	t_buff		*w_w;
 	t_buff		*frame;
+	t_buff		*skybox;
 	void		*brain;
 }				t_map;
 
