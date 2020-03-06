@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 22:11:09 by siferrar          #+#    #+#             */
-/*   Updated: 2020/03/06 06:59:20 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/03/06 09:53:25 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -215,9 +215,10 @@ void	draw_walls(t_brain *b, t_ctx *c)
 			dist = dist * cos((b->player->angle - cur_angle));
 		w_height = ((b->map->bloc_size) / dist) * b->player->cam->proj_dist;
 		c->color = 0x388FBA;
-		if (w_height < b->ctx->height)
+		/*if (w_height < b->ctx->height)
 			c->line(new_point(cur_col, 0), new_point(cur_col, c->height/2 - w_height/2 + b->player->z), c);
-		
+		*/
+		draw_sky(b, b->ctx, cur_col, c->height/2 - w_height/2 + b->player->z);
 		draw_col(b, w_height,  cur_col, wall);
 		
 		c->color = 0x91672C;

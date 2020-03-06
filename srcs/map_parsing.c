@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/14 20:36:43 by siferrar          #+#    #+#             */
-/*   Updated: 2020/02/28 08:59:08 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/03/06 07:51:42 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void init_texture(t_brain *b, char *path, t_buff **t)
 		dprintf(1, GRN" - OK\n"RST);
 	}
 	else
-		exit (4);
+		exit (2);
 }
 
 int				open_map(t_brain *b, char *map_path)
@@ -66,6 +66,7 @@ int				open_map(t_brain *b, char *map_path)
 	init_texture(b, "./assets/textures/walls/stone_bricks/4.xpm", &b->map->w_e);
 	init_texture(b, "./assets/textures/walls/stone_bricks/3.xpm", &b->map->w_s);
 	init_texture(b, "./assets/textures/walls/stone_bricks/1.xpm", &b->map->w_w);
+	init_texture(b, "./assets/sky/mountains.xpm", &b->map->skybox);
 	player = malloc(sizeof(t_player_detect));
 	file = open(map_path, O_RDONLY);
 	while ((ret = get_next_line(file, &line)) != -1)

@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 21:29:11 by siferrar          #+#    #+#             */
-/*   Updated: 2020/03/06 06:59:41 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/03/06 10:01:11 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -229,11 +229,21 @@ void meditate(t_brain *b)
 	free(b);
 }
 
-void	draw_sky(t_brain *b, t_ctx *c)
+void	draw_sky(t_brain *b, t_ctx *c, double col, double end)
 {
+	int color;
+	int y;
+	t_fpoint ratio;
 	
-
-	mlx_put_image_to_window(c->mlx_ptr, c->win_ptr, b->map->skybox->img, 0, 0);
+	ratio.x = (double)b->map->skybox->width / c->width;
+	ratio.y = (double)b->map->skybox->height / c->height;
+	y = 0;
+	while (y < end)
+	{
+		color = pixel_get(b->map->skybox, col + (b->map->skybox->width/2 + b->map->skybox->width) * b->player->angle * 0.4, 100 + y * ratio.y);
+		pixel_put_buff(col, y, color, b->map->frame);
+		y++;
+	}
 }
 
 int loop_hook(t_brain *b)
@@ -241,10 +251,9 @@ int loop_hook(t_brain *b)
 	key_press(-1, b);
 	mlx_clear_window(b->ctx->mlx_ptr, b->ctx->win_ptr);
 
-	//b->player->draw(b->player, b->ctx);
 	if (b->player->as_move == 1)
 	{
-		//draw_sky(b, b->ctx);
+		
 		draw_walls(b, b->ctx);
 		if (is_key_pressed(b, 3) == -1)
 			draw_minimap(b, 10, 25, 200);
@@ -256,8 +265,6 @@ int loop_hook(t_brain *b)
 	}
 	mlx_put_image_to_window(b->ctx->mlx_ptr , b->ctx->win_ptr, b->map->frame->img, 0, 0);
 	fps_count(b->ctx);
-	//mlx_put_image_to_window(b->ctx->mlx_ptr , b->ctx->win_ptr, b->ctx->buff->img, 0, 0);
-	//mlx_destroy_image(b->ctx->mlx_ptr, b->ctx->buff->img);
 	return (b->inited);
 }
 

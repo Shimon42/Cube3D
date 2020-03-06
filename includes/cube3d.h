@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 21:30:44 by siferrar          #+#    #+#             */
-/*   Updated: 2020/02/29 20:33:23 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/03/06 07:59:58 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,8 @@ void			jump(t_player *p, float speed);
 /*
 ** --- RayCasting
 */
+
+void	draw_sky(t_brain *b, t_ctx *c, double col, double end);
 
 t_fpoint		closest_grid_h(t_fpoint *p, t_map *m, float angle);
 t_fpoint		closest_grid_v(t_fpoint *p, t_map *m, float angle);
