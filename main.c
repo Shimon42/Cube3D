@@ -6,7 +6,11 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 21:29:11 by siferrar          #+#    #+#             */
-/*   Updated: 2020/03/04 09:25:25 by siferrar         ###   ########lyon.fr   */
+<<<<<<< Updated upstream
+/*   Updated: 2020/02/28 10:59:53 by siferrar         ###   ########lyon.fr   */
+=======
+/*   Updated: 2020/03/06 06:51:28 by siferrar         ###   ########lyon.fr   */
+>>>>>>> Stashed changes
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -229,17 +233,22 @@ void meditate(t_brain *b)
 	free(b);
 }
 
+void	draw_sky(t_brain *b, t_ctx *c)
+{
+	
+
+	mlx_put_image_to_window(c->mlx_ptr, c->win_ptr, b->map->skybox->img, 0, 0);
+}
+
 int loop_hook(t_brain *b)
 {
-	t_sprite *sprt;
-
-	sprt = (t_sprite *)b->map->sprites;
 	key_press(-1, b);
 	mlx_clear_window(b->ctx->mlx_ptr, b->ctx->win_ptr);
 
 	//b->player->draw(b->player, b->ctx);
 	if (b->player->as_move == 1)
 	{
+		draw_sky(b, b->ctx);
 		draw_walls(b, b->ctx);
 		if (is_key_pressed(b, 3) == -1)
 			draw_minimap(b, 10, 25, 200);
@@ -263,7 +272,7 @@ int	main(int ac, char **av)
 
 	if(ac != 2)
 		return (-1);
-	b = new_brain(1920, 1080, "Cub3D");
+	b = new_brain(1920, 1080, "Cube3D");
 	win = (t_mlx_win_list *)b->ctx->win_ptr;
 	b->ctx->width = win->size_x;
 	b->ctx->height = win->size_y;
