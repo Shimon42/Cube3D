@@ -3,13 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   map_parsing.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: siferrar <siferrar@student.le-101.fr>      +#+  +:+       +#+        */
+/*   By: simeon <simeon@student.le-101.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/14 20:36:43 by siferrar          #+#    #+#             */
-/*   Updated: 2020/03/06 07:51:42 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/03/06 13:05:01 by simeon           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "../includes/cube3d.h"
 
@@ -22,7 +21,7 @@ int				init_map(t_ctx *ctx, void *brain)
 	b->map->height = 0;
 	b->map->width = 0;
 	b->map->grid = NULL;
-	b->map->scale = 1;
+	b->map->scale = 1;>
 	b->map->bloc_size = 64;
 	b->map->w_n = NULL;
 	b->map->w_e = NULL;
