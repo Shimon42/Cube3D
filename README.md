@@ -19,7 +19,7 @@
 
 <kbd>D</kbd> - Move Right
 
-<kbd>LEFT</kbd> <kbd>RIGHT</kbd> - Rotate camera ( + [SHIFT] to rotate/10)
+<kbd>LEFT</kbd> <kbd>RIGHT</kbd> - Rotate camera ( + <kbd>SHIFT</kbd> to rotate/10)
 
 <kbd>UP</kbd> - Maxi FOV
 
