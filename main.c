@@ -6,7 +6,11 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 21:29:11 by siferrar          #+#    #+#             */
+<<<<<<< Updated upstream
 /*   Updated: 2020/02/28 10:59:53 by siferrar         ###   ########lyon.fr   */
+=======
+/*   Updated: 2020/03/06 06:51:28 by siferrar         ###   ########lyon.fr   */
+>>>>>>> Stashed changes
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -229,6 +233,13 @@ void meditate(t_brain *b)
 	free(b);
 }
 
+void	draw_sky(t_brain *b, t_ctx *c)
+{
+	
+
+	mlx_put_image_to_window(c->mlx_ptr, c->win_ptr, b->map->skybox->img, 0, 0);
+}
+
 int loop_hook(t_brain *b)
 {
 	key_press(-1, b);
@@ -237,6 +248,7 @@ int loop_hook(t_brain *b)
 	//b->player->draw(b->player, b->ctx);
 	if (b->player->as_move == 1)
 	{
+		draw_sky(b, b->ctx);
 		draw_walls(b, b->ctx);
 		if (is_key_pressed(b, 3) == -1)
 			draw_minimap(b, 10, 25, 200);

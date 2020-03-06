@@ -6,7 +6,11 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/27 08:02:21 by siferrar          #+#    #+#             */
+<<<<<<< Updated upstream
 /*   Updated: 2020/02/28 11:11:19 by siferrar         ###   ########lyon.fr   */
+=======
+/*   Updated: 2020/03/06 06:42:31 by siferrar         ###   ########lyon.fr   */
+>>>>>>> Stashed changes
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,9 +65,27 @@ void	draw_sprite(void *brain, t_sprite *s)
 	dist = calc_dist(*b->player->pos, s->pos);
 	s_size = ((b->map->bloc_size) / dist) * b->player->cam->proj_dist;
 
+<<<<<<< Updated upstream
 	ratio.y = s->model->height / s_size;
 	x = 0;
 	while (x < s_size)
+=======
+	s_dist.x = s->pos.x - b->player->pos->x;
+	s_dist.y = s->pos.y - b->player->pos->y;
+	
+	s_size.x = s->model->width * b->ctx->width / dist;
+	s_size.y = s->model->height * b->ctx->height / dist;
+
+	angle = atan2(s_dist.y, s_dist.x);
+	angle = b->player->angle - angle;
+	
+	start_y = (b->ctx->height / 2) * (1 + (1 / dist)) - s_size.y;
+	start_y = 1;
+	ratio.x = s_size.x / b->map->bloc_size;
+	ratio.y = s_size.y / b->map->bloc_size;
+//	texture_col = floor(s->model->width / sprite.render.numColumns * ( column - sprite.render.firstColumn ) );
+	while (y < s_size.y)
+>>>>>>> Stashed changes
 	{
 		ratio.x =  (x % s->model->width + 1) * (s->model->width / b->map->bloc_size);
 		y = 1;

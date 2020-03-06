@@ -72,7 +72,7 @@ comp:		all
 launch:		comp
 			clear
 			@echo "$(COL_CUBE)  .–––––––––––––––––––––––––––––––––––––––––––––––––––––––––.	"
-			@echo " / |                     $(COL_TITLE)Launching$(COL_CUBE)                          | \	"
+			@echo " / |                        $(COL_TITLE)Launching$(COL_CUBE)                       | \	"
 			@echo "+––+––––––––––––––––––––––––––––––––––––––––––––––––––––––––+––+"
 			@echo "|  |$(COL_TXT)             _____       _       _____ ____$(COL_CUBE)             |  |"
 			@echo "|  |$(COL_TXT)            /  __ \     | |     |____ |  _  \ $(COL_CUBE)          |  |"
