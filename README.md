@@ -7,23 +7,23 @@
 -> make launch - Compile changes & launch
 
 
-[ESC] - Quit (brutal killing)
+<kbd>ESC</kbd> - Quit (brutal killing)
 
-[F] - Expand map
+<kbd>F</kbd> - Expand map
 
-[Z] - Move forward
+<kbd>Z</kbd> - Move forward
 
-[S] - Move backward
+<kbd>S</kbd> - Move backward
 
-[A] - Move Left
+<kbd>A</kbd> - Move Left
 
-[D] - Move Right
+<kbd>D</kbd> - Move Right
 
-[LEFT] [RIGHT] - Rotate camera ( + [SHIFT] to rotate/10)
+<kbd>LEFT</kbd> <kbd>RIGHT</kbd> - Rotate camera ( + [SHIFT] to rotate/10)
 
-[UP] - Maxi FOV
+<kbd>UP</kbd> - Maxi FOV
 
-[SPACE] - Jump (WYP)
+<kbd>SPACE</kbd> - Jump (WYP)
 
 
 ![Cube3D Minimap expanded](/images/minimap.png)
