@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 21:30:44 by siferrar          #+#    #+#             */
-/*   Updated: 2020/02/28 09:00:31 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/03/06 07:59:58 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,10 +100,12 @@ void			jump(t_player *p, float speed);
 ** --- RayCasting
 */
 
+void	draw_sky(t_brain *b, t_ctx *c, double col, double end);
+
 t_fpoint		closest_grid_h(t_fpoint *p, t_map *m, float angle);
 t_fpoint		closest_grid_v(t_fpoint *p, t_map *m, float angle);
-t_fpoint		closest_wall_h(t_brain *b, t_fpoint *p, float angle);
-t_fpoint		closest_wall_v(t_brain *b, t_fpoint *p, float angle);
+t_detect		closest_wall_h(t_brain *b, t_fpoint *p, float angle);
+t_detect		closest_wall_v(t_brain *b, t_fpoint *p, float angle);
 t_detect		dist_to_wall(t_brain *b, t_fpoint *p, float angle);
 void			draw_walls(t_brain *b, t_ctx *c);
 void			draw_col(t_brain *b, float w_height,

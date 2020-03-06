@@ -50,6 +50,7 @@ OBJS = ${SRCS:.c=.o}
 MAPS	= assets/maps/
 MAP1 = $(MAPS)map.cub
 MAP2 = $(MAPS)map2.cub
+EMPTY = $(MAPS)empty.cub
 
 COL_TITLE = \033[2;33m
 COL_CUBE = \033[2;32m
@@ -72,7 +73,7 @@ comp:		all
 launch:		comp
 			clear
 			@echo "$(COL_CUBE)  .–––––––––––––––––––––––––––––––––––––––––––––––––––––––––.	"
-			@echo " / |                        $(COL_TITLE)Launching$(COL_CUBE)                       | \	"
+			@echo " / |                     $(COL_TITLE)Launching$(COL_CUBE)                          | \	"
 			@echo "+––+––––––––––––––––––––––––––––––––––––––––––––––––––––––––+––+"
 			@echo "|  |$(COL_TXT)             _____       _       _____ ____$(COL_CUBE)             |  |"
 			@echo "|  |$(COL_TXT)            /  __ \     | |     |____ |  _  \ $(COL_CUBE)          |  |"

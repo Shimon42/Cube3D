@@ -1,4 +1,4 @@
-# Cube 3D • Alpha 0.5.0
+# Cube 3D • Alpha 0.5.2
 
 ![Cube3D Screenshot](/images/textured.png)
 
@@ -32,7 +32,8 @@
 	————————————————————————————————————
 		Changes:
 	————————————————————————————————————
-	- Fixed "FPS drop if too close from wall", only lose ~5 FPS now
+	- Add Skybox
+	- Add Walls Collisions
 
     ————————————————————————————————————
 		Cur State:
@@ -40,6 +41,7 @@
 	- Map parsing, without config
 	- Draw walls (fish eye sort of corrected)
 	- Wall Texture
+	- Walls Collisions
 	- Minimap display
 	
 	————————————————————————————————————

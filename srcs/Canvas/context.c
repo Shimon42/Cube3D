@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/15 18:42:08 by siferrar          #+#    #+#             */
-/*   Updated: 2020/02/28 08:14:11 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/02/29 19:49:52 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,11 @@ void            pixel_put_buff(int x, int y, int color, t_buff *buff)
 //	printf("offset: %d\n", addr_index);
 	if(addr_index > 0 && addr_index < buff->line_length * buff->height)
 	{
+
+
+
+
+
     	dst = buff->addr + addr_index;
 		*(unsigned int*)dst = color;
 	}
