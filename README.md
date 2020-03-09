@@ -1,4 +1,4 @@
-# Cube 3D • Alpha 0.5.2
+# Cube 3D • Alpha 0.5.5
 
 ![Cube3D Screenshot](/images/world.png)
 
@@ -32,8 +32,9 @@
 	————————————————————————————————————
 		Changes:
 	————————————————————————————————————
-	- Add Skybox
-	- Add Walls Collisions
+	- Skybox ended
+	- Jumping
+	- View bobbing Y
 
     ————————————————————————————————————
 		Cur State:
@@ -43,6 +44,7 @@
 	- Wall Texture
 	- Walls Collisions
 	- Minimap display
+	- SkyBox
 	
 	————————————————————————————————————
     	Known Bugs:

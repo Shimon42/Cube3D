@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 21:29:11 by siferrar          #+#    #+#             */
-/*   Updated: 2020/03/09 07:51:44 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/03/09 09:23:42 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,10 +125,8 @@ int	key_press(int key, void *param)
 
 		if ((key = is_key_pressed(b, 49)) >= 0)
 			b->player->jump(b->player, 15);
-		else if (b->player->z != 0)
-		{
-			b->player->jump(b->player, -10);
-		}
+		else if (b->player->z != 0 && b->player->jumping != 0)
+			b->player->jump(b->player, 15);
 
 		if ((key = is_key_pressed(b, 126)) >= 0 && b->player->cam->fov != ft_inrad(160))
 		{
@@ -168,7 +166,7 @@ int	key_release(int key, void *param)
 		b->player->as_move = 1;
 	}
 	if (key == 49)
-		b->player->jump(b->player, -5);
+		b->player->jump(b->player, 5);
 	
 	if (key == 126)
 	{

@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/22 22:24:57 by siferrar          #+#    #+#             */
-/*   Updated: 2020/03/06 10:01:39 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/03/09 09:23:39 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,13 +65,15 @@ int		init_player(t_brain *b, int pos_x, char angle)
 	b->player->jump = &jump;
 	b->player->draw = &draw_player;
 	b->player->ctx = b->ctx;
-	b->player->speed = b->map->bloc_size * 0.15;
+	b->player->speed = b->map->bloc_size * 0.12;
 	b->player->angle = get_player_angle(angle);
 	b->player->rot_speed = (2 * PI) / 180;
 	b->player->step = malloc(sizeof(t_fpoint *));
 	b->player->rot(b->player, 0);
 	b->player->brain = b;
 	b->player->as_move = 1;
+	b->player->bobbing = 1;
+	b->player->jumping = 0;
 	b->player->inited = 1;
 	printf(GRN"Player init - "DGRN"OK\n"RST);
 	return (1);
@@ -114,6 +116,33 @@ void	draw_player(struct s_player *p, t_ctx *ctx)
 	draw_rays(p, ctx);
 }
 
+void	bobbing(t_player *p)
+{
+	float step;
+	float bob_height = 4;
+
+	step = 1;
+	if (p->jumping == 0)
+	{
+		if (p->bobbing == 1)
+		{
+			p->z += step;
+			if (p->z > bob_height)
+			{
+				p->bobbing = -1;
+				p->z = bob_height;
+			}
+		} else {
+			p->z -= step;
+			if (p->z <= 0)
+			{
+				p->bobbing = 1;
+				p->z = 0;
+			}
+		}
+	}
+}
+
 void	side_move(struct s_player *p, int dir)
 {
 	t_map *m;
@@ -126,6 +155,8 @@ void	side_move(struct s_player *p, int dir)
 	if (get_grid(m, p->pos->x, p->pos->y + p->speed * (sin(p->angle + (ft_inrad(90)) * dir)), 1) != 1)
 		p->pos->y += p->speed * (sin(p->angle + (ft_inrad(90)) * dir));
 	p->as_move = 1;
+	if (is_key_pressed(b, 13) == -1 && is_key_pressed(b, 1) == -1)
+		bobbing(p);
 }
 
 void	move(struct s_player *p, int dir)
@@ -141,6 +172,7 @@ void	move(struct s_player *p, int dir)
 	if (get_grid(m, p->pos->x, p->pos->y + p->step->y * dir, 1) != 1)
 		p->pos->y += p->step->y * dir;
 	p->as_move = 1;
+	bobbing(p);
 }
 
 void	rotate(struct s_player *p, float angle)
@@ -148,7 +180,7 @@ void	rotate(struct s_player *p, float angle)
 	p->angle += angle;
 	if (p->angle > 2 * PI)
 		p->angle = p->angle - 2 * PI;
-	if (p->angle <= 0)
+	else if (p->angle <= 0)
 		p->angle = 2 * PI - p->angle;
 	p->step->x = (p->pos->x + p->speed * cos(p->angle)) - p->pos->x;
 	p->step->y = (p->pos->y + p->speed * sin(p->angle)) - p->pos->y;
@@ -157,30 +189,30 @@ void	rotate(struct s_player *p, float angle)
 
 void	jump(t_player *p, float speed)
 {
-	static int jumping = 0;
+	double jump_h;
 	t_brain *b;
 
 	b = (t_brain *)p->brain;
+	jump_h = (double)b->map->bloc_size;
 
-	//dprintf(1, "jump: %d  -- jumpingof %f  -- z: %f\n", jumping, speed, p->z);
-	if (speed > 0 && jumping == 0)
-		jumping = 1;
-	else if (speed < 0)
-		jumping = -1;
-	if (p->z > 0 && speed < 0 && jumping == -1)
+	if (speed > 0 && p->jumping == 0)
+		p->jumping = 1;
+
+	
+	if (p->jumping != 0)
 	{
-		p->z += speed;
-		jumping = -1;
+		if (p->z < jump_h || (p->jumping == -1 && speed < 0))
+			p->z += speed * p->jumping;
+		else if (p->jumping == 1)
+		{
+			p->z = jump_h - 0.1;
+			p->jumping = -1;
+		}
+		if (p->z < 0)
+		{
+			p->jumping = 0;
+			p->z = 0;
+		}
 	}
-	else if (jumping == -1 && p->z < 0) {
-		p->z = 0;
-		jumping = 0;
-	}
-	if (jumping && speed > 0 && p->z < b->map->bloc_size * 0.75)
-		p->z += speed * jumping;
-	else if (jumping)
-		jumping = -1;
-
-	if (jumping != 0)
-		p->as_move = 1;
+	b->player->as_move = 1;
 }
