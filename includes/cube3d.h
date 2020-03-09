@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 21:30:44 by siferrar          #+#    #+#             */
-/*   Updated: 2020/03/06 07:59:58 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/03/09 20:11:55 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,12 @@ t_detect		dist_to_wall(t_brain *b, t_fpoint *p, float angle);
 void			draw_walls(t_brain *b, t_ctx *c);
 void			draw_col(t_brain *b, float w_height,
 				float cur_col, t_detect w);
+
+/*
+** --- FloorCasting
+*/
+
+void draw_floor(t_brain *b, t_ctx *c, double w_start, double col);
 
 /*
 ** --- DEBUG FUNCTIONS
