@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/22 22:24:57 by siferrar          #+#    #+#             */
-/*   Updated: 2020/03/09 09:43:18 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/03/09 19:16:29 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -194,11 +194,8 @@ void	jump(t_player *p, float speed)
 
 	b = (t_brain *)p->brain;
 	jump_h = (double)b->map->bloc_size;
-
 	if (speed > 0 && p->jumping == 0)
 		p->jumping = 1;
-
-	
 	if (p->jumping != 0)
 	{
 		if (p->z < jump_h || (p->jumping == -1 && speed < 0))
