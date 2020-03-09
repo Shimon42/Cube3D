@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/22 22:24:57 by siferrar          #+#    #+#             */
-/*   Updated: 2020/03/09 09:23:39 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/03/09 09:43:18 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ int		init_player(t_brain *b, int pos_x, char angle)
 	b->player->ctx = b->ctx;
 	b->player->speed = b->map->bloc_size * 0.12;
 	b->player->angle = get_player_angle(angle);
-	b->player->rot_speed = (2 * PI) / 180;
+	b->player->rot_speed = (3 * PI) / 180;
 	b->player->step = malloc(sizeof(t_fpoint *));
 	b->player->rot(b->player, 0);
 	b->player->brain = b;

@@ -6,10 +6,9 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 21:29:11 by siferrar          #+#    #+#             */
-/*   Updated: 2020/03/09 09:23:42 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/03/09 09:27:06 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "includes/cube3d.h"
 #include <time.h>
