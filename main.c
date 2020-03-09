@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 21:29:11 by siferrar          #+#    #+#             */
-/*   Updated: 2020/03/06 10:01:11 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/03/09 07:50:48 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -234,13 +234,19 @@ void	draw_sky(t_brain *b, t_ctx *c, double col, double end)
 	int color;
 	int y;
 	t_fpoint ratio;
-	
-	ratio.x = (double)b->map->skybox->width / c->width;
-	ratio.y = (double)b->map->skybox->height / c->height;
+	float width;
+	float left;
+
+	ratio.y = (float)b->map->skybox->height / b->player->cam->proj_size.y;
 	y = 0;
+	width = b->player->cam->proj_size.x * ((2 * PI) /  b->player->cam->fov);
+	ratio.x = (float)b->map->skybox->width / width;
+	left = -width * b->player->angle / (2 * PI);
+	if (left < width - b->player->cam->proj_size.x) 
+		left += width;
 	while (y < end)
 	{
-		color = pixel_get(b->map->skybox, col + (b->map->skybox->width/2 + b->map->skybox->width) * b->player->angle * 0.4, 100 + y * ratio.y);
+		color = pixel_get(b->map->skybox, col - left * ratio.x, 200 + y * ratio.y);
 		pixel_put_buff(col, y, color, b->map->frame);
 		y++;
 	}
