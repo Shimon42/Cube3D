@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 22:11:09 by siferrar          #+#    #+#             */
-/*   Updated: 2020/03/10 09:41:57 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/03/10 17:40:47 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -193,7 +193,6 @@ void	draw_walls(t_brain *b, t_ctx *c)
 {
 	float w_height;
 	t_detect wall;
-	float dist;
 	float cur_col;
 	float col_step;
 	float cur_angle;
@@ -205,32 +204,14 @@ void	draw_walls(t_brain *b, t_ctx *c)
 	{
 		cur_angle = b->player->angle - (b->player->cam->fov / 2) + (col_step * cur_col);
 		wall = dist_to_wall(b, b->player->pos, cur_angle);
-		dist = wall.dist;
-		if (cur_col < c->width / 2)
-			dist = dist * cos(-(b->player->angle - cur_angle));
-		else
-			dist = dist * cos((b->player->angle - cur_angle));
-		w_height = ((b->map->bloc_size) / dist) * b->player->cam->proj_dist;
-		c->color = 0x388FBA;
-		/*if (w_height < b->ctx->height)
-			c->line(new_point(cur_col, 0), new_point(cur_col, c->height/2 - w_height/2 + b->player->z), c);
-		*/
+		wall.dist *= cos((cur_col < c->width / 2 ? -1 : 1) * (b->player->angle - cur_angle));
+		w_height = ((b->map->bloc_size) / wall.dist) * b->player->cam->proj_dist;
 		draw_sky(b, b->ctx, cur_col, c->height/2 - w_height/2 + b->player->z);
 		draw_col(b, w_height,  cur_col, wall);
-		
-		c->color = 0x91672C - 0x101010;
-		/*if (w_height < b->ctx->height)
-			c->line(new_point(cur_col, c->height/2 + w_height/2 + b->player->z - 1), new_point(cur_col, c->height), c);*/
-		draw_floor(b, c, wall, c->height/2 + w_height/2 + b->player->z - 1, cur_col);
-		/*if (wall.spr_on_path[0] != NULL)
-		{
-			//dprintf(1, "sprites on ray\n");
-			draw_sprite(b, wall.spr_on_path[0], cur_col);
-		}*/
+		draw_floor(b, c, cur_angle, floor(c->height/2 + w_height/2 + b->player->z - 1), cur_col);
 		cur_col++;
 		free(wall.spr_on_path);
 	}
-	
 }
 void draw_col(t_brain *b, float w_height, float cur_col, t_detect w)
 {
@@ -242,10 +223,11 @@ void draw_col(t_brain *b, float w_height, float cur_col, t_detect w)
 
 	i = 0;
 	mid_wall = (b->ctx->height/2 - w_height/2 + 1);
-	texture_col = ((w.w_side_hit == 'n' || w.w_side_hit == 's') ? (int)w.hit.x % b->map->bloc_size : (int)w.hit.y % b->map->bloc_size);
+	texture_col = ((w.w_side_hit == 'n' || w.w_side_hit == 's') ?
+	(int)w.hit.x % b->map->bloc_size : (int)w.hit.y % b->map->bloc_size);
 	texture = get_wall_texture(b->map, w.w_side_hit);
 	ratio.y = ((*texture)->height / w_height);
-	ratio.x =  (texture_col + 1) * ((*texture)->width / b->map->bloc_size);
+	ratio.x = (texture_col + 1) * ((*texture)->width / b->map->bloc_size);
 	if (mid_wall < 0)
 		i = (mid_wall) * -1;
 	while (i <= w_height + 1)
@@ -253,7 +235,7 @@ void draw_col(t_brain *b, float w_height, float cur_col, t_detect w)
 		texture_col = pixel_get(*texture, ratio.x, (i + 1) * ratio.y);
 		texture_col -= 0x101010;
 		if (mid_wall + i >= 0)
-			pixel_put_buff(cur_col, (b->ctx->height/2 - w_height/2) + i + b->player->z, texture_col, b->map->frame);
+			pixel_put_buff(cur_col, mid_wall + i + b->player->z, texture_col, b->map->frame);
 		if (mid_wall + i > b->ctx->height)
 			break;
 		i++;

@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 21:29:11 by siferrar          #+#    #+#             */
-/*   Updated: 2020/03/10 10:07:26 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/03/10 17:34:20 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -220,6 +220,8 @@ float		calc_dist(t_fpoint p1, t_fpoint p2)
 
 void meditate(t_brain *b)
 {
+	free(b->map->skybox->addr);
+	free(b->map->skybox);
 	free(b->ctx->win_ptr);
 	free(b->ctx->mlx_ptr);
 	free(b->ctx);

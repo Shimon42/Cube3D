@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/15 18:42:08 by siferrar          #+#    #+#             */
-/*   Updated: 2020/02/29 19:49:52 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/03/10 17:39:26 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,20 +96,20 @@ void            pixel_put_buff(int x, int y, int color, t_buff *buff)
 {
     char    *dst;
 	int addr_index;
+	static int max = -420;
+	static double offset = 0;
 
-	addr_index = (y * buff->line_length + x * (buff->bits_per_pixel / 8));
-//	printf("offset: %d\n", addr_index);
-	if(addr_index > 0 && addr_index < buff->line_length * buff->height)
+	if (max == -420)
 	{
-
-
-
-
-
+		max = buff->line_length * buff->height;
+		offset = (buff->bits_per_pixel / 8);
+	}
+	addr_index = (y * buff->line_length + x * offset);
+	if(addr_index >= 0 && addr_index < max)
+	{
     	dst = buff->addr + addr_index;
 		*(unsigned int*)dst = color;
 	}
-	//color = 0;
 }
 
 int		pixel_get(t_buff *img, int x, int y)
@@ -117,8 +117,16 @@ int		pixel_get(t_buff *img, int x, int y)
     char    *dst;
 	int addr_index;
 	int *color;
-	addr_index = (y * img->line_length + x * (img->bits_per_pixel / 8));
-	if(addr_index > 0 && addr_index < img->line_length * img->height)
+	static int max = -420;
+	static double offset;
+
+	if (max == -420)
+	{
+		max = img->line_length * img->height;
+		offset = (img->bits_per_pixel / 8);
+	}
+	addr_index = (y * img->line_length + x * offset);
+	if(addr_index >= 0 && addr_index < max)
 	{
     	dst = img->addr + addr_index;
 		color = (int*)(dst);
