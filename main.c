@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 21:29:11 by siferrar          #+#    #+#             */
-/*   Updated: 2020/03/09 09:27:06 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/03/10 10:07:26 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -263,9 +263,7 @@ int loop_hook(t_brain *b)
 		b->player->as_move = 0;
 	} 
 	if (is_key_pressed(b, 3) != -1)
-	{
-		draw_fullmap(b, 0.3);
-	}
+		draw_fullmap(b, 0.28);
 	mlx_put_image_to_window(b->ctx->mlx_ptr , b->ctx->win_ptr, b->map->frame->img, 0, 0);
 	fps_count(b->ctx);
 	return (b->inited);

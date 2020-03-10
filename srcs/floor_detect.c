@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/09 19:31:18 by siferrar          #+#    #+#             */
-/*   Updated: 2020/03/09 20:15:03 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/03/10 10:36:13 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,17 +26,28 @@
 ** https://www.permadi.com/tutorial/raycast/images/figure26.gif
 */
 
-void draw_floor(t_brain *b, t_ctx *c, double w_start, double col)
+void draw_floor(t_brain *b, t_ctx *c, t_detect w, double w_start, double col)
 {
 	int i;
 	int color;
-	t_buff *floor;
-
-	floor = b->map->floor;
+	t_buff *floor_t;
+	t_fpoint ratio;
+	double dist;
+	double x,y;
+	double cur_angle = b->player->angle - (b->player->cam->fov / 2) + (b->player->cam->fov/ c->width * col);;
+	floor_t = b->map->floor;
 	i = w_start;
+
+
 	while (i < b->ctx->height)
 	{
-		color = pixel_get(*floor, ((int)floor(col)) % 64, (i + 1) * ratio.y);
+		dist = (((double)b->map->bloc_size/2) / (i - (b->player->cam->proj_size.y/2))) * b->player->cam->proj_dist;
+		ratio.x =  floor_t->width % (int)floor(dist);
+		x = dist * cos(cur_angle) + b->player->pos->x;
+		y = dist * sin(cur_angle) + b->player->pos->y;
+
+		color = pixel_get(floor_t, (int)floor(x) % floor_t->width, (int)floor(y) % floor_t->height);
+		pixel_put_buff(col, i, color, b->map->frame);
 		i++;
 	}
 }

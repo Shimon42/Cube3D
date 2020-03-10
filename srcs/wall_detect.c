@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 22:11:09 by siferrar          #+#    #+#             */
-/*   Updated: 2020/03/09 19:36:53 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/03/10 09:41:57 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -218,10 +218,10 @@ void	draw_walls(t_brain *b, t_ctx *c)
 		draw_sky(b, b->ctx, cur_col, c->height/2 - w_height/2 + b->player->z);
 		draw_col(b, w_height,  cur_col, wall);
 		
-		/*c->color = 0x91672C - 0x101010;
-		if (w_height < b->ctx->height)
+		c->color = 0x91672C - 0x101010;
+		/*if (w_height < b->ctx->height)
 			c->line(new_point(cur_col, c->height/2 + w_height/2 + b->player->z - 1), new_point(cur_col, c->height), c);*/
-		draw_floor(b, c, wall, cur_col);		
+		draw_floor(b, c, wall, c->height/2 + w_height/2 + b->player->z - 1, cur_col);
 		/*if (wall.spr_on_path[0] != NULL)
 		{
 			//dprintf(1, "sprites on ray\n");
