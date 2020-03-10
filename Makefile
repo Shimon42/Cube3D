@@ -43,8 +43,8 @@ GNL_OBJS =	${GNL_SRCS:.c=.o}
 
 CC =		gcc
 
-CFLAGSz	= -Wall -Wextra -Werror
-CFLAGS	= 
+CFLAGSz	= -g -Wall -Wextra -Werror
+CFLAGS	= -g
 
 OBJS = ${SRCS:.c=.o}
 
