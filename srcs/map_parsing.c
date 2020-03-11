@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/14 20:36:43 by siferrar          #+#    #+#             */
-/*   Updated: 2020/03/11 10:43:02 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/03/11 20:04:27 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,13 +42,13 @@ void init_texture(t_brain *b, char *path, t_buff **t)
 	{
 		(*t)->img = mlx_xpm_file_to_image(b->ctx->mlx_ptr, path, &(*t)->width, &(*t)->height);
 		if (!(*t)->img)
-			exit(4);
+			exit_cube(NULL, 404, path, 0);
 		(*t)->addr = mlx_get_data_addr((*t)->img, &(*t)->bits_per_pixel, &(*t)->line_length,
 									&(*t)->endian);
 		dprintf(1, GRN" - OK\n"RST);
 	}
 	else
-		exit (2);
+		exit_cube(NULL, 401, "Failed to malloc texture", 0);
 }
 
 int				open_map(t_brain *b, char *map_path)

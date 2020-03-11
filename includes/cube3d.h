@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 21:30:44 by siferrar          #+#    #+#             */
-/*   Updated: 2020/03/11 07:06:02 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/03/11 19:35:02 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@ typedef struct	s_brain
 	int			*keys;
 }				t_brain;
 
+void			exit_cube(t_brain *brain, int error_code, char *msg, int init);
+void			meditate(t_brain *b);
 /*
 ** --- Copy of mlx structure to gest sizes > screen size
 */

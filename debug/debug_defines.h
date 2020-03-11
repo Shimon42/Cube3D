@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/26 07:12:16 by siferrar          #+#    #+#             */
-/*   Updated: 2020/02/26 07:15:42 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/03/11 19:25:43 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,6 +118,7 @@
 ** -- Misc
 */
 
+# define BN    "\n"
 # define TAB    "\t"
 # define DTAB   "\t\t"
 # define TTAB   "\t\t\t"

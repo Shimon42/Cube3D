@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 21:29:11 by siferrar          #+#    #+#             */
-/*   Updated: 2020/03/11 08:42:48 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/03/11 20:16:00 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,8 @@ t_brain *new_brain(int width, int height, char * name)
 	new->ctx = new_ctx(width, height);
 	new->ctx->win_ptr = mlx_new_window(new->ctx->mlx_ptr, width, height, name);
 	new->ctx->color = 0x00FFFF;
+	new->map = NULL;
+	new->player = NULL;
 	init_buff(new->ctx, &new->ctx->buff, new->ctx->width, new->ctx->height);
 	new->keys = ft_calloc(10, sizeof(int));
 	init_keys(new);
@@ -77,13 +79,92 @@ float		calc_dist(t_fpoint p1, t_fpoint p2)
 	return (sqrt(pow((p2.x - p1.x),2) + pow((p2.y - p1.y), 2)));
 }
 
+void exit_cube(t_brain *brain, int error_code, char *msg, int init)
+{
+	static t_brain *b = NULL;
+
+	if (b == NULL && brain != NULL)
+		b = brain;
+	if (init)
+		return ;
+	if (error_code != 0)
+		ft_putstr(RED);
+	else
+		ft_putstr(GRN);
+	ft_putstr("Cub3D Exit - Error: ");
+	ft_putnbr(error_code);
+	ft_putstr(" - ");
+	ft_putstr(msg);
+	ft_putstr("\n"RST);
+	meditate(b);
+	ft_putstr(GRN"Meditate OK\n");
+	ft_putstr("Exit Done\n"GRN);
+	exit (0);
+}
+
+void free_buff(t_buff *buff)
+{
+	ft_putstr("  -> Free buff\n");
+	if (buff != NULL)
+	{
+		free(buff->addr);
+		free(buff->img);
+		free(buff);
+	}
+}
+void check_n_free(void *var)
+{
+	if (var != NULL)
+		free(var);
+}
+
 void meditate(t_brain *b)
 {
-	free(b->map->skybox->addr);
-	free(b->map->skybox);
-	free(b->ctx->win_ptr);
-	free(b->ctx->mlx_ptr);
-	free(b->ctx);
+	/*
+	** ----- FREE MAP
+	*/
+
+	ft_putstr(DYELO"Free Map\n");
+	if (b->map != NULL)
+	{
+		free_buff(b->map->skybox);
+		free_buff(b->map->w_n);
+		free_buff(b->map->w_e);
+		free_buff(b->map->w_s);
+		free_buff(b->map->w_w);
+		free_buff(b->map->floor);
+		free_buff(b->map->frame);
+		check_n_free(b->map);
+	}
+
+	/* 
+	** ---- FREE CTX
+	*/
+	ft_putstr(DCYAN"Free Context\n");
+	if (b->ctx != NULL)
+	{
+		free_buff(b->ctx->buff);
+		check_n_free(b->ctx->win_ptr);
+		check_n_free(b->ctx->mlx_ptr);
+		check_n_free(b->ctx);
+	}
+	
+	/* 
+	** ---- FREE PLAYER
+	*/
+	ft_putstr(DPINK"Free Player\n");
+	if (b->player != NULL)
+	{
+		check_n_free(b->player->cam);
+		check_n_free(b->player->pos);
+		check_n_free(b->player->step);
+		check_n_free(b->player);
+	}
+
+	/*
+	** ---- FREE BRAIN
+	*/
+	ft_putstr(DGRN"Free Brain Struct\n");
 	free(b);
 }
 
@@ -139,6 +220,7 @@ int	main(int ac, char **av)
 	if(ac != 2)
 		return (-1);
 	b = new_brain(1920, 1080, "Cube3D");
+	exit_cube(b, 0, "Init Exit", 1);
 	win = (t_mlx_win_list *)b->ctx->win_ptr;
 	b->ctx->width = win->size_x;
 	b->ctx->height = win->size_y;

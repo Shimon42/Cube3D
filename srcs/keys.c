@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/11 06:48:57 by siferrar          #+#    #+#             */
-/*   Updated: 2020/03/11 07:09:46 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/03/11 19:32:18 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ int	key_press(int key, void *param)
 
 	b = (t_brain*)param;
 	if (key == 53)
-		exit(1);
+		exit_cube(b, 0, "Exit from red cross", 0);
 	if (key != -1 && is_key_pressed(b, key) == -1)
 		add_key_pressed(b, key);
 	if (b && b->inited && b->player && b->player->inited)

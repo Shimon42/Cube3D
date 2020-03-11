@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/15 18:42:08 by siferrar          #+#    #+#             */
-/*   Updated: 2020/03/11 08:12:00 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/03/11 19:56:43 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,14 +44,10 @@ void	set_context(t_ctx **cur, t_ctx **new_ctx, char *name)
 		if (*new_ctx)
 		{
 			*cur = *new_ctx;
-			write(1, "Context SET\n", 12);
 			return ;
 		}
 		else
-		{
-			write(1, "\033[0;31mCTX NOT SET\n", 19);
-			exit(0);
-		}
+			exit_cube(NULL, 301, "Failed to set cur context", 0);
 	}
 	else
 		write(1, "Context Already SET\n", 20);
@@ -61,10 +57,7 @@ void init_buff(t_ctx * ctx, t_buff **buff, int width, int height)
 {
 	(*buff) = malloc(sizeof(t_buff));
 	if ((*buff) == NULL)
-	{
-		ft_putstr(RED"BUFF NOT SET"RST);
-		exit(3);
-	}
+		exit_cube(NULL, 1, "Buff malloc error", 0);
 	(*buff)->width = width;
 	(*buff)->height = height;
 	dprintf(1, DCYAN"INIT BUFF %d x %d px\n"RST, width, height);
@@ -74,15 +67,9 @@ void init_buff(t_ctx * ctx, t_buff **buff, int width, int height)
 	(*buff)->addr = mlx_get_data_addr((*buff)->img, &(*buff)->bits_per_pixel, &(*buff)->line_length,
                                  &(*buff)->endian);
 	if ((*buff)->addr == NULL)
-	{
-		ft_putstr(RED"BUFF NOT SET"RST);
-		exit(5);
-	}
+		exit_cube(NULL, 201, "Buff address malloc error", 0);
 	if ((*buff)->img == NULL)
-	{
-		ft_putstr(RED"BUFF NOT SET"RST);
-		exit(4);
-	}
+		exit_cube(NULL, 202, "Buff img malloc error", 0);
 }
 
 t_ctx	*new_ctx(int width, int height)

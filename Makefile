@@ -45,7 +45,7 @@ GNL_OBJS =	${GNL_SRCS:.c=.o}
 CC =		gcc
 
 CFLAGSPROD	= -g -Wall -Wextra -Werror
-CFLAGS	= -g
+CFLAGS	= 
 CFLAGSSAN	= -g -g3 -fsanitize=address
 
 OBJS = ${SRCS:.c=.o}

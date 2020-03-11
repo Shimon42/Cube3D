@@ -1,4 +1,4 @@
-# Cube 3D • Alpha 0.6
+# Cube 3D • Alpha 0.6.1
 
 ![Cube3D Screenshot](/images/world.png)
 
@@ -32,8 +32,7 @@
 	————————————————————————————————————
 		Changes:
 	————————————————————————————————————
-	- Floor Casting
-	- Optimization with statics
+	- exit_cube() - not finished but good start
 
     ————————————————————————————————————
 		Cur State:
