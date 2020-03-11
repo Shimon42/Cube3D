@@ -31,7 +31,9 @@ SRCS = 		main.c \
 			$(SRCSPATH)map_parsing.c \
 			$(SRCSPATH)draw_map.c \
 			$(SRCSPATH)wall_detect.c \
+			$(SRCSPATH)floor_detect.c \
 			$(SRCSPATH)sprites.c \
+			$(SRCSPATH)keys.c \
 			$(SRCSPATH)player.c \
 			$(DEBUGPATH)debug.c
 
@@ -42,13 +44,15 @@ GNL_OBJS =	${GNL_SRCS:.c=.o}
 
 CC =		gcc
 
-CFLAGSz	= -Wall -Wextra -Werror
-CFLAGS	= 
+CFLAGSPROD	= -g -Wall -Wextra -Werror
+CFLAGS	= -g
+CFLAGSSAN	= -g -g3 -fsanitize=address
 
 OBJS = ${SRCS:.c=.o}
 
 MAPS	= assets/maps/
 LAB = $(MAPS)Lab.cub
+WORLD = $(MAPS)world.cub
 MAP = $(MAPS)map.cub
 EMPTY = $(MAPS)empty.cub
 
@@ -62,7 +66,7 @@ all:		$(NAME)
 $(NAME):	$(OBJS) $(INCLUDES)
 			make -C $(MINILIB)
 			make -C $(LIBFT)
-			gcc -c $(GNL_SRCS) -D BUFFER_SIZE=128
+			gcc -c $(GNL_SRCS) -D BUFFER_SIZE=400
 			mv $(MINILIB)libmlx.a .
 			mv $(LIBFT)libft.a .
 			ar rc $(NAME).a $(OBJS) get_next_line.o get_next_line_utils.o

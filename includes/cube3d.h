@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 21:30:44 by siferrar          #+#    #+#             */
-/*   Updated: 2020/03/06 07:59:58 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/03/11 07:06:02 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ void			draw_fov_map(t_brain *b, t_ctx *c);
 void			draw_ray(t_player *p, t_map *m, float angle);
 void			draw_minimap_rays(t_brain *b, t_fpoint disp);
 void init_texture(t_brain *b, char *path, t_buff **t);
+
 /*
 ** --- Utils
 */
@@ -97,6 +98,16 @@ void			side_move(struct s_player *p, int dir);
 void			jump(t_player *p, float speed);
 
 /*
+** --- Controls
+*/
+
+int				is_key_pressed(t_brain *b, int key);
+int				add_key_pressed(t_brain *b, int key);
+int				del_key_pressed(t_brain *b, int key);
+int				key_press(int key, void *param);
+int				key_release(int key, void *param);
+
+/*
 ** --- RayCasting
 */
 
@@ -110,6 +121,12 @@ t_detect		dist_to_wall(t_brain *b, t_fpoint *p, float angle);
 void			draw_walls(t_brain *b, t_ctx *c);
 void			draw_col(t_brain *b, float w_height,
 				float cur_col, t_detect w);
+
+/*
+** --- FloorCasting
+*/
+
+void draw_floor(t_brain *b, t_ctx *c, double cur_angle, int w_start, double col);
 
 /*
 ** --- DEBUG FUNCTIONS

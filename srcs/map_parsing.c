@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/14 20:36:43 by siferrar          #+#    #+#             */
-/*   Updated: 2020/03/09 07:52:00 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/03/11 10:43:02 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,10 @@ int				init_map(t_ctx *ctx, void *brain)
 	b->map->w_e = NULL;
 	b->map->w_s = NULL;
 	b->map->w_w = NULL;
+	b->map->floor = NULL;
 	b->map->sprites_count = 0;
 	b->map->sprites = NULL;
 	b->map->brain = b;
-	
 	init_buff(ctx, &b->map->frame, ctx->width, ctx->height);
 	return (1);
 }
@@ -65,7 +65,10 @@ int				open_map(t_brain *b, char *map_path)
 	init_texture(b, "./assets/textures/walls/stone_bricks/4.xpm", &b->map->w_e);
 	init_texture(b, "./assets/textures/walls/stone_bricks/3.xpm", &b->map->w_s);
 	init_texture(b, "./assets/textures/walls/stone_bricks/1.xpm", &b->map->w_w);
-	init_texture(b, "./assets/sky/mountains.xpm", &b->map->skybox);
+	//init_texture(b, "./assets/textures/colors/blue.xpm", &b->map->floor);
+	init_texture(b, "./assets/textures/floor/sand.xpm", &b->map->floor);
+	init_texture(b, "./assets/sky/mountains/mountains.xpm", &b->map->skybox);
+	
 	player = malloc(sizeof(t_player_detect));
 	file = open(map_path, O_RDONLY);
 	while ((ret = get_next_line(file, &line)) != -1)

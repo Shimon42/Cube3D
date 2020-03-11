@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/22 22:24:57 by siferrar          #+#    #+#             */
-/*   Updated: 2020/03/09 19:16:29 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/03/11 08:15:04 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,10 +118,11 @@ void	draw_player(struct s_player *p, t_ctx *ctx)
 
 void	bobbing(t_player *p)
 {
-	float step;
-	float bob_height = 4;
+	static float step = -1;
+	float bob_height = 5;
 
-	step = 1;
+	if (step == -1)
+		step = bob_height / 3;
 	if (p->jumping == 0)
 	{
 		if (p->bobbing == 1)

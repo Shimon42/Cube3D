@@ -1,4 +1,4 @@
-# Cube 3D • Alpha 0.5.5
+# Cube 3D • Alpha 0.6
 
 ![Cube3D Screenshot](/images/world.png)
 
@@ -32,15 +32,15 @@
 	————————————————————————————————————
 		Changes:
 	————————————————————————————————————
-	- Skybox ended
-	- Jumping
-	- View bobbing Y
+	- Floor Casting
+	- Optimization with statics
 
     ————————————————————————————————————
 		Cur State:
 	————————————————————————————————————
 	- Map parsing, without config
 	- Draw walls (fish eye sort of corrected)
+	- Floor texture (Fisheye with some texture)
 	- Wall Texture
 	- Walls Collisions
 	- Minimap display
@@ -54,4 +54,7 @@
 	
 	Moving:
 	- Double speed if walk on side and move forward
+
+	Segfault:
+	- Sometimes at start, backtrace at pixel_put
 

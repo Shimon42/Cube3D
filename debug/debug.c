@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/20 15:53:12 by siferrar          #+#    #+#             */
-/*   Updated: 2020/02/26 07:18:43 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/03/11 06:58:39 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,21 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+
+void	disp_keys(t_brain *b)
+{
+	int i;
+
+	i = 0;
+	while (i < 10)
+	{
+		ft_putnbr(b->keys[i]);
+		if (i < 9)
+			ft_putstr(", ");
+		i++;
+	}
+	ft_putchar('\n');
+}
 
 void	disp_point(t_fpoint *p)
 {

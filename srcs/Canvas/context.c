@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/15 18:42:08 by siferrar          #+#    #+#             */
-/*   Updated: 2020/02/29 19:49:52 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/03/11 08:12:00 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,12 +60,29 @@ void	set_context(t_ctx **cur, t_ctx **new_ctx, char *name)
 void init_buff(t_ctx * ctx, t_buff **buff, int width, int height)
 {
 	(*buff) = malloc(sizeof(t_buff));
+	if ((*buff) == NULL)
+	{
+		ft_putstr(RED"BUFF NOT SET"RST);
+		exit(3);
+	}
 	(*buff)->width = width;
 	(*buff)->height = height;
 	dprintf(1, DCYAN"INIT BUFF %d x %d px\n"RST, width, height);
+	(*buff)->img = NULL;
+	(*buff)->addr = NULL;
 	(*buff)->img = mlx_new_image(ctx->mlx_ptr, ctx->width, ctx->height);
 	(*buff)->addr = mlx_get_data_addr((*buff)->img, &(*buff)->bits_per_pixel, &(*buff)->line_length,
                                  &(*buff)->endian);
+	if ((*buff)->addr == NULL)
+	{
+		ft_putstr(RED"BUFF NOT SET"RST);
+		exit(5);
+	}
+	if ((*buff)->img == NULL)
+	{
+		ft_putstr(RED"BUFF NOT SET"RST);
+		exit(4);
+	}
 }
 
 t_ctx	*new_ctx(int width, int height)
@@ -96,20 +113,23 @@ void            pixel_put_buff(int x, int y, int color, t_buff *buff)
 {
     char    *dst;
 	int addr_index;
+	static int max = -420;
+	static double offset = 0;
 
-	addr_index = (y * buff->line_length + x * (buff->bits_per_pixel / 8));
-//	printf("offset: %d\n", addr_index);
-	if(addr_index > 0 && addr_index < buff->line_length * buff->height)
+	//ft_putstr("Pixel PUT - ");
+	if (max == -420)
 	{
+		max = buff->line_length * buff->height;
+		offset = (buff->bits_per_pixel / 8);
+	}
 
-
-
-
-
+	addr_index = (y * buff->line_length + x * offset);
+	if(addr_index >= 0 && addr_index < max)
+	{
     	dst = buff->addr + addr_index;
 		*(unsigned int*)dst = color;
 	}
-	//color = 0;
+	//dprintf(1, "OK\n");
 }
 
 int		pixel_get(t_buff *img, int x, int y)
@@ -117,8 +137,21 @@ int		pixel_get(t_buff *img, int x, int y)
     char    *dst;
 	int addr_index;
 	int *color;
-	addr_index = (y * img->line_length + x * (img->bits_per_pixel / 8));
-	if(addr_index > 0 && addr_index < img->line_length * img->height)
+	static int max = -420;
+	static double offset;
+
+	if (dst == NULL)
+	{
+		ft_putstr(RED"BUFF NOT SET"RST);
+		exit(5);
+	}
+	if (max == -420)
+	{
+		max = img->line_length * img->height;
+		offset = (double)(img->bits_per_pixel / 8);
+	}
+	addr_index = (y * img->line_length + x * offset);
+	if(addr_index >= 0 && addr_index < max)
 	{
     	dst = img->addr + addr_index;
 		color = (int*)(dst);
