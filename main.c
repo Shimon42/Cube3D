@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 21:29:11 by siferrar          #+#    #+#             */
-/*   Updated: 2020/03/10 19:41:39 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/03/11 08:42:48 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,147 +38,6 @@ void		fps_count(t_ctx *c)
 	}
 }
 
-void	disp_keys(t_brain *b)
-{
-	int i;
-
-	i = 0;
-	while (i < 10)
-	{
-		ft_putnbr(b->keys[i]);
-		if (i < 9)
-			ft_putstr(", ");
-		i++;
-	}
-	ft_putchar('\n');
-}
-
-int	is_key_pressed(t_brain *b, int key)
-{
-	int i;
-
-	i = 0;
-	while (i < 10 && key != -1)
-	{
-		if (b->keys[i] == key)
-		{
-			//printf("Key %d is pressed\n", key);
-			//disp_keys(b);
-			return (i);
-		}
-		i++;
-	}
-	return (-1);
-}
-
-int	add_key_pressed(t_brain *b, int key)
-{
-	int i;
-
-	i = 0;
-	while (b->keys[i] != -1 && i < 10)
-		i++;
-	if (i < 10)
-	{
-		b->keys[i] = key;
-		//printf("Add %d\n", key);
-		//disp_keys(b);
-		return (1);
-	}
-	return (0);
-}
-
-int	del_key_pressed(t_brain *b, int key)
-{
-	int i;
-
-	i = 0;
-	while (b->keys[i] != key && i < 10)
-		i++;
-	if (i < 10 && b->keys[i] == key)
-	{
-		b->keys[i] = -1;
-		return (1);
-	}
-	return (0);
-}
-
-int	key_press(int key, void *param)
-{
-	t_brain *b;	
-
-	b = (t_brain*)param;
-	if (key == 53)
-		exit(1);
-	if (key != -1 && is_key_pressed(b, key) == -1)
-	{
-		//printf(CYAN"Key [%d] pressed"RST"\n", key);
-		add_key_pressed(b, key);
-	}
-	if (b && b->inited && b->player && b->player->inited)
-	{
-		if ((key = is_key_pressed(b, 13)) >= 0)
-			b->player->move(b->player, 1);
-		if ((key = is_key_pressed(b, 1)) >= 0)
-			b->player->move(b->player, -1);
-
-		if ((key = is_key_pressed(b, 49)) >= 0)
-			b->player->jump(b->player, 15);
-		else if (b->player->z != 0 && b->player->jumping != 0)
-			b->player->jump(b->player, 15);
-
-		if ((key = is_key_pressed(b, 126)) >= 0 && b->player->cam->fov != ft_inrad(160))
-		{
-			b->player->as_move = 1;
-			b->player->cam->fov = ft_inrad(170);
-			b->player->cam->proj_size.x = 5000;
-			b->player->cam->proj_size.y = 5000;
-			b->player->cam->proj_dist = (b->player->cam->proj_size.x / 2) / tan(b->player->cam->fov / 2) * 2;
-		}
-	
-		if ((key = is_key_pressed(b, 123)) >= 0 && is_key_pressed(b, 257) >= 0)
-			b->player->rot(b->player, -b->player->rot_speed / 20);
-		else if (key >= 0)
-			b->player->rot(b->player, -b->player->rot_speed);
-		if ((key = is_key_pressed(b, 124)) >= 0 && is_key_pressed(b, 257) >= 0)
-			b->player->rot(b->player, b->player->rot_speed / 20);
-		else if (key >= 0)
-			b->player->rot(b->player, b->player->rot_speed);
-
-		if ((key = is_key_pressed(b, 0)) >= 0)
-			b->player->sidemove(b->player, -1);
-		if ((key = is_key_pressed(b, 2)) >= 0)
-			b->player->sidemove(b->player, 1);		
-	}
-	return (0);
-}
-
-int	key_release(int key, void *param)
-{
-	t_brain *b;
-
-	b = (t_brain*)param;
-
-	if (key == 3)
-	{
-		draw_fullmap(b, 0);
-		b->player->as_move = 1;
-	}
-	if (key == 49)
-		b->player->jump(b->player, 5);
-	
-	if (key == 126)
-	{
-		b->map->bloc_size = 64;
-		b->player->cam->fov = ft_inrad(60);
-		b->player->cam->proj_size.x = b->ctx->width;
-		b->player->cam->proj_size.y = b->ctx->height;
-		b->player->cam->proj_dist = (b->player->cam->proj_size.x / 2) / tan(b->player->cam->fov / 2);
-		b->player->as_move = 1;
-	}
- 	del_key_pressed(b, key);
-	return (0);
-}
 
 t_fpoint	new_point(int x, int y)
 {
@@ -215,7 +74,7 @@ t_brain *new_brain(int width, int height, char * name)
 
 float		calc_dist(t_fpoint p1, t_fpoint p2)
 {
-	return ( sqrt( pow((p2.x - p1.x),2) + pow((p2.y - p1.y),2)));
+	return (sqrt(pow((p2.x - p1.x),2) + pow((p2.y - p1.y), 2)));
 }
 
 void meditate(t_brain *b)
@@ -232,14 +91,17 @@ void	draw_sky(t_brain *b, t_ctx *c, double col, double end)
 {
 	int color;
 	int y;
-	t_fpoint ratio;
-	float width;
+	static t_fpoint ratio = {-420, -420};
+	static float width = 0;
 	float left;
 
-	ratio.y = (float)b->map->skybox->height / b->player->cam->proj_size.y;
+	if (ratio.x == -420)
+	{
+		ratio.y = (float)b->map->skybox->height / b->player->cam->proj_size.y;
+		width = b->player->cam->proj_size.x * ((2 * PI) /  b->player->cam->fov);
+		ratio.x = (float)b->map->skybox->width / width;
+	}
 	y = 0;
-	width = b->player->cam->proj_size.x * ((2 * PI) /  b->player->cam->fov);
-	ratio.x = (float)b->map->skybox->width / width;
 	left = -width * b->player->angle / (2 * PI);
 	if (left < width - b->player->cam->proj_size.x) 
 		left += width;
@@ -255,10 +117,8 @@ int loop_hook(t_brain *b)
 {
 	key_press(-1, b);
 	mlx_clear_window(b->ctx->mlx_ptr, b->ctx->win_ptr);
-
 	if (b->player->as_move == 1)
 	{
-		
 		draw_walls(b, b->ctx);
 		if (is_key_pressed(b, 3) == -1)
 			draw_minimap(b, 10, 25, 200);
@@ -284,7 +144,6 @@ int	main(int ac, char **av)
 	b->ctx->height = win->size_y;
 	printf(GRN"Opening Map "DCYAN"%s\n"RST, av[1]);
 	open_map(b, av[1]);
-	
 	ft_putstr(RED"\n🔥 L"YELO"O"GRN"O"CYAN"P "BLUE"I"PURP"N"PINK"I"RST"T 🔥\n\n"RST);
 	mlx_loop_hook(b->ctx->mlx_ptr, &loop_hook, b);
 	mlx_hook(b->ctx->win_ptr, InputOnly, KeyPress, &key_press, b);

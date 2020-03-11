@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/15 18:42:08 by siferrar          #+#    #+#             */
-/*   Updated: 2020/03/10 19:40:24 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/03/11 08:12:00 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,7 +150,6 @@ int		pixel_get(t_buff *img, int x, int y)
 		max = img->line_length * img->height;
 		offset = (double)(img->bits_per_pixel / 8);
 	}
-	//dprintf(1, "Pixel GET - ");
 	addr_index = (y * img->line_length + x * offset);
 	if(addr_index >= 0 && addr_index < max)
 	{

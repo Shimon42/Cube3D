@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 22:11:09 by siferrar          #+#    #+#             */
-/*   Updated: 2020/03/10 17:40:47 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/03/11 10:41:02 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ float to_360(float angle)
 t_fpoint	closest_grid_h(t_fpoint *p, t_map *m, float angle)
 {
 	t_fpoint closest;
-	
+
 	if (angle > PI && angle < 2 * PI)
 		closest.y = floor(p->y / m->bloc_size) * m->bloc_size;
 	else
@@ -77,27 +77,20 @@ t_detect closest_wall_h(t_brain *b, t_fpoint *p, float angle)
 	t_detect d;
 	int is_wall;
 	int is_sprite;
+	int verif;
 
+	verif = angle > PI && angle < 2 * PI;
 	is_wall = 0;
 	d.hit = closest_grid_h(p, b->map, angle);
 	d.from = 'h';
-	d.spr_on_path = ft_calloc(b->map->sprites_count, sizeof(t_sprite *));
-	d.spr_on_path[0] = NULL;
-	if (angle > PI && angle < 2 * PI)
-	{
-		offset.y = -(b->map->bloc_size);
-		offset.x = ((float)b->map->bloc_size / tan(angle)) * -1;
-	}
-	else
-	{
-		offset.y = b->map->bloc_size;
-		offset.x = ((float)b->map->bloc_size / tan(angle)) * 1;
-	}
+	//d.spr_on_path = ft_calloc(b->map->sprites_count, sizeof(t_sprite *));
+	offset.y = (b->map->bloc_size) * (verif ? -1 : 1);
+	offset.x = ((float)b->map->bloc_size / tan(angle)) * (verif ? -1 : 1);
 	while (is_wall == 0 && d.hit.x < b->map->px_width && d.hit.x > 0)
 	{
-		is_sprite = (get_grid(b->map, d.hit.x, d.hit.y + 1, 1) == 2 || get_grid(b->map, d.hit.x, d.hit.y - 1, 1) == 2);
+		/*is_sprite = (get_grid(b->map, d.hit.x, d.hit.y + 1, 1) == 2 || get_grid(b->map, d.hit.x, d.hit.y - 1, 1) == 2);
 		if (is_sprite)
-			d.spr_on_path[0] = get_sprite(b->map, d.hit);
+			d.spr_on_path[0] = get_sprite(b->map, d.hit);*/
 		is_wall = (get_grid(b->map, d.hit.x, d.hit.y + 1, 1) == 1 || get_grid(b->map, d.hit.x, d.hit.y - 1, 1) == 1);
 		if (is_wall == -1 || is_wall == 1)
 			break;
@@ -113,27 +106,20 @@ t_detect closest_wall_v(t_brain *b, t_fpoint *p, float angle)
 	t_fpoint offset;
 	int is_wall;
 	int is_sprite;
+	int verif;
 
+	verif = angle < 2 * PI * 0.75 && angle > PI / 2;
 	is_wall = 0;
 	d.hit = closest_grid_v(p, b->map, angle);
 	d.from = 'v';
-	d.spr_on_path = ft_calloc(b->map->sprites_count, sizeof(t_sprite *));
-	d.spr_on_path[0] = NULL;
-	if (angle < 2 * PI * 0.75 && angle > PI / 2)
-	{
-		offset.x = -b->map->bloc_size;
-		offset.y = ((float)b->map->bloc_size * tan(angle)) * -1;
-	}else{
-		offset.x = b->map->bloc_size;
-		offset.y = ((float)b->map->bloc_size * tan(angle));
-	}
+	//d.spr_on_path = ft_calloc(b->map->sprites_count, sizeof(t_sprite *));
+	offset.x = b->map->bloc_size * (verif ? -1 : 1);
+	offset.y = (b->map->bloc_size * tan(angle)) * (verif ? -1 : 1);
 	while (is_wall == 0 && d.hit.y < b->map->px_height && d.hit.y > 0)
 	{
-		is_sprite = (get_grid(b->map, d.hit.x, d.hit.y + 1, 1) == 2 || get_grid(b->map, d.hit.x, d.hit.y - 1, 1) == 2);
+		/*is_sprite = (get_grid(b->map, d.hit.x, d.hit.y + 1, 1) == 2 || get_grid(b->map, d.hit.x, d.hit.y - 1, 1) == 2);
 		if (is_sprite)
-		{
-			d.spr_on_path[0] = get_sprite(b->map, d.hit);
-		}
+			d.spr_on_path[0] = get_sprite(b->map, d.hit);*/
 		is_wall = (get_grid(b->map, d.hit.x - 1, d.hit.y, 1) == 1 || get_grid(b->map, d.hit.x + 1, d.hit.y, 1) == 1);
 		if (is_wall == 1 || is_wall == -1) 
 			break;
@@ -161,16 +147,16 @@ t_detect	dist_to_wall(t_brain *b, t_fpoint *p, float angle)
 		bad_dist = dists.x;
 		wall.w_side_hit = get_wall_side(angle, 'h');
 		wall.hit = closest_h.hit;
-		wall.spr_on_path = closest_h.spr_on_path;
-		free(closest_v.spr_on_path);
+		//wall.spr_on_path = closest_h.spr_on_path;
+	//	free(closest_v.spr_on_path);
 	}
 	else
 	{
 		bad_dist = dists.y;
 		wall.w_side_hit = get_wall_side(angle, 'v');
 		wall.hit = closest_v.hit;
-		wall.spr_on_path = closest_v.spr_on_path;
-		free(closest_h.spr_on_path);
+		//wall.spr_on_path = closest_v.spr_on_path;
+		//free(closest_h.spr_on_path);
 	}
 	wall.dist = bad_dist;
 	return (wall);
@@ -196,7 +182,13 @@ void	draw_walls(t_brain *b, t_ctx *c)
 	float cur_col;
 	float col_step;
 	float cur_angle;
+	static t_fpoint divs = {-420, -420};
 
+	if (divs.x == -420)
+	{
+		divs.x = c->width / 2;
+		divs.y = c->height / 2;
+	}
 	cur_col = 0;
 	col_step = b->player->cam->fov/ c->width;
 	c->cur_buff = b->map->frame;
@@ -204,13 +196,18 @@ void	draw_walls(t_brain *b, t_ctx *c)
 	{
 		cur_angle = b->player->angle - (b->player->cam->fov / 2) + (col_step * cur_col);
 		wall = dist_to_wall(b, b->player->pos, cur_angle);
-		wall.dist *= cos((cur_col < c->width / 2 ? -1 : 1) * (b->player->angle - cur_angle));
+		wall.dist *= cos((cur_col < divs.x ? -1 : 1) * (b->player->angle - cur_angle));
 		w_height = ((b->map->bloc_size) / wall.dist) * b->player->cam->proj_dist;
-		draw_sky(b, b->ctx, cur_col, c->height/2 - w_height/2 + b->player->z);
+		draw_sky(b, b->ctx, cur_col, divs.y - w_height/2 + b->player->z);
 		draw_col(b, w_height,  cur_col, wall);
-		draw_floor(b, c, cur_angle, floor(c->height/2 + w_height/2 + b->player->z - 1), cur_col);
+		c->color = 0x91672C - 0x101010;
+		/*if (w_height < b->ctx->height)
+			c->line(new_point(cur_col, divs.y + w_height/2 + b->player->z - 1), new_point(cur_col, c->height), c);
+		*/
+	
+		draw_floor(b, c, cur_angle, floor(divs.y + w_height/2 + b->player->z - 1), cur_col);
 		cur_col++;
-		free(wall.spr_on_path);
+	//	free(wall.spr_on_path);
 	}
 }
 void draw_col(t_brain *b, float w_height, float cur_col, t_detect w)

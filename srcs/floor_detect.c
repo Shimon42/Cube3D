@@ -6,11 +6,26 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/09 19:31:18 by siferrar          #+#    #+#             */
-/*   Updated: 2020/03/10 17:42:43 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/03/11 10:35:41 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cube3d.h"
+
+
+int	brightness(int color, double bright)
+{
+	int ret;
+	int r;
+	int g;
+	int b;
+
+	r = ((color >> 16) & 0xFF) * bright;
+	g = ((color >> 8) & 0xFF) * bright;
+	b = (color & 0xFF) * bright;
+	ret = (r << 16) + (g << 8) + b;
+	return (ret);
+}
 
 void draw_floor(t_brain *b, t_ctx *c,
 				double cur_angle, int w_start, double col)
@@ -18,7 +33,7 @@ void draw_floor(t_brain *b, t_ctx *c,
 	t_fpoint div;
 	t_fpoint cossin;
 	t_point pos;
-	double dist;
+	float dist;
 	int color;
 
 	cossin.x = cos(cur_angle);

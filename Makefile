@@ -33,6 +33,7 @@ SRCS = 		main.c \
 			$(SRCSPATH)wall_detect.c \
 			$(SRCSPATH)floor_detect.c \
 			$(SRCSPATH)sprites.c \
+			$(SRCSPATH)keys.c \
 			$(SRCSPATH)player.c \
 			$(DEBUGPATH)debug.c
 
@@ -43,8 +44,9 @@ GNL_OBJS =	${GNL_SRCS:.c=.o}
 
 CC =		gcc
 
-CFLAGSz	= -g -Wall -Wextra -Werror
+CFLAGSPROD	= -g -Wall -Wextra -Werror
 CFLAGS	= -g
+CFLAGSSAN	= -g -g3 -fsanitize=address
 
 OBJS = ${SRCS:.c=.o}
 

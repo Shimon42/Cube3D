@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 21:30:44 by siferrar          #+#    #+#             */
-/*   Updated: 2020/03/10 17:01:36 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/03/11 07:06:02 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ void			draw_fov_map(t_brain *b, t_ctx *c);
 void			draw_ray(t_player *p, t_map *m, float angle);
 void			draw_minimap_rays(t_brain *b, t_fpoint disp);
 void init_texture(t_brain *b, char *path, t_buff **t);
+
 /*
 ** --- Utils
 */
@@ -95,6 +96,16 @@ void			rotate(struct s_player *p, float angle);
 void			draw_player(struct s_player *p, t_ctx *ctx);
 void			side_move(struct s_player *p, int dir);
 void			jump(t_player *p, float speed);
+
+/*
+** --- Controls
+*/
+
+int				is_key_pressed(t_brain *b, int key);
+int				add_key_pressed(t_brain *b, int key);
+int				del_key_pressed(t_brain *b, int key);
+int				key_press(int key, void *param);
+int				key_release(int key, void *param);
 
 /*
 ** --- RayCasting
