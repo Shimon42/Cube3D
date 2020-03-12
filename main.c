@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 21:29:11 by siferrar          #+#    #+#             */
-/*   Updated: 2020/03/11 20:16:00 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/03/12 08:29:52 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ void exit_cube(t_brain *brain, int error_code, char *msg, int init)
 		ft_putstr(RED);
 	else
 		ft_putstr(GRN);
-	ft_putstr("Cub3D Exit - Error: ");
+	ft_putstr("\nCub3D Exit - Error: ");
 	ft_putnbr(error_code);
 	ft_putstr(" - ");
 	ft_putstr(msg);
@@ -104,13 +104,17 @@ void exit_cube(t_brain *brain, int error_code, char *msg, int init)
 
 void free_buff(t_buff *buff)
 {
-	ft_putstr("  -> Free buff\n");
+	ft_putstr("  -> Free buff - ");
 	if (buff != NULL)
 	{
-		free(buff->addr);
-		free(buff->img);
-		free(buff);
+		dprintf(1, "INITED: %d - ", buff->initied);
+		if (buff->initied >= 1)
+			free(buff->img);
+		if (buff->initied >= 2)
+			free(buff->addr);
 	}
+	free(buff);
+	ft_putstr("OK\n");
 }
 void check_n_free(void *var)
 {
@@ -127,12 +131,12 @@ void meditate(t_brain *b)
 	ft_putstr(DYELO"Free Map\n");
 	if (b->map != NULL)
 	{
-		free_buff(b->map->skybox);
 		free_buff(b->map->w_n);
 		free_buff(b->map->w_e);
 		free_buff(b->map->w_s);
 		free_buff(b->map->w_w);
 		free_buff(b->map->floor);
+		free_buff(b->map->skybox);
 		free_buff(b->map->frame);
 		check_n_free(b->map);
 	}

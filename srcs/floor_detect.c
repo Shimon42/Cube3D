@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/09 19:31:18 by siferrar          #+#    #+#             */
-/*   Updated: 2020/03/11 10:35:41 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/03/12 08:31:35 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void draw_floor(t_brain *b, t_ctx *c,
 	div.y = b->player->cam->proj_size.y/2;
 	while (w_start < b->ctx->height)
 	{
-		dist = ((div.x) / (w_start - (div.y))) * b->player->cam->proj_dist;
+		dist = ((div.x) / ((w_start - (int)floor(b->player->z)) - (div.y))) * b->player->cam->proj_dist;
 		pos.x = (int)(dist * cossin.x + b->player->pos->x);
 		pos.y = (int)(dist * cossin.y + b->player->pos->y);
 		color = pixel_get(b->map->floor, pos.x % b->map->floor->width,

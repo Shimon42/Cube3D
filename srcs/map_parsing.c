@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/14 20:36:43 by siferrar          #+#    #+#             */
-/*   Updated: 2020/03/11 20:04:27 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/03/12 08:24:45 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ int				init_map(t_ctx *ctx, void *brain)
 	b->map->floor = NULL;
 	b->map->sprites_count = 0;
 	b->map->sprites = NULL;
+	b->map->skybox = NULL;
 	b->map->brain = b;
 	init_buff(ctx, &b->map->frame, ctx->width, ctx->height);
 	return (1);
@@ -38,13 +39,18 @@ int				init_map(t_ctx *ctx, void *brain)
 void init_texture(t_brain *b, char *path, t_buff **t)
 {
 	dprintf(1, DCYAN"	-> %s", path);
-	if (((*t) = malloc(sizeof(t_buff))) != NULL)
+	*t = NULL;
+	*t = malloc(sizeof(t_buff));
+	if (*t != NULL)
 	{
+		(*t)->initied = 1;
 		(*t)->img = mlx_xpm_file_to_image(b->ctx->mlx_ptr, path, &(*t)->width, &(*t)->height);
 		if (!(*t)->img)
 			exit_cube(NULL, 404, path, 0);
+		(*t)->initied = 2;
 		(*t)->addr = mlx_get_data_addr((*t)->img, &(*t)->bits_per_pixel, &(*t)->line_length,
 									&(*t)->endian);
+		(*t)->initied = 3;
 		dprintf(1, GRN" - OK\n"RST);
 	}
 	else

@@ -1,4 +1,4 @@
-# Cube 3D • Alpha 0.6.1
+# Cube 3D • Alpha 0.6.2
 
 ![Cube3D Screenshot](/images/world.png)
 
@@ -32,7 +32,7 @@
 	————————————————————————————————————
 		Changes:
 	————————————————————————————————————
-	- exit_cube() - not finished but good start
+	- Better player->z and floor gest 
 
     ————————————————————————————————————
 		Cur State:
