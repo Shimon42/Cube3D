@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 22:11:09 by siferrar          #+#    #+#             */
-/*   Updated: 2020/03/11 10:41:02 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/03/12 10:01:26 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,7 +121,7 @@ t_detect closest_wall_v(t_brain *b, t_fpoint *p, float angle)
 		if (is_sprite)
 			d.spr_on_path[0] = get_sprite(b->map, d.hit);*/
 		is_wall = (get_grid(b->map, d.hit.x - 1, d.hit.y, 1) == 1 || get_grid(b->map, d.hit.x + 1, d.hit.y, 1) == 1);
-		if (is_wall == 1 || is_wall == -1) 
+		if (is_wall == 1 || is_wall == -1)
 			break;
 		d.hit.x += offset.x;
 		d.hit.y += offset.y;	
@@ -198,14 +198,23 @@ void	draw_walls(t_brain *b, t_ctx *c)
 		wall = dist_to_wall(b, b->player->pos, cur_angle);
 		wall.dist *= cos((cur_col < divs.x ? -1 : 1) * (b->player->angle - cur_angle));
 		w_height = ((b->map->bloc_size) / wall.dist) * b->player->cam->proj_dist;
-		draw_sky(b, b->ctx, cur_col, divs.y - w_height/2 + b->player->z);
-		draw_col(b, w_height,  cur_col, wall);
-		c->color = 0x91672C - 0x101010;
-		/*if (w_height < b->ctx->height)
-			c->line(new_point(cur_col, divs.y + w_height/2 + b->player->z - 1), new_point(cur_col, c->height), c);
-		*/
-	
-		draw_floor(b, c, cur_angle, floor(divs.y + w_height/2 + b->player->z - 1), cur_col);
+
+		if (1)
+		{
+			if (w_height < b->ctx->height)
+				draw_sky(b, b->ctx, cur_col, divs.y - w_height/2 + b->player->z);
+			draw_col(b, w_height,  cur_col, wall);
+			if (w_height < b->ctx->height)
+				draw_floor(b, c, cur_angle, floor(divs.y + w_height/2 + b->player->z - 1), cur_col);
+		} else {
+			c->color = 0x388FBA;
+			if (w_height < b->ctx->height)
+				c->line(new_point(cur_col, 0), new_point(cur_col, c->height/2 - w_height/2 + b->player->z), c);
+			draw_col(b, w_height,  cur_col, wall);
+			c->color = 0x91672C;
+			if (w_height < b->ctx->height)
+				c->line(new_point(cur_col, c->height/2 + w_height/2 + b->player->z - 1), new_point(cur_col, c->height), c);
+		}
 		cur_col++;
 	//	free(wall.spr_on_path);
 	}

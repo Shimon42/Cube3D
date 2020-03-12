@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/14 22:46:16 by siferrar          #+#    #+#             */
-/*   Updated: 2020/03/09 20:09:07 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/03/12 10:14:27 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,5 +74,6 @@ int				parse_map(t_map **map, char *line);
 int				alloc_map(t_map **map);
 t_player_detect	*add_map_row(t_map *map, char *line);
 int				**alloc_2d_tab(int width, int height);
+int				check_map(t_map *m);
 
 #endif

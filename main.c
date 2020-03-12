@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 21:29:11 by siferrar          #+#    #+#             */
-/*   Updated: 2020/03/12 08:29:52 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/03/12 10:14:52 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,10 +107,9 @@ void free_buff(t_buff *buff)
 	ft_putstr("  -> Free buff - ");
 	if (buff != NULL)
 	{
-		dprintf(1, "INITED: %d - ", buff->initied);
-		if (buff->initied >= 1)
+		if (buff->img)
 			free(buff->img);
-		if (buff->initied >= 2)
+		if (buff->addr)
 			free(buff->addr);
 	}
 	free(buff);
@@ -192,7 +191,7 @@ void	draw_sky(t_brain *b, t_ctx *c, double col, double end)
 		left += width;
 	while (y < end)
 	{
-		color = pixel_get(b->map->skybox, col - left * ratio.x, 200 + y * ratio.y);
+		color = pixel_get(b->map->skybox, col - left * ratio.x, 200 - b->player->z*0.1 + y * ratio.y);
 		pixel_put_buff(col, y, color, b->map->frame);
 		y++;
 	}
@@ -200,8 +199,8 @@ void	draw_sky(t_brain *b, t_ctx *c, double col, double end)
 
 int loop_hook(t_brain *b)
 {
-	key_press(-1, b);
 	mlx_clear_window(b->ctx->mlx_ptr, b->ctx->win_ptr);
+	key_press(-1, b);
 	if (b->player->as_move == 1)
 	{
 		draw_walls(b, b->ctx);
@@ -214,6 +213,11 @@ int loop_hook(t_brain *b)
 	mlx_put_image_to_window(b->ctx->mlx_ptr , b->ctx->win_ptr, b->map->frame->img, 0, 0);
 	fps_count(b->ctx);
 	return (b->inited);
+}
+
+int	check_map(t_map *m)
+{
+	
 }
 
 int	main(int ac, char **av)
@@ -230,6 +234,7 @@ int	main(int ac, char **av)
 	b->ctx->height = win->size_y;
 	printf(GRN"Opening Map "DCYAN"%s\n"RST, av[1]);
 	open_map(b, av[1]);
+	check_map(b->map);
 	ft_putstr(RED"\n🔥 L"YELO"O"GRN"O"CYAN"P "BLUE"I"PURP"N"PINK"I"RST"T 🔥\n\n"RST);
 	mlx_loop_hook(b->ctx->mlx_ptr, &loop_hook, b);
 	mlx_hook(b->ctx->win_ptr, InputOnly, KeyPress, &key_press, b);

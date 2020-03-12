@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/23 18:52:51 by siferrar          #+#    #+#             */
-/*   Updated: 2020/03/09 08:40:16 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/03/12 08:51:09 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ typedef struct	s_player
 {
 	int			inited;
 	int			as_move;
+	int			as_rotate;
 	t_fpoint	*pos;
 	float		z;
 	t_camera	*cam;

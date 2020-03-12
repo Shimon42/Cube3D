@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/22 22:24:57 by siferrar          #+#    #+#             */
-/*   Updated: 2020/03/11 08:15:04 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/03/12 09:02:08 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ int		init_player(t_brain *b, int pos_x, char angle)
 	b->player->rot(b->player, 0);
 	b->player->brain = b;
 	b->player->as_move = 1;
+	b->player->as_rotate = 1;
 	b->player->bobbing = 1;
 	b->player->jumping = 0;
 	b->player->inited = 1;
@@ -178,6 +179,7 @@ void	move(struct s_player *p, int dir)
 
 void	rotate(struct s_player *p, float angle)
 {
+	p->as_rotate = 1;
 	p->angle += angle;
 	if (p->angle > 2 * PI)
 		p->angle = p->angle - 2 * PI;
