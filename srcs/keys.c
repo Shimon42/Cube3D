@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/11 06:48:57 by siferrar          #+#    #+#             */
-/*   Updated: 2020/03/11 19:32:18 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/03/13 08:49:06 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,15 +76,6 @@ int	key_press(int key, void *param)
 			b->player->jump(b->player, 15);
 		else if (b->player->z != 0 && b->player->jumping != 0)
 			b->player->jump(b->player, 15);
-
-		if ((key = is_key_pressed(b, 126)) >= 0 && b->player->cam->fov != ft_inrad(160))
-		{
-			b->player->as_move = 1;
-			b->player->cam->fov = ft_inrad(170);
-			b->player->cam->proj_size.x = 5000;
-			b->player->cam->proj_size.y = 5000;
-			b->player->cam->proj_dist = (b->player->cam->proj_size.x / 2) / tan(b->player->cam->fov / 2) * 2;
-		}
 	
 		if ((key = is_key_pressed(b, 123)) >= 0 && is_key_pressed(b, 257) >= 0)
 			b->player->rot(b->player, -b->player->rot_speed / 20);
@@ -115,15 +106,7 @@ int	key_release(int key, void *param)
 	}
 	if (key == 49)
 		b->player->jump(b->player, 15);
-	if (key == 126)
-	{
-		b->map->bloc_size = 64;
-		b->player->cam->fov = ft_inrad(60);
-		b->player->cam->proj_size.x = b->ctx->width;
-		b->player->cam->proj_size.y = b->ctx->height;
-		b->player->cam->proj_dist = (b->player->cam->proj_size.x / 2) / tan(b->player->cam->fov / 2);
-		b->player->as_move = 1;
-	}
+	
  	del_key_pressed(b, key);
 	return (0);
 }

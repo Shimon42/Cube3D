@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 21:29:11 by siferrar          #+#    #+#             */
-/*   Updated: 2020/03/12 10:14:52 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/03/13 09:49:26 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -217,7 +217,7 @@ int loop_hook(t_brain *b)
 
 int	check_map(t_map *m)
 {
-	
+	return (1);
 }
 
 int	main(int ac, char **av)
