@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/14 20:36:43 by siferrar          #+#    #+#             */
-/*   Updated: 2020/03/15 18:10:19 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/03/15 18:28:24 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ void init_texture(t_brain *b, char *path, t_buff **t)
 									&(*t)->endian);
 		(*t)->max_addr = (*t)->line_length * (*t)->height;
 		(*t)->offset = (*t)->bits_per_pixel / 8;
+		(*t)->ratio = (*t)->width / b->map->bloc_size;
 		(*t)->initied = 3;
 		dprintf(1, GRN" - OK\n"RST);
 	}
