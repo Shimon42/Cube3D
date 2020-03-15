@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 21:29:11 by siferrar          #+#    #+#             */
-/*   Updated: 2020/03/13 09:49:26 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/03/15 18:14:14 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -186,7 +186,7 @@ void	draw_sky(t_brain *b, t_ctx *c, double col, double end)
 		ratio.x = (float)b->map->skybox->width / width;
 	}
 	y = 0;
-	left = -width * b->player->angle / (2 * PI);
+	left = -width * (b->player->angle / (2 * PI));
 	if (left < width - b->player->cam->proj_size.x) 
 		left += width;
 	while (y < end)

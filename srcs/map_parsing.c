@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/14 20:36:43 by siferrar          #+#    #+#             */
-/*   Updated: 2020/03/13 09:16:18 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/03/15 18:10:19 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,8 @@ int				init_map(t_ctx *ctx, void *brain)
 void init_texture(t_brain *b, char *path, t_buff **t)
 {
 	dprintf(1, DCYAN"	-> %s", path);
-	*t = NULL;
 	*t = malloc(sizeof(t_buff));
-	if (*t != NULL)
+	if (*t)
 	{
 		(*t)->initied = 1;
 		(*t)->img = mlx_xpm_file_to_image(b->ctx->mlx_ptr, path, &(*t)->width, &(*t)->height);
@@ -50,6 +49,8 @@ void init_texture(t_brain *b, char *path, t_buff **t)
 		(*t)->initied = 2;
 		(*t)->addr = mlx_get_data_addr((*t)->img, &(*t)->bits_per_pixel, &(*t)->line_length,
 									&(*t)->endian);
+		(*t)->max_addr = (*t)->line_length * (*t)->height;
+		(*t)->offset = (*t)->bits_per_pixel / 8;
 		(*t)->initied = 3;
 		dprintf(1, GRN" - OK\n"RST);
 	}
@@ -73,7 +74,7 @@ int				open_map(t_brain *b, char *map_path)
 	init_texture(b, "./assets/textures/walls/stone_bricks/1.xpm", &b->map->w_w);
 	//init_texture(b, "./assets/textures/colors/blue.xpm", &b->map->floor);
 	init_texture(b, "./assets/textures/floor/sand.xpm", &b->map->floor);
-	init_texture(b, "./assets/sky/minecraft2.xpm", &b->map->skybox);
+	//init_texture(b, "./assets/sky/zenith.xpm", &b->map->skybox);
 	init_texture(b, "./assets/sky/mountains/mountains.xpm", &b->map->skybox);
 	
 	player = malloc(sizeof(t_player_detect));

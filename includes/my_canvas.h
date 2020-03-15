@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/15 17:33:03 by siferrar          #+#    #+#             */
-/*   Updated: 2020/03/12 08:04:49 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/03/15 17:54:28 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ typedef struct	s_buff {
 	int			endian;
 	int			width;
 	int			height;
+	int			offset;
+	int			max_addr;
 	int			initied;
 }				t_buff;
 

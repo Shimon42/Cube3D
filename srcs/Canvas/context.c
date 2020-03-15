@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/15 18:42:08 by siferrar          #+#    #+#             */
-/*   Updated: 2020/03/12 08:28:41 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/03/15 17:54:17 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,14 @@ void	set_context(t_ctx **cur, t_ctx **new_ctx, char *name)
 		if (*new_ctx)
 		{
 			*cur = *new_ctx;
+			write(1, "Context SET\n", 12);
 			return ;
 		}
 		else
-			exit_cube(NULL, 301, "Failed to set cur context", 0);
+		{
+			write(1, "\033[0;31mCTX NOT SET\n", 19);
+			exit(0);
+		}
 	}
 	else
 		write(1, "Context Already SET\n", 20);
@@ -57,19 +61,30 @@ void init_buff(t_ctx * ctx, t_buff **buff, int width, int height)
 {
 	(*buff) = malloc(sizeof(t_buff));
 	if ((*buff) == NULL)
-		exit_cube(NULL, 1, "Buff malloc error", 0);
+	{
+		ft_putstr(RED"BUFF NOT SET"RST);
+		exit(3);
+	}
 	(*buff)->width = width;
 	(*buff)->height = height;
-	//dprintf(1, DCYAN"INIT BUFF %d x %d px\n"RST, width, height);
+	dprintf(1, DCYAN"INIT BUFF %d x %d px\n"RST, width, height);
 	(*buff)->img = NULL;
 	(*buff)->addr = NULL;
 	(*buff)->img = mlx_new_image(ctx->mlx_ptr, ctx->width, ctx->height);
 	(*buff)->addr = mlx_get_data_addr((*buff)->img, &(*buff)->bits_per_pixel, &(*buff)->line_length,
                                  &(*buff)->endian);
+	(*buff)->max_addr = (*buff)->line_length * (*buff)->height;
+	(*buff)->offset = (*buff)->bits_per_pixel / 8;
 	if ((*buff)->addr == NULL)
-		exit_cube(NULL, 201, "Buff address malloc error", 0);
+	{
+		ft_putstr(RED"BUFF NOT SET"RST);
+		exit(5);
+	}
 	if ((*buff)->img == NULL)
-		exit_cube(NULL, 202, "Buff img malloc error", 0);
+	{
+		ft_putstr(RED"BUFF NOT SET"RST);
+		exit(4);
+	}
 }
 
 t_ctx	*new_ctx(int width, int height)
@@ -86,8 +101,6 @@ t_ctx	*new_ctx(int width, int height)
 	ctx->circle = &draw_circle;
 	ctx->text = &put_text;
 	ctx->clear = &clear_ctx;
-	
-	//disp_buff(ctx->buff);
 	return(ctx);
 }
 
@@ -100,18 +113,9 @@ void            pixel_put_buff(int x, int y, int color, t_buff *buff)
 {
     char    *dst;
 	int addr_index;
-	static int max = -420;
-	static double offset = 0;
 
-	//ft_putstr("Pixel PUT - ");
-	if (max == -420)
-	{
-		max = buff->line_length * buff->height;
-		offset = (buff->bits_per_pixel / 8);
-	}
-
-	addr_index = (y * buff->line_length + x * offset);
-	if(addr_index >= 0 && addr_index < max)
+	addr_index = (y * buff->line_length + x * buff->offset);
+	if(addr_index >= 0 && addr_index < buff->max_addr)
 	{
     	dst = buff->addr + addr_index;
 		*(unsigned int*)dst = color;
@@ -124,21 +128,9 @@ int		pixel_get(t_buff *img, int x, int y)
     char    *dst;
 	int addr_index;
 	int *color;
-	static int max = -420;
-	static double offset;
-
-	if (dst == NULL)
-	{
-		ft_putstr(RED"BUFF NOT SET"RST);
-		exit(5);
-	}
-	if (max == -420)
-	{
-		max = img->line_length * img->height;
-		offset = (double)(img->bits_per_pixel / 8);
-	}
-	addr_index = (y * img->line_length + x * offset);
-	if(addr_index >= 0 && addr_index < max)
+	
+	addr_index = (y * img->line_length + x * img->offset);
+	if(addr_index >= 0 && addr_index < img->max_addr)
 	{
     	dst = img->addr + addr_index;
 		color = (int*)(dst);
@@ -146,3 +138,4 @@ int		pixel_get(t_buff *img, int x, int y)
 	}
 	return (-1);
 }
+
