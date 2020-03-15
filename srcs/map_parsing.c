@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/14 20:36:43 by siferrar          #+#    #+#             */
-/*   Updated: 2020/03/15 18:28:24 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/03/15 19:03:15 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,8 +74,10 @@ int				open_map(t_brain *b, char *map_path)
 	init_texture(b, "./assets/textures/walls/stone_bricks/3.xpm", &b->map->w_s);
 	init_texture(b, "./assets/textures/walls/stone_bricks/1.xpm", &b->map->w_w);
 	//init_texture(b, "./assets/textures/colors/blue.xpm", &b->map->floor);
+	//init_texture(b, "./assets/textures/floor/grass/AC.xpm", &b->map->floor);
+	//init_texture(b, "./assets/textures/floor/concrete/lime.xpm", &b->map->floor);
 	init_texture(b, "./assets/textures/floor/sand.xpm", &b->map->floor);
-	//init_texture(b, "./assets/sky/zenith.xpm", &b->map->skybox);
+	//init_texture(b, "./assets/sky/sunset.xpm", &b->map->skybox);
 	init_texture(b, "./assets/sky/mountains/mountains.xpm", &b->map->skybox);
 	
 	player = malloc(sizeof(t_player_detect));

@@ -1,4 +1,4 @@
-# Cube 3D • Alpha 0.6.2
+# Cube 3D • Alpha 0.6.3
 
 ![Cube3D Screenshot](/images/world.png)
 
@@ -32,7 +32,7 @@
 	————————————————————————————————————
 		Changes:
 	————————————————————————————————————
-	- Better player->z and floor gest 
+	- No more texture bug
 
     ————————————————————————————————————
 		Cur State:
