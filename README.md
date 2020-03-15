@@ -1,4 +1,4 @@
-# Cube 3D • Alpha 0.6.3
+# Cube 3D • Alpha 0.6.4
 
 ![Cube3D Screenshot](/images/world.png)
 
@@ -33,6 +33,7 @@
 		Changes:
 	————————————————————————————————————
 	- No more texture bug
+	- No more random segfault at start
 
     ————————————————————————————————————
 		Cur State:
@@ -53,7 +54,4 @@
 	
 	Moving:
 	- Double speed if walk on side and move forward
-
-	Segfault:
-	- Sometimes at start, backtrace at pixel_put
 
