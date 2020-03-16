@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 21:29:11 by siferrar          #+#    #+#             */
-/*   Updated: 2020/03/15 18:14:14 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/03/16 10:11:35 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -217,6 +217,54 @@ int loop_hook(t_brain *b)
 
 int	check_map(t_map *m)
 {
+	int x;
+	int y;
+	int state;
+	int verif;
+
+	verif = 1;
+	x = 0;
+	dprintf(1, "CHECK MAP\n");
+	while (x < m->width)
+	{
+		y = 0;
+		while (y < m->height)
+		{
+			if (get_grid(m, x, y, 0) <= 0)
+			{
+				state = 0;
+				/*if ((verif = get_grid(m, x, y - 1, 0)) >= 0)
+				{
+					if (state == 0 && verif != 1)
+						return (0);
+				}
+				if ((verif = get_grid(m, x, y + 1, 0)) >= 0)
+				{
+					if (state == 0 && verif != 1)
+						return (0);
+				}
+				if ((verif = get_grid(m, x - 1, y, 0)) >= 0)
+				{
+					if (state == 0 && verif != 1)
+						return (0);
+				}
+				if ((verif = get_grid(m, x + 1, y, 0)) >= 0)
+				{
+					if (state == 0 && verif != 1)
+						return (0);
+				}*/
+			}
+			else
+			{
+				state = 1;
+
+			}
+			
+
+			y++;
+		}
+		x++;
+	}
 	return (1);
 }
 
@@ -234,7 +282,8 @@ int	main(int ac, char **av)
 	b->ctx->height = win->size_y;
 	printf(GRN"Opening Map "DCYAN"%s\n"RST, av[1]);
 	open_map(b, av[1]);
-	check_map(b->map);
+	if (!check_map(b->map))
+		exit_cube(b, 2, "BAD MAP", 0);
 	ft_putstr(RED"\n🔥 L"YELO"O"GRN"O"CYAN"P "BLUE"I"PURP"N"PINK"I"RST"T 🔥\n\n"RST);
 	mlx_loop_hook(b->ctx->mlx_ptr, &loop_hook, b);
 	mlx_hook(b->ctx->win_ptr, InputOnly, KeyPress, &key_press, b);

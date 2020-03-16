@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/14 22:46:16 by siferrar          #+#    #+#             */
-/*   Updated: 2020/03/12 10:14:27 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/03/16 09:31:41 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,15 @@ typedef struct	s_player_detect
 	char		direction;
 }				t_player_detect;
 
+typedef	struct	s_map_line
+{
+	int length;
+	char *line;
+}				t_map_line;
+
 typedef struct	s_map
 {
-	char		*grid;
+	t_map_line	**grid;
 	int			width;
 	int			height;
 	int			px_width;
@@ -72,6 +78,7 @@ typedef struct	s_map
 int				init_map(t_ctx *ctx, void *brain);
 int				parse_map(t_map **map, char *line);
 int				alloc_map(t_map **map);
+int				realloc_map(t_map *m, char *line);
 t_player_detect	*add_map_row(t_map *map, char *line);
 int				**alloc_2d_tab(int width, int height);
 int				check_map(t_map *m);

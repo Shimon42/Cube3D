@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/20 15:53:12 by siferrar          #+#    #+#             */
-/*   Updated: 2020/03/11 06:58:39 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/03/16 09:33:50 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ void	print_map_debug(char *line)
 		else if (*line == 'N')
 			ft_putstr(PINK); 
 		ft_putchar(*line++);
+		ft_putchar(' ');
 	}
 	ft_putchar('\n');
 }
@@ -91,25 +92,7 @@ void	print_map_grid(t_map *map)
 	while (y < map->height)
 	{
 		x = 0;
-		while (x < map->width)
-		{
-			val = map->grid[i];
-			if (val == '0')
-				ft_putstr(DGREY);
-			else if (val == '1')
-				ft_putstr(DCYAN);
-			else if (val == '2')
-				ft_putstr(YELO);
-			else if (val == 'N')
-				ft_putstr(PINK);
-			else
-				ft_putstr(RED);
-			ft_putchar(val);
-			if (x++ < map->width)
-				ft_putchar(' ');
-			i++;
-		};
-		ft_putchar('\n');
+		print_map_debug(map->grid[y]->line);
 		y++;
 	}
 }

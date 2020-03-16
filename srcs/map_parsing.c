@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/14 20:36:43 by siferrar          #+#    #+#             */
-/*   Updated: 2020/03/15 19:03:15 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/03/16 09:50:05 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ int				open_map(t_brain *b, char *map_path)
 	dprintf(1, CYAN"Map Readed - "GRN"OK - "DYELO"Code: %d\n"RST, ret);
 	dprintf(1, DCYAN"	-> Width: [%d]\n", b->map->width);
 	dprintf(1, "	-> Height:[%d]\n\n"RST, b->map->height);
-	print_map_grid(b->map);
+	print_map_grid((b->map));
 	b->map->px_width = b->map->width * b->map->bloc_size;
 	b->map->px_height = b->map->height * b->map->bloc_size;
 	dprintf(1,DCYAN"\nReal Size : %d x %d px\n", b->map->px_width, b->map->px_height);
@@ -111,12 +111,36 @@ size_t		line_length(char *line)
 	size_t len;
 
 	len = 0;
-	while (*line)
-		if (*line++ != ' ')
-			len++;
+	while (line[len])
+		len++;
 	return (len);
 }
 
+int		realloc_map(t_map *m, char *line)
+{
+	t_map_line **grid;
+	int y;
+	int len;
+
+	len = ft_strlen(line);
+	if (len > m->width)
+		m->width = len;
+	y = 0;
+	grid = ft_calloc(m->height + 2, sizeof(t_map_line *));
+	while (y < m->height)
+	{
+		grid[y] = m->grid[y];
+		y++;
+	}
+	grid[y] = malloc(sizeof(t_map_line));
+	grid[y]->length = len;
+	grid[y]->line = ft_strdup(line);
+	grid[++y] = NULL;
+
+	m->grid = grid;
+	m->height++;
+	return (1);
+}
 t_player_detect		*add_map_row(t_map *m, char *line)
 {
 	char	*new;
@@ -128,32 +152,17 @@ t_player_detect		*add_map_row(t_map *m, char *line)
 	i = 0;
 	real = 0;
 	player = NULL;
-	new = NULL;
-	if (!m->grid)
-		m->grid = ft_calloc(line_length(line) + 1, sizeof(char));
-	else
-		new = m->grid;
-	m->width = line_length(line);
+	realloc_map(m, line);
+	dprintf(1, "Alloc ok\n");
 	while (line[i])
 	{
-		if (line[i] != ' ')
+		if (line[i] == 'N' || line[i] == 'E' || line[i] == 'S' || line[i] == 'W')
 		{
-			temp = ft_strnjoin(new, line + i, 0, 1);
-			free(new);
-			new = temp;
-			if (line[i] == 'N' || line[i] == 'E' || line[i] == 'S' || line[i] == 'W')
-			{
-				player = malloc(sizeof(t_player_detect));
-				player->pos_x = real;
-				player->direction = line[i];
-			}
-			if (line[i] == '2')
-				add_sprite(m, real, 2);
-			real++;
+			player = malloc(sizeof(t_player_detect));
+			player->pos_x = i;
+			player->direction = line[i];
 		}
 		i++;
 	}
-	m->height++;
-	m->grid = new;
 	return (player);
 }

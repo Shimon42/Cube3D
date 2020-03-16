@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/14 22:43:45 by siferrar          #+#    #+#             */
-/*   Updated: 2020/03/13 08:23:29 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/03/16 10:21:37 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,21 +16,27 @@
 int get_grid(t_map *m, int x, int y, int need_rescale)
 {
 	t_fpoint scaled;
-
-	if (x > 0 && y > 0)
+	int val;
+	
+	if (x >= 0 && y >= 0)
 	{
-		if (need_rescale && x < m->px_width && y < m->px_height)
+		if (need_rescale)
 		{
-			scaled = to_grid(x, y, m);
-			x = scaled.x;
-			y = scaled.y;
+			if (x < m->px_width && y < m->px_height)
+			{
+				scaled = to_grid(x, y, m);
+				x = scaled.x;
+				y = scaled.y;
+			} else 
+				return (-1);
 		}
-		else
-			return (-1);
-		return (m->grid[y * m->width + x] - '0');
+		if (x < m->grid[y]->length)
+		{
+			val = m->grid[y]->line[x] - '0';
+			return (val);
+		}
 	}
-	else
-		return (-1);
+	return (-1);
 }
 
 t_fpoint			to_grid(int x, int y, t_map *m)
@@ -86,10 +92,9 @@ void		draw_elems(t_brain *b, int disp_x, int disp_y, float scale)
 {
 	int y;
 	int x;
-	int i;
-	char val;
+	int val;
 	t_fpoint p_pos;
-	i = 0;
+
 	y = 0;
 	p_pos = to_grid(b->player->pos->x, b->player->pos->y, b->map);
 	while (y < b->map->height)
@@ -97,36 +102,39 @@ void		draw_elems(t_brain *b, int disp_x, int disp_y, float scale)
 		x = 0;
 		while (x < b->map->width)
 		{
-			val = b->map->grid[i];
-			if (val == '0')
-				b->ctx->color = 0;
-			else if (val == '1')
-				b->ctx->color = 0x00FFFF;
-			else if (val == '2')
-				b->ctx->color = 0x00FF00;
-			else if (val == 'N' || val == 'E' || val == 'S' || val == 'W')
+			val = get_grid(b->map, x, y, 0);
+			dprintf(1, "val[%d][%d]: %d\n", x, y, val);
+			
+			if (val >= 0)
 			{
-				b->ctx->color = 0xFF00FF;
-			} else
-				b->ctx->color = 0xFF0000;
-
-			b->ctx->rect((disp_x + (x * (b->map->bloc_size * scale))),
-						disp_y + (y * (b->map->bloc_size * scale)),
-						b->map->bloc_size * scale,
-						b->map->bloc_size * scale,
-						1,
-						b->ctx);
-			if (b->map->scale > 0.5)
-			{
-				b->ctx->color = 0x222222;
-				b->ctx->rect(floor(disp_x + (x * (b->map->bloc_size * scale))),
-							floor(disp_y + (y * (b->map->bloc_size * scale))),
+				if (val == 0)
+					b->ctx->color = 0;
+				else if (val == 1)
+					b->ctx->color = 0x00FFFF;
+				else if (val == 2)
+					b->ctx->color = 0x00FF00;
+				else if (val == 'N' || val == 'E' || val == 'S' || val == 'W')
+				{
+					b->ctx->color = 0xFF00FF;
+				} else
+					b->ctx->color = 0xFF0000;
+				b->ctx->rect((disp_x + (x * (b->map->bloc_size * scale))),
+							disp_y + (y * (b->map->bloc_size * scale)),
 							b->map->bloc_size * scale,
 							b->map->bloc_size * scale,
-							0,
+							1,
 							b->ctx);
+				if (b->map->scale > 0.5)
+				{
+					b->ctx->color = 0x222222;
+					b->ctx->rect(floor(disp_x + (x * (b->map->bloc_size * scale))),
+								floor(disp_y + (y * (b->map->bloc_size * scale))),
+								b->map->bloc_size * scale,
+								b->map->bloc_size * scale,
+								0,
+								b->ctx);
+				}
 			}
-			i++;
 			x++;
 		};
 		y++;
