@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/14 22:43:45 by siferrar          #+#    #+#             */
-/*   Updated: 2020/03/16 10:21:37 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/03/16 17:59:54 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,9 @@ int get_grid(t_map *m, int x, int y, int need_rescale)
 			} else 
 				return (-1);
 		}
-		if (x < m->grid[y]->length)
+		if (y < m->height && x < m->grid[y]->length)
 		{
-			val = m->grid[y]->line[x] - '0';
+			val = m->grid[y]->line[x];
 			return (val);
 		}
 	}
@@ -103,7 +103,7 @@ void		draw_elems(t_brain *b, int disp_x, int disp_y, float scale)
 		while (x < b->map->width)
 		{
 			val = get_grid(b->map, x, y, 0);
-			dprintf(1, "val[%d][%d]: %d\n", x, y, val);
+		//	dprintf(1, "val[%d][%d]: %d\n", x, y, val);
 			
 			if (val >= 0)
 			{

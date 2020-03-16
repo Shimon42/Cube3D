@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/14 22:46:16 by siferrar          #+#    #+#             */
-/*   Updated: 2020/03/16 09:31:41 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/03/16 17:39:36 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ typedef struct	s_player_detect
 typedef	struct	s_map_line
 {
 	int length;
-	char *line;
+	int *line;
 }				t_map_line;
 
 typedef struct	s_map

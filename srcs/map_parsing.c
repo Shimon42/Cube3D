@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/14 20:36:43 by siferrar          #+#    #+#             */
-/*   Updated: 2020/03/16 09:50:05 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/03/16 17:41:29 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,7 +134,7 @@ int		realloc_map(t_map *m, char *line)
 	}
 	grid[y] = malloc(sizeof(t_map_line));
 	grid[y]->length = len;
-	grid[y]->line = ft_strdup(line);
+	grid[y]->line = ft_str_to_int_tab(line);
 	grid[++y] = NULL;
 
 	m->grid = grid;
@@ -143,8 +143,8 @@ int		realloc_map(t_map *m, char *line)
 }
 t_player_detect		*add_map_row(t_map *m, char *line)
 {
-	char	*new;
-	char	*temp;
+	int		*new;
+	int		*temp;
 	int		i;
 	int		real;
 	t_player_detect	*player;
@@ -152,10 +152,10 @@ t_player_detect		*add_map_row(t_map *m, char *line)
 	i = 0;
 	real = 0;
 	player = NULL;
-	realloc_map(m, line);
-	dprintf(1, "Alloc ok\n");
 	while (line[i])
 	{
+		if (line[i] == ' ')
+			line[i] = '0' - 1;
 		if (line[i] == 'N' || line[i] == 'E' || line[i] == 'S' || line[i] == 'W')
 		{
 			player = malloc(sizeof(t_player_detect));
@@ -164,5 +164,7 @@ t_player_detect		*add_map_row(t_map *m, char *line)
 		}
 		i++;
 	}
+	realloc_map(m, line);
+	dprintf(1, "Alloc ok\n");
 	return (player);
 }
