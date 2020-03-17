@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 21:29:11 by siferrar          #+#    #+#             */
-/*   Updated: 2020/03/16 18:07:06 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/03/17 08:27:45 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -233,48 +233,46 @@ int	check_map(t_map *m)
 		{
 			cur = get_grid(m, x, y, 0);
 			dprintf(1, "check [%d][%d] -> %d\n", x, y, cur);
-			if (cur == -1 || cur == 1)
+			if (cur == -1)
 			{
 				state = 0;
 				verif = get_grid(m, x, y - 1, 0);
 				dprintf(1, "TEST #1 - verif: %d\n", verif);
-				if (verif != 1 && verif != -1  || verif != 0)
+				if (verif != 1 && verif != -1)
 					return (0);
 					verif = get_grid(m, x, y + 1, 0);
 				dprintf(1, "TEST #2 - verif: %d\n", verif);
-				if (verif != 1 && verif != -1  || verif != 0)
+				if (verif != 1 && verif != -1)
 					return (0);
 					verif = get_grid(m, x - 1, y, 0);
 				dprintf(1, "TEST #3 - verif: %d\n", verif);
-				if (verif != 1 && verif != -1  || verif != 0)
+				if (verif != 1 && verif != -1)
 					return (0);
 					verif = get_grid(m, x + 1, y, 0);
 				dprintf(1, "TEST #4 - verif: %d\n", verif);
-				if (verif != 1 && verif != -1  || verif != 0)
+				if (verif != 1 && verif != -1)
 					return (0);
 			}
 			else
 			{
-				state = 1;
+				state = 1;     
 				verif = get_grid(m, x, y - 1, 0);
 				dprintf(1, "TEST #1 - verif: %d\n", verif);
-				if (verif < 0 && verif != -1)
+				if ((verif < 0 && verif != -1) || (cur == 0 && verif == -1))
 					return (0);
 				verif = get_grid(m, x, y + 1, 0);
 				dprintf(1, "TEST #2 - verif: %d\n", verif);
-				if (verif < 0 && verif != -1)
+				if ((verif < 0 && verif != -1) || (cur == 0 && verif == -1))
 					return (0);
 				verif = get_grid(m, x - 1, y, 0);
 				dprintf(1, "TEST #3 - verif: %d\n", verif);
-				if (verif < 0 && verif != -1)
+				if ((verif < 0 && verif != -1) || (cur == 0 && verif == -1))
 					return (0);
 				verif = get_grid(m, x + 1, y, 0);
 				dprintf(1, "TEST #4 - verif: %d\n", verif);
-				if (verif < 0 && verif != -1)
+				if ((verif < 0 && verif != -1) || (cur == 0 && verif == -1))
 					return (0);
 			}
-			
-
 			y++;
 		}
 		x++;
