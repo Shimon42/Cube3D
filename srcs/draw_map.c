@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/14 22:43:45 by siferrar          #+#    #+#             */
-/*   Updated: 2020/03/16 17:59:54 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/03/17 18:08:03 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,7 +124,7 @@ void		draw_elems(t_brain *b, int disp_x, int disp_y, float scale)
 							b->map->bloc_size * scale,
 							1,
 							b->ctx);
-				if (b->map->scale > 0.5)
+				if (b->map->scale > 0.1)
 				{
 					b->ctx->color = 0x222222;
 					b->ctx->rect(floor(disp_x + (x * (b->map->bloc_size * scale))),
@@ -251,7 +251,7 @@ void			draw_minimap(t_brain *b, int x, int y, int width)
 	b->map->scale = scale;
 	b->map->disp.x = floor(x);
 	b->map->disp.y = floor(y);
-    draw_frame(b);
+   // draw_frame(b);
     draw_elems(b, x, y, scale);
 	draw_player_map(b, b->player, new_point(x, y));
 	//draw_fov_map(b, b->ctx);
