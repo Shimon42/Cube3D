@@ -63,6 +63,7 @@ SRCS	=	$(MATHLIB)ft_abs.c \
 			$(CONVLIB)ft_itoa.c \
 			$(CONVLIB)ft_itoab.c \
 			$(CONVLIB)conv_angles.c \
+			$(CONVLIB)ft_str_to_int_tab.c \
 			\
 			$(NUMLIB)ft_nbrslen.c \
 			$(NUMLIB)ft_hexlen.c \

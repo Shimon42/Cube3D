@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 21:29:11 by siferrar          #+#    #+#             */
-/*   Updated: 2020/03/15 18:14:14 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/03/17 08:27:45 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -217,6 +217,66 @@ int loop_hook(t_brain *b)
 
 int	check_map(t_map *m)
 {
+	int x;
+	int y;
+	int cur;
+	int state;
+	int verif;
+
+	verif = 1;
+	x = 0;
+	dprintf(1, "CHECK MAP\n");
+	while (x < m->width)
+	{
+		y = 0;
+		while (y < m->height)
+		{
+			cur = get_grid(m, x, y, 0);
+			dprintf(1, "check [%d][%d] -> %d\n", x, y, cur);
+			if (cur == -1)
+			{
+				state = 0;
+				verif = get_grid(m, x, y - 1, 0);
+				dprintf(1, "TEST #1 - verif: %d\n", verif);
+				if (verif != 1 && verif != -1)
+					return (0);
+					verif = get_grid(m, x, y + 1, 0);
+				dprintf(1, "TEST #2 - verif: %d\n", verif);
+				if (verif != 1 && verif != -1)
+					return (0);
+					verif = get_grid(m, x - 1, y, 0);
+				dprintf(1, "TEST #3 - verif: %d\n", verif);
+				if (verif != 1 && verif != -1)
+					return (0);
+					verif = get_grid(m, x + 1, y, 0);
+				dprintf(1, "TEST #4 - verif: %d\n", verif);
+				if (verif != 1 && verif != -1)
+					return (0);
+			}
+			else
+			{
+				state = 1;     
+				verif = get_grid(m, x, y - 1, 0);
+				dprintf(1, "TEST #1 - verif: %d\n", verif);
+				if ((verif < 0 && verif != -1) || (cur == 0 && verif == -1))
+					return (0);
+				verif = get_grid(m, x, y + 1, 0);
+				dprintf(1, "TEST #2 - verif: %d\n", verif);
+				if ((verif < 0 && verif != -1) || (cur == 0 && verif == -1))
+					return (0);
+				verif = get_grid(m, x - 1, y, 0);
+				dprintf(1, "TEST #3 - verif: %d\n", verif);
+				if ((verif < 0 && verif != -1) || (cur == 0 && verif == -1))
+					return (0);
+				verif = get_grid(m, x + 1, y, 0);
+				dprintf(1, "TEST #4 - verif: %d\n", verif);
+				if ((verif < 0 && verif != -1) || (cur == 0 && verif == -1))
+					return (0);
+			}
+			y++;
+		}
+		x++;
+	}
 	return (1);
 }
 
@@ -234,7 +294,8 @@ int	main(int ac, char **av)
 	b->ctx->height = win->size_y;
 	printf(GRN"Opening Map "DCYAN"%s\n"RST, av[1]);
 	open_map(b, av[1]);
-	check_map(b->map);
+	if (!check_map(b->map))
+		exit_cube(b, 2, "BAD MAP", 0);
 	ft_putstr(RED"\n🔥 L"YELO"O"GRN"O"CYAN"P "BLUE"I"PURP"N"PINK"I"RST"T 🔥\n\n"RST);
 	mlx_loop_hook(b->ctx->mlx_ptr, &loop_hook, b);
 	mlx_hook(b->ctx->win_ptr, InputOnly, KeyPress, &key_press, b);

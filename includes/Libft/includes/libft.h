@@ -1,15 +1,15 @@
 /* ************************************************************************** */
-/*                                                          LE - /            */
-/*                                                              /             */
-/*   libft.h                                          .::    .:/ .      .::   */
-/*                                                 +:+:+   +:    +:  +:+:+    */
-/*   By: siferrar <siferrar@student.le-101.fr>      +:+   +:    +:    +:+     */
-/*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2019/10/11 12:00:43 by siferrar     #+#   ##    ##    #+#       */
-/*   Updated: 2020/02/04 21:33:56 by siferrar    ###    #+. /#+    ###.fr     */
-/*                                                         /                  */
-/*                                                        /                   */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   libft.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: siferrar <siferrar@student.le-101.fr>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/10/11 12:00:43 by siferrar          #+#    #+#             */
+/*   Updated: 2020/03/16 08:47:53 by siferrar         ###   ########lyon.fr   */
+/*                                                                            */
 /* ************************************************************************** */
+
 
 #ifndef LIBFT_H
 # define LIBFT_H
@@ -28,6 +28,7 @@ void				*ft_bzero(void *s, size_t n);
 void				*ft_calloc(size_t count, size_t size);
 char				*ft_itoa(int n);
 char				*ft_ftoa(float n, int dec);
+int					*ft_str_to_int_tab(const char *s1);
 int					ft_findchar(const char *needles, const char *str);
 double				ft_indeg(double angle);
 double				ft_inrad(double angle);
