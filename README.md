@@ -19,9 +19,9 @@
 
 <kbd>D</kbd> - Move Right
 
-<kbd>LEFT</kbd> <kbd>RIGHT</kbd> - Rotate camera ( + <kbd>SHIFT</kbd> to rotate/10)
+<kbd>LEFT</kbd> <kbd>RIGHT</kbd> - Rotate camera (+ <kbd>SHIFT</kbd> to rotate/10)
 
-<kbd>SPACE</kbd> - Jump (WYP)
+<kbd>SPACE</kbd> - Jump
 
 
 ![Cube3D Minimap expanded](/images/minimap.png)
