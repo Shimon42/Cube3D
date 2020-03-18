@@ -55,6 +55,8 @@ LAB = $(MAPS)Lab.cub
 WORLD = $(MAPS)world.cub
 MAP = $(MAPS)map.cub
 EMPTY = $(MAPS)empty.cub
+MINE = $(MAPS)Mine.cub
+NEW = $(MAPS)new_parse.cub
 
 COL_TITLE = \033[2;33m
 COL_CUBE = \033[2;32m
@@ -87,7 +89,7 @@ launch:		comp
 			@echo "|  |____________$(COL_TXT)\_____/\____|____/  \____/|____/ $(COL_CUBE)___________|  |"
 			@echo "| / $(COL_SHADOW)           /////// /////////     \\\\\\\\\\\\\\\\\\\ \\\\\\\\\\\\\\\\\\\\\\\\$(COL_CUBE)            \ |"
 			@echo "+––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––+\033[0m"
-			@./$(NAME) $(MAP)
+			@./$(NAME) $(MINE)
 
 minilib:	
 			@make -C $(MINILIB)

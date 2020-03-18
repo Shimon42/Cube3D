@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 21:30:44 by siferrar          #+#    #+#             */
-/*   Updated: 2020/03/12 08:45:49 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/03/16 17:45:48 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,7 +134,7 @@ void draw_floor(t_brain *b, t_ctx *c, double cur_angle, int w_start, double col)
 ** --- DEBUG FUNCTIONS
 */
 
-void			print_map_debug(char *line);
+void			print_map_debug(t_map_line *line);
 void			print_map_grid(t_map *map);
 void			disp_map_s(t_map *m);
 void			disp_buff(t_buff *b);

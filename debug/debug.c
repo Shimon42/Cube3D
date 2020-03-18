@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/20 15:53:12 by siferrar          #+#    #+#             */
-/*   Updated: 2020/03/11 06:58:39 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/03/16 17:55:45 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,20 +62,30 @@ void	print_player_debug(t_brain *b)
 	b->ctx->text(ft_itoa(b->player->pos->x), 65, 12, b->ctx);
 }
 
-void	print_map_debug(char *line)
+void	print_map_debug(t_map_line *line)
 {
-	while (*line)
+	int i;
+
+	i = 0;
+	while (i < line->length)
 	{
-		if (*line == '0')
+		if (line->line[i] == 0)
 			ft_putstr(DGREY);
-		else if (*line == '1')
+		else if (line->line[i] == 1)
 			ft_putstr(DCYAN);
-		else if (*line == '2')
+		else if (line->line[i] == 2)
 			ft_putstr(YELO);
-		else if (*line == 'N')
+		else if (line->line[i] > 5)
 			ft_putstr(PINK); 
-		ft_putchar(*line++);
+		if (line->line[i] == -1)
+			ft_putchar(' ');
+		else
+			ft_putnbr(line->line[i]);
+		ft_putchar(' ');
+		i++;
 	}
+	ft_putstr(" - ");
+	ft_putnbr(line->length);
 	ft_putchar('\n');
 }
 
@@ -91,25 +101,7 @@ void	print_map_grid(t_map *map)
 	while (y < map->height)
 	{
 		x = 0;
-		while (x < map->width)
-		{
-			val = map->grid[i];
-			if (val == '0')
-				ft_putstr(DGREY);
-			else if (val == '1')
-				ft_putstr(DCYAN);
-			else if (val == '2')
-				ft_putstr(YELO);
-			else if (val == 'N')
-				ft_putstr(PINK);
-			else
-				ft_putstr(RED);
-			ft_putchar(val);
-			if (x++ < map->width)
-				ft_putchar(' ');
-			i++;
-		};
-		ft_putchar('\n');
+		print_map_debug(map->grid[y]);
 		y++;
 	}
 }
