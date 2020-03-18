@@ -1,4 +1,4 @@
-# Cube 3D • Alpha 0.6.4
+# Cube 3D • Alpha 0.6.5
 
 ![Cube3D Screenshot](/images/world.png)
 
@@ -32,8 +32,8 @@
 	————————————————————————————————————
 		Changes:
 	————————————————————————————————————
-	- No more texture bug
-	- No more random segfault at start
+	- New map parsing
+	- Can load non square map
 
     ————————————————————————————————————
 		Cur State:
