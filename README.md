@@ -21,8 +21,6 @@
 
 <kbd>LEFT</kbd> <kbd>RIGHT</kbd> - Rotate camera ( + <kbd>SHIFT</kbd> to rotate/10)
 
-<kbd>UP</kbd> - Maxi FOV
-
 <kbd>SPACE</kbd> - Jump (WYP)
 
 
