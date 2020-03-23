@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/23 16:58:38 by siferrar          #+#    #+#             */
-/*   Updated: 2020/02/27 08:23:26 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/03/23 10:21:45 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,14 @@ void	draw_circle(float c_x, float c_y, int ray, int fill, t_ctx *ctx)
         d = ray - 1;
         while(y >= x)
         {
-            pixel_put_buff(c_x + x, c_y + y, ctx->color, ctx->cur_buff);
-            pixel_put_buff(c_x + y, c_y + x, ctx->color, ctx->cur_buff);
-            pixel_put_buff(c_x - x, c_y + y, ctx->color, ctx->cur_buff);
-            pixel_put_buff(c_x - y, c_y + x, ctx->color, ctx->cur_buff);
-            pixel_put_buff(c_x + x, c_y - y, ctx->color, ctx->cur_buff);
-            pixel_put_buff(c_x + y, c_y - x, ctx->color, ctx->cur_buff);
-            pixel_put_buff(c_x - x, c_y - y, ctx->color, ctx->cur_buff);
-            pixel_put_buff(c_x - y, c_y - x, ctx->color, ctx->cur_buff);
+            pixel_put(c_x + x, c_y + y, ctx->color, ctx->cur_buff);
+            pixel_put(c_x + y, c_y + x, ctx->color, ctx->cur_buff);
+            pixel_put(c_x - x, c_y + y, ctx->color, ctx->cur_buff);
+            pixel_put(c_x - y, c_y + x, ctx->color, ctx->cur_buff);
+            pixel_put(c_x + x, c_y - y, ctx->color, ctx->cur_buff);
+            pixel_put(c_x + y, c_y - x, ctx->color, ctx->cur_buff);
+            pixel_put(c_x - x, c_y - y, ctx->color, ctx->cur_buff);
+            pixel_put(c_x - y, c_y - x, ctx->color, ctx->cur_buff);
             
             if (d >= 2 * x)
             {
@@ -56,5 +56,5 @@ void	draw_circle(float c_x, float c_y, int ray, int fill, t_ctx *ctx)
             return ;
         ray--;
     }
-    pixel_put_buff(c_x, c_y, ctx->color, ctx->cur_buff);
+    pixel_put(c_x, c_y, ctx->color, ctx->cur_buff);
 }

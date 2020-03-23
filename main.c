@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 21:29:11 by siferrar          #+#    #+#             */
-/*   Updated: 2020/03/20 09:39:37 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/03/23 10:21:45 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -191,8 +191,10 @@ void	draw_sky(t_brain *b, t_ctx *c, double col, double end)
 		left += width;
 	while (y < end)
 	{
-		color = pixel_get(b->map->skybox, col - left * ratio.x, 200 - b->player->z*0.1 + y * ratio.y);
-		pixel_put_buff(col, y, color, b->map->frame);
+		color = pixel_get(b->map->skybox,
+							col - left * ratio.x,
+							200 - b->player->z*0.1 + y * ratio.y);
+		pixel_put(col, y, color, b->map->frame);
 		y++;
 	}
 }
@@ -210,7 +212,8 @@ int loop_hook(t_brain *b)
 	} 
 	if (is_key_pressed(b, 3) != -1)
 		draw_fullmap(b, 0.28);
-	mlx_put_image_to_window(b->ctx->mlx_ptr , b->ctx->win_ptr, b->map->frame->img, 0, 0);
+	mlx_put_image_to_window(b->ctx->mlx_ptr, b->ctx->win_ptr,
+													b->map->frame->img, 0, 0);
 	fps_count(b->ctx);
 	return (b->inited);
 }

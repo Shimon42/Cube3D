@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/27 08:02:21 by siferrar          #+#    #+#             */
-/*   Updated: 2020/03/05 09:58:46 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/03/23 10:21:45 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,7 +126,7 @@ void	draw_sprite(void *brain, t_sprite *s, float col)
 	{
 		color = pixel_get(s->model, col * ratio.x, y * ratio.y);
 
-		pixel_put_buff(col, y, color, b->map->frame);
+		pixel_put(col, y, color, b->map->frame);
 		y++;
 	}
 }

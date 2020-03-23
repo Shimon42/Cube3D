@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/22 22:24:57 by siferrar          #+#    #+#             */
-/*   Updated: 2020/03/15 19:07:17 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/03/23 10:52:28 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,17 +44,13 @@ int		init_player(t_brain *b, int pos_x, char angle)
 {
 	printf(DCYAN"	-> Init player at ");
 	if ((b->player = malloc(sizeof(t_player))) == NULL)
-	{
-		ft_putstr(RED"FAILED TO MALLOC PLAYER\n"RST);
-		exit(0);
-	}
+		exit_cube(NULL, 1, "Failed to malloc player", 0);
 	if ((b->player->pos = malloc(sizeof(t_fpoint))) == NULL)
-	{
-		ft_putstr(RED"FAILED TO MALLOC PLAYER POS\n"RST);
-		exit(0);
-	}
-	b->player->pos->x = ((pos_x + 1) * b->map->bloc_size) - (b->map->bloc_size/2);
-	b->player->pos->y = (b->map->height * b->map->bloc_size) - b->map->bloc_size/2;
+		exit_cube(NULL, 101, "Failed to malloc player pos", 0);
+	b->player->pos->x = ((pos_x + 1) * b->map->bloc_size) -
+														(b->map->bloc_size/2);
+	b->player->pos->y = (b->map->height * b->map->bloc_size) -
+														(b->map->bloc_size/2);
 	disp_point(b->player->pos);
 	ft_putstr("	-> Init Cam - ");
 	init_cam(b);
@@ -101,11 +97,13 @@ void	draw_rays(struct s_player *p, t_ctx *ctx)
 	while (i < nbrRay/2 + 1)
 	{
 		ctx->line(new_point(p->pos->x, p->pos->y),
-			new_point(p->pos->x + rayDist * cos(p->angle - cur_a), p->pos->y + rayDist * sin(p->angle - cur_a)),
-			ctx);
+						new_point(p->pos->x + rayDist * cos(p->angle - cur_a),
+								p->pos->y + rayDist * sin(p->angle - cur_a)),
+								ctx);
 		ctx->line(new_point(p->pos->x, p->pos->y),
-			new_point(p->pos->x + rayDist * cos(p->angle + cur_a), p->pos->y + rayDist * sin(p->angle + cur_a)),
-			ctx);
+						new_point(p->pos->x + rayDist * cos(p->angle + cur_a),
+								p->pos->y + rayDist * sin(p->angle + cur_a)),
+								ctx);
 		cur_a += (fov/(nbrRay));
 		i++;
 	}
@@ -152,9 +150,13 @@ void	side_move(struct s_player *p, int dir)
 
 	b = (t_brain *)p->brain;
 	m = b->map;
-	if (get_grid(m, p->pos->x + p->speed * (cos(p->angle + (ft_inrad(90)) * dir)), p->pos->y, 1) != 1)
+	if (get_grid(m,
+		p->pos->x + p->speed * (cos(p->angle + (ft_inrad(90)) * dir)),
+													p->pos->y, 1) != 1)
 		p->pos->x += p->speed * (cos(p->angle + (ft_inrad(90)) * dir));
-	if (get_grid(m, p->pos->x, p->pos->y + p->speed * (sin(p->angle + (ft_inrad(90)) * dir)), 1) != 1)
+	if (get_grid(m, p->pos->x,
+		p->pos->y + p->speed * (sin(p->angle + (ft_inrad(90)) * dir)),
+																1) != 1)
 		p->pos->y += p->speed * (sin(p->angle + (ft_inrad(90)) * dir));
 	p->as_move = 1;
 	if (is_key_pressed(b, 13) == -1 && is_key_pressed(b, 1) == -1)

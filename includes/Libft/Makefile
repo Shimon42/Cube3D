@@ -97,10 +97,7 @@ INCLUDES =	$(INCPATH)libft.h \
 all:		$(NAME) $(OBJS) $(INCLUDES)
 
 $(NAME): 	$(OBJS) $(INCLUDES)
-			$(CLEAR)
 			@echo "\033[0;32m––––––––––––––––––––––––\nMaking Libft\n––––––––––––––––––––––––\033[0;33m"
-		#	gcc -Wall -Wextra -Werror -c $(GNL_SRCS) -D BUFFER_SIZE=$(GNL_BUFF_SIZE)
-		#	ar rc $(NAME) $(GNL_OBJS)
 			ar rc $(NAME) $(OBJS)
 			@echo "\033[0;m"
 

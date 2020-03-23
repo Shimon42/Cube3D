@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/11 06:48:57 by siferrar          #+#    #+#             */
-/*   Updated: 2020/03/15 19:08:31 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/03/23 10:06:49 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,6 @@ int	key_release(int key, void *param)
 	}
 	if (key == 49)
 		b->player->jump(b->player, 15);
-	
  	del_key_pressed(b, key);
 	return (0);
 }

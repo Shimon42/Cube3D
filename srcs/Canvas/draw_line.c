@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/13 21:20:40 by siferrar          #+#    #+#             */
-/*   Updated: 2020/02/25 09:31:19 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/03/23 10:21:45 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void calc_first_quad(t_ctx *ctx, t_fpoint p1, t_fpoint p2, t_fpoint diff)
 		diff.y *= 2;
 		while (1)
 		{  // déplacements horizontaux
-			pixel_put_buff(p1.x, p1.y, ctx->color,  ctx->cur_buff);
+			pixel_put(p1.x, p1.y, ctx->color,  ctx->cur_buff);
 			if (++p1.x == p2.x)
 				break;
 			if ((e -= diff.y) < 0)
@@ -39,7 +39,7 @@ void calc_first_quad(t_ctx *ctx, t_fpoint p1, t_fpoint p2, t_fpoint diff)
 		diff.x *= 2;
 		while (1)
 		{  // déplacements horizontaux
-			pixel_put_buff(p1.x, p1.y, ctx->color,  ctx->cur_buff);
+			pixel_put(p1.x, p1.y, ctx->color,  ctx->cur_buff);
 			if (++p1.y == p2.y)
 				break;
 			if ((e -= diff.x) < 0)
@@ -60,7 +60,7 @@ void calc_fourth_quad(t_ctx *ctx, t_fpoint p1, t_fpoint p2, t_fpoint diff)
 		diff.y *= 2;
 		while (1)
 		{  // déplacements horizontaux
-			pixel_put_buff(p1.x, p1.y, ctx->color,  ctx->cur_buff);
+			pixel_put(p1.x, p1.y, ctx->color,  ctx->cur_buff);
 			if (++p1.x == p2.x)
 				break;
 			if ((e += diff.y) < 0)
@@ -76,7 +76,7 @@ void calc_fourth_quad(t_ctx *ctx, t_fpoint p1, t_fpoint p2, t_fpoint diff)
 		diff.x *= 2;
 		while (1)
 		{  // déplacements horizontaux
-			pixel_put_buff(p1.x, p1.y, ctx->color,  ctx->cur_buff);
+			pixel_put(p1.x, p1.y, ctx->color,  ctx->cur_buff);
 			if (--p1.y == p2.y)
 				break;
 			if ((e += diff.x) > 0)
@@ -98,7 +98,7 @@ void calc_second_quad(t_ctx *ctx, t_fpoint p1, t_fpoint p2, t_fpoint diff)
 		diff.y *= 2;
 		while (1)
 		{  // déplacements horizontaux
-			pixel_put_buff(p1.x, p1.y, ctx->color,  ctx->cur_buff);
+			pixel_put(p1.x, p1.y, ctx->color,  ctx->cur_buff);
 			if (--p1.x == p2.x)
 				break;
 			if ((e += diff.y) >= 0)
@@ -114,7 +114,7 @@ void calc_second_quad(t_ctx *ctx, t_fpoint p1, t_fpoint p2, t_fpoint diff)
 		diff.x *= 2;
 		while (1)
 		{  // déplacements horizontaux
-			pixel_put_buff(p1.x, p1.y, ctx->color,  ctx->cur_buff);
+			pixel_put(p1.x, p1.y, ctx->color,  ctx->cur_buff);
 			if (++p1.y == p2.y)
 				break;
 			if ((e += diff.x) <= 0)
@@ -135,7 +135,7 @@ void calc_third_quad(t_ctx *ctx, t_fpoint p1, t_fpoint p2, t_fpoint diff)
 		diff.y *= 2;
 		while (1)
 		{  // déplacements horizontaux
-			pixel_put_buff(p1.x, p1.y, ctx->color,  ctx->cur_buff);
+			pixel_put(p1.x, p1.y, ctx->color,  ctx->cur_buff);
 			if (--p1.x == p2.x)
 				break;
 			if ((e -= diff.y) >= 0)
@@ -151,7 +151,7 @@ void calc_third_quad(t_ctx *ctx, t_fpoint p1, t_fpoint p2, t_fpoint diff)
 		diff.x *= 2;
 		while (1)
 		{  // déplacements horizontaux
-			pixel_put_buff(p1.x, p1.y, ctx->color,  ctx->cur_buff);
+			pixel_put(p1.x, p1.y, ctx->color,  ctx->cur_buff);
 			if (--p1.y == p2.y)
 				break;
 			if ((e -= diff.x) >= 0)
@@ -181,7 +181,7 @@ void draw_line(t_fpoint p1, t_fpoint p2, t_ctx *ctx)
 			}
 			else
 				while (p1.x != p2.x)
-					pixel_put_buff(p1.x++, p1.y, ctx->color, ctx->cur_buff);
+					pixel_put(p1.x++, p1.y, ctx->color, ctx->cur_buff);
 		}
 		else
 		{
@@ -194,7 +194,7 @@ void draw_line(t_fpoint p1, t_fpoint p2, t_ctx *ctx)
 			}
 			else
 				while (p1.x != p2.x)
-					pixel_put_buff(p1.x--, p1.y, ctx->color, ctx->cur_buff) ;
+					pixel_put(p1.x--, p1.y, ctx->color, ctx->cur_buff) ;
 		}
 	}
 	else
@@ -204,12 +204,12 @@ void draw_line(t_fpoint p1, t_fpoint p2, t_ctx *ctx)
 			if (diff.y > 0)
 			{
 				while (p1.y != p2.y)
-					pixel_put_buff(p1.x, p1.y++, ctx->color, ctx->cur_buff);
+					pixel_put(p1.x, p1.y++, ctx->color, ctx->cur_buff);
 			}
 			else
 			{
 				while (p1.y != p2.y)
-					pixel_put_buff(p1.x, p1.y--, ctx->color, ctx->cur_buff) ;
+					pixel_put(p1.x, p1.y--, ctx->color, ctx->cur_buff) ;
 			}
 		}
 	}

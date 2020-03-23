@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.le-101.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/14 22:43:45 by siferrar          #+#    #+#             */
-/*   Updated: 2020/03/17 18:08:03 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/03/23 10:34:48 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,8 @@ void		point_on_map(t_brain *b, int x, int y, int color)
 	p = new_point(x, y);
 	p = map_scaled(&p, b->map);
 	b->ctx->color = color;
-	b->ctx->circle(b->map->disp.x + p.x, b->map->disp.y + p.y, (b->map->bloc_size * 0.06) * b->map->scale, 1, b->ctx);
+	b->ctx->circle(b->map->disp.x + p.x, b->map->disp.y + p.y,
+						(b->map->bloc_size * 0.06) * b->map->scale, 1, b->ctx);
 }
 
 void		draw_elems(t_brain *b, int disp_x, int disp_y, float scale)
@@ -103,8 +104,6 @@ void		draw_elems(t_brain *b, int disp_x, int disp_y, float scale)
 		while (x < b->map->width)
 		{
 			val = get_grid(b->map, x, y, 0);
-		//	dprintf(1, "val[%d][%d]: %d\n", x, y, val);
-			
 			if (val >= 0)
 			{
 				if (val == 0)
@@ -170,12 +169,15 @@ void	draw_minimap_closest(t_brain *b, t_fpoint disp, float angle)
 		wall = dist_to_wall(b, b->player->pos, angle);
 		b->ctx->color = color;
 		b->ctx->line(new_point(disp.x + p_pos.x, disp.y + p_pos.y),
-			new_point(disp.x + p_pos.x  + (wall.dist * b->map->scale) * cos(angle), disp.y + p_pos.y + (wall.dist * b->map->scale) * sin(angle) ),
+		new_point(disp.x + p_pos.x + (wall.dist * b->map->scale) * cos(angle),
+		disp.y + p_pos.y + (wall.dist * b->map->scale) * sin(angle)),
 			b->ctx);	
 		b->ctx->color = 0xFF0000; // RED H
-		b->ctx->circle(disp.x + close_h.x, disp.y + close_h.y, (b->map->bloc_size * 0.08) * b->map->scale, 1, b->ctx);
+		b->ctx->circle(disp.x + close_h.x, disp.y + close_h.y,
+						(b->map->bloc_size * 0.08) * b->map->scale, 1, b->ctx);
 		b->ctx->color = 0x00FFFF; // YELLO V
-		b->ctx->circle(disp.x + close_v.x, disp.y + close_v.y, (b->map->bloc_size * 0.08) * b->map->scale, 1, b->ctx);
+		b->ctx->circle(disp.x + close_v.x, disp.y + close_v.y,
+						(b->map->bloc_size * 0.08) * b->map->scale, 1, b->ctx);
 		b->ctx->color = 0x00FFFF;
 }
 
@@ -188,9 +190,11 @@ void	draw_minimap_rays(t_brain *b, t_fpoint disp)
 		close_h.hit = map_fscaled(&close_h.hit, b->map);
 		close_v.hit = map_fscaled(&close_v.hit, b->map);
 		b->ctx->color = 0xFFFF00;
-		b->ctx->circle(disp.x + close_h.hit.x, disp.y + close_h.hit.y, (b->map->bloc_size * 0.1) * b->map->scale, 1, b->ctx);
+		b->ctx->circle(disp.x + close_h.hit.x, disp.y + close_h.hit.y,
+						(b->map->bloc_size * 0.1) * b->map->scale, 1, b->ctx);
 		b->ctx->color = 0xFF00FF;
-		b->ctx->circle(disp.x + close_v.hit.x, disp.y + close_v.hit.y, (b->map->bloc_size * 0.1) * b->map->scale, 1, b->ctx);
+		b->ctx->circle(disp.x + close_v.hit.x, disp.y + close_v.hit.y,
+						(b->map->bloc_size * 0.1) * b->map->scale, 1, b->ctx);
 }
 
 void			draw_player_map(t_brain *b, t_player *p, t_fpoint m_pos)
@@ -221,13 +225,15 @@ void	draw_fov_map(t_brain *b, t_ctx *c)
 	col_step = b->player->cam->fov/ c->width;
 	while (cur_col < c->width)
 	{
-		cur_angle = b->player->angle - (b->player->cam->fov / 2) + (col_step * cur_col);
+		cur_angle = b->player->angle - (b->player->cam->fov / 2) +
+														(col_step * cur_col);
 		wall = dist_to_wall(b, b->player->pos, cur_angle);
 		dist = wall.dist;
 		b->ctx->color = 0xFF00FF;
 		line_on_map(b,
 			*b->player->pos,
-			new_point(b->player->pos->x + (wall.dist) * cos(cur_angle), b->player->pos->y + (wall.dist) * sin(cur_angle)));	
+			new_point(b->player->pos->x + (wall.dist) * cos(cur_angle),
+							b->player->pos->y + (wall.dist) * sin(cur_angle)));	
 		if (cur_col < c->width / 2)
 			dist = dist * cos(-(b->player->angle - cur_angle));
 		else
@@ -244,8 +250,9 @@ void			draw_minimap(t_brain *b, int x, int y, int width)
 	scale = ((float)(width / (float)b->map->px_width));
 	if (b->map->px_height * scale > b->ctx->height)
 	{
-		scale = ((float)((b->ctx->height - 2 * (100 * b->map->scale)) / (float)b->map->px_height));
-		x = (b->ctx->width - (b->map->width * b->map->bloc_size * scale)) / 2;;
+		scale = ((float)((b->ctx->height - 2 *
+						(100 * b->map->scale)) / (float)b->map->px_height));
+		x = (b->ctx->width - (b->map->width * b->map->bloc_size * scale)) / 2;
 		y = (b->ctx->height - (b->map->height * b->map->bloc_size * scale)) / 2;
 	}
 	b->map->scale = scale;
