@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 21:29:11 by siferrar          #+#    #+#             */
-/*   Updated: 2020/04/09 18:34:11 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/04/09 19:01:27 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ void		fps_count(t_ctx *c)
 		str_time = time(0);
 		free(str);
 		str = ft_itoa(count);
-		
 		count = 0;
 	} else
 		count++;
@@ -53,6 +52,7 @@ void	init_keys(t_brain *b)
 	int i;
 
 	i = 0;
+	b->keys = ft_calloc(10, sizeof(int));
 	while (i < 10)
 		b->keys[i++] = -1;
 }
@@ -68,7 +68,6 @@ t_brain *new_brain(int width, int height, char * name)
 	new->map = NULL;
 	new->player = NULL;
 	init_buff(new->ctx, &new->ctx->buff, new->ctx->width, new->ctx->height);
-	new->keys = ft_calloc(10, sizeof(int));
 	init_keys(new);
 	new->inited = 1;
 	return (new);

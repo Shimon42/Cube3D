@@ -6,11 +6,11 @@
 /*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/14 20:36:43 by siferrar          #+#    #+#             */
-/*   Updated: 2020/04/05 21:37:43 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/04/09 19:25:15 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cube3d.h"
+#include "../../includes/cube3d.h"
 
 int				init_map(t_ctx *ctx, void *brain)
 {
@@ -36,31 +36,6 @@ int				init_map(t_ctx *ctx, void *brain)
 	return (1);
 }
 
-void init_texture(t_brain *b, char *path, t_buff **t)
-{
-	dprintf(1, DCYAN"	-> %s", path);
-	*t = malloc(sizeof(t_buff));
-	if (*t)
-	{
-		(*t)->initied = 1;
-		(*t)->img = mlx_xpm_file_to_image(b->ctx->mlx_ptr, path,
-												&(*t)->width, &(*t)->height);
-		if (!(*t)->img)
-			exit_cube(NULL, 404, path, 0);
-		(*t)->initied = 2;
-		(*t)->addr = mlx_get_data_addr((*t)->img, &(*t)->bits_per_pixel,
-									&(*t)->line_length,
-									&(*t)->endian);
-		(*t)->max_addr = (*t)->line_length * (*t)->height;
-		(*t)->offset = (*t)->bits_per_pixel / 8;
-		(*t)->ratio = (*t)->width / b->map->bloc_size;
-		(*t)->initied = 3;
-		dprintf(1, GRN" - OK\n"RST);
-	}
-	else
-		exit_cube(NULL, 401, "Failed to malloc texture", 0);
-}
-
 void	init_textures(t_brain *b)
 {
 	ft_putstr(CYAN"Init Textures\n");
@@ -71,35 +46,6 @@ void	init_textures(t_brain *b)
 	init_texture(b, "./assets/textures/floor/sand.xpm", &b->map->floor);
 	init_texture(b, "./assets/sky/mountains/mountains.xpm", &b->map->skybox);
 	
-}
-
-int				open_map(t_brain *b, char *map_path)
-{
-	char	*line;
-	int		file;
-	int		ret;
-	t_player_detect *player;
-
-	init_map(b->ctx, b);
-	init_textures(b);
-	file = open(map_path, O_RDONLY);
-	while ((ret = get_next_line(file, &line)) != -1)
-	{
-		if ((player = add_map_row(b->map, line)) != NULL)
-			init_player(b, player->pos_x, player->direction);
-		if (!ret)
-			break;
-	}
-	close(file);
-	dprintf(1, DCYAN"	-> Width: [%d]\n", b->map->width);
-	dprintf(1, "	-> Height:[%d]\n\n"RST, b->map->height);
-	print_map_grid((b->map));
-	b->map->px_width = b->map->width * b->map->bloc_size;
-	b->map->px_height = b->map->height * b->map->bloc_size;
-	dprintf(1,DCYAN"\nReal Size : %d x %d px\n", b->map->px_width,
-												b->map->px_height);
-	free(player);
-	return (1);
 }
 
 int		realloc_map(t_map *m, char *line)
@@ -152,4 +98,33 @@ t_player_detect		*add_map_row(t_map *m, char *line)
 	}
 	realloc_map(m, line);
 	return (player);
+}
+
+int				open_map(t_brain *b, char *map_path)
+{
+	char	*line;
+	int		file;
+	int		ret;
+	t_player_detect *player;
+
+	init_map(b->ctx, b);
+	init_textures(b);
+	file = open(map_path, O_RDONLY);
+	while ((ret = get_next_line(file, &line)) != -1)
+	{
+		if ((player = add_map_row(b->map, line)) != NULL)
+			init_player(b, player->pos_x, player->direction);
+		if (!ret)
+			break;
+	}
+	close(file);
+	dprintf(1, DCYAN"	-> Width: [%d]\n", b->map->width);
+	dprintf(1, "	-> Height:[%d]\n\n"RST, b->map->height);
+	print_map_grid((b->map));
+	b->map->px_width = b->map->width * b->map->bloc_size;
+	b->map->px_height = b->map->height * b->map->bloc_size;
+	dprintf(1,DCYAN"\nReal Size : %d x %d px\n", b->map->px_width,
+												b->map->px_height);
+	free(player);
+	return (1);
 }

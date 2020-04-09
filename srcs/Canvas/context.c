@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   context.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: siferrar <siferrar@student.le-101.fr>      +#+  +:+       +#+        */
+/*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/15 18:42:08 by siferrar          #+#    #+#             */
-/*   Updated: 2020/03/23 10:27:17 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/04/09 19:26:06 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,6 @@ void	clear_ctx(int color, t_ctx *ctx)
 		ctx->color = color;
 	ctx->rect(0, 0, ctx->width, ctx->height, 1, ctx);
 	ctx->color = oldColor;
-}
-
-void	init_ctx_funcs(t_ctx *ctx)
-{
-	ctx->line(new_point(-1, -1), new_point(-1, -1), ctx);
-	ctx->rect(0, 0, 0, 0, -1, ctx);
-	ctx->circle(0, 0, 0, -1, ctx);
 }
 
 void init_buff(t_ctx * ctx, t_buff **buff, int width, int height)

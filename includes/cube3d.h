@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cube3d.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: siferrar <siferrar@student.le-101.fr>      +#+  +:+       +#+        */
+/*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 21:30:44 by siferrar          #+#    #+#             */
-/*   Updated: 2020/03/16 17:45:48 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/04/09 19:12:49 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,6 @@ float			calc_dist(t_fpoint p1, t_fpoint p2);
 int				init_player(t_brain *b, int pos_x, char angle);
 void			move(struct s_player *p, int dir);
 void			rotate(struct s_player *p, float angle);
-void			draw_player(struct s_player *p, t_ctx *ctx);
 void			side_move(struct s_player *p, int dir);
 void			jump(t_player *p, float speed);
 

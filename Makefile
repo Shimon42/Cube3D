@@ -28,14 +28,16 @@ SRCS = 		main.c \
 			$(SRCSPATH)Canvas/circle.c \
 			$(SRCSPATH)Canvas/text.c \
 			$(SRCSPATH)Canvas/context.c \
-			$(SRCSPATH)map_parsing.c \
-			$(SRCSPATH)draw_map.c \
+			$(SRCSPATH)Map/map_parsing.c \
+			$(SRCSPATH)Map/draw_map.c \
 			$(SRCSPATH)wall_detect.c \
 			$(SRCSPATH)floor_detect.c \
 			$(SRCSPATH)sprites.c \
 			$(SRCSPATH)keys.c \
-			$(SRCSPATH)player.c \
+			$(SRCSPATH)Player/player.c \
+			$(SRCSPATH)Player/move.c \
 			$(SRCSPATH)meditate.c \
+			$(SRCSPATH)textures.c \
 			$(DEBUGPATH)debug.c
 
 GNL_SRCS =	$(INCPATH)Gnl/get_next_line.c \

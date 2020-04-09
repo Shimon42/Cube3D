@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   draw_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: siferrar <siferrar@student.le-101.fr>      +#+  +:+       +#+        */
+/*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/14 22:43:45 by siferrar          #+#    #+#             */
-/*   Updated: 2020/03/23 10:34:48 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/04/09 19:19:59 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 
-#include "../includes/cube3d.h"
+#include "../../includes/cube3d.h"
 
 int get_grid(t_map *m, int x, int y, int need_rescale)
 {
