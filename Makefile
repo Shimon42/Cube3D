@@ -35,6 +35,7 @@ SRCS = 		main.c \
 			$(SRCSPATH)sprites.c \
 			$(SRCSPATH)keys.c \
 			$(SRCSPATH)player.c \
+			$(SRCSPATH)meditate.c \
 			$(DEBUGPATH)debug.c
 
 GNL_SRCS =	$(INCPATH)Gnl/get_next_line.c \

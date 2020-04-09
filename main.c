@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 21:29:11 by siferrar          #+#    #+#             */
-/*   Updated: 2020/04/04 12:34:10 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/04/09 18:34:11 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,98 +77,6 @@ t_brain *new_brain(int width, int height, char * name)
 float		calc_dist(t_fpoint p1, t_fpoint p2)
 {
 	return (sqrt(pow((p2.x - p1.x),2) + pow((p2.y - p1.y), 2)));
-}
-
-void exit_cube(t_brain *brain, int error_code, char *msg, int init)
-{
-	static t_brain *b = NULL;
-
-	if (b == NULL && brain != NULL)
-		b = brain;
-	if (init)
-		return ;
-	if (error_code != 0)
-		ft_putstr(RED);
-	else
-		ft_putstr(GRN);
-	ft_putstr("\nCub3D Exit - Error: ");
-	ft_putnbr(error_code);
-	ft_putstr(" - ");
-	ft_putstr(msg);
-	ft_putstr("\n"RST);
-	meditate(b);
-	ft_putstr(GRN"Meditate OK\n");
-	ft_putstr("Exit Done\n"GRN);
-	exit (0);
-}
-
-void free_buff(t_buff *buff)
-{
-	ft_putstr("  -> Free buff - ");
-	if (buff != NULL)
-	{
-		if (buff->img)
-			free(buff->img);
-		if (buff->addr)
-			free(buff->addr);
-	}
-	free(buff);
-	ft_putstr("OK\n");
-}
-void check_n_free(void *var)
-{
-	if (var != NULL)
-		free(var);
-}
-
-void meditate(t_brain *b)
-{
-	/*
-	** ----- FREE MAP
-	*/
-
-	ft_putstr(DYELO"Free Map\n");
-	if (b->map != NULL)
-	{
-		free_buff(b->map->w_n);
-		free_buff(b->map->w_e);
-		free_buff(b->map->w_s);
-		free_buff(b->map->w_w);
-		free_buff(b->map->floor);
-		free_buff(b->map->skybox);
-		free_buff(b->map->frame);
-		check_n_free(b->map);
-	}
-
-	/* 
-	** ---- FREE CTX
-	*/
-	ft_putstr(DCYAN"Free Context\n");
-	if (b->ctx != NULL)
-	{
-		free_buff(b->ctx->buff);
-		check_n_free(b->ctx->win_ptr);
-		check_n_free(b->ctx->mlx_ptr);
-		check_n_free(b->ctx);
-	}
-	
-	/* 
-	** ---- FREE PLAYER
-	*/
-	ft_putstr(DPINK"Free Player\n");
-	if (b->player != NULL)
-	{
-		check_n_free(b->player->cam);
-		check_n_free(b->player->pos);
-		check_n_free(b->player->step);
-		check_n_free(b->player);
-	}
-
-	/*
-	** ---- FREE BRAIN
-	*/
-	ft_putstr(DGRN"Free Brain Struct\n");
-	free(b);
 }
 
 void	draw_sky(t_brain *b, t_ctx *c, double col, double end)
