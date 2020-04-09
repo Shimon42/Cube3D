@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_parsing.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: siferrar <siferrar@student.le-101.fr>      +#+  +:+       +#+        */
+/*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/14 20:36:43 by siferrar          #+#    #+#             */
-/*   Updated: 2020/03/23 09:54:08 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/04/05 21:37:43 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ void	init_textures(t_brain *b)
 	init_texture(b, "./assets/textures/walls/stone_bricks/1.xpm", &b->map->w_w);
 	init_texture(b, "./assets/textures/floor/sand.xpm", &b->map->floor);
 	init_texture(b, "./assets/sky/mountains/mountains.xpm", &b->map->skybox);
+	
 }
 
 int				open_map(t_brain *b, char *map_path)
