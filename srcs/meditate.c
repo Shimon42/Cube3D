@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/09 18:31:48 by siferrar          #+#    #+#             */
-/*   Updated: 2020/04/09 18:46:58 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/04/10 15:50:14 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,9 @@ void check_n_free(void *var)
 
 void free_map(t_brain *b)
 {
+	int i;
+	t_sprite *s;
+	i = 0;
 	ft_putstr(DYELO"Free Map\n");
 	if (b->map != NULL)
 	{
@@ -44,6 +47,11 @@ void free_map(t_brain *b)
 		free_buff(b->map->floor);
 		free_buff(b->map->skybox);
 		free_buff(b->map->frame);
+		while (i < b->map->sprites->length)
+		{
+			free(b->map->sprites->list[i++]);
+		}
+		free(b->map->sprites->list);
 		check_n_free(b->map);
 	}
 }

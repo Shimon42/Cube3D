@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   debug.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: siferrar <siferrar@student.le-101.fr>      +#+  +:+       +#+        */
+/*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/20 15:53:12 by siferrar          #+#    #+#             */
-/*   Updated: 2020/03/16 17:55:45 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/04/10 15:53:14 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	disp_keys(t_brain *b)
 
 void	disp_point(t_fpoint *p)
 {
-	printf("{ x:%6f, y:%6f }\n", p->x, p->y);
+	dprintf(1, "{ x:%6f, y:%6f }\n", p->x, p->y);
 }
 
 void	disp_map_s(t_map *m)

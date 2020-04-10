@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/14 20:36:43 by siferrar          #+#    #+#             */
-/*   Updated: 2020/04/10 15:12:02 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/04/10 15:51:00 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,10 +96,7 @@ t_player_detect		*add_map_row(t_map *m, char *line)
 			player->direction = line[i];
 		}
 		if (line[i] == '2')
-		{
 			add_spr_to_list(m->sprites, init_sprite(m, new_point(i, m->height), 2));
-			disp_sprites(m->sprites);
-		}
 		i++;
 	}
 	realloc_map(m, line);
@@ -124,6 +121,7 @@ int				open_map(t_brain *b, char *map_path)
 			break;
 	}
 	close(file);
+	disp_sprites(b->map->sprites);
 	dprintf(1, DCYAN"	-> Width: [%d]\n", b->map->width);
 	dprintf(1, "	-> Height:[%d]\n\n"RST, b->map->height);
 	print_map_grid((b->map));

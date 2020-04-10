@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/27 08:02:21 by siferrar          #+#    #+#             */
-/*   Updated: 2020/04/10 15:11:52 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/04/10 15:54:31 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,44 +66,53 @@ t_sprite *get_sprite(t_map *m, t_fpoint p)
 
 void	add_spr_to_list(t_spr_list *s_list, t_sprite *s)
 {
-	t_spr_list *ret;
+	t_sprite **ret;
 	int i;
 
 	i = 0;
-	dprintf(1, "Add spr to list\n");
+	dprintf(1, YELO"Add spr to list\n");
 	disp_sprite(s);
-	ret = malloc(sizeof(t_spr_list *));
-	ret->list = malloc((s_list->length + 1) * sizeof(t_sprite));
+	ret = malloc((s_list->length + 1) * sizeof(t_sprite *));
 	if (s_list->list != NULL)
 		while (i < s_list->length)
 		{
-			ret->list[i] = s_list->list[i];
+			ret[i] = s_list->list[i];
 			i++;
 		}
-	ret->list[i] = s;
+	ret[i] = s;
 	free(s_list->list);
 	s_list->list = ret;
 	s_list->length++;
 	dprintf(1, GRN"Add spr to list OK\n"RST);
 }
 
-void    add_sprite(t_map *m, int posX, int type)
+void	disp_sprites(t_spr_list *s_list)
 {
-	t_sprite *list;
-	t_sprite *tmp;
-	t_sprite *s;
-
-	dprintf(1, GRN"Found sprite "DCYAN"-> posX: %d - posY: %d\n"RST, posX, m->height);
-	s = init_sprite(m, new_point(posX, m->height), type);
-	if (s != NULL)
+	int			i;
+	t_sprite	*s;
+	i = 0;
+	ft_putstr(PINK);
+	if (s_list->list != NULL)
 	{
-		s->next = m->sprites;
-		m->sprites = s;
-		m->sprites_count++;
+		dprintf(1, "%d sprites in list\n", s_list->length);
+		while (i < s_list->length)
+		{
+			disp_sprite(s_list->list[i]);
+			i++;
+		}
+		dprintf(1, "End of loop\n");
+	} else {
+		dprintf(1, "No sprites in list\n");
 	}
-	else
-		ft_putstr(RED"Failed to malloc sprite\n"RST);
+	ft_putstr(RST);
 }
+
+void	disp_sprite(t_sprite *s)
+{
+	dprintf(1, "Sprite of type %d\n", s->type);
+	disp_point(&(s->pos));
+}
+
 
 void	draw_sprite(void *brain, t_sprite *s, float col)
 {
@@ -143,33 +152,4 @@ void	draw_sprite(void *brain, t_sprite *s, float col)
 		pixel_put(col, y, color, b->map->frame);
 		y++;
 	}
-}
-
-void	disp_sprites(t_spr_list *s_list)
-{
-	int			i;
-	t_sprite	*s;
-	i = 0;
-	ft_putstr(PINK);
-	if (s_list->list != NULL)
-	{
-		dprintf(1, "%d sprites in list\n", s_list->length);
-
-		while (i < s_list->length)
-		{
-			s = s_list->list[i];
-			disp_sprite(s_list->list[i]);
-			i++;
-		}
-		dprintf(1, "End of loop\n");
-	} else {
-		dprintf(1, "No sprites in list\n");
-	}
-	ft_putstr(RST);
-}
-
-void	disp_sprite(t_sprite *s)
-{
-	dprintf(1, "Sprite of type %d\n", s->type);
-	disp_point(&(s->pos));
 }
