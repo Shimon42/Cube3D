@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sprites.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: siferrar <siferrar@student.le-101.fr>      +#+  +:+       +#+        */
+/*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/27 08:51:57 by siferrar          #+#    #+#             */
-/*   Updated: 2020/03/03 08:26:39 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/04/10 15:10:20 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,6 @@ t_sprite	*get_sprite(t_map *m, t_fpoint p);
 void	draw_sprite(void *brain, t_sprite *spr, float col);
 
 void		disp_sprt_list(t_list *s_list);
-void		disp_sprites(t_sprite *s);
-void	disp_sprite(void *spr);
+void		disp_sprites(t_spr_list *s_list);
+void		disp_sprite(t_sprite *spr);
 #endif
