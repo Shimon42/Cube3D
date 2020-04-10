@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/14 20:36:43 by siferrar          #+#    #+#             */
-/*   Updated: 2020/04/10 15:51:00 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/04/10 16:49:41 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,6 +121,8 @@ int				open_map(t_brain *b, char *map_path)
 			break;
 	}
 	close(file);
+	disp_sprites(b->map->sprites);
+	sort_sprites(b, b->map->sprites);
 	disp_sprites(b->map->sprites);
 	dprintf(1, DCYAN"	-> Width: [%d]\n", b->map->width);
 	dprintf(1, "	-> Height:[%d]\n\n"RST, b->map->height);

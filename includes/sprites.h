@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/27 08:51:57 by siferrar          #+#    #+#             */
-/*   Updated: 2020/04/10 15:10:20 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/04/10 16:49:16 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@
 
 t_sprite	*init_sprite(t_map *m, t_fpoint pos, int type);
 void		add_sprite(t_map *m, int posX, int type);
-void		reorder_sprites(t_map *m);
+void		sort_sprites(void *brain, t_spr_list *lst_sprt);
+void		swap_sprite(t_spr_list *lst_sprt, int num1, int num2);
 void		add_spr_to_list(t_spr_list *s_list, t_sprite *s);
-t_sprite	*get_sprite(t_map *m, t_fpoint p);
 
 void	draw_sprite(void *brain, t_sprite *spr, float col);
 

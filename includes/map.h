@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/14 22:46:16 by siferrar          #+#    #+#             */
-/*   Updated: 2020/04/10 15:48:34 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/04/10 16:15:12 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,8 @@ typedef struct      s_sprite
 {
 	t_fpoint        pos;
 	int			    type;
+	float			dist;
 	t_buff			*model;
-
-	struct s_sprite	*next;
 }				    t_sprite;
 
 typedef struct	s_spr_list

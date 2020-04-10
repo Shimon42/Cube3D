@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/27 08:02:21 by siferrar          #+#    #+#             */
-/*   Updated: 2020/04/10 15:54:31 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/04/10 16:49:15 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ t_sprite   *init_sprite(t_map *m, t_fpoint pos, int type)
 	s->model = NULL;
 	init_texture(b, "./assets/sprites/barrel.xpm", &s->model);
 	s->type = 2;
-	s->next = NULL;
 	return (s);
 }
 
@@ -39,29 +38,54 @@ int		compare(t_fpoint p1, t_fpoint p2, int range)
 		return (0);
 }
 
-t_sprite *get_sprite(t_map *m, t_fpoint p)
+void    swap_sprite(t_spr_list *lst_sprt, int num1, int num2)
 {
-	t_sprite **ptr;
-	t_fpoint in_grid;
-	t_sprite *sprites;
+    if((num1 < lst_sprt->length) && (num2 < lst_sprt->length) && (num1 != num2))
+    {
+        t_sprite temp;
+        t_sprite *spr_a;
+        t_sprite *spr_b;
 
-	//dprintf(1, "Getting sprite\n");
+        spr_a = &lst_sprt->list[num1];
+        spr_b = &lst_sprt->list[num2];
+        temp.dist = spr_a->dist;
+        temp.pos = spr_a->pos;
+        spr_a->dist = spr_b->dist;
+        spr_a->pos = spr_b->pos;
+        spr_b->dist = temp.dist;
+        spr_b->pos = temp.pos;
+    }
+}
 
-	sprites = (t_sprite *)m->sprites;
-	ptr = &sprites;
-	while (*ptr != NULL)
+void	sort_sprites(void *brain, t_spr_list *lst_sprt)
+{
+	float dist1;
+	float dist2;
+	int i;
+	int j;
+	t_brain *b;
+
+	b = (t_brain*)brain;
+	i = 0;
+	dprintf(1, CYAN"Order Sprites\n"RST);
+	while (i < lst_sprt->length)
 	{
-		//dprintf(1, "Check Sprites x:%f y:%f  VS x:%f y:%f \n", (*ptr)->pos.x, (*ptr)->pos.y, p.x, p.y);
-		if (compare((*ptr)->pos, p, m->bloc_size + 2))
+		j = i;
+		while (j < lst_sprt->length)
 		{
-			//dprintf(1, "Sprite found\n");
-			return (*ptr);
+			dist1 = calc_dist(*b->player->pos, lst_sprt->list[i]->pos);
+			dist2 = calc_dist(*b->player->pos, lst_sprt->list[j]->pos);
+			dprintf(1, "%f vs %f\n", dist1, dist2);
+			if (dist1 > dist2)
+			{
+				dprintf(1, "Swap [%d] and [%d]\n", i, j);
+				swap_sprite(lst_sprt, i, j);
+			}
+			j++;
 		}
-		ptr = &((*ptr)->next);
+		i++;
 	}
-	//dprintf(1, RED"Sprite NOT found\n"RST);
-
-	return (NULL);
+	dprintf(1, CYAN"Order Sprites OK\n"RST);
 }
 
 void	add_spr_to_list(t_spr_list *s_list, t_sprite *s)
@@ -111,6 +135,7 @@ void	disp_sprite(t_sprite *s)
 {
 	dprintf(1, "Sprite of type %d\n", s->type);
 	disp_point(&(s->pos));
+	dprintf(1, "-> toGrid [%d][%d]\n", (int)floor(s->pos.x /64), (int)floor(s->pos.y /64));
 }
 
 
