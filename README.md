@@ -31,6 +31,7 @@
 		Changes:
 	————————————————————————————————————
 	- Store all sprites in map->sprites during open_map()
+	- Sort sprites by distance from player
 
     ————————————————————————————————————
 		Cur State:
