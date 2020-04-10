@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/14 20:36:43 by siferrar          #+#    #+#             */
-/*   Updated: 2020/04/09 19:25:15 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/04/10 15:51:00 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,9 @@ int				init_map(t_ctx *ctx, void *brain)
 	b->map->w_s = NULL;
 	b->map->w_w = NULL;
 	b->map->floor = NULL;
-	b->map->sprites_count = 0;
-	b->map->sprites = NULL;
+	b->map->sprites = malloc(sizeof(t_spr_list));
+	b->map->sprites->length = 0;
+	b->map->sprites->list = NULL;
 	b->map->skybox = NULL;
 	b->map->brain = b;
 	init_buff(ctx, &b->map->frame, ctx->width, ctx->height);
@@ -94,6 +95,8 @@ t_player_detect		*add_map_row(t_map *m, char *line)
 			player->pos_x = i;
 			player->direction = line[i];
 		}
+		if (line[i] == '2')
+			add_spr_to_list(m->sprites, init_sprite(m, new_point(i, m->height), 2));
 		i++;
 	}
 	realloc_map(m, line);
@@ -118,6 +121,7 @@ int				open_map(t_brain *b, char *map_path)
 			break;
 	}
 	close(file);
+	disp_sprites(b->map->sprites);
 	dprintf(1, DCYAN"	-> Width: [%d]\n", b->map->width);
 	dprintf(1, "	-> Height:[%d]\n\n"RST, b->map->height);
 	print_map_grid((b->map));
