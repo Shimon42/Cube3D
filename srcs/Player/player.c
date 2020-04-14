@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/22 22:24:57 by siferrar          #+#    #+#             */
-/*   Updated: 2020/04/09 19:17:08 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/04/14 22:07:19 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,8 @@ int		init_values(t_brain *b, t_player *p)
 	p->jump = &jump;
 	p->speed = b->map->bloc_size * 0.12;
 	p->rot_speed = (3 * PI) / 180;
-	p->step = malloc(sizeof(t_fpoint *));
+	if ((p->step = malloc(sizeof(t_fpoint *))) == NULL)
+		return (0);
 	p->rot(p, 0);
 	p->brain = b;
 	p->as_move = 1;
@@ -56,6 +57,7 @@ int		init_values(t_brain *b, t_player *p)
 	p->bobbing = 1;
 	p->jumping = 0;
 	p->inited = 1;
+	return (1);
 }
 
 int		init_player(t_brain *b, int pos_x, char angle)

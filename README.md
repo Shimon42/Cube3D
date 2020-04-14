@@ -1,4 +1,4 @@
-# Cube 3D • Alpha 0.6.5
+# Cube 3D • Alpha 0.6.6
 
 ![Cube3D Screenshot](/images/world.png)
 
@@ -30,8 +30,7 @@
 	————————————————————————————————————
 		Changes:
 	————————————————————————————————————
-	- New map parsing
-	- Can load non square map
+	- Store all sprites in map->sprites during open_map()
 
     ————————————————————————————————————
 		Cur State:

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_parsing.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: milosandric <milosandric@student.42lyon    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/14 20:36:43 by siferrar          #+#    #+#             */
-/*   Updated: 2020/04/10 15:51:00 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/04/13 16:33:47 by milosandric      ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,16 +37,15 @@ int				init_map(t_ctx *ctx, void *brain)
 	return (1);
 }
 
-void	init_textures(t_brain *b)
+void	init_textures(t_brain *b, t_type *map)
 {
 	ft_putstr(CYAN"Init Textures\n");
-	init_texture(b, "./assets/textures/walls/stone_bricks/2.xpm", &b->map->w_n);
-	init_texture(b, "./assets/textures/walls/stone_bricks/4.xpm", &b->map->w_e);
-	init_texture(b, "./assets/textures/walls/stone_bricks/3.xpm", &b->map->w_s);
-	init_texture(b, "./assets/textures/walls/stone_bricks/1.xpm", &b->map->w_w);
-	init_texture(b, "./assets/textures/floor/sand.xpm", &b->map->floor);
-	init_texture(b, "./assets/sky/mountains/mountains.xpm", &b->map->skybox);
-	
+	init_texture(b, map->no, &b->map->w_n);
+	init_texture(b, map->ea, &b->map->w_e);
+	init_texture(b, map->so, &b->map->w_s);
+	init_texture(b, map->we, &b->map->w_w);
+	init_texture(b, map->f, &b->map->floor);
+	init_texture(b, map->c, &b->map->skybox);
 }
 
 int		realloc_map(t_map *m, char *line)
@@ -103,7 +102,7 @@ t_player_detect		*add_map_row(t_map *m, char *line)
 	return (player);
 }
 
-int				open_map(t_brain *b, char *map_path)
+int				open_map(t_brain *b, char *map_path, t_type *map)
 {
 	char	*line;
 	int		file;
@@ -111,17 +110,22 @@ int				open_map(t_brain *b, char *map_path)
 	t_player_detect *player;
 
 	init_map(b->ctx, b);
-	init_textures(b);
+	init_textures(b, map);
 	file = open(map_path, O_RDONLY);
-	while ((ret = get_next_line(file, &line)) != -1)
+	ret = get_next_line(file, &line);
+	while (ret && ((ft_strmultichr(line, " 01SNEW")) != 1))
+		ret = get_next_line(file, &line);
+	while (ret != -1)
 	{
 		if ((player = add_map_row(b->map, line)) != NULL)
 			init_player(b, player->pos_x, player->direction);
 		if (!ret)
 			break;
+		ret = get_next_line(file, &line);
 	}
 	close(file);
 	disp_sprites(b->map->sprites);
+	sort_sprites(b->player->pos, b->map->sprites);
 	dprintf(1, DCYAN"	-> Width: [%d]\n", b->map->width);
 	dprintf(1, "	-> Height:[%d]\n\n"RST, b->map->height);
 	print_map_grid((b->map));

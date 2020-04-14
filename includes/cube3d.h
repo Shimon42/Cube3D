@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cube3d.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: milosandric <milosandric@student.42lyon    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 21:30:44 by siferrar          #+#    #+#             */
-/*   Updated: 2020/04/09 19:12:49 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/04/13 16:45:32 by milosandric      ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,21 @@ typedef struct	s_brain
 	int			*keys;
 }				t_brain;
 
+typedef struct	s_type
+{
+	int			height;
+	int			width;
+	int			valid;
+	int			res[3];
+	char		*no;
+	char		*so;
+	char		*we;
+	char		*ea;
+	char		*s;
+	char		*f;
+	char		*c;
+}				t_type;
+
 void			exit_cube(t_brain *brain, int error_code, char *msg, int init);
 void			meditate(t_brain *b);
 /*
@@ -64,7 +79,7 @@ typedef struct	s_mlx_win_list
 ** --- Map and Minimap
 */
 
-int				open_map(t_brain *b, char *map_path);
+int				open_map(t_brain *b, char *map_path, t_type *map);
 void			draw_minimap(t_brain *b, int x, int y, int width);
 void			draw_fullmap(t_brain *b, float ease_val);
 void			draw_frame(t_brain *b);
@@ -139,5 +154,29 @@ void			disp_map_s(t_map *m);
 void			disp_buff(t_buff *b);
 void			print_player_debug(t_brain *b);
 void			disp_brain(t_brain *b);
+
+
+/*
+** --- Parsing
+*/
+
+void			ft_getmap_flag(int fd, t_type *map);
+void			ft_getmap_values(char *line, t_type *map);
+void			ft_flag_str(char *str, char **target, t_type *map);
+void			ft_flag_color(char *str, int *target, t_type *map);
+void			ft_flag_res(char *str, int *target, t_type *map);
+char			*ft_str_search(char *str, char *chrs);
+void			ft_check_struct(t_type *map);
+
+/*
+** --- Utilities
+*/
+
+int				ft_strmultichr(char *str, char *chrlst);
+int				ft_ext_check(char *str, char *end);
+void			ft_init_t_type(t_type *map);
+void			exit_flag(int err_num, char *str, t_type *map);
+void			update_sprite(t_brain *b);
+void    		sort_sprites(t_fpoint *pos, t_spr_list *lst_sprt);
 
 #endif
