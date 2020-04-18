@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 22:11:09 by siferrar          #+#    #+#             */
-/*   Updated: 2020/04/14 23:31:42 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/04/16 00:04:52 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,11 +92,13 @@ t_detect closest_wall_h(t_brain *b, t_fpoint *p, float angle)
 	offset.x = ((float)b->map->bloc_size / tan(angle)) * (verif ? -1 : 1);
 	while (is_wall == 0 && d.hit.x < b->map->px_width && d.hit.x > 0)
 	{
-		is_sprite = (get_grid(b->map, d.hit.x + 1, d.hit.y, 1) == 2 || get_grid(b->map, d.hit.x - 1, d.hit.y, 1) == 2);	
+		is_sprite = (get_grid(b->map, d.hit.x, d.hit.y, 1) == 2 || get_grid(b->map, d.hit.x + 1, d.hit.y, 1) == 2 || get_grid(b->map, d.hit.x - 1, d.hit.y, 1) == 2);	
 		if (is_sprite)
 		{
 			s = get_sprite(b->map, d.hit);
 			add_spr_to_list(d.spr_on_path, s);
+			d.spr_on_path->list[d.spr_on_path->length - 1]->hit = d.hit;
+			d.spr_on_path->list[d.spr_on_path->length - 1]->side_hit = "h";
 		}
 		is_wall = (get_grid(b->map, d.hit.x, d.hit.y + 1, 1) == 1 ||
 								get_grid(b->map, d.hit.x, d.hit.y - 1, 1) == 1);
@@ -105,11 +107,6 @@ t_detect closest_wall_h(t_brain *b, t_fpoint *p, float angle)
 		d.hit.x += offset.x;
 		d.hit.y += offset.y;
 	}
-	if (d.spr_on_path && d.spr_on_path->length)
-	{
-		dprintf(1, GRN"%d SPR ON PATH\n"RST, d.spr_on_path->length);
-	}
-	disp_sprites(d.spr_on_path);
 	return (d);
 }
 
@@ -133,11 +130,13 @@ t_detect closest_wall_v(t_brain *b, t_fpoint *p, float angle)
 	offset.y = (b->map->bloc_size * tan(angle)) * (verif ? -1 : 1);
 	while (is_wall == 0 && d.hit.y < b->map->px_height && d.hit.y > 0)
 	{
-		is_sprite = (get_grid(b->map, d.hit.x, d.hit.y + 1, 1) == 2 || get_grid(b->map, d.hit.x, d.hit.y - 1, 1) == 2);	
+		is_sprite = (get_grid(b->map, d.hit.x, d.hit.y, 1) == 2 || get_grid(b->map, d.hit.x, d.hit.y - 1, 1) == 2 || get_grid(b->map, d.hit.x, d.hit.y + 1, 1) == 2);	
 		if (is_sprite)
 		{
 			s = get_sprite(b->map, d.hit);
 			add_spr_to_list(d.spr_on_path, s);
+			d.spr_on_path->list[d.spr_on_path->length - 1]->hit = d.hit;
+			d.spr_on_path->list[d.spr_on_path->length - 1]->side_hit = "v";
 		}
 		is_wall = (get_grid(b->map, d.hit.x - 1, d.hit.y, 1) == 1 ||
 								get_grid(b->map, d.hit.x + 1, d.hit.y, 1) == 1);
@@ -145,10 +144,6 @@ t_detect closest_wall_v(t_brain *b, t_fpoint *p, float angle)
 			break;
 		d.hit.x += offset.x;
 		d.hit.y += offset.y;	
-	}
-	if (d.spr_on_path)
-	{
-		dprintf(1, GRN"%d SPR ON PATH\n"RST, d.spr_on_path->length);
 	}
 	return (d);
 }
@@ -235,15 +230,15 @@ void	draw_walls(t_brain *b, t_ctx *c)
 		if (w_height < b->ctx->height)
 			draw_floor(b, c, cur_angle,
 				floor(divs.y + mid_wall + b->player->z - 1), cur_col);
-		if (wall.spr_on_path != NULL)
+		if (wall.spr_on_path != NULL && wall.spr_on_path->length)
 		{
-			dprintf(1, RED"SPRITESSLKJH\n");
+			dprintf(1, RED"Draw %d Sprites\n", wall.spr_on_path->length);
 			sort_sprites(b->player->pos, wall.spr_on_path);
-			disp_sprites(wall.spr_on_path);
+		//	disp_sprites(wall.spr_on_path);
 			draw_sprites(b, wall.spr_on_path, cur_col);
 			free(wall.spr_on_path);
 		} else {
-			dprintf(1, RED"SPRITESSLKJH NOEPOEPOEPO\n");
+		//	dprintf(1, RED"SPRITESSLKJH NOEPOEPOEPO\n");
 		}
 		dprintf(1, "--------- END----------------\n", cur_col);
 		cur_col++;

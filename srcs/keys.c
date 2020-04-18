@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   keys.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: siferrar <siferrar@student.le-101.fr>      +#+  +:+       +#+        */
+/*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/11 06:48:57 by siferrar          #+#    #+#             */
-/*   Updated: 2020/03/23 10:06:49 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/04/15 23:01:34 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,9 @@ int	key_press(int key, void *param)
 
 	b = (t_brain*)param;
 	if (key == 53)
-		exit_cube(b, 0, "Exit from red cross", 0);
+		exit_cube(b, 0, "Exit from [ESCAPE] key", 0);
+	if (key == 93)
+		exit_cube(b, 0, "Exit from [ESCAPE] key", 0);
 	if (key != -1 && is_key_pressed(b, key) == -1)
 		add_key_pressed(b, key);
 	if (b && b->inited && b->player && b->player->inited)
