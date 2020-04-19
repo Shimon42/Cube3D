@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/14 20:36:43 by siferrar          #+#    #+#             */
-/*   Updated: 2020/04/10 16:49:41 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/04/19 02:20:42 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,10 @@ int				init_map(t_ctx *ctx, void *brain)
 	b->map->w_s = NULL;
 	b->map->w_w = NULL;
 	b->map->floor = NULL;
-	b->map->sprites = malloc(sizeof(t_spr_list));
+	if(!(b->map->sprites = malloc(sizeof(t_spr_list))))
+		exit_cube(brain, 120, "malloc failing for number of sprites in map", 0);
+	if(!(b->map->sprites->column = malloc(b->ctx->width * sizeof(float))))
+		exit_cube(brain, 121, "malloc failing for the distance array", 0);
 	b->map->sprites->length = 0;
 	b->map->sprites->list = NULL;
 	b->map->skybox = NULL;
@@ -37,16 +40,15 @@ int				init_map(t_ctx *ctx, void *brain)
 	return (1);
 }
 
-void	init_textures(t_brain *b)
+void	init_textures(t_brain *b, t_type *map)
 {
 	ft_putstr(CYAN"Init Textures\n");
-	init_texture(b, "./assets/textures/walls/stone_bricks/2.xpm", &b->map->w_n);
-	init_texture(b, "./assets/textures/walls/stone_bricks/4.xpm", &b->map->w_e);
-	init_texture(b, "./assets/textures/walls/stone_bricks/3.xpm", &b->map->w_s);
-	init_texture(b, "./assets/textures/walls/stone_bricks/1.xpm", &b->map->w_w);
-	init_texture(b, "./assets/textures/floor/sand.xpm", &b->map->floor);
-	init_texture(b, "./assets/sky/mountains/mountains.xpm", &b->map->skybox);
-	
+	init_texture(b, map->no, &b->map->w_n);
+	init_texture(b, map->ea, &b->map->w_e);
+	init_texture(b, map->so, &b->map->w_s);
+	init_texture(b, map->we, &b->map->w_w);
+	init_texture(b, map->f, &b->map->floor);
+	init_texture(b, map->c, &b->map->skybox);
 }
 
 int		realloc_map(t_map *m, char *line)
@@ -103,7 +105,7 @@ t_player_detect		*add_map_row(t_map *m, char *line)
 	return (player);
 }
 
-int				open_map(t_brain *b, char *map_path)
+int				open_map(t_brain *b, char *map_path, t_type *map)
 {
 	char	*line;
 	int		file;
@@ -111,19 +113,22 @@ int				open_map(t_brain *b, char *map_path)
 	t_player_detect *player;
 
 	init_map(b->ctx, b);
-	init_textures(b);
+	init_textures(b, map);
 	file = open(map_path, O_RDONLY);
-	while ((ret = get_next_line(file, &line)) != -1)
+	ret = get_next_line(file, &line);
+	while (ret && ((ft_strmultichr(line, " 01SNEW")) != 1))
+		ret = get_next_line(file, &line);
+	while (ret != -1)
 	{
 		if ((player = add_map_row(b->map, line)) != NULL)
 			init_player(b, player->pos_x, player->direction);
 		if (!ret)
 			break;
+		ret = get_next_line(file, &line);
 	}
 	close(file);
 	disp_sprites(b->map->sprites);
-	sort_sprites(b, b->map->sprites);
-	disp_sprites(b->map->sprites);
+	sort_sprites(b->player->pos, b->map->sprites);
 	dprintf(1, DCYAN"	-> Width: [%d]\n", b->map->width);
 	dprintf(1, "	-> Height:[%d]\n\n"RST, b->map->height);
 	print_map_grid((b->map));

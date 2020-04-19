@@ -33,6 +33,7 @@ SRCS = 		main.c \
 			$(SRCSPATH)wall_detect.c \
 			$(SRCSPATH)floor_detect.c \
 			$(SRCSPATH)sprites.c \
+			$(SRCSPATH)flag_get.c \
 			$(SRCSPATH)keys.c \
 			$(SRCSPATH)Player/player.c \
 			$(SRCSPATH)Player/move.c \

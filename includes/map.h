@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/14 22:46:16 by siferrar          #+#    #+#             */
-/*   Updated: 2020/04/10 16:15:12 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/04/19 02:19:53 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,19 @@
 
 typedef struct      s_sprite
 {
-	t_fpoint        pos;
-	int			    type;
-	float			dist;
+	t_fpoint		pos;
+	int				type;
+	float			deg;
+	int				on_screen;
 	t_buff			*model;
+	float			dist;
+
+	struct s_sprite	*next;
 }				    t_sprite;
 
 typedef struct	s_spr_list
 {
+	int			*column;
 	int			length;
 	t_sprite	**list;
 }				t_spr_list;

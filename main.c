@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 21:29:11 by siferrar          #+#    #+#             */
-/*   Updated: 2020/04/10 16:51:56 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/04/19 02:20:19 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,6 +115,7 @@ int loop_hook(t_brain *b)
 		draw_walls(b, b->ctx);
 		if (is_key_pressed(b, 3) == -1)
 			draw_minimap(b, 10, 25, 200);
+		update_sprite(b);
 		b->player->as_move = 0;
 	} 
 	if (is_key_pressed(b, 3) != -1)
@@ -161,16 +162,21 @@ int	main(int ac, char **av)
 {
 	t_brain *b;
 	t_mlx_win_list *win;
+	t_type	*map;
+	int fd;
 
 	if(ac != 2)
 		return (-1);
-	b = new_brain(1920, 1080, "Cube3D");
+	map = malloc(sizeof(t_type));
+	ft_getmap_flag(fd = open(av[1], O_RDONLY), map);
+	close(fd);
+	b = new_brain(map->res[0], map->res[1], "Cube3D");
 	exit_cube(b, 0, "Init Exit", 1);
 	win = (t_mlx_win_list *)b->ctx->win_ptr;
 	b->ctx->width = win->size_x;
 	b->ctx->height = win->size_y;
 	printf(GRN"Opening Map "DCYAN"%s\n"RST, av[1]);
-	open_map(b, av[1]);
+	open_map(b, av[1], map);
 	if (!check_map(b->map))
 		exit_cube(b, 2, "BAD MAP", 0);
 	ft_putstr(RED"\n🔥 L"YELO"O"GRN"O"CYAN"P "BLUE"I"PURP"N"PINK"I"RST"T 🔥\n\n"RST);

@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/27 08:51:57 by siferrar          #+#    #+#             */
-/*   Updated: 2020/04/10 16:49:16 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/04/19 02:20:00 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 #ifndef SPRITES_H
 # define SPRITES_H
+# define SPR_TRANSP 0x980088
 
 t_sprite	*init_sprite(t_map *m, t_fpoint pos, int type);
 void		add_sprite(t_map *m, int posX, int type);

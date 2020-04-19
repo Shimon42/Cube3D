@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wall_detect.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: milosandric <milosandric@student.42lyon    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 22:11:09 by siferrar          #+#    #+#             */
-/*   Updated: 2020/04/09 18:29:48 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/04/17 18:32:54 by milosandric      ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,9 +147,9 @@ t_detect	dist_to_wall(t_brain *b, t_fpoint *p, float angle)
 	{
 		bad_dist = dists.y;
 		wall.w_side_hit = get_wall_side(angle, 'v');
-		wall.hit = closest_v.hit;
+		wall.hit = closest_v.hit; 
 	}
-	wall.dist = bad_dist;
+	wall.dist = bad_dist; //corriger fisheye ici
 	return (wall);
 }
 
@@ -170,7 +170,7 @@ void	draw_walls(t_brain *b, t_ctx *c)
 {
 	float w_height;
 	t_detect wall;
-	float cur_col;
+	int		 cur_col;
 	float col_step;
 	float cur_angle;
 	float divangle;
@@ -191,6 +191,7 @@ void	draw_walls(t_brain *b, t_ctx *c)
 		cur_angle = divangle + (col_step * cur_col);
 		wall = dist_to_wall(b, b->player->pos, cur_angle);
 		wall.dist *= cos((cur_col < divs.x ? -1 : 1) * (b->player->angle - cur_angle));
+		b->map->sprites->column[cur_col] = wall.dist; //OKOKOKOKOKOK
 		w_height = ((b->map->bloc_size) / wall.dist) * b->player->cam->proj_dist;
 		mid_wall = w_height/2;
 		if (w_height < b->ctx->height)

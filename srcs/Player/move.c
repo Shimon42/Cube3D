@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/09 19:09:03 by siferrar          #+#    #+#             */
-/*   Updated: 2020/04/09 19:09:21 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/04/19 01:03:19 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,15 +45,17 @@ void	side_move(struct s_player *p, int dir)
 	t_map *m;
 	t_brain *b;
 
+	int key;
+
 	b = (t_brain *)p->brain;
 	m = b->map;
-	if (get_grid(m,
+	if ((key = get_grid(m,
 		p->pos->x + p->speed * (cos(p->angle + (ft_inrad(90)) * dir)),
-													p->pos->y, 1) != 1)
+													p->pos->y, 1) )!= 1 && key != 2)
 		p->pos->x += p->speed * (cos(p->angle + (ft_inrad(90)) * dir));
-	if (get_grid(m, p->pos->x,
+	if ((key = get_grid(m, p->pos->x,
 		p->pos->y + p->speed * (sin(p->angle + (ft_inrad(90)) * dir)),
-																1) != 1)
+																1)) != 1 && key != 2)
 		p->pos->y += p->speed * (sin(p->angle + (ft_inrad(90)) * dir));
 	p->as_move = 1;
 	if (is_key_pressed(b, 13) == -1 && is_key_pressed(b, 1) == -1)
@@ -65,12 +67,13 @@ void	move(struct s_player *p, int dir)
 	t_map *m;
 	t_brain *b;
 
+	int key;
 	b = (t_brain *)p->brain;
 	m = b->map;
 
-	if (get_grid(m, p->pos->x + p->step->x * dir, p->pos->y, 1) != 1)
+	if ((key = get_grid(m, p->pos->x + p->step->x * dir, p->pos->y, 1)) != 1 && key != 2)
 		p->pos->x += p->step->x * dir;
-	if (get_grid(m, p->pos->x, p->pos->y + p->step->y * dir, 1) != 1)
+	if ((key = get_grid(m, p->pos->x, p->pos->y + p->step->y * dir, 1)) != 1 && key != 2)
 		p->pos->y += p->step->y * dir;
 	p->as_move = 1;
 	bobbing(p);
