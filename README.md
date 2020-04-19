@@ -1,6 +1,6 @@
-# Cube 3D • Alpha 0.6.6
+# Cube 3D • Alpha 0.7
 
-![Cube3D Screenshot](/images/world.png)
+![Cube3D Screenshot](/images/sprites.png)
 
 -> make - Compile only
 
@@ -30,7 +30,9 @@
 	————————————————————————————————————
 		Changes:
 	————————————————————————————————————
-	- Store all sprites in map->sprites during open_map()
+	- Draw sprites !!!! (Laggy when player is too close)
+	- Sprites collisions
+	- Fixed bad player move at start if no rotat first
 
     ————————————————————————————————————
 		Cur State:
@@ -40,15 +42,30 @@
 	- Floor texture (Fisheye with some texture)
 	- Wall Texture
 	- Walls Collisions
+	- Textured sprites [WIP]
+	- Sprites Collisions
 	- Minimap display
 	- SkyBox
 	
 	————————————————————————————————————
     	Known Bugs:
 	————————————————————————————————————
+	General
+	- Random Crash On Start
+	- Random BadMap error - weird chars in map display
+
 	Drawing: 
 	- Line drawn after end of win width is drawn on the other side of the window
 	
 	Moving:
 	- Double speed if walk on side and move forward
 
+	Sprites
+	- Bad start_y
+	- Streched textures
+	- Sprite is cropped sometimes
+
+	Floor Casting
+	- Floor texture move badly sometimes
+
+![Cube3D Screenshot](/images/Bugs/sprites.png)

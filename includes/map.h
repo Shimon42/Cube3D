@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: milosandric <milosandric@student.42lyon    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/14 22:46:16 by siferrar          #+#    #+#             */
-/*   Updated: 2020/04/15 23:09:14 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/04/17 17:53:37 by milosandric      ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,16 +19,17 @@ typedef struct      s_sprite
 {
 	t_fpoint		pos;
 	int				type;
+	float			deg;
+	int				on_screen;
 	t_buff			*model;
 	float			dist;
-	t_fpoint		hit;
-	char			side_hit;
 
 	struct s_sprite	*next;
 }				    t_sprite;
 
 typedef struct	s_spr_list
 {
+	int			*column;
 	int			length;
 	t_sprite	**list;
 }				t_spr_list;
@@ -39,7 +40,7 @@ typedef struct	s_detect
 	t_fpoint	hit;
 	char		w_side_hit;
 	char		from;
-	t_spr_list	*spr_on_path;
+	t_sprite	**spr_on_path;
 }				t_detect;
 
 typedef struct	s_player_detect

@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/27 08:02:21 by siferrar          #+#    #+#             */
-/*   Updated: 2020/04/16 13:10:02 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/04/19 01:33:07 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,10 @@ t_sprite   *init_sprite(t_map *m, t_fpoint pos, int type)
 	if (!(s = malloc(sizeof(t_sprite))))
 		return (NULL);
 	s->pos = pos;
-	s->pos.x = pos.x * m->bloc_size;
-	s->pos.y = pos.y * m->bloc_size;
+	s->pos.x = pos.x * m->bloc_size + m->bloc_size/2;
+	s->pos.y = pos.y * m->bloc_size + m->bloc_size/2;
 	s->model = NULL;
+	s->on_screen = 0;
 	init_texture(b, "./assets/sprites/barrel.xpm", &s->model);
 	s->type = 2;
 	s->next = NULL;
@@ -41,20 +42,23 @@ int		compare(t_fpoint p1, t_fpoint p2, int range)
 
 t_sprite *get_sprite(t_map *m, t_fpoint p)
 {
+	t_sprite **ptr;
 	t_fpoint in_grid;
-	int i;
+	t_sprite *sprites;
 
 	//dprintf(1, "Getting sprite\n");
-	i = 0;
-	while (i < m->sprites->length)
+
+	sprites = (t_sprite *)m->sprites;
+	ptr = &sprites;
+	while (*ptr != NULL)
 	{
 		//dprintf(1, "Check Sprites x:%f y:%f  VS x:%f y:%f \n", (*ptr)->pos.x, (*ptr)->pos.y, p.x, p.y);
-		if (compare(m->sprites->list[i]->pos, p, m->bloc_size + 2))
+		if (compare((*ptr)->pos, p, m->bloc_size + 2))
 		{
 			//dprintf(1, "Sprite found\n");
-			return (m->sprites->list[i]);
+			return (*ptr);
 		}
-		i++;
+		ptr = &((*ptr)->next);
 	}
 	//dprintf(1, RED"Sprite NOT found\n"RST);
 
@@ -65,33 +69,22 @@ void	add_spr_to_list(t_spr_list *s_list, t_sprite *s)
 {
 	t_sprite **ret;
 	int i;
-	int new_len;
 
 	i = 0;
-	//dprintf(1, YELO"Add spr to list\n");
-	//disp_sprite(s);
-	if (s_list == NULL)
-	{
-	//	dprintf(1, "-- Init List\n");
-		s_list = malloc(sizeof(t_spr_list));
-		s_list->length = 0;
-		s_list->list = NULL;
-	}
+	dprintf(1, YELO"Add spr to list\n");
+	disp_sprite(s);
 	ret = malloc((s_list->length + 1) * sizeof(t_sprite *));
-	if (s_list->list != NULL && s_list->length != 0)
-	{
+	if (s_list->list != NULL)
 		while (i < s_list->length)
 		{
 			ret[i] = s_list->list[i];
 			i++;
 		}
-		free(s_list->list);
-	}
-
 	ret[i] = s;
+	free(s_list->list);
 	s_list->list = ret;
 	s_list->length++;
-	//dprintf(1, GRN"Add spr to list OK\n"RST);
+	dprintf(1, GRN"Add spr to list OK\n"RST);
 }
 
 void    swap_sprite(t_spr_list *lst_sprt, int num1, int num2)
@@ -120,19 +113,90 @@ void	disp_sprites(t_spr_list *s_list)
 	t_sprite	*s;
 	i = 0;
 	ft_putstr(PINK);
-	if (s_list != NULL && s_list->list != NULL)
+	if (s_list->list != NULL)
 	{
-		//dprintf(1, "%d sprites in list\n", s_list->length);
+		dprintf(1, "%d sprites in list\n", s_list->length);
 		while (i < s_list->length)
 		{
 			disp_sprite(s_list->list[i]);
 			i++;
 		}
-	//	dprintf(1, "End of loop\n");
+		dprintf(1, "End of loop\n");
 	} else {
-		//dprintf(1, "No sprites in list\n");
+		dprintf(1, "No sprites in list\n");
 	}
 	ft_putstr(RST);
+}
+
+void	disp_sprite(t_sprite *s)
+{
+	dprintf(1, "Sprite of type %d\n", s->type);
+	disp_point(&(s->pos));
+}
+
+
+void	draw_sprite(void *brain, t_sprite *s, float col)
+{
+	t_brain		*b;
+	t_fpoint	s_size;
+	t_fpoint	s_dist;
+	t_fpoint	ratio;
+	double		dist;
+	double		angle;
+	int		start_y;
+	int		start_x;
+	int			color;
+	int			y;
+	int x;
+	int			texture_col;
+	b = (t_brain *)brain;
+	
+	dist = calc_dist(*b->player->pos, s->pos);
+
+	s_dist.x = s->pos.x - b->player->pos->x;
+	s_dist.y = s->pos.y - b->player->pos->y;
+	
+	s_size.x = s->model->width * b->ctx->width / s->dist;
+	s_size.y = s->model->height * b->ctx->height / s->dist;
+
+	angle = atan2(s_dist.y, s_dist.x);
+	angle = ft_indeg(to_360(b->player->angle - angle));
+	
+	//dprintf(1, "Angle: %f\n", angle);
+	col = b->ctx->width / ft_indeg(b->player->cam->fov);
+	//dprintf(1, "col_ratio: %f\n", col);
+	//dprintf(1, "Draw sprite\n");
+	//ft_putstr("s_size: ");
+	//disp_point(&s_size);
+	if (angle >= 0 && angle < 180)
+		start_x = (int)floor(b->ctx->width / 2 - (col * angle));
+	else if (angle < 360)
+		start_x = (int)floor(b->ctx->width / 2 + (col * (360 - angle)));
+
+	start_x -= s_size.x/2;
+	//start_y = (int)floor(b->ctx->height / 2 + b->player->z - s_size.y/2);
+	start_y = (b->ctx->height / 2) * (1 + (1/ s->dist)) + b->player->z - s_size.y/2;
+	
+	//dprintf(1, "start [%d][%d]\n", start_x, start_y);
+	ratio.x = s->model->width / s_size.x;
+	ratio.y = s->model->height / s_size.y;
+	//dprintf(1, "ratio [%f][%f]\n", ratio.x, ratio.y);
+
+	x = 0;
+	while (x < s_size.x)
+	{
+		y = 0;
+		while (y < s_size.y)
+		{
+			color = pixel_get(s->model, x * ratio.x, y * ratio.y);			
+			if (color != SPR_TRANSP && b->map->sprites->column[start_x + x] >= floor(dist))
+				if (start_x + x > 0 && start_x + x < b->ctx->width
+					&& start_y + y > 0 && start_y + y < b->ctx->height)
+					pixel_put(start_x + x, start_y + y, color, b->map->frame);
+			y++;
+		}
+		x++;
+	}
 }
 
 void    sort_sprites(t_fpoint *pos, t_spr_list *lst_sprt)
@@ -143,7 +207,7 @@ void    sort_sprites(t_fpoint *pos, t_spr_list *lst_sprt)
 	int j;
 
 	i = 0;
-	//dprintf(1, CYAN"Order Sprites\n"RST);
+	dprintf(1, CYAN"Order Sprites\n"RST);
 	while (i < lst_sprt->length)
 	{
 		j = i;
@@ -153,91 +217,57 @@ void    sort_sprites(t_fpoint *pos, t_spr_list *lst_sprt)
 			dist2 = calc_dist(*pos, lst_sprt->list[j]->pos);
 			lst_sprt->list[i]->dist = dist1;
 			lst_sprt->list[j]->dist = dist2;
-		//	dprintf(1, "%f vs %f\n", dist1, dist2);
-			if (dist1 > dist2)
+			//dprintf(1, "%f vs %f\n", dist1, dist2);
+			if (dist1 < dist2)
 			{
-				//dprintf(1, "Swap [%d] and [%d]\n", i, j);
-				disp_sprite(lst_sprt->list[i]);
-				disp_sprite(lst_sprt->list[j]);
+			//	dprintf(1, "Swap [%d] and [%d]\n", i, j);
+				//disp_sprite(lst_sprt->list[i]);
+				//disp_sprite(lst_sprt->list[j]);
 				swap_sprite(lst_sprt, i, j);
 			}
 			j++;
 		}
 		i++;
 	}
-	//dprintf(1, CYAN"Order Sprites OK\n"RST);
+	dprintf(1, CYAN"Order Sprites OK\n"RST);
 }
 
-void	draw_sprite(void *brain, t_sprite *s, float col)
+float	deg_sprite(t_player *ply, t_spr_list *spr)
 {
-	t_brain		*b;
-	t_fpoint	s_size;
-	t_fpoint	s_dist;
-	t_fpoint	ratio;
-	double		dist;
-	double		angle;
-	float		start_y;
-	int			color;
-	int			y;
-	int			texture_col;
-
-	b = (t_brain *)brain;
-	
-	ft_putstr(RST);
-	dist = calc_dist(*b->player->pos, s->pos);
-
-	
-	s_size.x = s->model->width * b->ctx->width / dist;
-	s_size.y = s->model->height * b->ctx->height / dist;
-	s_dist.x = abs(s->pos.x - b->player->pos->x);
-	s_dist.y = abs(s->pos.y - b->player->pos->y);
-
-	angle = atan2(s_dist.y, s_dist.x);
-	angle = b->player->angle - angle;
-	
-	start_y = (b->ctx->height / 2) * (1 + (1 / dist)) - s_size.y/2;
-	ratio.x = s_size.x / b->map->bloc_size;
-	ratio.y = s_size.y / b->map->bloc_size;
-
-	y = 0;
-	dprintf(1, "size: %f %f\n", s_size.x, s_size.y);
-	ft_putstr("s_dist:");
-	disp_point(&s_dist);
-	ft_putstr("Ratio:");
-	disp_point(&ratio);
-	while (y < s_size.y)
-	{
-		//color = pixel_get(s->model, (int)floor(s->hit.x) % b->map->bloc_size, y * ratio.y);
-		color = 0xFF0000;
-		pixel_put(col, start_y + y, color, b->map->frame);
-		y++;
-	}
-}
-
-
-void draw_sprites(void *brain, t_spr_list *lst, int col)
-{
+	float angle;
+	t_fpoint s_dist;
 	int i;
-
+	
 	i = 0;
-	//dprintf(1, GRN"DRAW SPRITES\n"RST);
-	while (i < lst->length)
+	while(i < spr->length)
 	{
-		draw_sprite(brain, lst->list[i], col);
+		s_dist.x = spr->list[i]->pos.x - ply->pos->x;
+		s_dist.y = spr->list[i]->pos.y - ply->pos->y;
+		angle = atan2(s_dist.y, s_dist.x);
+		angle = to_360(ply->angle - angle);	
+		dprintf(1, "%f\t%f\n", ply->pos->x, ply->pos->y);
+		dprintf(1, "angle : %f\n", ft_indeg(angle));
+		spr->list[i]->deg = ft_indeg(angle);
+		if((spr->list[i]->deg > (360 - ft_indeg(ply->cam->fov / 2))) 
+			|| (spr->list[i]->deg < ft_indeg(ply->cam->fov / 2))) // a opti
+			spr->list[i]->on_screen = 1;
+		else
+			spr->list[i]->on_screen = 0;
+		dprintf(1, "on_scr : %d\n", spr->list[i]->on_screen);
 		i++;
 	}
 }
 
 void	update_sprite(t_brain *b)
 {
+	int i;
+	
+	i = 0;
 	sort_sprites(b->player->pos, b->map->sprites);
-}
-
-void	disp_sprite(t_sprite *s)
-{
-	dprintf(1, "Sprite of type %d\n", s->type);
-	disp_point(&(s->pos));
-	dprintf(1, "Hit at:");
-	if (&s->hit != NULL)
-		disp_point(&s->hit);
+	//deg_sprite(b->player, b->map->sprites);
+	while(i < b->map->sprites->length)
+	{
+		draw_sprite(b, b->map->sprites->list[i], 0);
+		i++;
+	}
 }

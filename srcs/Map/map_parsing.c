@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_parsing.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: milosandric <milosandric@student.42lyon    +#+  +:+       +#+        */
+/*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/14 20:36:43 by siferrar          #+#    #+#             */
-/*   Updated: 2020/04/13 16:33:47 by milosandric      ###   ########lyon.fr   */
+/*   Updated: 2020/04/18 22:06:36 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,10 @@ int				init_map(t_ctx *ctx, void *brain)
 	b->map->w_s = NULL;
 	b->map->w_w = NULL;
 	b->map->floor = NULL;
-	b->map->sprites = malloc(sizeof(t_spr_list));
+	if(!(b->map->sprites = malloc(sizeof(t_spr_list))))
+		exit_cube(brain, 120, "malloc failing for number of sprites in map", 0);
+	if(!(b->map->sprites->column = malloc(b->ctx->width * sizeof(float))))
+		exit_cube(brain, 121, "malloc failing for the distance array", 0);
 	b->map->sprites->length = 0;
 	b->map->sprites->list = NULL;
 	b->map->skybox = NULL;

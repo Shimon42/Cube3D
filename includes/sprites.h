@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/27 08:51:57 by siferrar          #+#    #+#             */
-/*   Updated: 2020/04/15 16:41:35 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/04/19 01:32:58 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 #ifndef SPRITES_H
 # define SPRITES_H
+# define SPR_TRANSP 0x980088
 
 t_sprite	*init_sprite(t_map *m, t_fpoint pos, int type);
 void		add_sprite(t_map *m, int posX, int type);
@@ -22,7 +23,6 @@ void		add_spr_to_list(t_spr_list *s_list, t_sprite *s);
 t_sprite	*get_sprite(t_map *m, t_fpoint p);
 
 void	draw_sprite(void *brain, t_sprite *spr, float col);
-void	draw_sprites(void *brain, t_spr_list *lst, int col);
 
 void		disp_sprt_list(t_list *s_list);
 void		disp_sprites(t_spr_list *s_list);
