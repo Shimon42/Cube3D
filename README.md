@@ -42,7 +42,7 @@
 	- Floor texture (Fisheye with some texture)
 	- Wall Texture
 	- Walls Collisions
-	- Textured sprites [WIP]
+	- Textured sprites [WIP with @milos-andric] 
 	- Sprites Collisions
 	- Minimap display
 	- SkyBox
