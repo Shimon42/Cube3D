@@ -2,10 +2,15 @@
 
 ![Cube3D Screenshot](/images/sprites.png)
 
+![Cube3D Minimap expanded](/images/minimap.png)
+
+<hr>
+
 -> make - Compile only
 
 -> make launch - Compile changes & launch
 
+<hr>
 
 <kbd>ESC</kbd> - Quit (brutal killing)
 
@@ -23,9 +28,7 @@
 
 <kbd>SPACE</kbd> - Jump
 
-
-![Cube3D Minimap expanded](/images/minimap.png)
-
+<hr>
 
 	————————————————————————————————————
 		Changes:
