@@ -1,4 +1,4 @@
-# Cube 3D • Alpha 0.7.5 - Sprites & Minimap Fix
+# Cube 3D • Alpha 0.7.5 - Sprites
 
 ![Cube3D Screenshot](/images/sprites.png)
 
