@@ -6,7 +6,7 @@
 
 -> make launch - Compile changes & launch
 
-
+<hr>
 <kbd>ESC</kbd> - Quit (brutal killing)
 
 <kbd>F</kbd> - Expand map
