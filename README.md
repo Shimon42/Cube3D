@@ -35,6 +35,7 @@
 	- Fixed Minimap is too small when map.height > map.width
 	- Fixed Fullmap bad display when map.height > map.width
 	- Fixed bad swap_sprites()
+	- Fixed FPS Drop when too close from sprite
 
     ————————————————————————————————————
 		Cur State:

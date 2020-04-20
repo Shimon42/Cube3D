@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/27 08:02:21 by siferrar          #+#    #+#             */
-/*   Updated: 2020/04/20 23:28:55 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/04/20 23:45:36 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,8 +146,8 @@ void	draw_sprite(void *brain, t_sprite *s, float col)
 	col = b->ctx->width / ft_indeg(b->player->cam->fov);
 	//dprintf(1, "col_ratio: %f\n", col);
 	//dprintf(1, "Draw sprite\n");
-	ft_putstr("s_size: ");
-	disp_point(&s_size);
+	//ft_putstr("s_size: ");
+	//disp_point(&s_size);
 	if (angle >= 0 && angle < 180)
 		start_x = (int)floor(b->ctx->width / 2 - (col * angle));
 	else if (angle < 360)
@@ -167,18 +167,20 @@ void	draw_sprite(void *brain, t_sprite *s, float col)
 	x = 0;
 	while (x < s_size.x)
 	{
-		y = 0;
-		while (y < s_size.y)
+		if (start_x + x > 0 && start_x + x < b->ctx->width)
 		{
-			if (start_x + x > 0 && start_x + x < b->ctx->width
-						&& start_y + y > 0 && start_y + y < b->ctx->height)
+			y = 0;
+			while (y < s_size.y)
 			{
-					color = pixel_get(s->model, x * ratio.x, y * ratio.y);			
-					if (color != SPR_TRANSP && b->map->sprites->column[start_x + x] >= floor(s->dist))
-							pixel_put(start_x + x, start_y + y, color, b->map->frame);
-				
+				if (start_y + y > 0 && start_y + y < b->ctx->height)
+				{
+						color = pixel_get(s->model, x * ratio.x, y * ratio.y);			
+						if (color != SPR_TRANSP && b->map->sprites->column[start_x + x] >= floor(s->dist))
+								pixel_put(start_x + x, start_y + y, color, b->map->frame);
+					
+				}
+				y++;
 			}
-			y++;
 		}
 		x++;
 	}
@@ -192,7 +194,7 @@ void    sort_sprites(t_fpoint *pos, t_spr_list *lst_sprt)
 	int j;
 
 	i = 0;
-	dprintf(1, CYAN"Order Sprites\n"RST);
+	//dprintf(1, CYAN"Order Sprites\n"RST);
 	while (i < lst_sprt->length)
 	{
 		j = i;
@@ -214,7 +216,7 @@ void    sort_sprites(t_fpoint *pos, t_spr_list *lst_sprt)
 		}
 		i++;
 	}
-	dprintf(1, CYAN"Order Sprites OK\n"RST);
+	//dprintf(1, CYAN"Order Sprites OK\n"RST);
 }
 
 float	deg_sprite(t_player *ply, t_spr_list *spr)
