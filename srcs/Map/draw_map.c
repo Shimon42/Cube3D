@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/14 22:43:45 by siferrar          #+#    #+#             */
-/*   Updated: 2020/04/09 19:19:59 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/04/20 22:44:19 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -247,7 +247,11 @@ void			draw_minimap(t_brain *b, int x, int y, int width)
 	float scale;
 
 	b->ctx->cur_buff = b->map->frame;
-	scale = ((float)(width / (float)b->map->px_width));
+	if (b->map->px_height > b->map->px_width)
+		scale = ((float)(width / (float)b->map->px_height));
+	else
+		scale = ((float)(width / (float)b->map->px_width));
+		
 	if (b->map->px_height * scale > b->ctx->height)
 	{
 		scale = ((float)((b->ctx->height - 2 *
@@ -274,7 +278,11 @@ void			draw_fullmap(t_brain *b, float ease_val)
 	if (ease_val > 0)
 	{
 		margin = 100 * b->map->scale;
-		scale = ((float)((b->ctx->width - 2 * margin) / (float)b->map->px_width));
+		
+		if (b->map->px_height > b->map->px_width)
+			scale = ((float)((b->ctx->height - 2 * margin) / (float)b->map->height));
+		else
+			scale = ((float)((b->ctx->width - 2 * margin) / (float)b->map->px_width));
 		if (b->map->px_width * scale > b->ctx->width)
 			scale = ((float)((b->ctx->height - 2 * margin) / (float)b->map->px_height));
 		b->map->scale = scale;

@@ -79,7 +79,7 @@ $(NAME):	$(OBJS) $(INCLUDES)
 			ar rc $(NAME).a $(OBJS) get_next_line.o get_next_line_utils.o
 
 comp:		all
-			gcc $(CFLAGS) main.c $(NAME).a libft.a libmlx.a -o $(NAME) -framework OpenGL -framework AppKit
+			gcc $(CFLAGSSAN) main.c $(NAME).a libft.a libmlx.a -o $(NAME) -framework OpenGL -framework AppKit
 
 launch:		comp
 			clear

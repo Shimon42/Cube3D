@@ -1,4 +1,4 @@
-# Cube 3D • Alpha 0.7
+# Cube 3D • Alpha 0.7.5 - Sprites & Minimap Fix
 
 ![Cube3D Screenshot](/images/sprites.png)
 
@@ -30,9 +30,11 @@
 	————————————————————————————————————
 		Changes:
 	————————————————————————————————————
-	- Draw sprites !!!! (Laggy when player is too close)
-	- Sprites collisions
-	- Fixed bad player move at start if no rotat first
+	- Draw sprites !
+	- Multi Sprites
+	- Fixed Minimap is too small when map.height > map.width
+	- Fixed Fullmap bad display when map.height > map.width
+	- Fixed bad swap_sprites()
 
     ————————————————————————————————————
 		Cur State:
@@ -42,7 +44,7 @@
 	- Floor texture (Fisheye with some texture)
 	- Wall Texture
 	- Walls Collisions
-	- Textured sprites [WIP with @milos-andric] 
+	- Textured sprites
 	- Sprites Collisions
 	- Minimap display
 	- SkyBox
@@ -51,7 +53,7 @@
     	Known Bugs:
 	————————————————————————————————————
 	General
-	- Random Crash On Start
+	- RANDOM CRASH ON START (Temporaly Fixed with -gcc g -g3 -fsanitize=address in Makefile)
 	- Random BadMap error - weird chars in map display
 
 	Drawing: 
@@ -60,12 +62,12 @@
 	Moving:
 	- Double speed if walk on side and move forward
 
-	Sprites
-	- Bad start_y
-	- Streched textures
-	- Sprite is cropped sometimes
-
 	Floor Casting
 	- Floor texture move badly sometimes
+	- Fish eye
 
-![Cube3D Screenshot](/images/Bugs/sprites.png)
+	Sprites:
+	- Cropped sprite sometimes
+
+
+![Cube3D Minimap expanded](/images/Bugs/sprites.png)

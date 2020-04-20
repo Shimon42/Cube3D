@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/20 15:53:12 by siferrar          #+#    #+#             */
-/*   Updated: 2020/04/10 15:53:14 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/04/20 20:57:27 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,16 +91,11 @@ void	print_map_debug(t_map_line *line)
 
 void	print_map_grid(t_map *map)
 {
-	int x;
 	int y;
-	int i;
-	char val;
 
-	i = 0;
 	y = 0;
 	while (y < map->height)
 	{
-		x = 0;
 		print_map_debug(map->grid[y]);
 		y++;
 	}

@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 21:29:11 by siferrar          #+#    #+#             */
-/*   Updated: 2020/04/18 22:08:52 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/04/20 22:38:36 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,9 +113,9 @@ int loop_hook(t_brain *b)
 	if (b->player->as_move == 1)
 	{
 		draw_walls(b, b->ctx);
+		update_sprite(b);
 		if (is_key_pressed(b, 3) == -1)
 			draw_minimap(b, 10, 25, 200);
-		update_sprite(b);
 		b->player->as_move = 0;
 	} 
 	if (is_key_pressed(b, 3) != -1)
