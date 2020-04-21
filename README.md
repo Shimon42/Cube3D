@@ -1,4 +1,4 @@
-# Cube 3D • Alpha 0.7.5 - Sprites
+# Cube 3D • Alpha 0.7.6 - Opacity
 
 ![Cube3D Screenshot](/images/sprites.png)
 
@@ -33,12 +33,9 @@
 	————————————————————————————————————
 		Changes:
 	————————————————————————————————————
-	- Draw sprites !
-	- Multi Sprites
-	- Fixed Minimap is too small when map.height > map.width
-	- Fixed Fullmap bad display when map.height > map.width
-	- Fixed bad swap_sprites()
-	- Fixed FPS Drop when too close from sprite
+	- Add opacity()
+	- Add conv functions and structs for rgb <-> hex 
+	- Sprites shadows are transparents
 
     ————————————————————————————————————
 		Cur State:

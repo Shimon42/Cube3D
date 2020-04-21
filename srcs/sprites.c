@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/27 08:02:21 by siferrar          #+#    #+#             */
-/*   Updated: 2020/04/20 23:45:36 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/04/21 14:33:41 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,23 @@ t_sprite   *init_sprite(t_map *m, t_fpoint pos, int type)
 	s->pos.x = pos.x * m->bloc_size + m->bloc_size/2;
 	s->pos.y = pos.y * m->bloc_size + m->bloc_size/2;
 	s->model = NULL;
+	s->shadow = NULL;
 	s->on_screen = 0;
 	if (type == 2)
+	{
 		init_texture(b, "./assets/sprites/barrel.xpm", &s->model);
+		init_texture(b, "./assets/sprites/barrel-shadow.xpm", &s->shadow);
+	}
 	else if (type == 3)
+	{
 		init_texture(b, "./assets/sprites/tree.xpm", &s->model);
+		init_texture(b, "./assets/sprites/tree-shadow.xpm", &s->shadow);
+	}
 	else if (type == 4)
+	{
 		init_texture(b, "./assets/sprites/col2.xpm", &s->model);
+		init_texture(b, "./assets/sprites/col2-shadow.xpm", &s->shadow);
+	}
 	s->next = NULL;
 	return (s);
 }
@@ -74,17 +84,20 @@ void    swap_sprite(t_spr_list *lst_sprt, int num1, int num2)
 		temp.dist = spr_a->dist;
 		temp.pos = spr_a->pos;
 		temp.model = spr_a->model;
+		temp.shadow = spr_a->shadow;
 		temp.type = spr_a->type;
 		
 		spr_a->dist = spr_b->dist;
 		spr_a->pos = spr_b->pos;
 		spr_a->type = spr_b->type;
 		spr_a->model = spr_b->model;
+		spr_a->shadow = spr_b->shadow;
 		
 		spr_b->dist = temp.dist;
 		spr_b->pos = temp.pos;
 		spr_b->type = temp.type;
 		spr_b->model = temp.model;
+		spr_b->shadow = temp.shadow;
 	}
 }
 
@@ -116,6 +129,37 @@ void	disp_sprite(t_sprite *s)
 	disp_point(&(s->pos));
 }
 
+t_rgb hex_to_rgb(int color)
+{
+	t_rgb ret;
+
+
+	ret.r = ((color >> 16) & 0xFF);
+	ret.g = ((color >> 8) & 0xFF);
+	ret.b = (color & 0xFF);
+	return (ret);
+}
+
+
+int rgb_to_hex(t_rgb color)
+{
+	return ((color.r << 16) + (color.g << 8) + color.b);
+}
+
+int	opacity(int color1, int color2, double opa)
+{
+	t_rgb col1;
+	t_rgb col2;
+	t_rgb ret;
+
+	col1 = hex_to_rgb(color1);
+	col2 = hex_to_rgb(color2);
+
+	ret.r = (int)floor(col1.r * opa) + (int)floor(col2.r * opa);
+	ret.g = (int)floor(col1.g * opa) + (int)floor(col2.g * opa);
+	ret.b = (int)floor(col1.b * opa) + (int)floor(col2.b * opa);
+	return (rgb_to_hex(ret));
+}
 
 void	draw_sprite(void *brain, t_sprite *s, float col)
 {
@@ -167,19 +211,32 @@ void	draw_sprite(void *brain, t_sprite *s, float col)
 	x = 0;
 	while (x < s_size.x)
 	{
-		if (start_x + x > 0 && start_x + x < b->ctx->width)
+		if (b->map->sprites->column[start_x + x] >= floor(s->dist))
 		{
-			y = 0;
-			while (y < s_size.y)
+			if (start_x + x > 0 && start_x + x < b->ctx->width)
 			{
-				if (start_y + y > 0 && start_y + y < b->ctx->height)
+				y = 0;
+				while (y < s_size.y)
 				{
-						color = pixel_get(s->model, x * ratio.x, y * ratio.y);			
-						if (color != SPR_TRANSP && b->map->sprites->column[start_x + x] >= floor(s->dist))
-								pixel_put(start_x + x, start_y + y, color, b->map->frame);
-					
+					if (start_y + y > 0 && start_y + y < b->ctx->height)
+					{
+							color = pixel_get(s->model, x * ratio.x, y * ratio.y);
+							if (s->shadow != NULL)
+							{
+								col = pixel_get(s->shadow, x * ratio.x, y * ratio.y);
+								if (col != SPR_TRANSP)
+								{
+									col = opacity(pixel_get(b->map->frame, start_x + x, start_y + y), col, 0.4);
+									pixel_put(start_x + x, start_y + y, col, b->map->frame);
+								}
+
+							}
+							if (color != SPR_TRANSP)
+										pixel_put(start_x + x, start_y + y, color, b->map->frame);
+						
+					}
+					y++;
 				}
-				y++;
 			}
 		}
 		x++;
