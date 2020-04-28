@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: milosandric <milosandric@student.42lyon    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 21:29:11 by siferrar          #+#    #+#             */
-/*   Updated: 2020/04/20 22:38:36 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/04/23 16:51:06 by milosandric      ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,14 +75,14 @@ t_brain *new_brain(int width, int height, char * name)
 
 float		calc_dist(t_fpoint p1, t_fpoint p2)
 {
-	return (sqrt(pow((p2.x - p1.x),2) + pow((p2.y - p1.y), 2)));
+	return (sqrt(pow((p2.x - p1.x),2) + pow((p2.y - p1.y), 2))); // true value ?
 }
 
 void	draw_sky(t_brain *b, t_ctx *c, double col, double end)
 {
 	int color;
 	int y;
-	static t_fpoint ratio = {-420, -420};
+	static t_fpoint ratio = {-420, -420}; //?? c'est normal ces valeurs en dur ?
 	static float width = 0;
 	float left;
 
@@ -163,19 +163,16 @@ int	main(int ac, char **av)
 	t_brain *b;
 	t_mlx_win_list *win;
 	t_type	*map;
-	int fd;
 
 	if(ac != 2)
 		return (-1);
-	map = malloc(sizeof(t_type));
-	ft_getmap_flag(fd = open(av[1], O_RDONLY), map);
-	close(fd);
+	map = ft_getmap_flag(av[1]);
 	b = new_brain(map->res[0], map->res[1], "Cube3D");
 	exit_cube(b, 0, "Init Exit", 1);
 	win = (t_mlx_win_list *)b->ctx->win_ptr;
 	b->ctx->width = win->size_x;
 	b->ctx->height = win->size_y;
-	printf(GRN"Opening Map "DCYAN"%s\n"RST, av[1]);
+	printf(GRN"Opening Map "DCYAN"%s\n"RST, av[1]); //attention pf
 	open_map(b, av[1], map);
 	if (!check_map(b->map))
 		exit_cube(b, 2, "BAD MAP", 0);

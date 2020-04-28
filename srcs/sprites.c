@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sprites.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: milosandric <milosandric@student.42lyon    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/27 08:02:21 by siferrar          #+#    #+#             */
-/*   Updated: 2020/04/21 14:33:41 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/04/28 14:19:37 by milosandric      ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -161,53 +161,41 @@ int	opacity(int color1, int color2, double opa)
 	return (rgb_to_hex(ret));
 }
 
-void	draw_sprite(void *brain, t_sprite *s, float col)
+void	draw_sprite(void *brain, t_sprite *s, float col) // btranle col
 {
 	t_brain		*b;
 	t_fpoint	s_size;
 	t_fpoint	s_dist;
 	t_fpoint	ratio;
 	double		angle;
-	int		start_y;
-	int		start_x;
+	int			start_y;
+	int			start_x;
 	int			color;
 	int			y;
 	int			x;
 	int			texture_col;
 	b = (t_brain *)brain;
 	
-
 	s_dist.x = s->pos.x - b->player->pos->x;
 	s_dist.y = s->pos.y - b->player->pos->y;
-	
 	s_size.x = (b->map->bloc_size / s->dist) * b->player->cam->proj_dist;
 	s_size.y = (b->map->bloc_size / s->dist) * b->player->cam->proj_dist;
-
 	angle = atan2(s_dist.y, s_dist.x);
 	angle = ft_indeg(to_360(b->player->angle - angle));
-	
-	//dprintf(1, "Angle: %f\n", angle);
 	col = b->ctx->width / ft_indeg(b->player->cam->fov);
-	//dprintf(1, "col_ratio: %f\n", col);
-	//dprintf(1, "Draw sprite\n");
-	//ft_putstr("s_size: ");
-	//disp_point(&s_size);
 	if (angle >= 0 && angle < 180)
 		start_x = (int)floor(b->ctx->width / 2 - (col * angle));
 	else if (angle < 360)
 		start_x = (int)floor(b->ctx->width / 2 + (col * (360 - angle)));
-
 	start_x -= s_size.x/2;
 	if (start_x + s_size.x < 0)
 		return ;
 	//start_y = (int)floor(b->ctx->height / 2 + b->player->z - s_size.y/2);
 	start_y = (b->ctx->height / 2) * (1 + (1/ s->dist)) + b->player->z - s_size.y/2;
-	
 	//dprintf(1, "start [%d][%d]\n", start_x, start_y);
 	ratio.x = s->model->width / s_size.x;
 	ratio.y = s->model->height / s_size.y;
 	//dprintf(1, "ratio [%f][%f]\n", ratio.x, ratio.y);
-
 	x = 0;
 	while (x < s_size.x)
 	{
@@ -233,7 +221,6 @@ void	draw_sprite(void *brain, t_sprite *s, float col)
 							}
 							if (color != SPR_TRANSP)
 										pixel_put(start_x + x, start_y + y, color, b->map->frame);
-						
 					}
 					y++;
 				}
@@ -276,39 +263,12 @@ void    sort_sprites(t_fpoint *pos, t_spr_list *lst_sprt)
 	//dprintf(1, CYAN"Order Sprites OK\n"RST);
 }
 
-float	deg_sprite(t_player *ply, t_spr_list *spr)
-{
-	float angle;
-	t_fpoint s_dist;
-	int i;
-	
-	i = 0;
-	while(i < spr->length)
-	{
-		s_dist.x = spr->list[i]->pos.x - ply->pos->x;
-		s_dist.y = spr->list[i]->pos.y - ply->pos->y;
-		angle = atan2(s_dist.y, s_dist.x);
-		angle = to_360(ply->angle - angle);	
-		dprintf(1, "%f\t%f\n", ply->pos->x, ply->pos->y);
-		dprintf(1, "angle : %f\n", ft_indeg(angle));
-		spr->list[i]->deg = ft_indeg(angle);
-		if((spr->list[i]->deg > (360 - ft_indeg(ply->cam->fov / 2))) 
-			|| (spr->list[i]->deg < ft_indeg(ply->cam->fov / 2))) // a opti
-			spr->list[i]->on_screen = 1;
-		else
-			spr->list[i]->on_screen = 0;
-		dprintf(1, "on_scr : %d\n", spr->list[i]->on_screen);
-		i++;
-	}
-}
-
 void	update_sprite(t_brain *b)
 {
 	int i;
 	
 	i = 0;
 	sort_sprites(b->player->pos, b->map->sprites);
-	//deg_sprite(b->player, b->map->sprites);
 	while(i < b->map->sprites->length)
 	{
 		draw_sprite(b, b->map->sprites->list[i], 0);

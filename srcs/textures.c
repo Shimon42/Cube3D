@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   textures.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: milosandric <milosandric@student.42lyon    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/09 19:25:10 by siferrar          #+#    #+#             */
-/*   Updated: 2020/04/21 14:10:22 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/04/23 12:39:58 by milosandric      ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,6 @@ void init_texture(t_brain *b, char *path, t_buff **t)
 	int fd;
 	
 	dprintf(1, DCYAN"	-> %s", path);
-	/*if ((fd = open(path, O_RDONLY)) == -1)
-		exit_cube(b, 503, "Invalid path for one of the textures\n", 0);
-	close(fd);*/
 	*t = malloc(sizeof(t_buff));
 	if (*t)
 	{

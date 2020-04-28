@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cube3d.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: milosandric <milosandric@student.42lyon    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 21:30:44 by siferrar          #+#    #+#             */
-/*   Updated: 2020/04/21 13:28:00 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/04/28 14:26:17 by milosandric      ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -167,7 +167,7 @@ void			disp_brain(t_brain *b);
 ** --- Parsing
 */
 
-void			ft_getmap_flag(int fd, t_type *map);
+t_type			*ft_getmap_flag(char *str);
 void			ft_getmap_values(char *line, t_type *map);
 void			ft_flag_str(char *str, char **target, t_type *map);
 void			ft_flag_color(char *str, int *target, t_type *map);
