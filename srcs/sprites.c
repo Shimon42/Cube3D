@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/27 08:02:21 by siferrar          #+#    #+#             */
-/*   Updated: 2020/04/21 14:33:41 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/04/29 15:50:10 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ t_sprite   *init_sprite(t_map *m, t_fpoint pos, int type)
 	t_sprite	*s;
 	t_brain		*b;
 
-	dprintf(1, "Init Sprite\n");
+	ft_printf("Init Sprite\n");
 	b = (t_brain *)m->brain;
 	if (!(s = malloc(sizeof(t_sprite))))
 		return (NULL);
@@ -54,7 +54,7 @@ void	add_spr_to_list(t_spr_list *s_list, t_sprite *s)
 	int i;
 
 	i = 0;
-	dprintf(1, YELO"Add spr to list\n");
+	ft_printf(YELO"Add spr to list\n");
 	disp_sprite(s);
 	ret = malloc((s_list->length + 1) * sizeof(t_sprite *));
 	if (s_list->list != NULL)
@@ -67,7 +67,7 @@ void	add_spr_to_list(t_spr_list *s_list, t_sprite *s)
 	free(s_list->list);
 	s_list->list = ret;
 	s_list->length++;
-	dprintf(1, GRN"Add spr to list OK\n"RST);
+	ft_printf(GRN"Add spr to list OK\n"RST);
 }
 
 void    swap_sprite(t_spr_list *lst_sprt, int num1, int num2)
@@ -110,22 +110,22 @@ void	disp_sprites(t_spr_list *s_list)
 	ft_putstr(PINK);
 	if (s_list->list != NULL)
 	{
-		dprintf(1, "%d sprites in list\n", s_list->length);
+		ft_printf("%d sprites in list\n", s_list->length);
 		while (i < s_list->length)
 		{
 			disp_sprite(s_list->list[i]);
 			i++;
 		}
-		dprintf(1, "End of loop\n");
+		ft_printf("End of loop\n");
 	} else {
-		dprintf(1, "No sprites in list\n");
+		ft_printf("No sprites in list\n");
 	}
 	ft_putstr(RST);
 }
 
 void	disp_sprite(t_sprite *s)
 {
-	dprintf(1, "Sprite of type %d\n", s->type);
+	ft_printf("Sprite of type %d\n", s->type);
 	disp_point(&(s->pos));
 }
 
@@ -189,7 +189,7 @@ void	draw_sprite(void *brain, t_sprite *s, float col)
 	//dprintf(1, "Angle: %f\n", angle);
 	col = b->ctx->width / ft_indeg(b->player->cam->fov);
 	//dprintf(1, "col_ratio: %f\n", col);
-	//dprintf(1, "Draw sprite\n");
+	//ft_printf("Draw sprite\n");
 	//ft_putstr("s_size: ");
 	//disp_point(&s_size);
 	if (angle >= 0 && angle < 180)
@@ -203,7 +203,7 @@ void	draw_sprite(void *brain, t_sprite *s, float col)
 	//start_y = (int)floor(b->ctx->height / 2 + b->player->z - s_size.y/2);
 	start_y = (b->ctx->height / 2) * (1 + (1/ s->dist)) + b->player->z - s_size.y/2;
 	
-	//dprintf(1, "start [%d][%d]\n", start_x, start_y);
+	//ft_printf("start [%d][%d]\n", start_x, start_y);
 	ratio.x = s->model->width / s_size.x;
 	ratio.y = s->model->height / s_size.y;
 	//dprintf(1, "ratio [%f][%f]\n", ratio.x, ratio.y);
@@ -251,7 +251,7 @@ void    sort_sprites(t_fpoint *pos, t_spr_list *lst_sprt)
 	int j;
 
 	i = 0;
-	//dprintf(1, CYAN"Order Sprites\n"RST);
+	//ft_printf(CYAN"Order Sprites\n"RST);
 	while (i < lst_sprt->length)
 	{
 		j = i;
@@ -264,7 +264,7 @@ void    sort_sprites(t_fpoint *pos, t_spr_list *lst_sprt)
 			//dprintf(1, "%f vs %f\n", dist1, dist2);
 			if (dist1 < dist2)
 			{
-			//	dprintf(1, "Swap [%d] and [%d]\n", i, j);
+			//	ft_printf("Swap [%d] and [%d]\n", i, j);
 				//disp_sprite(lst_sprt->list[i]);
 				//disp_sprite(lst_sprt->list[j]);
 				swap_sprite(lst_sprt, i, j);
@@ -273,7 +273,7 @@ void    sort_sprites(t_fpoint *pos, t_spr_list *lst_sprt)
 		}
 		i++;
 	}
-	//dprintf(1, CYAN"Order Sprites OK\n"RST);
+	//ft_printf(CYAN"Order Sprites OK\n"RST);
 }
 
 float	deg_sprite(t_player *ply, t_spr_list *spr)
@@ -289,7 +289,7 @@ float	deg_sprite(t_player *ply, t_spr_list *spr)
 		s_dist.y = spr->list[i]->pos.y - ply->pos->y;
 		angle = atan2(s_dist.y, s_dist.x);
 		angle = to_360(ply->angle - angle);	
-		dprintf(1, "%f\t%f\n", ply->pos->x, ply->pos->y);
+		ft_printf("%f\t%f\n", ply->pos->x, ply->pos->y);
 		dprintf(1, "angle : %f\n", ft_indeg(angle));
 		spr->list[i]->deg = ft_indeg(angle);
 		if((spr->list[i]->deg > (360 - ft_indeg(ply->cam->fov / 2))) 
@@ -297,7 +297,7 @@ float	deg_sprite(t_player *ply, t_spr_list *spr)
 			spr->list[i]->on_screen = 1;
 		else
 			spr->list[i]->on_screen = 0;
-		dprintf(1, "on_scr : %d\n", spr->list[i]->on_screen);
+		ft_printf("on_scr : %d\n", spr->list[i]->on_screen);
 		i++;
 	}
 }

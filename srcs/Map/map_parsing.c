@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/14 20:36:43 by siferrar          #+#    #+#             */
-/*   Updated: 2020/04/20 21:56:42 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/04/29 15:50:10 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,8 +130,8 @@ int				open_map(t_brain *b, char *map_path, t_type *map)
 	close(file);
 	disp_sprites(b->map->sprites);
 	sort_sprites(b->player->pos, b->map->sprites);
-	dprintf(1, DCYAN"	-> Width: [%d]\n", b->map->width);
-	dprintf(1, "	-> Height:[%d]\n\n"RST, b->map->height);
+	ft_printf(DCYAN"	-> Width: [%d]\n", b->map->width);
+	ft_printf("	-> Height:[%d]\n\n"RST, b->map->height);
 	print_map_grid((b->map));
 	b->map->px_width = b->map->width * b->map->bloc_size;
 	b->map->px_height = b->map->height * b->map->bloc_size;
