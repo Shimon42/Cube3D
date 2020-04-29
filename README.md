@@ -1,4 +1,4 @@
-# Cube 3D • Alpha 0.7.6 - Opacity
+# Cube 3D • Alpha 0.7.7 - Norming and Minimap
 
 ![Cube3D Screenshot](/images/sprites.png)
 
@@ -32,15 +32,14 @@
 
 	————————————————————————————————————
 		Changes:
-	————————————————————————————————————
-	- Add opacity()
-	- Add conv functions and structs for rgb <-> hex 
-	- Sprites shadows are transparents
+	———————————————————————————————————— 
+	- Normed minimap->draw_elems(), ctx->draw_circle()
+	- Better minimap display
 
     ————————————————————————————————————
 		Cur State:
 	————————————————————————————————————
-	- Map parsing, without config
+	- Map parsing
 	- Draw walls (fish eye sort of corrected)
 	- Floor texture (Fisheye with some texture)
 	- Wall Texture
