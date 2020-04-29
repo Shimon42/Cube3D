@@ -115,7 +115,7 @@ all:		$(NAME) $(OBJS) $(INCLUDES)
 $(NAME): 	$(OBJS) $(INCLUDES)
 			@echo "\033[0;32m––––––––––––––––––––––––\nMaking Libft\n––––––––––––––––––––––––\033[0;33m"
 
-			ar rc $(NAME) $(OBJS) $(PRINTF)libftprintf.a
+			ar rc $(NAME) $(OBJS)
 			@echo "\033[0;m"
 
 $(OBJS):	$(INCLUDES)
