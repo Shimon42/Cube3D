@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/14 22:43:45 by siferrar          #+#    #+#             */
-/*   Updated: 2020/04/20 22:44:19 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/04/29 17:33:15 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,40 @@ void		point_on_map(t_brain *b, int x, int y, int color)
 						(b->map->bloc_size * 0.06) * b->map->scale, 1, b->ctx);
 }
 
+int			get_map_colors(int val)
+{
+	if (val == 0)
+		return(0);
+	else if (val == 1)
+		return(0x00FFFF);
+	else if (val >= 2 && val < 5)
+		return(0x00FF00);
+	else if (val == 'N' - '0' || val == 'E' - '0' || val == 'S' - '0' || val == 'W' - '0')
+		return(0xCCFFFFFF);
+	else
+		return(0xFF00FF);
+}
+
+void		draw_elem(t_brain *b, int disp_x, int disp_y, float scale, int val)
+{
+	b->ctx->color = get_map_colors(val);
+	b->ctx->rect(disp_x, disp_y,
+				b->map->bloc_size * scale + 1,
+				b->map->bloc_size * scale + 1,
+				1,
+				b->ctx);
+	if (b->map->scale > 0.1)
+	{
+		b->ctx->color = 0x222222;
+		b->ctx->rect(disp_x,
+				disp_y,
+				b->map->bloc_size * scale + 1,
+				b->map->bloc_size * scale + 1,
+				0,
+				b->ctx);
+	}
+}
+
 void		draw_elems(t_brain *b, int disp_x, int disp_y, float scale)
 {
 	int y;
@@ -103,48 +137,17 @@ void		draw_elems(t_brain *b, int disp_x, int disp_y, float scale)
 		x = 0;
 		while (x < b->map->width)
 		{
-			val = get_grid(b->map, x, y, 0);
-			if (val >= 0)
-			{
-				if (val == 0)
-					b->ctx->color = 0;
-				else if (val == 1)
-					b->ctx->color = 0x00FFFF;
-				else if (val == 2)
-					b->ctx->color = 0x00FF00;
-				else if (val == 'N' || val == 'E' || val == 'S' || val == 'W')
-				{
-					b->ctx->color = 0xFF00FF;
-				} else
-					b->ctx->color = 0xFF0000;
-				b->ctx->rect((disp_x + (x * (b->map->bloc_size * scale))),
-							disp_y + (y * (b->map->bloc_size * scale)),
-							b->map->bloc_size * scale,
-							b->map->bloc_size * scale,
-							1,
-							b->ctx);
-				if (b->map->scale > 0.1)
-				{
-					b->ctx->color = 0x222222;
-					b->ctx->rect(floor(disp_x + (x * (b->map->bloc_size * scale))),
-								floor(disp_y + (y * (b->map->bloc_size * scale))),
-								b->map->bloc_size * scale,
-								b->map->bloc_size * scale,
-								0,
-								b->ctx);
-				}
-			}
+			if ((val = get_grid(b->map, x, y, 0)) >= 0)
+				draw_elem(b, floor(disp_x + (x * (b->map->bloc_size * scale))),
+				floor(disp_y + (y * (b->map->bloc_size * scale))), scale, val);
 			x++;
-		};
+		}
 		y++;
 	}
 	b->ctx->color = 0xFFFF00;
 	b->ctx->rect(floor(disp_x + (p_pos.x * (b->map->bloc_size * scale))),
-				floor(disp_y + (p_pos.y * (b->map->bloc_size * scale))),
-				b->map->bloc_size * scale,
-				b->map->bloc_size * scale,
-				0,
-				b->ctx);
+			floor(disp_y + (p_pos.y * (b->map->bloc_size * scale))),
+			b->map->bloc_size * scale, b->map->bloc_size * scale, 0,b->ctx);
 }
 
 void	line_on_map(t_brain *b, t_fpoint p1, t_fpoint p2)

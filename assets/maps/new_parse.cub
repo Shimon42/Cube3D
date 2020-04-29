@@ -8,7 +8,7 @@ WE ./assets/textures/walls/stone_bricks/2.xpm
 
 S ./assets/sprites/barrel.xpm
 
-R 900 900
+R 1920 1080
 F ./assets/textures/floor/sand.xpm
 C ./assets/sky/mountains/mountains.xpm
 

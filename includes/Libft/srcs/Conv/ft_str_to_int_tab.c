@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_str_to_int_tab.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: siferrar <siferrar@student.le-101.fr>      +#+  +:+       +#+        */
+/*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/16 08:44:13 by siferrar          #+#    #+#             */
-/*   Updated: 2020/03/16 08:46:57 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/04/29 17:07:40 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
