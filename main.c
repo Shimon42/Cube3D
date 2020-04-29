@@ -6,7 +6,7 @@
 /*   By: milosandric <milosandric@student.42lyon    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 21:29:11 by siferrar          #+#    #+#             */
-/*   Updated: 2020/04/23 16:51:06 by milosandric      ###   ########lyon.fr   */
+/*   Updated: 2020/04/29 14:40:37 by milosandric      ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ void	draw_sky(t_brain *b, t_ctx *c, double col, double end)
 {
 	int color;
 	int y;
-	static t_fpoint ratio = {-420, -420}; //?? c'est normal ces valeurs en dur ?
+	static t_fpoint ratio = {-420, -420};
 	static float width = 0;
 	float left;
 
@@ -126,6 +126,28 @@ int loop_hook(t_brain *b)
 	return (b->inited);
 }
 
+int	check_surround(t_map *m, t_point *pos)
+{
+	int cur;
+	int verif;
+	
+	cur = get_grid(m, pos->x, pos->y, 0);
+	verif = get_grid(m, pos->x, pos->y - 1, 0);
+			
+	if ((cur == 0 && verif == -1) || (cur == -1 && verif != 1 && verif != -1))
+		return (0);
+	verif = get_grid(m, pos->x, pos->y + 1, 0);
+	if ((cur == 0 && verif == -1) || (cur == -1 && verif != 1 && verif != -1))
+		return (0);
+	verif = get_grid(m, pos->x - 1, pos->y, 0);
+	if ((cur == 0 && verif == -1) || (cur == -1 && verif != 1 && verif != -1))
+		return (0);
+	verif = get_grid(m, pos->x + 1, pos->y, 0);
+	if ((cur == 0 && verif == -1) || (cur == -1 && verif != 1 && verif != -1))
+		return (0);
+	return(1);
+}
+
 int	check_map(t_map *m)
 {
 	t_point pos;
@@ -138,18 +160,7 @@ int	check_map(t_map *m)
 		pos.y = 0;
 		while (pos.y < m->height)
 		{
-			cur = get_grid(m, pos.x, pos.y, 0);
-			verif = get_grid(m, pos.x, pos.y - 1, 0);
-			if ((cur == 0 && verif == -1) || (cur == -1 && verif != 1 && verif != -1))
-				return (0);
-			verif = get_grid(m, pos.x, pos.y + 1, 0);
-			if ((cur == 0 && verif == -1) || (cur == -1 && verif != 1 && verif != -1))
-				return (0);
-			verif = get_grid(m, pos.x - 1, pos.y, 0);
-			if ((cur == 0 && verif == -1) || (cur == -1 && verif != 1 && verif != -1))
-				return (0);
-			verif = get_grid(m, pos.x + 1, pos.y, 0);
-			if ((cur == 0 && verif == -1) || (cur == -1 && verif != 1 && verif != -1))
+			if (check_surround(m, &pos) == 0)
 				return (0);
 			pos.y++;
 		}

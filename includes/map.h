@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: milosandric <milosandric@student.42lyon    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/14 22:46:16 by siferrar          #+#    #+#             */
-/*   Updated: 2020/04/21 14:07:00 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/04/29 13:01:44 by milosandric      ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 # define MAP_H
 
 # include "cube3d.h"
+
+
 
 typedef struct      s_sprite
 {
@@ -24,8 +26,6 @@ typedef struct      s_sprite
 	t_buff			*model;
 	t_buff			*shadow;
 	float			dist;
-
-	struct s_sprite	*next;
 }				    t_sprite;
 
 typedef struct	s_spr_list

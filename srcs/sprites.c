@@ -6,7 +6,7 @@
 /*   By: milosandric <milosandric@student.42lyon    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/27 08:02:21 by siferrar          #+#    #+#             */
-/*   Updated: 2020/04/28 14:19:37 by milosandric      ###   ########lyon.fr   */
+/*   Updated: 2020/04/29 13:02:16 by milosandric      ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ t_sprite   *init_sprite(t_map *m, t_fpoint pos, int type)
 		init_texture(b, "./assets/sprites/col2.xpm", &s->model);
 		init_texture(b, "./assets/sprites/col2-shadow.xpm", &s->shadow);
 	}
-	s->next = NULL;
 	return (s);
 }
 
@@ -70,6 +69,15 @@ void	add_spr_to_list(t_spr_list *s_list, t_sprite *s)
 	dprintf(1, GRN"Add spr to list OK\n"RST);
 }
 
+void	copy_sprite(t_sprite *from, t_sprite *to)
+{
+	to->dist = from->dist;
+	to->pos = from->pos;
+	to->model = from->model;
+	to->shadow = from->shadow;
+	to->type = from->type;
+}
+
 void    swap_sprite(t_spr_list *lst_sprt, int num1, int num2)
 {
 	if((num1 < lst_sprt->length) && (num2 < lst_sprt->length) && (num1 != num2))
@@ -81,26 +89,11 @@ void    swap_sprite(t_spr_list *lst_sprt, int num1, int num2)
 		spr_a = lst_sprt->list[num1];
 		spr_b = lst_sprt->list[num2];
 
-		temp.dist = spr_a->dist;
-		temp.pos = spr_a->pos;
-		temp.model = spr_a->model;
-		temp.shadow = spr_a->shadow;
-		temp.type = spr_a->type;
-		
-		spr_a->dist = spr_b->dist;
-		spr_a->pos = spr_b->pos;
-		spr_a->type = spr_b->type;
-		spr_a->model = spr_b->model;
-		spr_a->shadow = spr_b->shadow;
-		
-		spr_b->dist = temp.dist;
-		spr_b->pos = temp.pos;
-		spr_b->type = temp.type;
-		spr_b->model = temp.model;
-		spr_b->shadow = temp.shadow;
+		copy_sprite(spr_a, &temp);
+		copy_sprite(spr_b, spr_a);
+		copy_sprite(&temp, spr_b);
 	}
 }
-
 
 void	disp_sprites(t_spr_list *s_list)
 {

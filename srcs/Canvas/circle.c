@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   circle.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: siferrar <siferrar@student.le-101.fr>      +#+  +:+       +#+        */
+/*   By: milosandric <milosandric@student.42lyon    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/23 16:58:38 by siferrar          #+#    #+#             */
-/*   Updated: 2020/03/23 10:21:45 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/04/29 15:58:28 by milosandric      ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 

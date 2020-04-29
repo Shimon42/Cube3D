@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sprites.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: milosandric <milosandric@student.42lyon    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/27 08:51:57 by siferrar          #+#    #+#             */
-/*   Updated: 2020/04/19 01:32:58 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/04/28 16:56:14 by milosandric      ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 #ifndef SPRITES_H
 # define SPRITES_H
 # define SPR_TRANSP 0x980088
+# define EXT_EXT ".xpm"
+# define EXT_SHD "-shadow.xpm"
 
 t_sprite	*init_sprite(t_map *m, t_fpoint pos, int type);
 void		add_sprite(t_map *m, int posX, int type);
