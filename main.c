@@ -6,7 +6,7 @@
 /*   By: milosandric <milosandric@student.42lyon    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 21:29:11 by siferrar          #+#    #+#             */
-/*   Updated: 2020/04/29 14:40:37 by milosandric      ###   ########lyon.fr   */
+/*   Updated: 2020/04/29 16:01:25 by milosandric      ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -183,7 +183,7 @@ int	main(int ac, char **av)
 	win = (t_mlx_win_list *)b->ctx->win_ptr;
 	b->ctx->width = win->size_x;
 	b->ctx->height = win->size_y;
-	printf(GRN"Opening Map "DCYAN"%s\n"RST, av[1]); //attention pf
+	ft_printf(GRN"Opening Map "DCYAN"%s\n"RST, av[1]);
 	open_map(b, av[1], map);
 	if (!check_map(b->map))
 		exit_cube(b, 2, "BAD MAP", 0);

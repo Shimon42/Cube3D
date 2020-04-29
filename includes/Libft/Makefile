@@ -10,6 +10,7 @@ NUMLIB = $(SRCSPATH)Numbers/
 STRLIB = $(SRCSPATH)String/
 PRINTLIB = $(SRCSPATH)DispTxt/
 FILESLIB = $(SRCSPATH)Files/
+PRINTF = $(SRCSPATH)Printf/
 
 
 SRCS	=	$(MATHLIB)ft_abs.c \
@@ -76,7 +77,20 @@ SRCS	=	$(MATHLIB)ft_abs.c \
 			$(LISTSLIB)ft_lstiter.c \
 			$(LISTSLIB)ft_lstdelone.c \
 			$(LISTSLIB)ft_lstclear.c \
-			$(LISTSLIB)ft_lstmap.c
+			$(LISTSLIB)ft_lstmap.c \
+			\
+			$(PRINTF)srcs/ft_printf.c \
+			$(PRINTF)srcs/gest_params.c \
+			$(PRINTF)srcs/gest_flags.c \
+			$(PRINTF)srcs/gest_flags_disp.c \
+			$(PRINTF)srcs/treat/per_per.c \
+			$(PRINTF)srcs/treat/per_c.c \
+			$(PRINTF)srcs/treat/per_s.c \
+			$(PRINTF)srcs/treat/per_d.c \
+			$(PRINTF)srcs/treat/per_u.c \
+			$(PRINTF)srcs/treat/per_p.c \
+			$(PRINTF)srcs/treat/per_x.c \
+			$(PRINTF)srcs/treat/per_n.c
 
 GNL = $(FILESLIB)GNL/
 GNL_SRCS =	$(GNL)get_next_line.c \
@@ -92,13 +106,16 @@ RM		= rm -f
 OBJS	= ${SRCS:.c=.o}
 
 INCLUDES =	$(INCPATH)libft.h \
-			$(GNL)get_next_line.h
+			$(GNL)get_next_line.h \
+			$(PRINTF)includes/brain_printf.h \
+			$(PRINTF)includes/printf.h
 
 all:		$(NAME) $(OBJS) $(INCLUDES)
 
 $(NAME): 	$(OBJS) $(INCLUDES)
 			@echo "\033[0;32m––––––––––––––––––––––––\nMaking Libft\n––––––––––––––––––––––––\033[0;33m"
-			ar rc $(NAME) $(OBJS)
+
+			ar rc $(NAME) $(OBJS) $(PRINTF)libftprintf.a
 			@echo "\033[0;m"
 
 $(OBJS):	$(INCLUDES)

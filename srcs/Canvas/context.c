@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/15 18:42:08 by siferrar          #+#    #+#             */
-/*   Updated: 2020/04/09 19:26:06 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/04/29 15:50:10 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void init_buff(t_ctx * ctx, t_buff **buff, int width, int height)
 		exit_cube(NULL, 5, "Failed to malloc buff", 0);
 	(*buff)->width = width;
 	(*buff)->height = height;
-	dprintf(1, DCYAN"INIT BUFF %d x %d px\n"RST, width, height);
+	ft_printf(DCYAN"INIT BUFF %d x %d px\n"RST, width, height);
 	(*buff)->img = NULL;
 	(*buff)->addr = NULL;
 	(*buff)->img = mlx_new_image(ctx->mlx_ptr, ctx->width, ctx->height);

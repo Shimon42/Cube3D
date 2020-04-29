@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/20 15:53:12 by siferrar          #+#    #+#             */
-/*   Updated: 2020/04/20 20:57:27 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/04/29 15:51:37 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ void	print_map_debug(t_map_line *line)
 			ft_putstr(DGREY);
 		else if (line->line[i] == 1)
 			ft_putstr(DCYAN);
-		else if (line->line[i] == 2)
+		else if (line->line[i] >= 2 && line->line[i] < 5)
 			ft_putstr(YELO);
 		else if (line->line[i] > 5)
 			ft_putstr(PINK); 

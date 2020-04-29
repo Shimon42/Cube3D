@@ -6,7 +6,7 @@
 /*   By: milosandric <milosandric@student.42lyon    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/09 19:25:10 by siferrar          #+#    #+#             */
-/*   Updated: 2020/04/29 12:55:08 by milosandric      ###   ########lyon.fr   */
+/*   Updated: 2020/04/29 16:05:14 by milosandric      ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,10 @@ void init_texture(t_brain *b, char *path, t_buff **t)
 {
 	int fd;
 	
-	dprintf(1, DCYAN"	-> %s", path);
+	ft_printf(DCYAN"	-> %s", path);
+	/*if ((fd = open(path, O_RDONLY)) == -1)
+		exit_cube(b, 503, "Invalid path for one of the textures\n", 0);
+	close(fd);*/
 	*t = malloc(sizeof(t_buff));
 	if (*t)
 	{
@@ -33,7 +36,7 @@ void init_texture(t_brain *b, char *path, t_buff **t)
 		(*t)->offset = (*t)->bits_per_pixel / 8;
 		(*t)->ratio = (*t)->width / b->map->bloc_size;
 		(*t)->initied = 3;
-		dprintf(1, GRN" - OK\n"RST);
+		ft_printf(GRN" - OK\n"RST);
 	}
 	else
 		exit_cube(NULL, 401, "Failed to malloc texture", 0);
