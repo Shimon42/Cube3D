@@ -6,7 +6,7 @@
 /*   By: milosandric <milosandric@student.42lyon    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/23 16:58:38 by siferrar          #+#    #+#             */
-/*   Updated: 2020/04/29 16:22:53 by milosandric      ###   ########lyon.fr   */
+/*   Updated: 2020/04/29 16:35:44 by milosandric      ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,18 +30,18 @@ void	condition(int *d, int *x, int *y, int ray)
 	if (*d >= 2 * *x)
 	{
 		*d -= 2 * *x + 1;
-		*x++;
+		(*x)++;
 	}
 	else if (*d < 2 * (ray - *y))
 	{
 		*d += 2 * *y - 1;
-		*y--;
+		(*y)--;
 	}
 	else
 	{
 		*d += 2 * (*y - *x - 1);
-		*y--;
-		*x++;
+		(*y)--;
+		(*x)++;
 	}
 }
 
