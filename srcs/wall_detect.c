@@ -6,7 +6,7 @@
 /*   By: milosandric <milosandric@student.42lyon    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 22:11:09 by siferrar          #+#    #+#             */
-/*   Updated: 2020/04/17 18:32:54 by milosandric      ###   ########lyon.fr   */
+/*   Updated: 2020/05/06 20:40:58 by milosandric      ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -190,8 +190,8 @@ void	draw_walls(t_brain *b, t_ctx *c)
 	{
 		cur_angle = divangle + (col_step * cur_col);
 		wall = dist_to_wall(b, b->player->pos, cur_angle);
-		wall.dist *= cos((cur_col < divs.x ? -1 : 1) * (b->player->angle - cur_angle));
 		b->map->sprites->column[cur_col] = wall.dist; //OKOKOKOKOKOK
+		wall.dist *= cos((cur_col < divs.x ? -1 : 1) * (b->player->angle - cur_angle));
 		w_height = ((b->map->bloc_size) / wall.dist) * b->player->cam->proj_dist;
 		mid_wall = w_height/2;
 		if (w_height < b->ctx->height)
