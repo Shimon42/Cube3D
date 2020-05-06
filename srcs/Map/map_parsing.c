@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_parsing.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: milosandric <milosandric@student.42lyon    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/14 20:36:43 by siferrar          #+#    #+#             */
-/*   Updated: 2020/04/29 17:35:04 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/05/06 15:52:42 by milosandric      ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,13 +75,12 @@ int		realloc_map(t_map *m, char *line)
 	m->height++;
 	return (1);
 }
-t_player_detect		*add_map_row(t_map *m, char *line)
+
+t_player_detect		*chr_trt(char *line, t_map *m)
 {
-	int		*new;
-	int		*temp;
-	int		i;
-	int		real;
 	t_player_detect	*player;
+	int i;
+	int real;
 
 	i = 0;
 	real = 0;
@@ -91,7 +90,7 @@ t_player_detect		*add_map_row(t_map *m, char *line)
 		if (line[i] == ' ')
 			line[i] = '0' - 1;
 		if (line[i] == 'N' || line[i] == 'E'
-											|| line[i] == 'S' || line[i] == 'W')
+									|| line[i] == 'S' || line[i] == 'W')
 		{
 			player = malloc(sizeof(t_player_detect));
 			player->pos_x = i;
@@ -102,6 +101,16 @@ t_player_detect		*add_map_row(t_map *m, char *line)
 			add_spr_to_list(m->sprites, init_sprite(m, new_point(i, m->height), real));
 		i++;
 	}
+	return(player);
+}
+
+t_player_detect		*add_map_row(t_map *m, char *line)
+{
+	int		*new;
+	int		*temp;
+	t_player_detect	*player;
+
+	player = chr_trt(line, m);
 	realloc_map(m, line);
 	return (player);
 }
