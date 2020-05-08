@@ -6,20 +6,17 @@
 /*   By: milosandric <milosandric@student.42lyon    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/09 19:25:10 by siferrar          #+#    #+#             */
-/*   Updated: 2020/04/29 16:05:14 by milosandric      ###   ########lyon.fr   */
+/*   Updated: 2020/05/08 18:02:42 by milosandric      ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cube3d.h"
 
-void init_texture(t_brain *b, char *path, t_buff **t)
+void	init_texture(t_brain *b, char *path, t_buff **t)
 {
-	int fd;
-	
+	int	fd;
+
 	ft_printf(DCYAN"	-> %s", path);
-	/*if ((fd = open(path, O_RDONLY)) == -1)
-		exit_cube(b, 503, "Invalid path for one of the textures\n", 0);
-	close(fd);*/
 	*t = malloc(sizeof(t_buff));
 	if (*t)
 	{

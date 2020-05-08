@@ -6,223 +6,231 @@
 /*   By: milosandric <milosandric@student.42lyon    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/13 21:20:40 by siferrar          #+#    #+#             */
-/*   Updated: 2020/05/06 13:30:47 by milosandric      ###   ########lyon.fr   */
+/*   Updated: 2020/05/08 17:58:31 by milosandric      ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "../../includes/my_canvas.h"
 
-int first_octant(t_ctx *ctx, t_fpoint *p1, t_fpoint *p2, t_fpoint *diff)
+int		first_octant(t_ctx *ctx, t_fpoint *p1, t_fpoint *p2, t_fpoint *diff)
 {
 	int ret;
-	
-	diff->x = (ret = diff->x) * 2;
+
+	ret = diff->x;
+	diff->x = ret * 2;
 	diff->y *= 2;
 	while (1)
-	{  // déplacements horizontaux
-		pixel_put(p1->x, p1->y, ctx->color,  ctx->cur_buff);
+	{
+		pixel_put(p1->x, p1->y, ctx->color, ctx->cur_buff);
 		if (++p1->x == p2->x)
-			break;
+			break ;
 		if ((ret -= diff->y) < 0)
 		{
-			p1->y++;  // déplacement diagonal
-			ret += diff->x ;
+			p1->y++;
+			ret += diff->x;
 		}
 	}
-	return(ret);
+	return (ret);
 }
 
-int second_octant(t_ctx *ctx, t_fpoint *p1, t_fpoint *p2, t_fpoint *diff)
+int		second_octant(t_ctx *ctx, t_fpoint *p1, t_fpoint *p2, t_fpoint *diff)
 {
 	int ret;
-	
-	diff->y = (ret = diff->y) * 2;
+
+	ret = diff->y;
+	diff->y = ret * 2;
 	diff->x *= 2;
 	while (1)
-	{  // déplacements horizontaux
-		pixel_put(p1->x, p1->y, ctx->color,  ctx->cur_buff);
+	{
+		pixel_put(p1->x, p1->y, ctx->color, ctx->cur_buff);
 		if (++p1->y == p2->y)
-			break;
+			break ;
 		if ((ret -= diff->x) < 0)
 		{
-			p1->x++;  // déplacement diagonal
-			ret += diff->y ;
+			p1->x++;
+			ret += diff->y;
 		}
 	}
-	return(ret);
+	return (ret);
 }
 
-void calc_first_quad(t_ctx *ctx, t_fpoint p1, t_fpoint p2, t_fpoint diff)
+void	calc_first_quad(t_ctx *ctx, t_fpoint p1, t_fpoint p2, t_fpoint diff)
 {
 	int		e;
-	if (diff.x >= diff.y) // first octant
+
+	if (diff.x >= diff.y)
 	{
-		e = first_octant(ctx, &p1, &p2, &diff);	
+		e = first_octant(ctx, &p1, &p2, &diff);
 	}
-	else // second octant
+	else
 	{
 		e = second_octant(ctx, &p1, &p2, &diff);
 	}
 }
 
-int third_octant(t_ctx *ctx, t_fpoint *p1, t_fpoint *p2, t_fpoint *diff)
+int		third_octant(t_ctx *ctx, t_fpoint *p1, t_fpoint *p2, t_fpoint *diff)
 {
 	int ret;
-	
-	diff->y = (ret = diff->y) * 2;
+
+	ret = diff->y;
+	diff->y = ret * 2;
 	diff->x *= 2;
 	while (1)
-	{  // déplacements horizontaux
-		pixel_put(p1->x, p1->y, ctx->color,  ctx->cur_buff);
+	{
+		pixel_put(p1->x, p1->y, ctx->color, ctx->cur_buff);
 		if (++p1->y == p2->y)
-			break;
+			break ;
 		if ((ret += diff->x) <= 0)
 		{
-			p1->x--;  // déplacretmretnt diagonal
-			ret += diff->y ;
+			p1->x--;
+			ret += diff->y;
 		}
 	}
-	return(ret);
+	return (ret);
 }
 
-int fourth_octant(t_ctx *ctx, t_fpoint *p1, t_fpoint *p2, t_fpoint *diff)
+int		fourth_octant(t_ctx *ctx, t_fpoint *p1, t_fpoint *p2, t_fpoint *diff)
 {
 	int ret;
-	
-	diff->x = (ret = diff->x) * 2;
+
+	ret = diff->x;
+	diff->x = ret * 2;
 	diff->y *= 2;
 	while (1)
-	{  // déplacements horizontaux
-		pixel_put(p1->x, p1->y, ctx->color,  ctx->cur_buff);
+	{
+		pixel_put(p1->x, p1->y, ctx->color, ctx->cur_buff);
 		if (--p1->x == p2->x)
-			break;
+			break ;
 		if ((ret += diff->y) >= 0)
 		{
-			p1->y++;  // déplacement diagonal
-			ret += diff->x ;
+			p1->y++;
+			ret += diff->x;
 		}
 	}
-	return(ret);
+	return (ret);
 }
 
-void calc_second_quad(t_ctx *ctx, t_fpoint p1, t_fpoint p2, t_fpoint diff)
+void	calc_second_quad(t_ctx *ctx, t_fpoint p1, t_fpoint p2, t_fpoint diff)
 {
 	int		e;
-	
-	if (-diff.x >= diff.y) //  octant 4
+
+	if (-diff.x >= diff.y)
 	{
 		e = fourth_octant(ctx, &p1, &p2, &diff);
 	}
-	else // octant 3
+	else
 	{
 		e = third_octant(ctx, &p1, &p2, &diff);
 	}
 }
 
-int fifth_octant(t_ctx *ctx, t_fpoint *p1, t_fpoint *p2, t_fpoint *diff)
+int		fifth_octant(t_ctx *ctx, t_fpoint *p1, t_fpoint *p2, t_fpoint *diff)
 {
 	int ret;
-	
-	diff->x = (ret = diff->x) * 2;
+
+	ret = diff->x;
+	diff->x = ret * 2;
 	diff->y *= 2;
 	while (1)
-	{  // déplacements horizontaux
-		pixel_put(p1->x, p1->y, ctx->color,  ctx->cur_buff);
+	{
+		pixel_put(p1->x, p1->y, ctx->color, ctx->cur_buff);
 		if (--p1->x == p2->x)
-			break;
+			break ;
 		if ((ret -= diff->y) >= 0)
 		{
-			p1->y--;  // déplacement diagonal
-			ret += diff->x ;
+			p1->y--;
+			ret += diff->x;
 		}
 	}
-	return(ret);
+	return (ret);
 }
 
-int sixth_octant(t_ctx *ctx, t_fpoint *p1, t_fpoint *p2, t_fpoint *diff)
+int		sixth_octant(t_ctx *ctx, t_fpoint *p1, t_fpoint *p2, t_fpoint *diff)
 {
 	int ret;
-	
-	diff->y = (ret = diff->y) * 2;
+
+	ret = diff->y;
+	diff->y = ret * 2;
 	diff->x *= 2;
 	while (1)
-	{  // déplacements horizontaux
-		pixel_put(p1->x, p1->y, ctx->color,  ctx->cur_buff);
+	{
+		pixel_put(p1->x, p1->y, ctx->color, ctx->cur_buff);
 		if (--p1->y == p2->y)
-			break;
+			break ;
 		if ((ret -= diff->x) >= 0)
 		{
-			p1->x--;  // déplacement diagonal
-			ret += diff->y ;
+			p1->x--;
+			ret += diff->y;
 		}
 	}
-	return(ret);
+	return (ret);
 }
 
-void calc_third_quad(t_ctx *ctx, t_fpoint p1, t_fpoint p2, t_fpoint diff)
+void	calc_third_quad(t_ctx *ctx, t_fpoint p1, t_fpoint p2, t_fpoint diff)
 {
 	int		e;
-	
-	if (diff.x <= diff.y) // octant 8
+
+	if (diff.x <= diff.y)
 	{
 		e = fifth_octant(ctx, &p1, &p2, &diff);
 	}
-	else // octant 7
+	else
 	{
 		e = sixth_octant(ctx, &p1, &p2, &diff);
 	}
 }
 
-int seventh_octant(t_ctx *ctx, t_fpoint *p1, t_fpoint *p2, t_fpoint *diff)
+int		seventh_octant(t_ctx *ctx, t_fpoint *p1, t_fpoint *p2, t_fpoint *diff)
 {
 	int ret;
-	
-	diff->y = (ret = diff->y) * 2;
+
+	ret = diff->y;
+	diff->y = ret * 2;
 	diff->x *= 2;
 	while (1)
-	{  // déplacements horizontaux
-		pixel_put(p1->x, p1->y, ctx->color,  ctx->cur_buff);
+	{
+		pixel_put(p1->x, p1->y, ctx->color, ctx->cur_buff);
 		if (--p1->y == p2->y)
-			break;
+			break ;
 		if ((ret += diff->x) > 0)
 		{
-			p1->x++;  // déplacement diagonal
-			ret += diff->y ;
+			p1->x++;
+			ret += diff->y;
 		}
 	}
-	return(ret);
+	return (ret);
 }
 
-int eigth_octant(t_ctx *ctx, t_fpoint *p1, t_fpoint *p2, t_fpoint *diff)
+int		eigth_octant(t_ctx *ctx, t_fpoint *p1, t_fpoint *p2, t_fpoint *diff)
 {
 	int ret;
-	
-	diff->x = (ret = diff->x) * 2;
+
+	ret = diff->x;
+	diff->x = ret * 2;
 	diff->y *= 2;
 	while (1)
-	{  // déplacements horizontaux
-		pixel_put(p1->x, p1->y, ctx->color,  ctx->cur_buff);
+	{
+		pixel_put(p1->x, p1->y, ctx->color, ctx->cur_buff);
 		if (++p1->x == p2->x)
-			break;
+			break ;
 		if ((ret += diff->y) < 0)
 		{
-			p1->y--;  // déplacement diagonal
-			ret += diff->x ;
+			p1->y--;
+			ret += diff->x;
 		}
 	}
-	return(ret);
+	return (ret);
 }
 
-void calc_fourth_quad(t_ctx *ctx, t_fpoint p1, t_fpoint p2, t_fpoint diff)
+void	calc_fourth_quad(t_ctx *ctx, t_fpoint p1, t_fpoint p2, t_fpoint diff)
 {
-	int		e;
-	
-	if (diff.x >= -diff.y) // octant 8
+	int	e;
+
+	if (diff.x >= -diff.y)
 	{
 		e = eigth_octant(ctx, &p1, &p2, &diff);
 	}
-	else // octant 7
+	else
 	{
 		e = seventh_octant(ctx, &p1, &p2, &diff);
 	}
@@ -231,31 +239,31 @@ void calc_fourth_quad(t_ctx *ctx, t_fpoint p1, t_fpoint p2, t_fpoint diff)
 void	calc_quads(t_ctx *ctx, t_fpoint *p1, t_fpoint *p2, t_fpoint *diff)
 {
 	if (diff->x > 0)
+	{
+		if ((diff->y = p2->y - p1->y) != 0)
 		{
-			if ((diff->y = p2->y - p1->y) != 0)
-			{
-				if (diff->y > 0)
-					calc_first_quad(ctx, *p1, *p2, *diff);
-				else
-					calc_fourth_quad(ctx, *p1, *p2, *diff);
-			}
+			if (diff->y > 0)
+				calc_first_quad(ctx, *p1, *p2, *diff);
 			else
-				while (p1->x != p2->x)
-					pixel_put(p1->x++, p1->y, ctx->color, ctx->cur_buff);
+				calc_fourth_quad(ctx, *p1, *p2, *diff);
 		}
 		else
+			while (p1->x != p2->x)
+				pixel_put(p1->x++, p1->y, ctx->color, ctx->cur_buff);
+	}
+	else
+	{
+		if ((diff->y = p2->y - p1->y) != 0)
 		{
-			if ((diff->y = p2->y - p1->y) != 0)
-			{
-				if (diff->y > 0)
-					calc_second_quad(ctx, *p1, *p2, *diff);
-				else
-					calc_third_quad(ctx, *p1, *p2, *diff);
-			}
+			if (diff->y > 0)
+				calc_second_quad(ctx, *p1, *p2, *diff);
 			else
-				while (p1->x != p2->x)
-					pixel_put(p1->x--, p1->y, ctx->color, ctx->cur_buff) ;
+				calc_third_quad(ctx, *p1, *p2, *diff);
 		}
+		else
+			while (p1->x != p2->x)
+				pixel_put(p1->x--, p1->y, ctx->color, ctx->cur_buff);
+	}
 }
 
 void	draw_line(t_fpoint p1, t_fpoint p2, t_ctx *ctx)
@@ -279,7 +287,7 @@ void	draw_line(t_fpoint p1, t_fpoint p2, t_ctx *ctx)
 			else
 			{
 				while (p1.y != p2.y)
-					pixel_put(p1.x, p1.y--, ctx->color, ctx->cur_buff) ;
+					pixel_put(p1.x, p1.y--, ctx->color, ctx->cur_buff);
 			}
 		}
 	}

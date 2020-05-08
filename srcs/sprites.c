@@ -6,13 +6,13 @@
 /*   By: milosandric <milosandric@student.42lyon    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/27 08:02:21 by siferrar          #+#    #+#             */
-/*   Updated: 2020/05/08 14:33:55 by milosandric      ###   ########lyon.fr   */
+/*   Updated: 2020/05/08 18:27:48 by milosandric      ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cube3d.h"
 
-t_sprite   *init_sprite(t_map *m, t_fpoint pos, int type)
+t_sprite	*init_sprite(t_map *m, t_fpoint pos, int type)
 {
 	t_sprite	*s;
 	t_brain		*b;
@@ -23,8 +23,8 @@ t_sprite   *init_sprite(t_map *m, t_fpoint pos, int type)
 		return (NULL);
 	s->pos = pos;
 	s->type = type;
-	s->pos.x = pos.x * m->bloc_size + m->bloc_size/2;
-	s->pos.y = pos.y * m->bloc_size + m->bloc_size/2;
+	s->pos.x = pos.x * m->bloc_size + m->bloc_size / 2;
+	s->pos.y = pos.y * m->bloc_size + m->bloc_size / 2;
 	s->model = NULL;
 	s->shadow = NULL;
 	s->on_screen = 0;
@@ -46,11 +46,10 @@ t_sprite   *init_sprite(t_map *m, t_fpoint pos, int type)
 	return (s);
 }
 
-
-void	add_spr_to_list(t_spr_list *s_list, t_sprite *s)
+void		add_spr_to_list(t_spr_list *s_list, t_sprite *s)
 {
-	t_sprite **ret;
-	int i;
+	t_sprite	**ret;
+	int			i;
 
 	i = 0;
 	ft_printf(YELO"Add spr to list\n");
@@ -69,7 +68,7 @@ void	add_spr_to_list(t_spr_list *s_list, t_sprite *s)
 	ft_printf(GRN"Add spr to list OK\n"RST);
 }
 
-void	copy_sprite(t_sprite *from, t_sprite *to)
+void		copy_sprite(t_sprite *from, t_sprite *to)
 {
 	to->dist = from->dist;
 	to->pos = from->pos;
@@ -78,27 +77,27 @@ void	copy_sprite(t_sprite *from, t_sprite *to)
 	to->type = from->type;
 }
 
-void    swap_sprite(t_spr_list *lst_sprt, int num1, int num2)
+void		swap_sprite(t_spr_list *lst_sprt, int num1, int num2)
 {
-	if((num1 < lst_sprt->length) && (num2 < lst_sprt->length) && (num1 != num2))
-	{
-		t_sprite temp;
-		t_sprite *spr_a;
-		t_sprite *spr_b;
+	t_sprite	temp;
+	t_sprite	*spr_a;
+	t_sprite	*spr_b;
 
+	if ((num1 < lst_sprt->length) && (num2 < lst_sprt->length) && (num1 != num2))
+	{
 		spr_a = lst_sprt->list[num1];
 		spr_b = lst_sprt->list[num2];
-
 		copy_sprite(spr_a, &temp);
 		copy_sprite(spr_b, spr_a);
 		copy_sprite(&temp, spr_b);
 	}
 }
 
-void	disp_sprites(t_spr_list *s_list)
+void		disp_sprites(t_spr_list *s_list)
 {
 	int			i;
 	t_sprite	*s;
+
 	i = 0;
 	ft_putstr(PINK);
 	if (s_list->list != NULL)
@@ -110,22 +109,21 @@ void	disp_sprites(t_spr_list *s_list)
 			i++;
 		}
 		ft_printf("End of loop\n");
-	} else {
-		ft_printf("No sprites in list\n");
 	}
+	else
+		ft_printf("No sprites in list\n");
 	ft_putstr(RST);
 }
 
-void	disp_sprite(t_sprite *s)
+void		disp_sprite(t_sprite *s)
 {
 	ft_printf("Sprite of type %d\n", s->type);
 	disp_point(&(s->pos));
 }
 
-t_rgb hex_to_rgb(int color)
+t_rgb		hex_to_rgb(int color)
 {
 	t_rgb ret;
-
 
 	ret.r = ((color >> 16) & 0xFF);
 	ret.g = ((color >> 8) & 0xFF);
@@ -133,28 +131,26 @@ t_rgb hex_to_rgb(int color)
 	return (ret);
 }
 
-
-int rgb_to_hex(t_rgb color)
+int			rgb_to_hex(t_rgb color)
 {
 	return ((color.r << 16) + (color.g << 8) + color.b);
 }
 
-int	opacity(int color1, int color2, double opa)
+int			opacity(int color1, int color2, double opa)
 {
-	t_rgb col1;
-	t_rgb col2;
-	t_rgb ret;
+	t_rgb	col1;
+	t_rgb	col2;
+	t_rgb	ret;
 
 	col1 = hex_to_rgb(color1);
 	col2 = hex_to_rgb(color2);
-
 	ret.r = (int)floor(col1.r * opa) + (int)floor(col2.r * opa);
 	ret.g = (int)floor(col1.g * opa) + (int)floor(col2.g * opa);
 	ret.b = (int)floor(col1.b * opa) + (int)floor(col2.b * opa);
 	return (rgb_to_hex(ret));
 }
 
-void	draw_sprite(void *brain, t_sprite *s, float col) // btranle col
+void		draw_sprite(void *brain, t_sprite *s, float col) // btranle col
 {
 	t_brain		*b;
 	t_fpoint	s_size;
@@ -167,8 +163,8 @@ void	draw_sprite(void *brain, t_sprite *s, float col) // btranle col
 	int			y;
 	int			x;
 	int			texture_col;
+
 	b = (t_brain *)brain;
-	
 	s_dist.x = s->pos.x - b->player->pos->x;
 	s_dist.y = s->pos.y - b->player->pos->y;
 	s_size.x = (b->map->bloc_size / s->dist) * b->player->cam->proj_dist;
@@ -180,11 +176,10 @@ void	draw_sprite(void *brain, t_sprite *s, float col) // btranle col
 		start_x = (int)floor(b->ctx->width / 2 - (col * angle));
 	else if (angle < 360)
 		start_x = (int)floor(b->ctx->width / 2 + (col * (360 - angle)));
-	start_x -= s_size.x/2;
+	start_x -= s_size.x / 2;
 	if (start_x + s_size.x < 0)
 		return ;
-	//start_y = (int)floor(b->ctx->height / 2 + b->player->z - s_size.y/2);
-	start_y = (b->ctx->height / 2) * (1 + (1/ s->dist)) + b->player->z - s_size.y/2;
+	start_y = (b->ctx->height / 2) * (1 + (1 / s->dist)) + b->player->z - s_size.y / 2;
 	//dprintf(1, "start [%d][%d]\n", start_x, start_y);
 	ratio.x = s->model->width / s_size.x;
 	ratio.y = s->model->height / s_size.y;
@@ -201,19 +196,18 @@ void	draw_sprite(void *brain, t_sprite *s, float col) // btranle col
 				{
 					if (start_y + y > 0 && start_y + y < b->ctx->height)
 					{
-							color = pixel_get(s->model, x * ratio.x, y * ratio.y);
-							if (s->shadow != NULL)
+						color = pixel_get(s->model, x * ratio.x, y * ratio.y);
+						if (s->shadow != NULL)
+						{
+							col = pixel_get(s->shadow, x * ratio.x, y * ratio.y);
+							if (col != SPR_TRANSP)
 							{
-								col = pixel_get(s->shadow, x * ratio.x, y * ratio.y);
-								if (col != SPR_TRANSP)
-								{
-									col = opacity(pixel_get(b->map->frame, start_x + x, start_y + y), col, 0.4);
-									pixel_put(start_x + x, start_y + y, col, b->map->frame);
-								}
-
+								col = opacity(pixel_get(b->map->frame, start_x + x, start_y + y), col, 0.4);
+								pixel_put(start_x + x, start_y + y, col, b->map->frame);
 							}
-							if (color != SPR_TRANSP)
-										pixel_put(start_x + x, start_y + y, color, b->map->frame);
+						}
+						if (color != SPR_TRANSP)
+							pixel_put(start_x + x, start_y + y, color, b->map->frame);
 					}
 					y++;
 				}
@@ -223,12 +217,12 @@ void	draw_sprite(void *brain, t_sprite *s, float col) // btranle col
 	}
 }
 
-void    sort_sprites(t_fpoint *pos, t_spr_list *lst_sprt)
+void		sort_sprites(t_fpoint *pos, t_spr_list *lst_sprt)
 {
-	float dist1;
-	float dist2;
-	int i;
-	int j;
+	float	dist1;
+	float	dist2;
+	int		i;
+	int		j;
 
 	i = 0;
 	//ft_printf(CYAN"Order Sprites\n"RST);
@@ -244,12 +238,7 @@ void    sort_sprites(t_fpoint *pos, t_spr_list *lst_sprt)
 			lst_sprt->list[j]->dist = dist2;
 			//dprintf(1, "%f vs %f\n", dist1, dist2);
 			if (dist1 < dist2)
-			{
-			//	ft_printf("Swap [%d] and [%d]\n", i, j);
-				//disp_sprite(lst_sprt->list[i]);
-				//disp_sprite(lst_sprt->list[j]);
 				swap_sprite(lst_sprt, i, j);
-			}
 			j++;
 		}
 		i++;
@@ -257,13 +246,13 @@ void    sort_sprites(t_fpoint *pos, t_spr_list *lst_sprt)
 	//ft_printf(CYAN"Order Sprites OK\n"RST);
 }
 
-void	update_sprite(t_brain *b)
+void		update_sprite(t_brain *b)
 {
 	int i;
-	
+
 	i = 0;
 	sort_sprites(b->player->pos, b->map->sprites);
-	while(i < b->map->sprites->length)
+	while (i < b->map->sprites->length)
 	{
 		draw_sprite(b, b->map->sprites->list[i], 0);
 		i++;
