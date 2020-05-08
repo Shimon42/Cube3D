@@ -6,7 +6,7 @@
 /*   By: milosandric <milosandric@student.42lyon    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/27 08:02:21 by siferrar          #+#    #+#             */
-/*   Updated: 2020/04/29 16:03:37 by milosandric      ###   ########lyon.fr   */
+/*   Updated: 2020/05/08 14:33:55 by milosandric      ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -238,6 +238,7 @@ void    sort_sprites(t_fpoint *pos, t_spr_list *lst_sprt)
 		while (j < lst_sprt->length)
 		{
 			dist1 = calc_dist(*pos, lst_sprt->list[i]->pos);
+			//dist1 = cos((cur_col < divs.x ? -1 : 1) * (b->player->angle - cur_angle));
 			dist2 = calc_dist(*pos, lst_sprt->list[j]->pos);
 			lst_sprt->list[i]->dist = dist1;
 			lst_sprt->list[j]->dist = dist2;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   move.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: milosandric <milosandric@student.42lyon    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/09 19:09:03 by siferrar          #+#    #+#             */
-/*   Updated: 2020/04/20 23:41:30 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/05/08 14:52:27 by milosandric      ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,11 @@
 
 void	bobbing(t_player *p)
 {
-	static float step = -1;
-	float bob_height = 5;
+	static float	step;
+	float			bob_height;
 
+	step = -1;
+	bob_height = 5;
 	if (step == -1)
 		step = bob_height / 3;
 	if (p->jumping == 0)
@@ -29,7 +31,9 @@ void	bobbing(t_player *p)
 				p->bobbing = -1;
 				p->z = bob_height;
 			}
-		} else {
+		}
+		else
+		{
 			p->z -= step;
 			if (p->z <= 0)
 			{
@@ -42,20 +46,19 @@ void	bobbing(t_player *p)
 
 void	side_move(struct s_player *p, int dir)
 {
-	t_map *m;
-	t_brain *b;
-
-	int key;
+	t_map	*m;
+	t_brain	*b;
+	int		key;
 
 	b = (t_brain *)p->brain;
 	m = b->map;
 	if ((key = get_grid(m,
 		p->pos->x + p->speed * (cos(p->angle + (ft_inrad(90)) * dir)),
-													p->pos->y, 1) )!= 1 && key != 2 && key != 4)
+								p->pos->y, 1)) != 1 && key != 2 && key != 4)
 		p->pos->x += p->speed * (cos(p->angle + (ft_inrad(90)) * dir));
 	if ((key = get_grid(m, p->pos->x,
 		p->pos->y + p->speed * (sin(p->angle + (ft_inrad(90)) * dir)),
-																1)) != 1 && key != 2 && key != 4)
+											1)) != 1 && key != 2 && key != 4)
 		p->pos->y += p->speed * (sin(p->angle + (ft_inrad(90)) * dir));
 	p->as_move = 1;
 	if (is_key_pressed(b, 13) == -1 && is_key_pressed(b, 1) == -1)
@@ -64,16 +67,17 @@ void	side_move(struct s_player *p, int dir)
 
 void	move(struct s_player *p, int dir)
 {
-	t_map *m;
-	t_brain *b;
+	t_map	*m;
+	t_brain	*b;
+	int		key;
 
-	int key;
 	b = (t_brain *)p->brain;
 	m = b->map;
-
-	if ((key = get_grid(m, p->pos->x + p->step->x * dir, p->pos->y, 1)) != 1 && key != 2 && key != 4 )
+	if ((key = get_grid(m, p->pos->x + p->step->x * dir, p->pos->y, 1))
+											!= 1 && key != 2 && key != 4)
 		p->pos->x += p->step->x * dir;
-	if ((key = get_grid(m, p->pos->x, p->pos->y + p->step->y * dir, 1)) != 1 && key != 2 && key != 4 )
+	if ((key = get_grid(m, p->pos->x, p->pos->y + p->step->y * dir, 1))
+											!= 1 && key != 2 && key != 4)
 		p->pos->y += p->step->y * dir;
 	p->as_move = 1;
 	bobbing(p);
@@ -94,8 +98,8 @@ void	rotate(struct s_player *p, float angle)
 
 void	jump(t_player *p, float speed)
 {
-	double jump_h;
-	t_brain *b;
+	double	jump_h;
+	t_brain	*b;
 
 	b = (t_brain *)p->brain;
 	jump_h = (double)b->map->bloc_size;

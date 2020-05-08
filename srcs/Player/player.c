@@ -6,10 +6,9 @@
 /*   By: milosandric <milosandric@student.42lyon    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/22 22:24:57 by siferrar          #+#    #+#             */
-/*   Updated: 2020/04/29 16:01:49 by milosandric      ###   ########lyon.fr   */
+/*   Updated: 2020/05/08 14:41:24 by milosandric      ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "../../includes/cube3d.h"
 
@@ -26,7 +25,7 @@ int		init_cam(t_brain *b)
 	return (1);
 }
 
-float get_player_angle(char dir)
+float	get_player_angle(char dir)
 {
 	if (dir == 'N')
 		return (2 * PI * 0.75);
@@ -66,9 +65,9 @@ int		init_player(t_brain *b, int pos_x, char angle)
 	if ((b->player->pos = malloc(sizeof(t_fpoint))) == NULL)
 		exit_cube(NULL, 101, "Failed to malloc player pos", 0);
 	b->player->pos->x = ((pos_x + 1) * b->map->bloc_size) -
-														(b->map->bloc_size/2);
+												(b->map->bloc_size / 2);
 	b->player->pos->y = (b->map->height * b->map->bloc_size) -
-														(b->map->bloc_size/2);
+												(b->map->bloc_size / 2);
 	init_values(b, b->player);
 	b->player->angle = get_player_angle(angle);
 	b->player->rot(b->player, 0);
