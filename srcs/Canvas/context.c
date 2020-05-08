@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   context.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: milosandric <milosandric@student.42lyon    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/15 18:42:08 by siferrar          #+#    #+#             */
-/*   Updated: 2020/04/29 15:50:10 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/05/08 17:24:15 by milosandric      ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,18 +15,18 @@
 
 void	clear_ctx(int color, t_ctx *ctx)
 {
-	int oldColor;
+	int oldcolor;
 
-	oldColor = 0;
+	oldcolor = 0;
 	if (ctx->color >= 0)
-		oldColor = ctx->color;
+		oldcolor = ctx->color;
 	if (color >= 0)
 		ctx->color = color;
 	ctx->rect(0, 0, ctx->width, ctx->height, 1, ctx);
-	ctx->color = oldColor;
+	ctx->color = oldcolor;
 }
 
-void init_buff(t_ctx * ctx, t_buff **buff, int width, int height)
+void	init_buff(t_ctx *ctx, t_buff **buff, int width, int height)
 {
 	(*buff) = malloc(sizeof(t_buff));
 	if ((*buff) == NULL)
@@ -39,7 +39,7 @@ void init_buff(t_ctx * ctx, t_buff **buff, int width, int height)
 	(*buff)->img = mlx_new_image(ctx->mlx_ptr, ctx->width, ctx->height);
 	(*buff)->addr = mlx_get_data_addr((*buff)->img, &(*buff)->bits_per_pixel,
 								&(*buff)->line_length,
-                                &(*buff)->endian);
+								&(*buff)->endian);
 	(*buff)->max_addr = (*buff)->line_length * (*buff)->height;
 	(*buff)->offset = (*buff)->bits_per_pixel / 8;
 	if ((*buff)->addr == NULL)
@@ -62,30 +62,30 @@ t_ctx	*new_ctx(int width, int height)
 	ctx->circle = &draw_circle;
 	ctx->text = &put_text;
 	ctx->clear = &clear_ctx;
-	return(ctx);
+	return (ctx);
 }
 
-void            pixel_put(int x, int y, int color, t_buff *buff)
+void	pixel_put(int x, int y, int color, t_buff *buff)
 {
-    char    *dst;
-	int addr_index;
+	char	*dst;
+	int		addr_index;
 
 	addr_index = (y * buff->line_length + x * buff->offset);
-	if(addr_index >= 0 && addr_index < buff->max_addr)
+	if (addr_index >= 0 && addr_index < buff->max_addr)
 		*(unsigned int*)(buff->addr + addr_index) = color;
 }
 
 int		pixel_get(t_buff *img, int x, int y)
 {
-    char    *dst;
-	int addr_index;
-	int *color;
+	char	*dst;
+	int		addr_index;
+	int		*color;
 
 	addr_index = (y * img->line_length + x * img->offset);
-	if(addr_index >= 0 && addr_index < img->max_addr)
+	if (addr_index >= 0 && addr_index < img->max_addr)
 	{
 		color = (int*)(img->addr + addr_index);
-		return(*color);
+		return (*color);
 	}
 	return (-1);
 }

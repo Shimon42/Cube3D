@@ -6,19 +6,19 @@
 /*   By: milosandric <milosandric@student.42lyon    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/31 16:39:19 by milosand          #+#    #+#             */
-/*   Updated: 2020/04/23 16:32:33 by milosandric      ###   ########lyon.fr   */
+/*   Updated: 2020/05/08 17:19:09 by milosandric      ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cube3d.h"
 
-t_type *ft_getmap_flag(char *path)
+t_type	*ft_getmap_flag(char *path)
 {
 	int		ret;
 	int		fd;
 	char	*line;
 	t_type	*map;
-	
+
 	map = malloc(sizeof(t_type));
 	fd = open(path, O_RDONLY);
 	map->res[0] = 0;
@@ -34,9 +34,9 @@ t_type *ft_getmap_flag(char *path)
 	return (map);
 }
 
-void ft_getmap_values(char *line, t_type *map)
+void	ft_getmap_values(char *line, t_type *map)
 {
-	int res;
+	int	res;
 
 	if (!(res = ft_strncmp(line, "R ", 2)))
 		ft_flag_res(line + 2, map->res, map);
@@ -56,17 +56,17 @@ void ft_getmap_values(char *line, t_type *map)
 		ft_flag_str(line + 2, &map->c, map);
 	else if (line[0] != '\0')
 		exit_flag(501, "Unkown identifier(s) in setup file\n", map);
-	else{}
 }
 
-void ft_flag_str(char *str, char **target, t_type *map)
+void	ft_flag_str(char *str, char **target, t_type *map)
 {
-	int fd;
+	int	fd;
 
 	if (ft_ext_check(str, ".xpm"))
 	{
 		if (*target != NULL)
-			exit_flag(502, "Several textures provided for one identifiers\n", map);
+			exit_flag(502,
+				"Several textures provided for one identifiers\n", map);
 		if ((fd = open(str, O_RDONLY)) == -1)
 			exit_flag(503, "Invalid path for one of the textures\n", map);
 		*target = ft_strdup(str);
@@ -76,10 +76,10 @@ void ft_flag_str(char *str, char **target, t_type *map)
 		exit_flag(504, "Please provide a \'.xpm\' file.\n", map);
 }
 
-void ft_flag_res(char *str, int *target, t_type *map)
+void	ft_flag_res(char *str, int *target, t_type *map)
 {
-	int i;
-	char **splited;
+	int		i;
+	char	**splited;
 
 	i = 0;
 	if (ft_str_search(str, "0123456789 "))
@@ -105,7 +105,7 @@ void ft_flag_res(char *str, int *target, t_type *map)
 	target[2] = 1;
 }
 
-char *ft_str_search(char *str, char *chrs)
+char	*ft_str_search(char *str, char *chrs)
 {
 	int i;
 	int flag;
@@ -131,7 +131,7 @@ char *ft_str_search(char *str, char *chrs)
 	return (NULL);
 }
 
-void ft_check_struct(t_type *map)
+void	ft_check_struct(t_type *map)
 {
 	if ((map->res[2] == 0) || ((map->f[3] == 0) || (map->c[3] == 0)))
 		exit_flag(512, "The setup file lacks one or more information\n", map);
@@ -147,17 +147,17 @@ void ft_check_struct(t_type *map)
 		exit_flag(517, "Sprite texture missing\n", map);
 }
 
-int ft_strmultichr(char *str, char *chrlst)
+int		ft_strmultichr(char *str, char *chrlst)
 {
-	int i;
-	char *ptr;
-	int flaged;
+	int		i;
+	int		flaged;
+	char	*ptr;
 
 	i = 0;
 	ptr = NULL;
 	flaged = 1;
 	if ((ft_strlen(str) == 0) || ((str == NULL) && (chrlst == NULL)))
-		return 0;
+		return (0);
 	while (str[i])
 	{
 		if (!(ptr = ft_strchr(chrlst, str[i])))
@@ -167,10 +167,10 @@ int ft_strmultichr(char *str, char *chrlst)
 	return (flaged);
 }
 
-int ft_ext_check(char *str, char *end)
+int		ft_ext_check(char *str, char *end)
 {
-	int len;
-	int count;
+	int	len;
+	int	count;
 
 	len = ft_strlen(str) - 1;
 	count = ft_strlen(end) - 1;
@@ -184,7 +184,7 @@ int ft_ext_check(char *str, char *end)
 		return (0);
 }
 
-void ft_init_t_type(t_type *map)
+void	ft_init_t_type(t_type *map)
 {
 	map->no = NULL;
 	map->so = NULL;
@@ -201,7 +201,7 @@ void ft_init_t_type(t_type *map)
 	map->res[2] = 0;
 }
 
-void exit_flag(int err_num, char *str, t_type *map)
+void	exit_flag(int err_num, char *str, t_type *map)
 {
 	ft_putstr(RED "Cub3d Exit - Error: ");
 	ft_putnbr(err_num);
