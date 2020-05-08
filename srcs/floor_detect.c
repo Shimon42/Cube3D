@@ -3,22 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   floor_detect.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: milosandric <milosandric@student.42lyon    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/09 19:31:18 by siferrar          #+#    #+#             */
-/*   Updated: 2020/04/21 13:37:27 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/05/08 15:00:04 by milosandric      ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cube3d.h"
 
-
-int	brightness(int color, double bright)
+int		brightness(int color, double bright)
 {
-	int ret;
-	int r;
-	int g;
-	int b;
+	int	ret;
+	int	r;
+	int	g;
+	int	b;
 
 	r = ((color >> 16) & 0xFF) * bright;
 	g = ((color >> 8) & 0xFF) * bright;
@@ -27,19 +26,19 @@ int	brightness(int color, double bright)
 	return (ret);
 }
 
-void draw_floor(t_brain *b, t_ctx *c,
+void	draw_floor(t_brain *b, t_ctx *c,
 				double cur_angle, int w_start, double col)
 {
-	t_fpoint div;
-	t_fpoint cossin;
-	t_point pos;
-	float dist;
-	int color;
+	t_fpoint	div;
+	t_fpoint	cossin;
+	t_point		pos;
+	float		dist;
+	int			color;
 
 	cossin.x = cos(cur_angle);
 	cossin.y = sin(cur_angle);
-	div.x = (double)b->map->bloc_size/2;
-	div.y = b->player->cam->proj_size.y/2;
+	div.x = (double)b->map->bloc_size / 2;
+	div.y = b->player->cam->proj_size.y / 2;
 	while (w_start < b->ctx->height)
 	{
 		dist = ((div.x) / ((w_start - (int)floor(b->player->z)) -

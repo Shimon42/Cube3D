@@ -6,13 +6,13 @@
 /*   By: milosandric <milosandric@student.42lyon    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/09 18:31:48 by siferrar          #+#    #+#             */
-/*   Updated: 2020/04/12 14:32:57 by milosandric      ###   ########lyon.fr   */
+/*   Updated: 2020/05/08 14:56:55 by milosandric      ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cube3d.h"
 
-void free_buff(t_buff *buff)
+void	free_buff(t_buff *buff)
 {
 	ft_putstr("  -> Free buff - ");
 	if (buff != NULL)
@@ -26,16 +26,17 @@ void free_buff(t_buff *buff)
 	ft_putstr("OK\n");
 }
 
-void check_n_free(void *var)
+void	check_n_free(void *var)
 {
 	if (var != NULL)
 		free(var);
 }
 
-void free_map(t_brain *b)
+void	free_map(t_brain *b)
 {
-	int i;
-	t_sprite *s;
+	int			i;
+	t_sprite	*s;
+
 	i = 0;
 	ft_putstr(DYELO"Free Map\n");
 	if (b->map != NULL)
@@ -56,7 +57,7 @@ void free_map(t_brain *b)
 	}
 }
 
-void meditate(t_brain *b)
+void	meditate(t_brain *b)
 {
 	ft_putstr(DCYAN"Free Context\n");
 	free_map(b);
@@ -79,7 +80,7 @@ void meditate(t_brain *b)
 	free(b);
 }
 
-void exit_cube(t_brain *brain, int error_code, char *msg, int init)
+void	exit_cube(t_brain *brain, int error_code, char *msg, int init)
 {
 	static t_brain *b = NULL;
 
@@ -99,5 +100,5 @@ void exit_cube(t_brain *brain, int error_code, char *msg, int init)
 	meditate(b);
 	ft_putstr(GRN"Meditate OK\n");
 	ft_putstr("Exit Done\n"GRN);
-	exit (0);
+	exit(0);
 }

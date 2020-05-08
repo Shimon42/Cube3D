@@ -6,13 +6,13 @@
 /*   By: milosandric <milosandric@student.42lyon    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/11 06:48:57 by siferrar          #+#    #+#             */
-/*   Updated: 2020/05/06 13:59:33 by milosandric      ###   ########lyon.fr   */
+/*   Updated: 2020/05/08 15:23:51 by milosandric      ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cube3d.h"
 
-int	is_key_pressed(t_brain *b, int key)
+int		is_key_pressed(t_brain *b, int key)
 {
 	int i;
 
@@ -26,7 +26,7 @@ int	is_key_pressed(t_brain *b, int key)
 	return (-1);
 }
 
-int	add_key_pressed(t_brain *b, int key)
+int		add_key_pressed(t_brain *b, int key)
 {
 	int i;
 
@@ -41,7 +41,7 @@ int	add_key_pressed(t_brain *b, int key)
 	return (0);
 }
 
-int	del_key_pressed(t_brain *b, int key)
+int		del_key_pressed(t_brain *b, int key)
 {
 	int i;
 
@@ -79,12 +79,13 @@ void	action_keys(int key, void *param, t_brain *b)
 		if ((key = is_key_pressed(b, 0)) >= 0)
 			b->player->sidemove(b->player, -1);
 		if ((key = is_key_pressed(b, 2)) >= 0)
-			b->player->sidemove(b->player, 1);		
+			b->player->sidemove(b->player, 1);
 	}
 }
-int	key_press(int key, void *param)
+
+int		key_press(int key, void *param)
 {
-	t_brain *b;	
+	t_brain	*b;
 
 	b = (t_brain*)param;
 	if (key == 53)
@@ -95,7 +96,7 @@ int	key_press(int key, void *param)
 	return (0);
 }
 
-int	key_release(int key, void *param)
+int		key_release(int key, void *param)
 {
 	t_brain *b;
 
@@ -107,6 +108,6 @@ int	key_release(int key, void *param)
 	}
 	if (key == 49)
 		b->player->jump(b->player, 15);
- 	del_key_pressed(b, key);
+	del_key_pressed(b, key);
 	return (0);
 }

@@ -6,13 +6,13 @@
 /*   By: milosandric <milosandric@student.42lyon    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/14 20:36:43 by siferrar          #+#    #+#             */
-/*   Updated: 2020/05/06 20:42:46 by milosandric      ###   ########lyon.fr   */
+/*   Updated: 2020/05/08 15:32:30 by milosandric      ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cube3d.h"
 
-int				init_map(t_ctx *ctx, void *brain)
+int					init_map(t_ctx *ctx, void *brain)
 {
 	t_brain *b;
 
@@ -28,9 +28,9 @@ int				init_map(t_ctx *ctx, void *brain)
 	b->map->w_s = NULL;
 	b->map->w_w = NULL;
 	b->map->floor = NULL;
-	if(!(b->map->sprites = malloc(sizeof(t_spr_list))))
+	if (!(b->map->sprites = malloc(sizeof(t_spr_list))))
 		exit_cube(brain, 120, "malloc failing for number of sprites in map", 0);
-	if(!(b->map->sprites->column = malloc(b->ctx->width * sizeof(float))))
+	if (!(b->map->sprites->column = malloc(b->ctx->width * sizeof(float))))
 		exit_cube(brain, 121, "malloc failing for the distance array", 0);
 	b->map->sprites->length = 0;
 	b->map->sprites->list = NULL;
@@ -40,7 +40,7 @@ int				init_map(t_ctx *ctx, void *brain)
 	return (1);
 }
 
-void	init_textures(t_brain *b, t_type *map)
+void				init_textures(t_brain *b, t_type *map)
 {
 	ft_putstr(CYAN"Init Textures\n");
 	init_texture(b, map->no, &b->map->w_n);
@@ -51,11 +51,11 @@ void	init_textures(t_brain *b, t_type *map)
 	init_texture(b, map->c, &b->map->skybox);
 }
 
-int		realloc_map(t_map *m, char *line)
+int					realloc_map(t_map *m, char *line)
 {
-	t_map_line **grid;
-	int y;
-	int len;
+	t_map_line	**grid;
+	int			y;
+	int			len;
 
 	len = ft_strlen(line);
 	if (len > m->width)
@@ -79,8 +79,8 @@ int		realloc_map(t_map *m, char *line)
 t_player_detect		*chr_trt(char *line, t_map *m)
 {
 	t_player_detect	*player;
-	int i;
-	int real;
+	int				i;
+	int				real;
 
 	i = 0;
 	real = 0;
@@ -98,16 +98,17 @@ t_player_detect		*chr_trt(char *line, t_map *m)
 		}
 		real = line[i] - '0';
 		if (real >= 2 && real <= 4)
-			add_spr_to_list(m->sprites, init_sprite(m, new_point(i, m->height), real));
+			add_spr_to_list(m->sprites,
+							init_sprite(m, new_point(i, m->height), real));
 		i++;
 	}
-	return(player);
+	return (player);
 }
 
 t_player_detect		*add_map_row(t_map *m, char *line)
 {
-	int		*new;
-	int		*temp;
+	int				*new;
+	int				*temp;
 	t_player_detect	*player;
 
 	player = chr_trt(line, m);
@@ -115,12 +116,12 @@ t_player_detect		*add_map_row(t_map *m, char *line)
 	return (player);
 }
 
-int				open_map(t_brain *b, char *map_path, t_type *map)
+int					open_map(t_brain *b, char *map_path, t_type *map)
 {
-	char	*line;
-	int		file;
-	int		ret;
-	t_player_detect *player;
+	char			*line;
+	int				file;
+	int				ret;
+	t_player_detect	*player;
 
 	init_map(b->ctx, b);
 	init_textures(b, map);
@@ -133,7 +134,7 @@ int				open_map(t_brain *b, char *map_path, t_type *map)
 		if ((player = add_map_row(b->map, line)) != NULL)
 			init_player(b, player->pos_x, player->direction);
 		if (!ret)
-			break;
+			break ;
 		ret = get_next_line(file, &line);
 	}
 	close(file);
@@ -144,7 +145,7 @@ int				open_map(t_brain *b, char *map_path, t_type *map)
 	print_map_grid((b->map));
 	b->map->px_width = b->map->width * b->map->bloc_size;
 	b->map->px_height = b->map->height * b->map->bloc_size;
-	dprintf(1,DCYAN"\nReal Size : %d x %d px\n", b->map->px_width,
+	dprintf(1, DCYAN"\nReal Size : %d x %d px\n", b->map->px_width,
 												b->map->px_height);
 	free(player);
 	return (1);
