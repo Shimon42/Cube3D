@@ -6,7 +6,7 @@
 /*   By: milosandric <milosandric@student.42lyon    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/08 17:32:22 by milosandric       #+#    #+#             */
-/*   Updated: 2020/05/08 17:32:26 by milosandric      ###   ########lyon.fr   */
+/*   Updated: 2020/05/12 15:03:39 by milosandric      ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ float	get_player_angle(char dir)
 	return (0);
 }
 
-int		init_values(t_brain *b, t_player *p)
+int		init_values(t_brain *b, t_player *p) // Void ?
 {
 	p->move = &move;
 	p->sidemove = &side_move;
@@ -72,6 +72,7 @@ int		init_player(t_brain *b, int pos_x, char angle)
 	b->player->angle = get_player_angle(angle);
 	b->player->rot(b->player, 0);
 	b->player->ctx = b->ctx;
+	b->player->bob_height = 5;
 	disp_point(b->player->pos);
 	ft_putstr("	-> Init Cam - ");
 	init_cam(b);

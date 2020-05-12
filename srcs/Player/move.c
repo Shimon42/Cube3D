@@ -6,7 +6,7 @@
 /*   By: milosandric <milosandric@student.42lyon    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/09 19:09:03 by siferrar          #+#    #+#             */
-/*   Updated: 2020/05/08 17:25:13 by milosandric      ###   ########lyon.fr   */
+/*   Updated: 2020/05/12 15:01:33 by milosandric      ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,21 +15,18 @@
 void	bobbing(t_player *p)
 {
 	static float	step;
-	float			bob_height;
 
 	step = -1;
-	bob_height = 5;
-	if (step == -1)
-		step = bob_height / 3;
+	step = (step == -1 ? p->bob_height / 3 : step * 1);
 	if (p->jumping == 0)
 	{
 		if (p->bobbing == 1)
 		{
 			p->z += step;
-			if (p->z > bob_height)
+			if (p->z > p->bob_height)
 			{
 				p->bobbing = -1;
-				p->z = bob_height;
+				p->z = p->bob_height;
 			}
 		}
 		else

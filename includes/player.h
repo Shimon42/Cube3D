@@ -6,7 +6,7 @@
 /*   By: milosandric <milosandric@student.42lyon    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/23 18:52:51 by siferrar          #+#    #+#             */
-/*   Updated: 2020/04/23 15:47:04 by milosandric      ###   ########lyon.fr   */
+/*   Updated: 2020/05/12 14:44:07 by milosandric      ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ typedef struct	s_player
 	void		(*sidemove)(struct s_player *, int);
 	void		(*jump)(struct s_player *, float);
 	void		(*draw)(struct s_player *, t_ctx *);
+	float		bob_height;
 }				t_player;
 
 #endif
