@@ -29,12 +29,15 @@ SRCS = 		main.c \
 			$(SRCSPATH)Canvas/text.c \
 			$(SRCSPATH)Canvas/context.c \
 			$(SRCSPATH)Map/map_parsing.c \
+			$(SRCSPATH)Map/map_parsing2.c \
 			$(SRCSPATH)Map/draw_map.c \
 			$(SRCSPATH)wall_detect.c \
 			$(SRCSPATH)floor_detect.c \
 			$(SRCSPATH)sprites.c \
 			$(SRCSPATH)flag_get.c \
+			$(SRCSPATH)flag_get2.c \
 			$(SRCSPATH)keys.c \
+			$(SRCSPATH)keys_2.c \
 			$(SRCSPATH)Player/player.c \
 			$(SRCSPATH)Player/move.c \
 			$(SRCSPATH)meditate.c \

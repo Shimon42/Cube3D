@@ -6,7 +6,7 @@
 /*   By: milosandric <milosandric@student.42lyon    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 21:30:44 by siferrar          #+#    #+#             */
-/*   Updated: 2020/04/28 14:26:17 by milosandric      ###   ########lyon.fr   */
+/*   Updated: 2020/05/12 15:11:36 by milosandric      ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,7 +149,8 @@ void			draw_col(t_brain *b, float w_height,
 ** --- FloorCasting
 */
 
-void draw_floor(t_brain *b, t_ctx *c, double cur_angle, int w_start, double col);
+void			draw_floor(t_brain *b,
+							double cur_angle, int w_start, double col);
 
 /*
 ** --- DEBUG FUNCTIONS

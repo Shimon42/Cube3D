@@ -6,7 +6,7 @@
 /*   By: milosandric <milosandric@student.42lyon    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 22:11:09 by siferrar          #+#    #+#             */
-/*   Updated: 2020/05/08 17:25:50 by milosandric      ###   ########lyon.fr   */
+/*   Updated: 2020/05/12 15:32:20 by milosandric      ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -189,16 +189,16 @@ void		draw_walls(t_brain *b, t_ctx *c)
 	{
 		cur_angle = divangle + (col_step * cur_col);
 		wall = dist_to_wall(b, b->player->pos, cur_angle);
-		b->map->sprites->column[cur_col] = wall.dist; //OKOKOKOKOKOK
+		b->map->sprites->column[cur_col] = wall.dist;
 		wall.dist *= cos((cur_col < divs.x ? -1 : 1)
-									* (b->player->angle - cur_angle));
+									* (b->player->angle - cur_angle)); // voir ligne 151
 		w_hgt = ((b->map->bloc_size) / wall.dist) * b->player->cam->proj_dist;
 		mid_wall = w_hgt / 2;
 		if (w_hgt < b->ctx->height)
 			draw_sky(b, b->ctx, cur_col, divs.y - mid_wall + b->player->z);
 		draw_col(b, w_hgt, cur_col, wall);
 		if (w_hgt < b->ctx->height)
-			draw_floor(b, c, cur_angle,
+			draw_floor(b, cur_angle,
 				floor(divs.y + mid_wall + b->player->z - 1), cur_col);
 		cur_col++;
 	}

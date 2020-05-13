@@ -6,7 +6,7 @@
 /*   By: milosandric <milosandric@student.42lyon    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/14 20:36:43 by siferrar          #+#    #+#             */
-/*   Updated: 2020/05/08 17:26:35 by milosandric      ###   ########lyon.fr   */
+/*   Updated: 2020/05/13 12:16:48 by milosandric      ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,39 +114,4 @@ t_player_detect		*add_map_row(t_map *m, char *line)
 	player = chr_trt(line, m);
 	realloc_map(m, line);
 	return (player);
-}
-
-int					open_map(t_brain *b, char *map_path, t_type *map)
-{
-	char			*line;
-	int				file;
-	int				ret;
-	t_player_detect	*player;
-
-	init_map(b->ctx, b);
-	init_textures(b, map);
-	file = open(map_path, O_RDONLY);
-	ret = get_next_line(file, &line);
-	while (ret && ((ft_strmultichr(line, " 01SNEW")) != 1))
-		ret = get_next_line(file, &line);
-	while (ret != -1)
-	{
-		if ((player = add_map_row(b->map, line)) != NULL)
-			init_player(b, player->pos_x, player->direction);
-		if (!ret)
-			break ;
-		ret = get_next_line(file, &line);
-	}
-	close(file);
-	disp_sprites(b->map->sprites);
-	sort_sprites(b->player->pos, b->map->sprites);
-	ft_printf(DCYAN"	-> Width: [%d]\n", b->map->width);
-	ft_printf("	-> Height:[%d]\n\n"RST, b->map->height);
-	print_map_grid((b->map));
-	b->map->px_width = b->map->width * b->map->bloc_size;
-	b->map->px_height = b->map->height * b->map->bloc_size;
-	dprintf(1, DCYAN"\nReal Size : %d x %d px\n", b->map->px_width,
-												b->map->px_height);
-	free(player);
-	return (1);
 }

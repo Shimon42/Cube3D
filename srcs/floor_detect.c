@@ -6,7 +6,7 @@
 /*   By: milosandric <milosandric@student.42lyon    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/09 19:31:18 by siferrar          #+#    #+#             */
-/*   Updated: 2020/05/08 15:00:04 by milosandric      ###   ########lyon.fr   */
+/*   Updated: 2020/05/12 15:10:03 by milosandric      ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int		brightness(int color, double bright)
 	return (ret);
 }
 
-void	draw_floor(t_brain *b, t_ctx *c,
+void	draw_floor(t_brain *b,
 				double cur_angle, int w_start, double col)
 {
 	t_fpoint	div;
