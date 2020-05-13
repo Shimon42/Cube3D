@@ -6,7 +6,7 @@
 /*   By: milosandric <milosandric@student.42lyon    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/15 17:33:03 by siferrar          #+#    #+#             */
-/*   Updated: 2020/05/13 12:44:13 by milosandric      ###   ########lyon.fr   */
+/*   Updated: 2020/05/13 17:10:24 by milosandric      ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,5 +74,9 @@ void			clear_ctx(int color, t_ctx *ctx);
 
 t_fpoint		new_point(int x, int y);
 void			disp_point(t_fpoint *p);
+
+
+int		third_octant(t_ctx *ctx, t_fpoint *p1, t_fpoint *p2, t_fpoint *diff);
+int		fourth_octant(t_ctx *ctx, t_fpoint *p1, t_fpoint *p2, t_fpoint *diff);
 
 #endif
