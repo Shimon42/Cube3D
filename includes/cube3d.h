@@ -6,7 +6,7 @@
 /*   By: milosandric <milosandric@student.42lyon    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 21:30:44 by siferrar          #+#    #+#             */
-/*   Updated: 2020/05/13 15:24:45 by milosandric      ###   ########lyon.fr   */
+/*   Updated: 2020/05/13 14:41:42 by milosandric      ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,7 +142,6 @@ t_fpoint		closest_grid_v(t_fpoint *p, t_map *m, float angle);
 t_detect		closest_wall_h(t_brain *b, t_fpoint *p, float angle);
 t_detect		closest_wall_v(t_brain *b, t_fpoint *p, float angle);
 t_detect		dist_to_wall(t_brain *b, t_fpoint *p, float angle);
-char			get_wall_side(float angle, int closest);
 void			draw_walls(t_brain *b, t_ctx *c);
 void			draw_col(t_brain *b, float w_height,
 				float cur_col, t_detect w);

@@ -6,7 +6,7 @@
 /*   By: milosandric <milosandric@student.42lyon    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/15 17:33:03 by siferrar          #+#    #+#             */
-/*   Updated: 2020/05/13 15:46:18 by milosandric      ###   ########lyon.fr   */
+/*   Updated: 2020/05/13 12:44:13 by milosandric      ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,18 +71,7 @@ void			draw_circle(float c_x, float c_y,
 						int ray, int fill, t_ctx *ctx);
 void			put_text(char *str, int x, int y, t_ctx *ctx);
 void			clear_ctx(int color, t_ctx *ctx);
-int				first_octant(t_ctx *ctx, t_fpoint *p1, t_fpoint *p2, t_fpoint *diff);
-int				second_octant(t_ctx *ctx, t_fpoint *p1, t_fpoint *p2, t_fpoint *diff);
-int				third_octant(t_ctx *ctx, t_fpoint *p1, t_fpoint *p2, t_fpoint *diff);
-int				fourth_octant(t_ctx *ctx, t_fpoint *p1, t_fpoint *p2, t_fpoint *diff);
-int				fifth_octant(t_ctx *ctx, t_fpoint *p1, t_fpoint *p2, t_fpoint *diff);
-int				sixth_octant(t_ctx *ctx, t_fpoint *p1, t_fpoint *p2, t_fpoint *diff);
-int				seventh_octant(t_ctx *ctx, t_fpoint *p1, t_fpoint *p2, t_fpoint *diff);
-int				eight_octant(t_ctx *ctx, t_fpoint *p1, t_fpoint *p2, t_fpoint *diff);
-void			calc_first_quad(t_ctx *ctx, t_fpoint p1, t_fpoint p2, t_fpoint diff);
-void			calc_second_quad(t_ctx *ctx, t_fpoint p1, t_fpoint p2, t_fpoint diff);
-void			calc_third_quad(t_ctx *ctx, t_fpoint p1, t_fpoint p2, t_fpoint diff);
-void			calc_fourth_quad(t_ctx *ctx, t_fpoint p1, t_fpoint p2, t_fpoint diff);
+
 t_fpoint		new_point(int x, int y);
 void			disp_point(t_fpoint *p);
 
