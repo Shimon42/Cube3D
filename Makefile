@@ -31,6 +31,9 @@ SRCS = 		main.c \
 			$(SRCSPATH)Map/map_parsing.c \
 			$(SRCSPATH)Map/map_parsing2.c \
 			$(SRCSPATH)Map/draw_map.c \
+			$(SRCSPATH)Map/draw_map2.c \
+			$(SRCSPATH)Map/draw_map3.c \
+			$(SRCSPATH)Map/draw_map4.c \
 			$(SRCSPATH)wall_detect.c \
 			$(SRCSPATH)floor_detect.c \
 			$(SRCSPATH)sprites.c \

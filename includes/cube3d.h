@@ -6,7 +6,7 @@
 /*   By: milosandric <milosandric@student.42lyon    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 21:30:44 by siferrar          #+#    #+#             */
-/*   Updated: 2020/05/12 15:11:36 by milosandric      ###   ########lyon.fr   */
+/*   Updated: 2020/05/13 14:41:42 by milosandric      ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,7 @@ t_fpoint		to_fpoint(t_fpoint *p);
 float			to_360(float angle);
 float			calc_dist(t_fpoint p1, t_fpoint p2);
 float			calc_dist(t_fpoint p1, t_fpoint p2);
+void			init_textures(t_brain *b, t_type *map); //faudras pas oublier de passer la compile en gcc + flag ...
 
 /*
 ** --- Player
@@ -186,5 +187,9 @@ void			ft_init_t_type(t_type *map);
 void			exit_flag(int err_num, char *str, t_type *map);
 void			update_sprite(t_brain *b);
 void    		sort_sprites(t_fpoint *pos, t_spr_list *lst_sprt);
+
+void			draw_elems(t_brain *b, int disp_x, int disp_y, float scale);
+void			draw_player_map(t_brain *b, t_player *p, t_fpoint m_pos);
+void			draw_minimap_closest(t_brain *b, t_fpoint disp, float angle);
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   my_canvas.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: siferrar <siferrar@student.le-101.fr>      +#+  +:+       +#+        */
+/*   By: milosandric <milosandric@student.42lyon    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/15 17:33:03 by siferrar          #+#    #+#             */
-/*   Updated: 2020/03/23 10:22:00 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/05/13 12:44:13 by milosandric      ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
