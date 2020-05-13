@@ -24,6 +24,8 @@ INCLUDES =	$(INCPATH)cube3d.h \
 #--------	SRCS --
 SRCS = 		main.c \
 			$(SRCSPATH)Canvas/draw_line.c \
+			$(SRCSPATH)Canvas/draw_line2.c \
+			$(SRCSPATH)Canvas/draw_line3.c \
 			$(SRCSPATH)Canvas/rect.c \
 			$(SRCSPATH)Canvas/circle.c \
 			$(SRCSPATH)Canvas/text.c \
@@ -33,7 +35,6 @@ SRCS = 		main.c \
 			$(SRCSPATH)Map/draw_map.c \
 			$(SRCSPATH)Map/draw_map2.c \
 			$(SRCSPATH)Map/draw_map3.c \
-			$(SRCSPATH)Map/draw_map4.c \
 			$(SRCSPATH)wall_detect.c \
 			$(SRCSPATH)floor_detect.c \
 			$(SRCSPATH)sprites.c \
