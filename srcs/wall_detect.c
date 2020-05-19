@@ -6,7 +6,7 @@
 /*   By: milosandric <milosandric@student.42lyon    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 22:11:09 by siferrar          #+#    #+#             */
-/*   Updated: 2020/05/13 16:58:46 by milosandric      ###   ########lyon.fr   */
+/*   Updated: 2020/05/19 11:00:51 by milosandric      ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ t_detect	dist_to_wall(t_brain *b, t_fpoint *p, float angle)
 		wall.w_side_hit = get_wall_side(angle, 'v');
 		wall.hit = closest_v.hit;
 	}
-	wall.dist = bad_dist; //corriger fisheye ici
+	wall.dist = bad_dist;
 	return (wall);
 }
 
@@ -106,7 +106,7 @@ void		draw_walls(t_brain *b, t_ctx *c)
 		wall = dist_to_wall(b, b->player->pos, cur_angle);
 		b->map->sprites->column[cur_col] = wall.dist;
 		wall.dist *= cos((cur_col < divs.x ? -1 : 1)
-									* (b->player->angle - cur_angle)); // voir ligne 151
+						* (b->player->angle - cur_angle)); // voir ligne 151
 		w_hgt = ((b->map->bloc_size) / wall.dist) * b->player->cam->proj_dist;
 		mid_wall = w_hgt / 2;
 		if (w_hgt < b->ctx->height)

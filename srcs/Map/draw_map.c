@@ -6,7 +6,7 @@
 /*   By: milosandric <milosandric@student.42lyon    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/14 22:43:45 by siferrar          #+#    #+#             */
-/*   Updated: 2020/05/13 14:39:31 by milosandric      ###   ########lyon.fr   */
+/*   Updated: 2020/05/19 12:35:59 by milosandric      ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,10 @@ void		draw_minimap_closest(t_brain *b, t_fpoint disp, float angle)
 	new_point(disp.x + p_pos.x + (wall.dist * b->map->scale) * cos(angle),
 	disp.y + p_pos.y + (wall.dist * b->map->scale) * sin(angle)),
 		b->ctx);
-	b->ctx->color = 0xFF0000; // RED H
+	b->ctx->color = 0xFF0000;
 	b->ctx->circle(disp.x + close_h.x, disp.y + close_h.y,
 					(b->map->bloc_size * 0.08) * b->map->scale, 1, b->ctx);
-	b->ctx->color = 0x00FFFF; // YELLO V
+	b->ctx->color = 0x00FFFF;
 	b->ctx->circle(disp.x + close_v.x, disp.y + close_v.y,
 					(b->map->bloc_size * 0.08) * b->map->scale, 1, b->ctx);
 	b->ctx->color = 0x00FFFF;
@@ -114,44 +114,17 @@ void		draw_minimap(t_brain *b, int x, int y, int width)
 void		draw_fullmap(t_brain *b, float ease_val)
 {
 	int				margin;
-	float			scale;
 	float			mrgn_top;
 	static float	ease = 0;
 
 	if (ease_val > 0)
 	{
-		margin = 100 * b->map->scale;
-		if (b->map->px_height > b->map->px_width)
-			scale = ((float)((b->ctx->height - 2 * margin) /
-							(float)b->map->height));
-		else
-			scale = ((float)((b->ctx->width - 2 * margin) /
-							(float)b->map->px_width));
-		if (b->map->px_width * scale > b->ctx->width)
-			scale = ((float)((b->ctx->height - 2 * margin) /
-							(float)b->map->px_height));
-		b->map->scale = scale;
-		mrgn_top = (b->ctx->height -
-					(b->map->height * b->map->bloc_size * scale)) / 2;
+		calculate_size_mm(b, &margin, &mrgn_top, &ease);
 		draw_minimap(b,
-					margin,
-					mrgn_top,
-					(b->ctx->width - 2 * margin) * (ease));
-		if (ease < 1 && ease + ease_val <= 1)
-		{
-			ease += ease_val;
-			b->player->as_move = 1;
-		}
-		else if (b->player->as_move == 0 && ease == 1)
-		{
-			b->player->as_move = 1;
-			ease = 1.000001;
-		}
-		else if (ease != 1 && ease != 1.000001)
-		{
-			ease = 1;
-			b->player->as_move = 1;
-		}
+			margin,
+			mrgn_top,
+			(b->ctx->width - 2 * margin) * (ease));
+		ease_in_n_out(b, &ease, ease_val);
 	}
 	else
 	{

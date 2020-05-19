@@ -6,7 +6,7 @@
 /*   By: milosandric <milosandric@student.42lyon    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 21:30:44 by siferrar          #+#    #+#             */
-/*   Updated: 2020/05/13 17:10:17 by milosandric      ###   ########lyon.fr   */
+/*   Updated: 2020/05/19 12:34:55 by milosandric      ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -191,7 +191,8 @@ void    		sort_sprites(t_fpoint *pos, t_spr_list *lst_sprt);
 void			draw_elems(t_brain *b, int disp_x, int disp_y, float scale);
 void			draw_player_map(t_brain *b, t_player *p, t_fpoint m_pos);
 void			draw_minimap_closest(t_brain *b, t_fpoint disp, float angle);
-char		get_wall_side(float angle, int closest);
-
-
+char			get_wall_side(float angle, int closest);
+void			calculate_size_mm(t_brain *b, int *margin,
+												float *mrgn_top, float *ease);
+void			ease_in_n_out(t_brain *b, float *ease, float ease_val);
 #endif

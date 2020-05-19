@@ -6,7 +6,7 @@
 /*   By: milosandric <milosandric@student.42lyon    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/27 08:02:21 by siferrar          #+#    #+#             */
-/*   Updated: 2020/05/08 18:27:48 by milosandric      ###   ########lyon.fr   */
+/*   Updated: 2020/05/19 10:48:31 by milosandric      ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -234,6 +234,8 @@ void		sort_sprites(t_fpoint *pos, t_spr_list *lst_sprt)
 			dist1 = calc_dist(*pos, lst_sprt->list[i]->pos);
 			//dist1 = cos((cur_col < divs.x ? -1 : 1) * (b->player->angle - cur_angle));
 			dist2 = calc_dist(*pos, lst_sprt->list[j]->pos);
+//			wall.dist *= cos((cur_col < divs.x ? -1 : 1)
+//							* (b->player->angle - cur_angle));
 			lst_sprt->list[i]->dist = dist1;
 			lst_sprt->list[j]->dist = dist2;
 			//dprintf(1, "%f vs %f\n", dist1, dist2);

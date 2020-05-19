@@ -6,7 +6,7 @@
 /*   By: milosandric <milosandric@student.42lyon    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/13 13:29:44 by milosandric       #+#    #+#             */
-/*   Updated: 2020/05/13 13:45:47 by milosandric      ###   ########lyon.fr   */
+/*   Updated: 2020/05/19 12:07:14 by milosandric      ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,8 @@ int			get_map_colors(int val)
 		return (0xFF00FF);
 }
 
-void		draw_elem(t_brain *b, int disp_x, int disp_y, float scale, int val)
+void		draw_elem(t_brain *b, int disp_x, int disp_y,
+											float scale, int val)//presets
 {
 	b->ctx->color = get_map_colors(val);
 	b->ctx->rect(disp_x, disp_y,
