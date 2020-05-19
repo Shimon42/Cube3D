@@ -6,7 +6,7 @@
 /*   By: milosandric <milosandric@student.42lyon    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/13 14:36:41 by milosandric       #+#    #+#             */
-/*   Updated: 2020/05/19 12:35:28 by milosandric      ###   ########lyon.fr   */
+/*   Updated: 2020/05/19 12:56:46 by milosandric      ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void		calculate_size_mm(t_brain *b, int *margin,
 												float *mrgn_top, float *ease)
 {
 	int scale;
-	
+
 	*margin = 100 * b->map->scale;
 	if (b->map->px_height > b->map->px_width)
 		scale = ((float)((b->ctx->height - 2 * *margin) /

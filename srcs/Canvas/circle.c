@@ -6,7 +6,7 @@
 /*   By: milosandric <milosandric@student.42lyon    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/23 16:58:38 by siferrar          #+#    #+#             */
-/*   Updated: 2020/05/13 12:44:36 by milosandric      ###   ########lyon.fr   */
+/*   Updated: 2020/05/19 13:29:58 by milosandric      ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	condition(int *d, int *x, int *y, int ray)
 	}
 }
 
-void	draw_circle(float c_x, float c_y, int ray, int fill, t_ctx *ctx) // enlever le fill, tout le temps a 1
+void	draw_circle(float c_x, float c_y, int ray, int fill, t_ctx *ctx)
 {
 	int	x;
 	int	y;
