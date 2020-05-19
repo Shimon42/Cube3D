@@ -6,22 +6,22 @@
 /*   By: milosandric <milosandric@student.42lyon    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/23 16:58:38 by siferrar          #+#    #+#             */
-/*   Updated: 2020/05/19 13:29:58 by milosandric      ###   ########lyon.fr   */
+/*   Updated: 2020/05/19 14:41:58 by milosandric      ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/my_canvas.h"
 
-void	draw_outer(float c_x, float c_y, int x, int y, t_ctx *ctx)
+void	draw_outer(t_fpoint *pos, int x, int y, t_ctx *ctx)
 {
-	pixel_put(c_x + x, c_y + y, ctx->color, ctx->cur_buff);
-	pixel_put(c_x + y, c_y + x, ctx->color, ctx->cur_buff);
-	pixel_put(c_x - x, c_y + y, ctx->color, ctx->cur_buff);
-	pixel_put(c_x - y, c_y + x, ctx->color, ctx->cur_buff);
-	pixel_put(c_x + x, c_y - y, ctx->color, ctx->cur_buff);
-	pixel_put(c_x + y, c_y - x, ctx->color, ctx->cur_buff);
-	pixel_put(c_x - x, c_y - y, ctx->color, ctx->cur_buff);
-	pixel_put(c_x - y, c_y - x, ctx->color, ctx->cur_buff);
+	pixel_put(pos->x + x, pos->y + y, ctx->color, ctx->cur_buff);
+	pixel_put(pos->x + y, pos->y + x, ctx->color, ctx->cur_buff);
+	pixel_put(pos->x - x, pos->y + y, ctx->color, ctx->cur_buff);
+	pixel_put(pos->x - y, pos->y + x, ctx->color, ctx->cur_buff);
+	pixel_put(pos->x + x, pos->y - y, ctx->color, ctx->cur_buff);
+	pixel_put(pos->x + y, pos->y - x, ctx->color, ctx->cur_buff);
+	pixel_put(pos->x - x, pos->y - y, ctx->color, ctx->cur_buff);
+	pixel_put(pos->x - y, pos->y - x, ctx->color, ctx->cur_buff);
 }
 
 void	condition(int *d, int *x, int *y, int ray)
@@ -44,7 +44,7 @@ void	condition(int *d, int *x, int *y, int ray)
 	}
 }
 
-void	draw_circle(float c_x, float c_y, int ray, int fill, t_ctx *ctx)
+void	draw_circle(t_fpoint *pos, int ray, int fill, t_ctx *ctx) //tf_point
 {
 	int	x;
 	int	y;
@@ -57,12 +57,12 @@ void	draw_circle(float c_x, float c_y, int ray, int fill, t_ctx *ctx)
 		d = ray - 1;
 		while (y >= x)
 		{
-			draw_outer(c_x, c_y, x, y, ctx);
+			draw_outer(pos, x, y, ctx);
 			condition(&d, &x, &y, ray);
 		}
 		if (!fill)
 			return ;
 		ray--;
 	}
-	pixel_put(c_x, c_y, ctx->color, ctx->cur_buff);
+	pixel_put(pos->x, pos->y, ctx->color, ctx->cur_buff);
 }

@@ -6,7 +6,7 @@
 /*   By: milosandric <milosandric@student.42lyon    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/13 14:36:41 by milosandric       #+#    #+#             */
-/*   Updated: 2020/05/19 12:56:46 by milosandric      ###   ########lyon.fr   */
+/*   Updated: 2020/05/19 15:24:06 by milosandric      ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,11 @@
 
 void		draw_player_map(t_brain *b, t_player *p, t_fpoint m_pos)
 {
+	t_fpoint position;
+
 	b->ctx->color = 0xFFFFFF;
-	b->ctx->circle(m_pos.x + (p->pos->x * b->map->scale),
-					m_pos.y + (p->pos->y * b->map->scale),
+	position = new_point(m_pos.x + (p->pos->x * b->map->scale), m_pos.y + (p->pos->y * b->map->scale));
+	b->ctx->circle(&position,
 					(b->map->bloc_size * 0.1) * b->map->scale,
 					1,
 					b->ctx);

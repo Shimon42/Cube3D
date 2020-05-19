@@ -6,7 +6,7 @@
 /*   By: milosandric <milosandric@student.42lyon    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/14 22:43:45 by siferrar          #+#    #+#             */
-/*   Updated: 2020/05/19 12:35:59 by milosandric      ###   ########lyon.fr   */
+/*   Updated: 2020/05/19 14:55:58 by milosandric      ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,11 @@ void		draw_minimap_closest(t_brain *b, t_fpoint disp, float angle)
 	disp.y + p_pos.y + (wall.dist * b->map->scale) * sin(angle)),
 		b->ctx);
 	b->ctx->color = 0xFF0000;
-	b->ctx->circle(disp.x + close_h.x, disp.y + close_h.y,
-					(b->map->bloc_size * 0.08) * b->map->scale, 1, b->ctx);
+	//b->ctx->circle(disp.x + close_h.x, disp.y + close_h.y,
+	//				(b->map->bloc_size * 0.08) * b->map->scale, 1, b->ctx);
 	b->ctx->color = 0x00FFFF;
-	b->ctx->circle(disp.x + close_v.x, disp.y + close_v.y,
-					(b->map->bloc_size * 0.08) * b->map->scale, 1, b->ctx);
+	//b->ctx->circle(disp.x + close_v.x, disp.y + close_v.y,
+	//				(b->map->bloc_size * 0.08) * b->map->scale, 1, b->ctx);
 	b->ctx->color = 0x00FFFF;
 }
 
@@ -51,11 +51,11 @@ void		draw_minimap_rays(t_brain *b, t_fpoint disp)
 	close_h.hit = map_fscaled(&close_h.hit, b->map);
 	close_v.hit = map_fscaled(&close_v.hit, b->map);
 	b->ctx->color = 0xFFFF00;
-	b->ctx->circle(disp.x + close_h.hit.x, disp.y + close_h.hit.y,
-					(b->map->bloc_size * 0.1) * b->map->scale, 1, b->ctx);
+	//b->ctx->circle(disp.x + close_h.hit.x, disp.y + close_h.hit.y,
+	//				(b->map->bloc_size * 0.1) * b->map->scale, 1, b->ctx);
 	b->ctx->color = 0xFF00FF;
-	b->ctx->circle(disp.x + close_v.hit.x, disp.y + close_v.hit.y,
-					(b->map->bloc_size * 0.1) * b->map->scale, 1, b->ctx);
+	//b->ctx->circle(disp.x + close_v.hit.x, disp.y + close_v.hit.y,
+	//				(b->map->bloc_size * 0.1) * b->map->scale, 1, b->ctx);
 }
 
 void		draw_fov_map(t_brain *b, t_ctx *c)
