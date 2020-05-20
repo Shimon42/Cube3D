@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: milosandric <milosandric@student.42lyon    +#+  +:+       +#+        */
+/*   By: mandric <mandric@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/14 22:46:16 by siferrar          #+#    #+#             */
-/*   Updated: 2020/04/29 13:01:44 by milosandric      ###   ########lyon.fr   */
+/*   Updated: 2020/05/20 17:25:41 by mandric          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,18 +15,16 @@
 
 # include "cube3d.h"
 
-
-
-typedef struct      s_sprite
+typedef struct	s_sprite
 {
-	t_fpoint		pos;
-	int				type;
-	float			deg;
-	int				on_screen;
-	t_buff			*model;
-	t_buff			*shadow;
-	float			dist;
-}				    t_sprite;
+	t_fpoint	pos;
+	int			type;
+	float		deg;
+	int			on_screen;
+	t_buff		*model;
+	t_buff		*shadow;
+	float		dist;
+}				t_sprite;
 
 typedef struct	s_spr_list
 {
@@ -55,7 +53,6 @@ typedef	struct	s_map_line
 	int length;
 	int *line;
 }				t_map_line;
-
 
 typedef struct	s_map
 {

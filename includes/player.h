@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: milosandric <milosandric@student.42lyon    +#+  +:+       +#+        */
+/*   By: mandric <mandric@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/23 18:52:51 by siferrar          #+#    #+#             */
-/*   Updated: 2020/05/12 14:44:07 by milosandric      ###   ########lyon.fr   */
+/*   Updated: 2020/05/20 17:27:56 by mandric          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 

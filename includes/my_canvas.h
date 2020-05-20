@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   my_canvas.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: mandric <mandric@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/15 17:33:03 by siferrar          #+#    #+#             */
-/*   Updated: 2020/05/20 15:42:20 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/05/20 17:26:53 by mandric          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,9 +75,13 @@ t_point			new_point(int x, int y);
 t_fpoint		new_fpoint(float x, float y);
 void			disp_point(t_fpoint p);
 
-void	calc_first_quad(t_ctx *ctx, t_point p1, t_point p2, t_fpoint diff);
-void	calc_second_quad(t_ctx *ctx, t_point p1, t_point p2, t_fpoint diff);
-void	calc_third_quad(t_ctx *ctx, t_point p1, t_point p2, t_fpoint diff);
-void	calc_fourth_quad(t_ctx *ctx, t_point p1, t_point p2, t_fpoint diff);
+void			calc_first_quad(t_ctx *ctx, t_point p1, t_point p2,
+															t_fpoint diff);
+void			calc_second_quad(t_ctx *ctx, t_point p1, t_point p2,
+															t_fpoint diff);
+void			calc_third_quad(t_ctx *ctx, t_point p1, t_point p2,
+															t_fpoint diff);
+void			calc_fourth_quad(t_ctx *ctx, t_point p1, t_point p2,
+															t_fpoint diff);
 
 #endif
