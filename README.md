@@ -67,7 +67,4 @@
 	- Fish eye
 
 	Sprites:
-	- Cropped sprite sometimes
-
-
-![Cube3D Minimap expanded](/images/Bugs/sprites.png)
+	- Weird position (Bad fish eye correction ?)
