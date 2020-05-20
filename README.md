@@ -1,4 +1,4 @@
-# Cube 3D • Alpha 0.8 - Norming and FullMap
+# Cube 3D • Alpha 0.8.1 - Norming in progress
 
 ![Cube3D Screenshot](/images/sprites.png)
 
@@ -33,12 +33,12 @@
 	————————————————————————————————————
 		Changes:
 	———————————————————————————————————— 
-	- All srcs normed except for sprites.c and draw_walls.c
+	- All srcs normed except for draw_rect(), draw_walls(), init_sprite(), draw_sprite()
 
     ————————————————————————————————————
 		Cur State:
 	————————————————————————————————————
-	- All srcs normed except for sprites.c and draw_walls.c
+	- All srcs normed except for draw_rect(), draw_walls(), init_sprite(), draw_sprite()
 	- Map parsing
 	- Draw walls (fish eye sort of corrected)
 	- Floor texture (Fisheye with some texture)
