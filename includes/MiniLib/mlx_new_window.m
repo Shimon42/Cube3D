@@ -662,16 +662,16 @@ void *mlx_new_window(mlx_ptr_t *mlx_ptr, int size_x, int size_y, char *title)
   }
   newwin->size_x = size_x;
   newwin->size_y = size_y;
-  NSRect windowRect = NSMakeRect(10, (H - size_y) / 2, size_x, size_y);
-  //NSRect windowRect = NSMakeRect((W - size_x) / 2, (H - size_y) / 2, size_x, size_y);
+  //NSRect windowRect = NSMakeRect(10, (H - size_y) / 2, size_x, size_y);
+  NSRect windowRect = NSMakeRect((W - size_x) / 2, (H - size_y) / 2, size_x, size_y);
   str = [NSString stringWithCString:title encoding:NSASCIIStringEncoding];
   newwin->winid = [[MlxWin alloc] initWithRect:windowRect andTitle:str pfaAttrs:pfa_attrs];
   if (newwin->winid)
     if (![(id)(newwin->winid) pixel_management])
-      {
-	[(id)(newwin->winid) destroyPixelManagement];
-	[(id)(newwin->winid) destroyMe];
-      }
+    {
+		[(id)(newwin->winid) destroyPixelManagement];
+		[(id)(newwin->winid) destroyMe];
+    }
   return ((void *)newwin);
 }
 
