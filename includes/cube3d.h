@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cube3d.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: mandric <mandric@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 21:30:44 by siferrar          #+#    #+#             */
-/*   Updated: 2020/05/20 14:02:16 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/05/20 17:22:54 by mandric          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 # include "Libft/includes/libft.h"
 # include "my_canvas.h"
 # include "map.h"
-# include "sprites.h" 
+# include "sprites.h"
 # include "player.h"
 # include "MiniLib/X.h"
 # include "../debug/debug.h"
@@ -165,7 +165,6 @@ void			disp_buff(t_buff *b);
 void			print_player_debug(t_brain *b);
 void			disp_brain(t_brain *b);
 
-
 /*
 ** --- Parsing
 */
@@ -187,8 +186,7 @@ int				ft_ext_check(char *str, char *end);
 void			ft_init_t_type(t_type *map);
 void			exit_flag(int err_num, char *str, t_type *map);
 void			update_sprite(t_brain *b);
-void    		sort_sprites(t_fpoint *pos, t_spr_list *lst_sprt);
-
+void			sort_sprites(t_fpoint *pos, t_spr_list *lst_sprt);
 void			draw_elems(t_brain *b, int disp_x, int disp_y, float scale);
 void			draw_player_map(t_brain *b, t_player *p, t_fpoint m_pos);
 void			draw_minimap_closest(t_brain *b, t_fpoint disp, float angle);

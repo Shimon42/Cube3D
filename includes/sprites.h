@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/27 08:51:57 by siferrar          #+#    #+#             */
-/*   Updated: 2020/05/20 17:42:29 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/05/20 17:46:01 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 # define SPR_TRANSP 0x980088
 # define EXT_EXT ".xpm"
 # define EXT_SHD "-shadow.xpm"
+# include "cube3d.h"
+
 # include "cube3d.h"
 
 t_sprite	*init_sprite(t_map *m, t_fpoint pos, int type);
