@@ -40,14 +40,14 @@
 	————————————————————————————————————
 	- All srcs normed
 	- Map parsing
+	- Minimap display and expand to fullmap
 	- Draw walls (fish eye sort of corrected)
-	- Floor texture (Fisheye with some texture)
-	- Wall Texture
-	- Walls Collisions
-	- Textured sprites
-	- Sprites Collisions
-	- Minimap display
 	- SkyBox
+	- Walls textures
+	- Walls collisions
+	- Floor texture (Fisheye with some texture)
+	- Textured sprites
+	- Sprites collisions
 	
 	————————————————————————————————————
     	Known Bugs:
