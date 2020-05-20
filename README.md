@@ -1,4 +1,4 @@
-# Cube 3D • Alpha 0.8.3 - Norming in progress
+# Cube 3D • Alpha 0.8.5 - All sources normed
 
 ![Cube3D Screenshot](/images/sprites.png)
 
@@ -33,13 +33,12 @@
 	————————————————————————————————————
 		Changes:
 	———————————————————————————————————— 
-	- Add t_point
-	- Replaced t_fpoint by t_point
+	- All srcs normed, includes left
 
     ————————————————————————————————————
 		Cur State:
 	————————————————————————————————————
-	- All srcs normed except for draw_walls(), draw_sprite()
+	- All srcs normed
 	- Map parsing
 	- Draw walls (fish eye sort of corrected)
 	- Floor texture (Fisheye with some texture)
