@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/20 13:45:58 by siferrar          #+#    #+#             */
-/*   Updated: 2020/05/20 15:30:39 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/05/20 15:46:15 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void		add_spr_to_list(t_spr_list *s_list, t_sprite *s)
 	ft_printf(GRN"Add spr to list OK\n"RST);
 }
 
-void		set_spr_text(t_brain *b, t_sprite *s, int type)
+void		set_spr_texture(t_brain *b, t_sprite *s, int type)
 {
 	if (type == 2)
 	{

@@ -1,4 +1,4 @@
-# Cube 3D • Alpha 0.8.2 - Norming in progress
+# Cube 3D • Alpha 0.8.3 - Norming in progress
 
 ![Cube3D Screenshot](/images/sprites.png)
 
@@ -33,7 +33,8 @@
 	————————————————————————————————————
 		Changes:
 	———————————————————————————————————— 
-	- Normed init_sprite() and draw_rect()
+	- Add t_point
+	- Replaced t_fpoint by t_point
 
     ————————————————————————————————————
 		Cur State:

@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/20 12:39:56 by siferrar          #+#    #+#             */
-/*   Updated: 2020/05/20 13:16:15 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/05/20 15:45:48 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,10 @@ void		point_on_map(t_brain *b, int x, int y, int color)
 	t_fpoint	p;
 	t_fpoint	pos;
 
-	p = new_point(x, y);
+	p = new_fpoint(x, y);
 	p = map_scaled(&p, b->map);
 	b->ctx->color = color;
-	pos = new_point(b->map->disp.x + p.x, b->map->disp.y + p.y);
+	pos = new_fpoint(b->map->disp.x + p.x, b->map->disp.y + p.y);
 	b->ctx->circle(pos,
 						(b->map->bloc_size * 0.06) * b->map->scale, 1, b->ctx);
 }

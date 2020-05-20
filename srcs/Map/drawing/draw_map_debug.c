@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/20 12:34:25 by siferrar          #+#    #+#             */
-/*   Updated: 2020/05/20 13:16:09 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/05/20 15:45:44 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,10 +51,10 @@ void		draw_minimap_rays(t_brain *b, t_fpoint disp)
 	close_h.hit = map_fscaled(&close_h.hit, b->map);
 	close_v.hit = map_fscaled(&close_v.hit, b->map);
 	b->ctx->color = 0xFFFF00;
-	b->ctx->circle(new_point(disp.x + close_h.hit.x, disp.y + close_h.hit.y),
+	b->ctx->circle(new_fpoint(disp.x + close_h.hit.x, disp.y + close_h.hit.y),
 					(b->map->bloc_size * 0.1) * b->map->scale, 1, b->ctx);
 	b->ctx->color = 0xFF00FF;
-	b->ctx->circle(new_point(disp.x + close_v.hit.x, disp.y + close_v.hit.y),
+	b->ctx->circle(new_fpoint(disp.x + close_v.hit.x, disp.y + close_v.hit.y),
 					(b->map->bloc_size * 0.1) * b->map->scale, 1, b->ctx);
 }
 
@@ -77,7 +77,7 @@ void		draw_fov_map(t_brain *b, t_ctx *c)
 		b->ctx->color = 0xFF00FF;
 		line_on_map(b,
 			*b->player->pos,
-			new_point(b->player->pos->x + (wall.dist) * cos(cur_angle),
+			new_fpoint(b->player->pos->x + (wall.dist) * cos(cur_angle),
 							b->player->pos->y + (wall.dist) * sin(cur_angle)));
 		if (cur_col < c->width / 2)
 			dist = dist * cos(-(b->player->angle - cur_angle));

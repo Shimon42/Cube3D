@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/14 20:36:43 by siferrar          #+#    #+#             */
-/*   Updated: 2020/05/20 12:48:53 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/05/20 15:35:34 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ t_player_detect		*chr_trt(char *line, t_map *m)
 		real = line[i] - '0';
 		if (real >= 2 && real <= 4)
 			add_spr_to_list(m->sprites,
-							init_sprite(m, new_point(i, m->height), real));
+							init_sprite(m, new_fpoint(i, m->height), real));
 		i++;
 	}
 	return (player);

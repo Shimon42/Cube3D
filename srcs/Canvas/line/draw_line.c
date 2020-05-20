@@ -6,13 +6,13 @@
 /*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/13 21:20:40 by siferrar          #+#    #+#             */
-/*   Updated: 2020/05/20 13:26:22 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/05/20 15:41:33 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/my_canvas.h"
 
-void	calc_quads(t_ctx *ctx, t_fpoint *p1, t_fpoint *p2, t_fpoint *diff)
+void	calc_quads(t_ctx *ctx, t_point *p1, t_point *p2, t_fpoint *diff)
 {
 	if (diff->x > 0)
 	{
@@ -39,11 +39,11 @@ void	calc_quads(t_ctx *ctx, t_fpoint *p1, t_fpoint *p2, t_fpoint *diff)
 			pixel_put(p1->x--, p1->y, ctx->color, ctx->cur_buff);
 }
 
-void	draw_line(t_fpoint p1, t_fpoint p2, t_ctx *ctx)
+void	draw_line(t_point p1, t_point p2, t_ctx *ctx)
 {
 	t_fpoint diff;
 
-	diff = new_point(0, 0);
+	diff = new_fpoint(0, 0);
 	if ((diff.x = p2.x - p1.x) != 0)
 	{
 		calc_quads(ctx, &p1, &p2, &diff);

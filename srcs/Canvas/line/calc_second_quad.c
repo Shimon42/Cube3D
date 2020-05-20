@@ -6,13 +6,13 @@
 /*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/20 11:41:18 by siferrar          #+#    #+#             */
-/*   Updated: 2020/05/20 13:26:52 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/05/20 15:45:00 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/my_canvas.h"
 
-int		third_octant(t_ctx *ctx, t_fpoint *p1, t_fpoint *p2, t_fpoint *diff)
+int		third_octant(t_ctx *ctx, t_point *p1, t_point *p2, t_fpoint *diff)
 {
 	int ret;
 
@@ -33,7 +33,7 @@ int		third_octant(t_ctx *ctx, t_fpoint *p1, t_fpoint *p2, t_fpoint *diff)
 	return (ret);
 }
 
-int		fourth_octant(t_ctx *ctx, t_fpoint *p1, t_fpoint *p2, t_fpoint *diff)
+int		fourth_octant(t_ctx *ctx, t_point *p1, t_point *p2, t_fpoint *diff)
 {
 	int ret;
 
@@ -54,7 +54,7 @@ int		fourth_octant(t_ctx *ctx, t_fpoint *p1, t_fpoint *p2, t_fpoint *diff)
 	return (ret);
 }
 
-void	calc_second_quad(t_ctx *ctx, t_fpoint p1, t_fpoint p2, t_fpoint diff)
+void	calc_second_quad(t_ctx *ctx, t_point p1, t_point p2, t_fpoint diff)
 {
 	int		e;
 

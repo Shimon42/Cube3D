@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/27 08:02:21 by siferrar          #+#    #+#             */
-/*   Updated: 2020/05/20 14:56:28 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/05/20 15:35:34 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@ void		draw_sprite(void *brain, t_sprite *s, float col)
 	int			x;
 
 	b = (t_brain *)brain;
-	s_dist = new_point(s->pos.x - b->player->pos->x,
+	s_dist = new_fpoint(s->pos.x - b->player->pos->x,
 						s->pos.y - b->player->pos->y);
-	s_size = new_point((b->map->bloc_size / s->dist) * b->player->cam->proj_dist
+	s_size = new_fpoint((b->map->bloc_size / s->dist) * b->player->cam->proj_dist
 				, (b->map->bloc_size / s->dist) * b->player->cam->proj_dist);
 	angle = ft_indeg(ft_to_360(b->player->angle - atan2(s_dist.y, s_dist.x)));
 	col = b->ctx->width / ft_indeg(b->player->cam->fov);

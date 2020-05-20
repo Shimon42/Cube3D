@@ -6,16 +6,16 @@
 /*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/20 13:51:53 by siferrar          #+#    #+#             */
-/*   Updated: 2020/05/20 14:50:53 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/05/20 15:48:04 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/my_canvas.h"
 #include <math.h>
 
-t_fpoint	new_point(int x, int y)
+t_point		new_point(int x, int y)
 {
-	t_fpoint new;
+	t_point new;
 
 	new.x = x;
 	new.y = y;
