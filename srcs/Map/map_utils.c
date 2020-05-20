@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw_map2.c                                        :+:      :+:    :+:   */
+/*   map_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: milosandric <milosandric@student.42lyon    +#+  +:+       +#+        */
+/*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/13 13:29:42 by milosandric       #+#    #+#             */
-/*   Updated: 2020/05/13 13:37:46 by milosandric      ###   ########lyon.fr   */
+/*   Updated: 2020/05/20 15:38:11 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,10 +69,9 @@ t_fpoint	map_scaled(t_fpoint *p, t_map *m)
 void		draw_frame(t_brain *b)
 {
 	b->ctx->color = 0x000000;
-	b->ctx->rect(b->map->disp.x,
-				b->map->disp.y,
-				b->map->bloc_size * b->map->width * b->map->scale,
-				b->map->bloc_size * b->map->height * b->map->scale,
+	b->ctx->rect(new_point(b->map->disp.x, b->map->disp.y),
+				new_point(b->map->bloc_size * b->map->width * b->map->scale,
+				b->map->bloc_size * b->map->height * b->map->scale),
 				1,
 				b->ctx);
 }

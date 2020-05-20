@@ -3,25 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   circle.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: milosandric <milosandric@student.42lyon    +#+  +:+       +#+        */
+/*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/23 16:58:38 by siferrar          #+#    #+#             */
-/*   Updated: 2020/05/19 14:41:58 by milosandric      ###   ########lyon.fr   */
+/*   Updated: 2020/05/20 13:27:03 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/my_canvas.h"
 
-void	draw_outer(t_fpoint *pos, int x, int y, t_ctx *ctx)
+void	draw_outer(t_fpoint pos, int x, int y, t_ctx *ctx)
 {
-	pixel_put(pos->x + x, pos->y + y, ctx->color, ctx->cur_buff);
-	pixel_put(pos->x + y, pos->y + x, ctx->color, ctx->cur_buff);
-	pixel_put(pos->x - x, pos->y + y, ctx->color, ctx->cur_buff);
-	pixel_put(pos->x - y, pos->y + x, ctx->color, ctx->cur_buff);
-	pixel_put(pos->x + x, pos->y - y, ctx->color, ctx->cur_buff);
-	pixel_put(pos->x + y, pos->y - x, ctx->color, ctx->cur_buff);
-	pixel_put(pos->x - x, pos->y - y, ctx->color, ctx->cur_buff);
-	pixel_put(pos->x - y, pos->y - x, ctx->color, ctx->cur_buff);
+	pixel_put(pos.x + x, pos.y + y, ctx->color, ctx->cur_buff);
+	pixel_put(pos.x + y, pos.y + x, ctx->color, ctx->cur_buff);
+	pixel_put(pos.x - x, pos.y + y, ctx->color, ctx->cur_buff);
+	pixel_put(pos.x - y, pos.y + x, ctx->color, ctx->cur_buff);
+	pixel_put(pos.x + x, pos.y - y, ctx->color, ctx->cur_buff);
+	pixel_put(pos.x + y, pos.y - x, ctx->color, ctx->cur_buff);
+	pixel_put(pos.x - x, pos.y - y, ctx->color, ctx->cur_buff);
+	pixel_put(pos.x - y, pos.y - x, ctx->color, ctx->cur_buff);
 }
 
 void	condition(int *d, int *x, int *y, int ray)
@@ -44,7 +44,7 @@ void	condition(int *d, int *x, int *y, int ray)
 	}
 }
 
-void	draw_circle(t_fpoint *pos, int ray, int fill, t_ctx *ctx) //tf_point
+void	draw_circle(t_fpoint pos, int ray, int fill, t_ctx *ctx)
 {
 	int	x;
 	int	y;
@@ -64,5 +64,5 @@ void	draw_circle(t_fpoint *pos, int ray, int fill, t_ctx *ctx) //tf_point
 			return ;
 		ray--;
 	}
-	pixel_put(pos->x, pos->y, ctx->color, ctx->cur_buff);
+	pixel_put(pos.x, pos.y, ctx->color, ctx->cur_buff);
 }

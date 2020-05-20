@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   context.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: milosandric <milosandric@student.42lyon    +#+  +:+       +#+        */
+/*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/15 18:42:08 by siferrar          #+#    #+#             */
-/*   Updated: 2020/05/08 17:24:15 by milosandric      ###   ########lyon.fr   */
+/*   Updated: 2020/05/20 15:37:28 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	clear_ctx(int color, t_ctx *ctx)
 		oldcolor = ctx->color;
 	if (color >= 0)
 		ctx->color = color;
-	ctx->rect(0, 0, ctx->width, ctx->height, 1, ctx);
+	ctx->rect(new_point(0, 0), new_point(ctx->width, ctx->height), 1, ctx);
 	ctx->color = oldcolor;
 }
 

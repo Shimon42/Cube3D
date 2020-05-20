@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   meditate.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: milosandric <milosandric@student.42lyon    +#+  +:+       +#+        */
+/*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/09 18:31:48 by siferrar          #+#    #+#             */
-/*   Updated: 2020/05/08 17:25:23 by milosandric      ###   ########lyon.fr   */
+/*   Updated: 2020/05/20 12:46:42 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,6 @@ void	exit_cube(t_brain *brain, int error_code, char *msg, int init)
 	ft_putstr("\n"RST);
 	meditate(b);
 	ft_putstr(GRN"Meditate OK\n");
-	ft_putstr("Exit Done\n"GRN);
+	ft_putstr("Exit Done\n"RST);
 	exit(0);
 }

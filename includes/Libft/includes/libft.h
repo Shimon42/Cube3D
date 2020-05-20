@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/11 12:00:43 by siferrar          #+#    #+#             */
-/*   Updated: 2020/04/29 15:31:04 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/05/20 13:57:06 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # include "../srcs/Files/GNL/get_next_line.h"
 # include "../srcs/Printf/includes/printf.h"
 
-# define PI 3.14159265359
+# define PI 3.14159265358979323846264338327950288
 
 long				ft_abs(long n);
 int					ft_atoi(const char *str);
@@ -33,6 +33,7 @@ int					*ft_str_to_int_tab(const char *s1);
 int					ft_findchar(const char *needles, const char *str);
 double				ft_indeg(double angle);
 double				ft_inrad(double angle);
+float				ft_to_360(float angle);
 int					ft_isalnum(int c);
 int					ft_isalpha(int c);
 int					ft_isascii(int c);

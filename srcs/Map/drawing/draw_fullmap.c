@@ -1,38 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw_map4.c                                        :+:      :+:    :+:   */
+/*   draw_fullmap.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: milosandric <milosandric@student.42lyon    +#+  +:+       +#+        */
+/*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/05/13 14:36:41 by milosandric       #+#    #+#             */
-/*   Updated: 2020/05/19 15:24:06 by milosandric      ###   ########lyon.fr   */
+/*   Created: 2020/05/20 12:30:05 by siferrar          #+#    #+#             */
+/*   Updated: 2020/05/20 13:16:07 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/cube3d.h"
-
-void		draw_player_map(t_brain *b, t_player *p, t_fpoint m_pos)
-{
-	t_fpoint position;
-
-	b->ctx->color = 0xFFFFFF;
-	position = new_point(m_pos.x + (p->pos->x * b->map->scale), m_pos.y + (p->pos->y * b->map->scale));
-	b->ctx->circle(&position,
-					(b->map->bloc_size * 0.1) * b->map->scale,
-					1,
-					b->ctx);
-	draw_minimap_closest(b, m_pos, p->angle);
-	b->ctx->color = 0xFF0000;
-	draw_minimap_closest(b, m_pos, to_360(p->angle - p->cam->fov / 2));
-	b->ctx->color = 0x00FF00;
-	draw_minimap_closest(b, m_pos, p->angle + p->cam->fov / 2);
-}
+#include "../../../includes/cube3d.h"
 
 void		calculate_size_mm(t_brain *b, int *margin,
 												float *mrgn_top, float *ease)
 {
-	int scale;
+	float scale;
 
 	*margin = 100 * b->map->scale;
 	if (b->map->px_height > b->map->px_width)
@@ -65,5 +48,31 @@ void		ease_in_n_out(t_brain *b, float *ease, float ease_val)
 	{
 		*ease = 1;
 		b->player->as_move = 1;
+	}
+}
+
+void		draw_fullmap(t_brain *b, float ease_val)
+{
+	int				margin;
+	float			mrgn_top;
+	static float	ease = 0;
+
+	margin = 100;
+	if (ease_val > 0)
+	{
+		calculate_size_mm(b, &margin, &mrgn_top, &ease);
+		draw_minimap(b,
+			margin,
+			mrgn_top,
+			(b->ctx->width - 2 * margin) * (ease));
+		ease_in_n_out(b, &ease, ease_val);
+	}
+	else
+	{
+		if (ease != 0)
+			b->player->as_move = 1;
+		else
+			b->player->as_move = 0;
+		ease = 0;
 	}
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cube3d.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: milosandric <milosandric@student.42lyon    +#+  +:+       +#+        */
+/*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 21:30:44 by siferrar          #+#    #+#             */
-/*   Updated: 2020/05/19 12:34:55 by milosandric      ###   ########lyon.fr   */
+/*   Updated: 2020/05/20 14:02:16 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,7 @@ int				get_grid(t_map *m, int x, int y, int need_rescale);
 t_fpoint		to_grid(int x, int y, t_map *m);
 void			point_on_map(t_brain *b, int x, int y, int color);
 void			line_on_map(t_brain *b, t_fpoint p1, t_fpoint p2);
+int				get_map_colors(int val);
 void			draw_fov_map(t_brain *b, t_ctx *c);
 void			draw_ray(t_player *p, t_map *m, float angle);
 void			draw_minimap_rays(t_brain *b, t_fpoint disp);
@@ -105,9 +106,8 @@ void			init_texture(t_brain *b, char *path, t_buff **t);
 ** --- Utils
 */
 
+void			fps_count(t_ctx *c);
 t_fpoint		to_fpoint(t_fpoint *p);
-float			to_360(float angle);
-float			calc_dist(t_fpoint p1, t_fpoint p2);
 float			calc_dist(t_fpoint p1, t_fpoint p2);
 void			init_textures(t_brain *b, t_type *map); //faudras pas oublier de passer la compile en gcc + flag ...
 
@@ -125,6 +125,7 @@ void			jump(t_player *p, float speed);
 ** --- Controls
 */
 
+void			init_keys(t_brain *b);
 int				is_key_pressed(t_brain *b, int key);
 int				add_key_pressed(t_brain *b, int key);
 int				del_key_pressed(t_brain *b, int key);
@@ -135,7 +136,7 @@ int				key_release(int key, void *param);
 ** --- RayCasting
 */
 
-void	draw_sky(t_brain *b, t_ctx *c, double col, double end);
+void			draw_sky(t_brain *b, double col, double end);
 
 t_fpoint		closest_grid_h(t_fpoint *p, t_map *m, float angle);
 t_fpoint		closest_grid_v(t_fpoint *p, t_map *m, float angle);
@@ -195,4 +196,5 @@ char			get_wall_side(float angle, int closest);
 void			calculate_size_mm(t_brain *b, int *margin,
 												float *mrgn_top, float *ease);
 void			ease_in_n_out(t_brain *b, float *ease, float ease_val);
+int				opacity(int color1, int color2, double opa);
 #endif

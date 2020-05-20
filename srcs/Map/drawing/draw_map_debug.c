@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw_map.c                                         :+:      :+:    :+:   */
+/*   draw_map_debug.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: milosandric <milosandric@student.42lyon    +#+  +:+       +#+        */
+/*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/14 22:43:45 by siferrar          #+#    #+#             */
-/*   Updated: 2020/05/19 14:55:58 by milosandric      ###   ########lyon.fr   */
+/*   Created: 2020/05/20 12:34:25 by siferrar          #+#    #+#             */
+/*   Updated: 2020/05/20 15:45:44 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/cube3d.h"
+#include "../../../includes/cube3d.h"
 
 void		draw_minimap_closest(t_brain *b, t_fpoint disp, float angle)
 {
@@ -33,11 +33,11 @@ void		draw_minimap_closest(t_brain *b, t_fpoint disp, float angle)
 	disp.y + p_pos.y + (wall.dist * b->map->scale) * sin(angle)),
 		b->ctx);
 	b->ctx->color = 0xFF0000;
-	//b->ctx->circle(disp.x + close_h.x, disp.y + close_h.y,
-	//				(b->map->bloc_size * 0.08) * b->map->scale, 1, b->ctx);
+	b->ctx->circle(new_fpoint(disp.x + close_h.x, disp.y + close_h.y),
+					(b->map->bloc_size * 0.08) * b->map->scale, 1, b->ctx);
 	b->ctx->color = 0x00FFFF;
-	//b->ctx->circle(disp.x + close_v.x, disp.y + close_v.y,
-	//				(b->map->bloc_size * 0.08) * b->map->scale, 1, b->ctx);
+	b->ctx->circle(new_fpoint(disp.x + close_v.x, disp.y + close_v.y),
+					(b->map->bloc_size * 0.08) * b->map->scale, 1, b->ctx);
 	b->ctx->color = 0x00FFFF;
 }
 
@@ -51,11 +51,11 @@ void		draw_minimap_rays(t_brain *b, t_fpoint disp)
 	close_h.hit = map_fscaled(&close_h.hit, b->map);
 	close_v.hit = map_fscaled(&close_v.hit, b->map);
 	b->ctx->color = 0xFFFF00;
-	//b->ctx->circle(disp.x + close_h.hit.x, disp.y + close_h.hit.y,
-	//				(b->map->bloc_size * 0.1) * b->map->scale, 1, b->ctx);
+	b->ctx->circle(new_fpoint(disp.x + close_h.hit.x, disp.y + close_h.hit.y),
+					(b->map->bloc_size * 0.1) * b->map->scale, 1, b->ctx);
 	b->ctx->color = 0xFF00FF;
-	//b->ctx->circle(disp.x + close_v.hit.x, disp.y + close_v.hit.y,
-	//				(b->map->bloc_size * 0.1) * b->map->scale, 1, b->ctx);
+	b->ctx->circle(new_fpoint(disp.x + close_v.hit.x, disp.y + close_v.hit.y),
+					(b->map->bloc_size * 0.1) * b->map->scale, 1, b->ctx);
 }
 
 void		draw_fov_map(t_brain *b, t_ctx *c)
@@ -77,61 +77,12 @@ void		draw_fov_map(t_brain *b, t_ctx *c)
 		b->ctx->color = 0xFF00FF;
 		line_on_map(b,
 			*b->player->pos,
-			new_point(b->player->pos->x + (wall.dist) * cos(cur_angle),
+			new_fpoint(b->player->pos->x + (wall.dist) * cos(cur_angle),
 							b->player->pos->y + (wall.dist) * sin(cur_angle)));
 		if (cur_col < c->width / 2)
 			dist = dist * cos(-(b->player->angle - cur_angle));
 		else
 			dist = dist * cos((b->player->angle - cur_angle));
 		cur_col += c->width / 10;
-	}
-}
-
-void		draw_minimap(t_brain *b, int x, int y, int width)
-{
-	float scale;
-
-	b->ctx->cur_buff = b->map->frame;
-	if (b->map->px_height > b->map->px_width)
-		scale = ((float)(width / (float)b->map->px_height));
-	else
-		scale = ((float)(width / (float)b->map->px_width));
-	if (b->map->px_height * scale > b->ctx->height)
-	{
-		scale = ((float)((b->ctx->height - 2 *
-						(100 * b->map->scale)) / (float)b->map->px_height));
-		x = (b->ctx->width - (b->map->width * b->map->bloc_size * scale)) / 2;
-		y = (b->ctx->height - (b->map->height * b->map->bloc_size * scale)) / 2;
-	}
-	b->map->scale = scale;
-	b->map->disp.x = floor(x);
-	b->map->disp.y = floor(y);
-	draw_elems(b, x, y, scale);
-	draw_player_map(b, b->player, new_point(x, y));
-	//draw_fov_map(b, b->ctx);
-}
-
-void		draw_fullmap(t_brain *b, float ease_val)
-{
-	int				margin;
-	float			mrgn_top;
-	static float	ease = 0;
-
-	if (ease_val > 0)
-	{
-		calculate_size_mm(b, &margin, &mrgn_top, &ease);
-		draw_minimap(b,
-			margin,
-			mrgn_top,
-			(b->ctx->width - 2 * margin) * (ease));
-		ease_in_n_out(b, &ease, ease_val);
-	}
-	else
-	{
-		if (ease != 0)
-			b->player->as_move = 1;
-		else
-			b->player->as_move = 0;
-		ease = 0;
 	}
 }
