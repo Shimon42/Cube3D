@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/08 17:32:22 by milosandric       #+#    #+#             */
-/*   Updated: 2020/05/20 13:22:20 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/05/20 16:11:47 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ int		init_values(t_brain *b, t_player *p)
 	p->step = malloc(sizeof(t_fpoint *));
 	if (p->step == NULL)
 		exit_cube(NULL, 102, "Failed to malloc player step", 0);
-	p->rot(p, 0);
 	p->brain = b;
 	p->as_move = 1;
 	p->as_rotate = 1;
@@ -71,14 +70,15 @@ int		init_player(t_brain *b, int pos_x, char angle)
 												(b->map->bloc_size / 2);
 	b->player->pos->y = (b->map->height * b->map->bloc_size) -
 												(b->map->bloc_size / 2);
+	init_cam(b);
 	init_values(b, b->player);
 	b->player->angle = get_player_angle(angle);
 	b->player->rot(b->player, 0);
 	b->player->ctx = b->ctx;
 	b->player->bob_height = 5;
+	b->ctx->col_step = b->player->cam->fov / b->ctx->width;
 	disp_point(*b->player->pos);
 	ft_putstr("	-> Init Cam - ");
-	init_cam(b);
 	ft_putstr(DGRN"OK\n");
 	ft_printf(GRN"Player init - "DGRN"OK\n"RST);
 	return (1);

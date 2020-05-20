@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/15 17:33:03 by siferrar          #+#    #+#             */
-/*   Updated: 2020/05/20 15:42:20 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/05/20 17:43:47 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,8 @@ typedef struct	s_ctx
 	void		*win_ptr;
 	t_buff		*buff;
 	t_buff		*cur_buff;
+	t_fpoint	divided;
+	float		col_step;
 	void		(*line)(t_point, t_point, struct s_ctx *);
 	void		(*rect)(t_point, t_point, int, struct s_ctx *);
 	void		(*circle)(t_fpoint, int, int, struct s_ctx *);
@@ -75,9 +77,13 @@ t_point			new_point(int x, int y);
 t_fpoint		new_fpoint(float x, float y);
 void			disp_point(t_fpoint p);
 
-void	calc_first_quad(t_ctx *ctx, t_point p1, t_point p2, t_fpoint diff);
-void	calc_second_quad(t_ctx *ctx, t_point p1, t_point p2, t_fpoint diff);
-void	calc_third_quad(t_ctx *ctx, t_point p1, t_point p2, t_fpoint diff);
-void	calc_fourth_quad(t_ctx *ctx, t_point p1, t_point p2, t_fpoint diff);
+void			calc_first_quad(t_ctx *ctx,
+					t_point p1, t_point p2, t_fpoint diff);
+void			calc_second_quad(t_ctx *ctx,
+					t_point p1, t_point p2, t_fpoint diff);
+void			calc_third_quad(t_ctx *ctx,
+					t_point p1, t_point p2, t_fpoint diff);
+void			calc_fourth_quad(t_ctx *ctx,
+					t_point p1, t_point p2, t_fpoint diff);
 
 #endif

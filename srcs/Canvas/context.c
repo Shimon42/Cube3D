@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/15 18:42:08 by siferrar          #+#    #+#             */
-/*   Updated: 2020/05/20 15:37:28 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/05/20 16:10:49 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,8 @@ t_ctx	*new_ctx(int width, int height)
 	ctx->win_ptr = 0;
 	ctx->width = width;
 	ctx->height = height;
+	ctx->divided = new_fpoint(width / 2, height / 2);
+	ctx->col_step = 0;
 	ctx->line = &draw_line;
 	ctx->rect = &draw_rect;
 	ctx->circle = &draw_circle;

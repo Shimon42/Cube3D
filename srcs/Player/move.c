@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/09 19:09:03 by siferrar          #+#    #+#             */
-/*   Updated: 2020/05/20 13:29:06 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/05/20 16:02:25 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,6 @@ void	move(struct s_player *p, int dir)
 
 void	rotate(struct s_player *p, float angle)
 {
-	p->as_rotate = 1;
 	p->angle += angle;
 	if (p->angle > 2 * PI)
 		p->angle = p->angle - 2 * PI;
@@ -90,6 +89,8 @@ void	rotate(struct s_player *p, float angle)
 		p->angle = 2 * PI - p->angle;
 	p->step->x = (p->pos->x + p->speed * cos(p->angle)) - p->pos->x;
 	p->step->y = (p->pos->y + p->speed * sin(p->angle)) - p->pos->y;
+	p->divided = p->angle - (p->cam->fov / 2);
+	p->as_rotate = 1;
 	p->as_move = 1;
 }
 

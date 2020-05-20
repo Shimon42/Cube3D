@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: milosandric <milosandric@student.42lyon    +#+  +:+       +#+        */
+/*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/23 18:52:51 by siferrar          #+#    #+#             */
-/*   Updated: 2020/05/12 14:44:07 by milosandric      ###   ########lyon.fr   */
+/*   Updated: 2020/05/20 15:58:58 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ typedef struct	s_player
 	float		speed;
 	int			bobbing;
 	int			jumping;
+	float		divided;
 	t_ctx		*ctx;
 	void		*brain;
 	void		(*rot)(struct s_player *, float);
