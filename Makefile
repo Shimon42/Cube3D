@@ -136,8 +136,12 @@ $(OBJS):	$(INCLUDES)
 
 clean:
 			${RM} $(OBJS) get_next_line.o get_next_line_utils.o
+			@make -C $(LIBFT) clean
+			@make -C $(MINILIB) clean
 
 fclean:		clean
+			@make -C $(LIBFT) fclean
+			@make -C $(MINILIB) clean
 			${RM} $(NAME).a $(NAME) libft.a libmlx.a
 
 re:			fclean all
