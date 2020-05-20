@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/14 22:43:45 by siferrar          #+#    #+#             */
-/*   Updated: 2020/05/20 13:28:10 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/05/20 13:58:26 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ void		draw_player_map(t_brain *b, t_player *p, t_fpoint m_pos)
 					b->ctx);
 	draw_minimap_closest(b, m_pos, p->angle);
 	b->ctx->color = 0xFF0000;
-	draw_minimap_closest(b, m_pos, to_360(p->angle - p->cam->fov / 2));
+	draw_minimap_closest(b, m_pos, ft_to_360(p->angle - p->cam->fov / 2));
 	b->ctx->color = 0x00FF00;
 	draw_minimap_closest(b, m_pos, p->angle + p->cam->fov / 2);
 }

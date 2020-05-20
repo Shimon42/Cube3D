@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/13 16:51:40 by milosandric       #+#    #+#             */
-/*   Updated: 2020/05/20 13:18:21 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/05/20 13:58:26 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ t_detect	dist_to_wall(t_brain *b, t_fpoint *p, float angle)
 	t_detect	wall;
 	float		bad_dist;
 
-	angle = to_360(angle);
+	angle = ft_to_360(angle);
 	closest_h = closest_wall_h(b, p, angle);
 	closest_v = closest_wall_v(b, p, angle);
 	dists.x = calc_dist(*p, closest_h.hit);

@@ -6,11 +6,11 @@
 /*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/31 16:39:19 by milosand          #+#    #+#             */
-/*   Updated: 2020/05/20 13:27:50 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/05/20 14:11:22 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cube3d.h"
+#include "../../includes/cube3d.h"
 
 t_type	*ft_getmap_flag(char *path)
 {

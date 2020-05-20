@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 21:30:44 by siferrar          #+#    #+#             */
-/*   Updated: 2020/05/20 13:35:19 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/05/20 14:02:16 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,9 +106,8 @@ void			init_texture(t_brain *b, char *path, t_buff **t);
 ** --- Utils
 */
 
+void			fps_count(t_ctx *c);
 t_fpoint		to_fpoint(t_fpoint *p);
-float			to_360(float angle);
-float			calc_dist(t_fpoint p1, t_fpoint p2);
 float			calc_dist(t_fpoint p1, t_fpoint p2);
 void			init_textures(t_brain *b, t_type *map); //faudras pas oublier de passer la compile en gcc + flag ...
 
@@ -126,6 +125,7 @@ void			jump(t_player *p, float speed);
 ** --- Controls
 */
 
+void			init_keys(t_brain *b);
 int				is_key_pressed(t_brain *b, int key);
 int				add_key_pressed(t_brain *b, int key);
 int				del_key_pressed(t_brain *b, int key);
@@ -196,4 +196,5 @@ char			get_wall_side(float angle, int closest);
 void			calculate_size_mm(t_brain *b, int *margin,
 												float *mrgn_top, float *ease);
 void			ease_in_n_out(t_brain *b, float *ease, float ease_val);
+int				opacity(int color1, int color2, double opa);
 #endif

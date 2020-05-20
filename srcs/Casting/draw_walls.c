@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 22:11:09 by siferrar          #+#    #+#             */
-/*   Updated: 2020/05/20 13:35:37 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/05/20 13:57:14 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,17 +46,6 @@ char		get_wall_side(float angle, int closest)
 			return ('w');
 	}
 	return ('z');
-}
-
-float		to_360(float angle)
-{
-	if (angle == 0)
-		angle = 0.1;
-	if (angle < 0)
-		return ((2.0 * M_PI) + angle);
-	else if (angle > 2 * M_PI)
-		return (angle - (2.0 * PI));
-	return (angle);
 }
 
 void		draw_walls(t_brain *b, t_ctx *c)

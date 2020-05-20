@@ -32,6 +32,15 @@ SRCS = 		main.c \
 			$(SRCSPATH)Canvas/circle.c \
 			$(SRCSPATH)Canvas/text.c \
 			$(SRCSPATH)Canvas/context.c \
+			$(SRCSPATH)Canvas/points.c \
+			\
+			$(SRCSPATH)Utils/colors.c \
+			$(SRCSPATH)Utils/fps_counter.c \
+			\
+			$(SRCSPATH)Checker/check.c \
+			$(SRCSPATH)Checker/flag_get.c \
+			$(SRCSPATH)Checker/flag_get_utils.c \
+			\
 			$(SRCSPATH)Map/open_map.c \
 			$(SRCSPATH)Map/init_map.c \
 			$(SRCSPATH)Map/map_utils.c \
@@ -39,16 +48,23 @@ SRCS = 		main.c \
 			$(SRCSPATH)Map/drawing/draw_map_debug.c \
 			$(SRCSPATH)Map/drawing/draw_map_utils.c \
 			$(SRCSPATH)Map/drawing/draw_minimap.c \
+			\
 			$(SRCSPATH)Casting/wall_detect.c \
 			$(SRCSPATH)Casting/draw_walls.c \
 			$(SRCSPATH)Casting/floor_detect.c \
-			$(SRCSPATH)sprites.c \
-			$(SRCSPATH)flag_get.c \
-			$(SRCSPATH)flag_get_utils.c \
+			$(SRCSPATH)Casting/draw_sky.c \
+			\
+			$(SRCSPATH)Sprites/new_sprite.c \
+			$(SRCSPATH)Sprites/sprites_debug.c \
+			$(SRCSPATH)Sprites/sprites_utils.c \
+			$(SRCSPATH)Sprites/sprites.c \
+			\
 			$(SRCSPATH)Keys/keys_events.c \
 			$(SRCSPATH)Keys/keys_states.c \
+			\
 			$(SRCSPATH)Player/player.c \
 			$(SRCSPATH)Player/move.c \
+			\
 			$(SRCSPATH)meditate.c \
 			$(SRCSPATH)textures.c \
 			$(DEBUGPATH)debug.c

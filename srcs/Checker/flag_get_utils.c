@@ -6,11 +6,11 @@
 /*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/13 12:20:59 by milosandric       #+#    #+#             */
-/*   Updated: 2020/05/20 13:27:41 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/05/20 14:11:35 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cube3d.h"
+#include "../../includes/cube3d.h"
 
 void	ft_check_struct(t_type *map)
 {

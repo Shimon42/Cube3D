@@ -6,11 +6,21 @@
 /*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/12 15:35:13 by milosandric       #+#    #+#             */
-/*   Updated: 2020/05/20 13:19:09 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/05/20 13:51:30 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cube3d.h"
+
+void	init_keys(t_brain *b)
+{
+	int i;
+
+	i = 0;
+	b->keys = ft_calloc(10, sizeof(int));
+	while (i < 10)
+		b->keys[i++] = -1;
+}
 
 int		is_key_pressed(t_brain *b, int key)
 {
