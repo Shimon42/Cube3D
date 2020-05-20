@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/20 13:46:41 by siferrar          #+#    #+#             */
-/*   Updated: 2020/05/20 14:03:55 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/05/20 14:57:15 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ void		swap_sprite(t_spr_list *lst_sprt, int num1, int num2)
 	t_sprite	*spr_a;
 	t_sprite	*spr_b;
 
-	if ((num1 < lst_sprt->length) && (num2 < lst_sprt->length) && (num1 != num2))
+	if ((num1 < lst_sprt->length)
+		&& (num2 < lst_sprt->length) && (num1 != num2))
 	{
 		spr_a = lst_sprt->list[num1];
 		spr_b = lst_sprt->list[num2];

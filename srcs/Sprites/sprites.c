@@ -6,12 +6,11 @@
 /*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/27 08:02:21 by siferrar          #+#    #+#             */
-/*   Updated: 2020/05/20 13:58:26 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/05/20 14:56:28 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cube3d.h"
-
 
 void		draw_sprite(void *brain, t_sprite *s, float col)
 {
@@ -73,4 +72,3 @@ void		draw_sprite(void *brain, t_sprite *s, float col)
 		x++;
 	}
 }
-

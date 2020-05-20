@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/20 13:52:35 by siferrar          #+#    #+#             */
-/*   Updated: 2020/05/20 13:58:46 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/05/20 14:58:42 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 
 void		fps_count(t_ctx *c)
 {
-	static time_t str_time = 0;
-	static int count = 0;
-	static char *str = NULL;
+	static time_t	str_time = 0;
+	static int		count = 0;
+	static char		*str = NULL;
 
 	if (str_time == 0)
 		str_time = time(0);
@@ -27,7 +27,8 @@ void		fps_count(t_ctx *c)
 		free(str);
 		str = ft_itoa(count);
 		count = 0;
-	} else
+	}
+	else
 		count++;
 	if (str != NULL)
 	{

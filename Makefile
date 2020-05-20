@@ -42,6 +42,7 @@ SRCS = 		main.c \
 			$(SRCSPATH)Checker/flag_get_utils.c \
 			\
 			$(SRCSPATH)Map/open_map.c \
+			$(SRCSPATH)Map/map_debug.c \
 			$(SRCSPATH)Map/init_map.c \
 			$(SRCSPATH)Map/map_utils.c \
 			$(SRCSPATH)Map/drawing/draw_fullmap.c \
@@ -59,6 +60,7 @@ SRCS = 		main.c \
 			$(SRCSPATH)Sprites/sprites_utils.c \
 			$(SRCSPATH)Sprites/sprites.c \
 			\
+			$(SRCSPATH)Keys/keys_debug.c \
 			$(SRCSPATH)Keys/keys_events.c \
 			$(SRCSPATH)Keys/keys_states.c \
 			\

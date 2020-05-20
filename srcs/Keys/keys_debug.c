@@ -1,37 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   points.c                                           :+:      :+:    :+:   */
+/*   keys_debug.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/05/20 13:51:53 by siferrar          #+#    #+#             */
-/*   Updated: 2020/05/20 14:50:53 by siferrar         ###   ########lyon.fr   */
+/*   Created: 2020/05/20 14:46:34 by siferrar          #+#    #+#             */
+/*   Updated: 2020/05/20 14:55:28 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/my_canvas.h"
-#include <math.h>
+#include "../../includes/cube3d.h"
 
-t_fpoint	new_point(int x, int y)
+void	disp_keys(t_brain *b)
 {
-	t_fpoint new;
+	int i;
 
-	new.x = x;
-	new.y = y;
-	return (new);
-}
-
-t_fpoint	new_fpoint(float x, float y)
-{
-	t_fpoint new;
-
-	new.x = x;
-	new.y = y;
-	return (new);
-}
-
-float		calc_dist(t_fpoint p1, t_fpoint p2)
-{
-	return (sqrt(pow((p2.x - p1.x), 2) + pow((p2.y - p1.y), 2)));
+	i = 0;
+	while (i < 10)
+	{
+		ft_putnbr(b->keys[i]);
+		if (i < 9)
+			ft_putstr(", ");
+		i++;
+	}
+	ft_putchar('\n');
 }
