@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: milosandric <milosandric@student.42lyon    +#+  +:+       +#+        */
+/*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/08 17:32:22 by milosandric       #+#    #+#             */
-/*   Updated: 2020/05/12 15:03:39 by milosandric      ###   ########lyon.fr   */
+/*   Updated: 2020/05/20 13:22:20 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,11 @@ float	get_player_angle(char dir)
 		return (PI / 2);
 	if (dir == 'W')
 		return (PI);
-	ft_putstr(RED"WRONG DIR\n");
+	ft_putstr(RED"Unknown direction for get_player_angle in player.c\n"RST);
 	return (0);
 }
 
-int		init_values(t_brain *b, t_player *p) // Void ?
+int		init_values(t_brain *b, t_player *p)
 {
 	p->move = &move;
 	p->sidemove = &side_move;
@@ -48,6 +48,8 @@ int		init_values(t_brain *b, t_player *p) // Void ?
 	p->speed = b->map->bloc_size * 0.12;
 	p->rot_speed = (3 * PI) / 180;
 	p->step = malloc(sizeof(t_fpoint *));
+	if (p->step == NULL)
+		exit_cube(NULL, 102, "Failed to malloc player step", 0);
 	p->rot(p, 0);
 	p->brain = b;
 	p->as_move = 1;
@@ -55,6 +57,7 @@ int		init_values(t_brain *b, t_player *p) // Void ?
 	p->bobbing = 1;
 	p->jumping = 0;
 	p->inited = 1;
+	return (1);
 }
 
 int		init_player(t_brain *b, int pos_x, char angle)
@@ -73,7 +76,7 @@ int		init_player(t_brain *b, int pos_x, char angle)
 	b->player->rot(b->player, 0);
 	b->player->ctx = b->ctx;
 	b->player->bob_height = 5;
-	disp_point(b->player->pos);
+	disp_point(*b->player->pos);
 	ft_putstr("	-> Init Cam - ");
 	init_cam(b);
 	ft_putstr(DGRN"OK\n");

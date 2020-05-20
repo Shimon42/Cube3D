@@ -1,4 +1,4 @@
-# Cube 3D • Alpha 0.7.7 - Norming and Minimap
+# Cube 3D • Alpha 0.8 - Norming and FullMap
 
 ![Cube3D Screenshot](/images/sprites.png)
 
@@ -33,12 +33,12 @@
 	————————————————————————————————————
 		Changes:
 	———————————————————————————————————— 
-	- Normed minimap->draw_elems(), ctx->draw_circle()
-	- Better minimap display
+	- All srcs normed except for sprites.c and draw_walls.c
 
     ————————————————————————————————————
 		Cur State:
 	————————————————————————————————————
+	- All srcs normed except for sprites.c and draw_walls.c
 	- Map parsing
 	- Draw walls (fish eye sort of corrected)
 	- Floor texture (Fisheye with some texture)

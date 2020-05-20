@@ -23,27 +23,30 @@ INCLUDES =	$(INCPATH)cube3d.h \
 
 #--------	SRCS --
 SRCS = 		main.c \
-			$(SRCSPATH)Canvas/draw_line.c \
-			$(SRCSPATH)Canvas/draw_line2.c \
-			$(SRCSPATH)Canvas/draw_line3.c \
+			$(SRCSPATH)Canvas/line/calc_first_quad.c \
+			$(SRCSPATH)Canvas/line/calc_second_quad.c \
+			$(SRCSPATH)Canvas/line/calc_third_quad.c \
+			$(SRCSPATH)Canvas/line/calc_fourth_quad.c \
+			$(SRCSPATH)Canvas/line/draw_line.c \
 			$(SRCSPATH)Canvas/rect.c \
 			$(SRCSPATH)Canvas/circle.c \
 			$(SRCSPATH)Canvas/text.c \
 			$(SRCSPATH)Canvas/context.c \
-			$(SRCSPATH)Map/map_parsing.c \
-			$(SRCSPATH)Map/map_parsing2.c \
-			$(SRCSPATH)Map/draw_map.c \
-			$(SRCSPATH)Map/draw_map2.c \
-			$(SRCSPATH)Map/draw_map3.c \
-			$(SRCSPATH)Map/draw_map4.c \
-			$(SRCSPATH)wall_detect.c \
-			$(SRCSPATH)wall_detect2.c \
-			$(SRCSPATH)floor_detect.c \
+			$(SRCSPATH)Map/open_map.c \
+			$(SRCSPATH)Map/init_map.c \
+			$(SRCSPATH)Map/map_utils.c \
+			$(SRCSPATH)Map/drawing/draw_fullmap.c \
+			$(SRCSPATH)Map/drawing/draw_map_debug.c \
+			$(SRCSPATH)Map/drawing/draw_map_utils.c \
+			$(SRCSPATH)Map/drawing/draw_minimap.c \
+			$(SRCSPATH)Casting/wall_detect.c \
+			$(SRCSPATH)Casting/draw_walls.c \
+			$(SRCSPATH)Casting/floor_detect.c \
 			$(SRCSPATH)sprites.c \
 			$(SRCSPATH)flag_get.c \
-			$(SRCSPATH)flag_get2.c \
-			$(SRCSPATH)keys.c \
-			$(SRCSPATH)keys_2.c \
+			$(SRCSPATH)flag_get_utils.c \
+			$(SRCSPATH)Keys/keys_events.c \
+			$(SRCSPATH)Keys/keys_states.c \
 			$(SRCSPATH)Player/player.c \
 			$(SRCSPATH)Player/move.c \
 			$(SRCSPATH)meditate.c \
@@ -59,7 +62,7 @@ CC =		gcc
 
 CFLAGSPROD	= -g -Wall -Wextra -Werror
 CFLAGS	= 
-CFLAGSSAN	= -g -g3 -fsanitize=address
+CFLAGSSAN	= -g -g3 -fsanitize=address -Wall -Wextra -Werror
 
 OBJS = ${SRCS:.c=.o}
 

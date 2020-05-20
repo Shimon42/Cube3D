@@ -1,50 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   wall_detect2.c                                     :+:      :+:    :+:   */
+/*   wall_detect.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: milosandric <milosandric@student.42lyon    +#+  +:+       +#+        */
+/*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/13 16:51:40 by milosandric       #+#    #+#             */
-/*   Updated: 2020/05/13 16:59:12 by milosandric      ###   ########lyon.fr   */
+/*   Updated: 2020/05/20 13:18:21 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cube3d.h"
-
-char		get_wall_side(float angle, int closest)
-{
-	if (angle >= 0 & angle < PI)
-	{
-		if (closest == 'h')
-			return ('n');
-		if (angle >= 0 && angle < PI / 2.0)
-			return ('w');
-		else
-			return ('e');
-	}
-	else
-	{
-		if (closest == 'h')
-			return ('s');
-		if (angle >= PI && angle < 2.0 * PI * 0.75)
-			return ('e');
-		else
-			return ('w');
-	}
-	return ('z');
-}
-
-float		to_360(float angle)
-{
-	if (angle == 0)
-		angle = 0.1;
-	if (angle < 0)
-		return ((2.0 * M_PI) + angle);
-	else if (angle > 2 * M_PI)
-		return (angle - (2.0 * PI));
-	return (angle);
-}
+#include "../../includes/cube3d.h"
 
 t_fpoint	closest_grid_h(t_fpoint *p, t_map *m, float angle)
 {
@@ -95,4 +61,59 @@ t_detect	closest_wall_h(t_brain *b, t_fpoint *p, float angle)
 		d.hit.y += offset.y;
 	}
 	return (d);
+}
+
+t_detect	closest_wall_v(t_brain *b, t_fpoint *p, float angle)
+{
+	t_detect	d;
+	t_fpoint	offset;
+	int			is_wall;
+	int			is_sprite;
+	int			verif;
+
+	verif = angle < 2 * PI * 0.75 && angle > PI / 2;
+	is_wall = 0;
+	d.hit = closest_grid_v(p, b->map, angle);
+	d.from = 'v';
+	offset.x = b->map->bloc_size * (verif ? -1 : 1);
+	offset.y = (b->map->bloc_size * tan(angle)) * (verif ? -1 : 1);
+	while (is_wall == 0 && d.hit.y < b->map->px_height && d.hit.y > 0)
+	{
+		is_wall = (get_grid(b->map, d.hit.x - 1, d.hit.y, 1) == 1 ||
+								get_grid(b->map, d.hit.x + 1, d.hit.y, 1) == 1);
+		if (is_wall == 1 || is_wall == -1)
+			break ;
+		d.hit.x += offset.x;
+		d.hit.y += offset.y;
+	}
+	return (d);
+}
+
+t_detect	dist_to_wall(t_brain *b, t_fpoint *p, float angle)
+{
+	t_detect	closest_h;
+	t_detect	closest_v;
+	t_fpoint	dists;
+	t_detect	wall;
+	float		bad_dist;
+
+	angle = to_360(angle);
+	closest_h = closest_wall_h(b, p, angle);
+	closest_v = closest_wall_v(b, p, angle);
+	dists.x = calc_dist(*p, closest_h.hit);
+	dists.y = calc_dist(*p, closest_v.hit);
+	if (dists.x < dists.y)
+	{
+		bad_dist = dists.x;
+		wall.w_side_hit = get_wall_side(angle, 'h');
+		wall.hit = closest_h.hit;
+	}
+	else
+	{
+		bad_dist = dists.y;
+		wall.w_side_hit = get_wall_side(angle, 'v');
+		wall.hit = closest_v.hit;
+	}
+	wall.dist = bad_dist;
+	return (wall);
 }

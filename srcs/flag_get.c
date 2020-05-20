@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   flag_get.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: milosandric <milosandric@student.42lyon    +#+  +:+       +#+        */
+/*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/31 16:39:19 by milosand          #+#    #+#             */
-/*   Updated: 2020/05/13 12:33:05 by milosandric      ###   ########lyon.fr   */
+/*   Updated: 2020/05/20 13:27:50 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 

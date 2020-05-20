@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: milosandric <milosandric@student.42lyon    +#+  +:+       +#+        */
+/*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 21:29:11 by siferrar          #+#    #+#             */
-/*   Updated: 2020/04/29 16:01:25 by milosandric      ###   ########lyon.fr   */
+/*   Updated: 2020/05/20 13:35:55 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,15 @@ t_fpoint	new_point(int x, int y)
 	return (new);
 }
 
+t_fpoint	new_fpoint(float x, float y)
+{
+	t_fpoint new;
+
+	new.x = x;
+	new.y = y;
+	return (new);
+}
+
 void	init_keys(t_brain *b)
 {
 	int i;
@@ -78,7 +87,7 @@ float		calc_dist(t_fpoint p1, t_fpoint p2)
 	return (sqrt(pow((p2.x - p1.x),2) + pow((p2.y - p1.y), 2))); // true value ?
 }
 
-void	draw_sky(t_brain *b, t_ctx *c, double col, double end)
+void	draw_sky(t_brain *b, double col, double end)
 {
 	int color;
 	int y;
@@ -151,8 +160,6 @@ int	check_surround(t_map *m, t_point *pos)
 int	check_map(t_map *m)
 {
 	t_point pos;
-	int cur;
-	int verif;
 
 	pos.x = 0;
 	while (pos.x < m->width)

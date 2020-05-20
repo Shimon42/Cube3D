@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   keys_2.c                                           :+:      :+:    :+:   */
+/*   keys_states.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: milosandric <milosandric@student.42lyon    +#+  +:+       +#+        */
+/*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/12 15:35:13 by milosandric       #+#    #+#             */
-/*   Updated: 2020/05/12 15:56:13 by milosandric      ###   ########lyon.fr   */
+/*   Updated: 2020/05/20 13:19:09 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cube3d.h"
+#include "../../includes/cube3d.h"
 
 int		is_key_pressed(t_brain *b, int key)
 {

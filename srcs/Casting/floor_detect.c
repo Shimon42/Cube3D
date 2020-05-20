@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   floor_detect.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: milosandric <milosandric@student.42lyon    +#+  +:+       +#+        */
+/*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/09 19:31:18 by siferrar          #+#    #+#             */
-/*   Updated: 2020/05/12 15:10:03 by milosandric      ###   ########lyon.fr   */
+/*   Updated: 2020/05/20 13:18:14 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cube3d.h"
+#include "../../includes/cube3d.h"
 
 int		brightness(int color, double bright)
 {

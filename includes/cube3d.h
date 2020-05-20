@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cube3d.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: milosandric <milosandric@student.42lyon    +#+  +:+       +#+        */
+/*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 21:30:44 by siferrar          #+#    #+#             */
-/*   Updated: 2020/05/19 12:34:55 by milosandric      ###   ########lyon.fr   */
+/*   Updated: 2020/05/20 13:35:19 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,7 @@ int				get_grid(t_map *m, int x, int y, int need_rescale);
 t_fpoint		to_grid(int x, int y, t_map *m);
 void			point_on_map(t_brain *b, int x, int y, int color);
 void			line_on_map(t_brain *b, t_fpoint p1, t_fpoint p2);
+int				get_map_colors(int val);
 void			draw_fov_map(t_brain *b, t_ctx *c);
 void			draw_ray(t_player *p, t_map *m, float angle);
 void			draw_minimap_rays(t_brain *b, t_fpoint disp);
@@ -135,7 +136,7 @@ int				key_release(int key, void *param);
 ** --- RayCasting
 */
 
-void	draw_sky(t_brain *b, t_ctx *c, double col, double end);
+void			draw_sky(t_brain *b, double col, double end);
 
 t_fpoint		closest_grid_h(t_fpoint *p, t_map *m, float angle);
 t_fpoint		closest_grid_v(t_fpoint *p, t_map *m, float angle);

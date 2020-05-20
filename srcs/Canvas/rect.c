@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rect.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: milosandric <milosandric@student.42lyon    +#+  +:+       +#+        */
+/*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/14 17:15:35 by siferrar          #+#    #+#             */
-/*   Updated: 2020/05/08 18:01:01 by milosandric      ###   ########lyon.fr   */
+/*   Updated: 2020/05/20 13:23:26 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 

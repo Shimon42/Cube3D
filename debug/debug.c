@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/20 15:53:12 by siferrar          #+#    #+#             */
-/*   Updated: 2020/04/29 15:51:37 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/05/20 12:15:37 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,9 @@ void	disp_keys(t_brain *b)
 	ft_putchar('\n');
 }
 
-void	disp_point(t_fpoint *p)
+void	disp_point(t_fpoint p)
 {
-	dprintf(1, "{ x:%6f, y:%6f }\n", p->x, p->y);
+	dprintf(1, "{ x:%6f, y:%6f }\n", p.x, p.y);
 }
 
 void	disp_map_s(t_map *m)

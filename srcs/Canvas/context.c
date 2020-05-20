@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   context.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: milosandric <milosandric@student.42lyon    +#+  +:+       +#+        */
+/*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/15 18:42:08 by siferrar          #+#    #+#             */
-/*   Updated: 2020/05/08 17:24:15 by milosandric      ###   ########lyon.fr   */
+/*   Updated: 2020/05/20 13:27:29 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
