@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 22:11:09 by siferrar          #+#    #+#             */
-/*   Updated: 2020/05/20 13:57:14 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/05/20 16:12:05 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,36 +53,26 @@ void		draw_walls(t_brain *b, t_ctx *c)
 	float			w_hgt;
 	t_detect		wall;
 	int				cur_col;
-	float			col_step;
 	float			cur_angle;
-	float			divangle;
 	int				mid_wall;
-	static t_fpoint	divs = {-420, -420};
 
-	if (divs.x == -420)
-	{
-		divs.x = c->width / 2;
-		divs.y = c->height / 2;
-	}
-	divangle = b->player->angle - (b->player->cam->fov / 2);
 	cur_col = 0;
-	col_step = b->player->cam->fov / c->width;
 	c->cur_buff = b->map->frame;
 	while (cur_col < c->width)
 	{
-		cur_angle = divangle + (col_step * cur_col);
+		cur_angle = b->player->divided + (c->col_step * cur_col);
 		wall = dist_to_wall(b, b->player->pos, cur_angle);
 		b->map->sprites->column[cur_col] = wall.dist;
-		wall.dist *= cos((cur_col < divs.x ? -1 : 1)
+		wall.dist *= cos((cur_col < c->divided.x ? -1 : 1)
 						* (b->player->angle - cur_angle));
 		w_hgt = ((b->map->bloc_size) / wall.dist) * b->player->cam->proj_dist;
 		mid_wall = w_hgt / 2;
 		if (w_hgt < b->ctx->height)
-			draw_sky(b, cur_col, divs.y - mid_wall + b->player->z);
+			draw_sky(b, cur_col, c->divided.y - mid_wall + b->player->z);
 		draw_col(b, w_hgt, cur_col, wall);
 		if (w_hgt < b->ctx->height)
 			draw_floor(b, cur_angle,
-				floor(divs.y + mid_wall + b->player->z - 1), cur_col);
+				floor(c->divided.y + mid_wall + b->player->z - 1), cur_col);
 		cur_col++;
 	}
 }

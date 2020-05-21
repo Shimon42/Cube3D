@@ -1,19 +1,18 @@
 /* ************************************************************************** */
-/*                                                          LE - /            */
-/*                                                              /             */
-/*   get_next_line.c                                  .::    .:/ .      .::   */
-/*                                                 +:+:+   +:    +:  +:+:+    */
-/*   By: siferrar <siferrar@student.le-101.fr>      +:+   +:    +:    +:+     */
-/*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2019/10/30 14:39:54 by siferrar     #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/14 22:35:27 by siferrar    ###    #+. /#+    ###.fr     */
-/*                                                         /                  */
-/*                                                        /                   */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/10/30 14:39:54 by siferrar          #+#    #+#             */
+/*   Updated: 2020/05/20 17:53:02 by siferrar         ###   ########lyon.fr   */
+/*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-t_gnl	*init_brain(int fd)
+t_gnl		*init_brain(int fd)
 {
 	t_gnl *brain;
 
@@ -29,7 +28,7 @@ t_gnl	*init_brain(int fd)
 	return (brain);
 }
 
-t_gnl	*get_brain(t_gnl **b, int fd, char **line)
+t_gnl		*get_brain(t_gnl **b, int fd, char **line)
 {
 	t_gnl *tmp;
 	t_gnl **ptr;
@@ -81,7 +80,7 @@ static void	meditate(t_gnl **blist, t_gnl *b, char **line)
 	free(b);
 }
 
-int		treat_left(t_gnl *b, char **line)
+int			treat_left(t_gnl *b, char **line)
 {
 	char *temp;
 	char *btemp;
@@ -109,7 +108,7 @@ int		treat_left(t_gnl *b, char **line)
 	return (0);
 }
 
-int		get_next_line(int fd, char **line)
+int			get_next_line(int fd, char **line)
 {
 	static	t_gnl	*blist;
 	t_gnl			*b;

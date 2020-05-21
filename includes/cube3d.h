@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cube3d.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mandric <mandric@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 21:30:44 by siferrar          #+#    #+#             */
-/*   Updated: 2020/05/20 17:22:54 by mandric          ###   ########lyon.fr   */
+/*   Updated: 2020/05/20 17:51:32 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ void			init_texture(t_brain *b, char *path, t_buff **t);
 void			fps_count(t_ctx *c);
 t_fpoint		to_fpoint(t_fpoint *p);
 float			calc_dist(t_fpoint p1, t_fpoint p2);
-void			init_textures(t_brain *b, t_type *map); //faudras pas oublier de passer la compile en gcc + flag ...
+void			init_textures(t_brain *b, t_type *map);
 
 /*
 ** --- Player

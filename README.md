@@ -1,4 +1,4 @@
-# Cube 3D • Alpha 0.8.3 - Norming in progress
+# Cube 3D • Alpha 0.8.5 - All sources normed
 
 ![Cube3D Screenshot](/images/sprites.png)
 
@@ -33,22 +33,21 @@
 	————————————————————————————————————
 		Changes:
 	———————————————————————————————————— 
-	- Add t_point
-	- Replaced t_fpoint by t_point
+	- All srcs normed, includes left
 
     ————————————————————————————————————
 		Cur State:
 	————————————————————————————————————
-	- All srcs normed except for draw_walls(), draw_sprite()
+	- All srcs normed
 	- Map parsing
+	- Minimap display and expand to fullmap
 	- Draw walls (fish eye sort of corrected)
-	- Floor texture (Fisheye with some texture)
-	- Wall Texture
-	- Walls Collisions
-	- Textured sprites
-	- Sprites Collisions
-	- Minimap display
 	- SkyBox
+	- Walls textures
+	- Walls collisions
+	- Floor texture (Fisheye with some texture)
+	- Textured sprites
+	- Sprites collisions
 	
 	————————————————————————————————————
     	Known Bugs:
@@ -68,7 +67,4 @@
 	- Fish eye
 
 	Sprites:
-	- Cropped sprite sometimes
-
-
-![Cube3D Minimap expanded](/images/Bugs/sprites.png)
+	- Weird position (Bad fish eye correction ?)

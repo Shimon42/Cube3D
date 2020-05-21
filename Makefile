@@ -109,7 +109,7 @@ $(NAME):	$(OBJS) $(INCLUDES)
 			ar rc $(NAME).a $(OBJS) get_next_line.o get_next_line_utils.o
 
 comp:		all
-			gcc $(CFLAGSSAN) main.c $(NAME).a libft.a libmlx.a -o $(NAME) -framework OpenGL -framework AppKit
+			gcc $(CFLAGSPROD) main.c $(NAME).a libft.a libmlx.a -o $(NAME) -framework OpenGL -framework AppKit
 
 launch:		comp
 			clear
@@ -136,8 +136,12 @@ $(OBJS):	$(INCLUDES)
 
 clean:
 			${RM} $(OBJS) get_next_line.o get_next_line_utils.o
+			@make -C $(LIBFT) clean
+			@make -C $(MINILIB) clean
 
 fclean:		clean
+			@make -C $(LIBFT) fclean
+			@make -C $(MINILIB) clean
 			${RM} $(NAME).a $(NAME) libft.a libmlx.a
 
 re:			fclean all
