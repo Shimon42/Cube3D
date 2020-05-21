@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   brain_printf.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: mandric <mandric@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/20 15:15:38 by siferrar          #+#    #+#             */
-/*   Updated: 2020/04/29 15:41:08 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/05/20 17:54:42 by mandric          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,12 +35,12 @@ typedef struct			s_param
 	struct s_brain_prf	*parent;
 }						t_param;
 
-typedef	struct		s_brain_prf
+typedef	struct			s_brain_prf
 {
-	t_param			*params;
-	t_param			*cur_param;
-	int				n_print;
-	long			stri;
-}					t_brain_prf;
+	t_param				*params;
+	t_param				*cur_param;
+	int					n_print;
+	long				stri;
+}						t_brain_prf;
 
 #endif

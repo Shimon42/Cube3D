@@ -3,19 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   conv_angles.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: mandric <mandric@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/04 21:28:19 by siferrar          #+#    #+#             */
-/*   Updated: 2020/05/20 13:57:43 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/05/20 18:07:30 by mandric          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "../../includes/libft.h"
 
 double	ft_inrad(double angle)
 {
-	return ((angle * PI)/ 180);
+	return ((angle * PI) / 180);
 }
 
 double	ft_indeg(double angle)

@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: mandric <mandric@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/19 15:11:47 by siferrar          #+#    #+#             */
-/*   Updated: 2020/04/29 15:44:44 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/05/20 17:47:55 by mandric          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/printf.h"
 
-static void				init_prf_brain(t_brain_prf **b)
+static void			init_prf_brain(t_brain_prf **b)
 {
 	(*b)->cur_param = NULL;
 	(*b)->params = NULL;
@@ -20,7 +20,7 @@ static void				init_prf_brain(t_brain_prf **b)
 	init_params_list(b);
 }
 
-static void				meditate_prf(t_brain_prf *b)
+static void			meditate_prf(t_brain_prf *b)
 {
 	t_param *tmp;
 
@@ -93,9 +93,9 @@ static int			treat_str(t_brain_prf *b, const char *str, va_list va)
 
 int					ft_printf(const char *str, ...)
 {
-	va_list	(va);
-	t_brain_prf *b;
-	int		n_print;
+	va_list		(va);
+	t_brain_prf	*b;
+	int			n_print;
 
 	n_print = 0;
 	if ((b = malloc(sizeof(t_brain_prf))) == NULL)
