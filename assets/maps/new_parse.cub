@@ -1,14 +1,14 @@
-EA ./assets/textures/walls/stone_bricks/2.xpm
+EA ./assets/textures/walls/stone_bricks/1.xpm
 
 SO ./assets/textures/walls/stone_bricks/2.xpm
 
-NO ./assets/textures/walls/stone_bricks/2.xpm
+NO ./assets/textures/walls/stone_bricks/3.xpm
 
-WE ./assets/textures/walls/stone_bricks/2.xpm
+WE ./assets/textures/walls/stone_bricks/4.xpm
 
 S ./assets/sprites/barrel.xpm
 
-R 1280 800
+R 1920 1080
 F ./assets/textures/floor/sand.xpm
 C ./assets/sky/mountains/mountains.xpm
 
