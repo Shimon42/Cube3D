@@ -68,13 +68,11 @@ void		add_param(t_brain_prf **b, char *key, void *f)
 int			check_key(const char *str, char *tofind)
 {
 	size_t	x;
-	size_t	i;
 	char	upper;
 	size_t	to_f_len;
 
 	to_f_len = ft_strlen(tofind);
 	x = 0;
-	i = 0;
 	if (tofind[0] != '\0')
 	{
 		upper = ft_toupper(str[x]);

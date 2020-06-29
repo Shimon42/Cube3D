@@ -52,7 +52,7 @@ int		per_s(va_list va, t_param *p)
 		wasnull = 1;
 	}
 	if (p->precision != 0)
-		len = strlen(str);
+		len = ft_strlen(str);
 	else
 		len = 0;
 	disp_per_s(p, len, str);

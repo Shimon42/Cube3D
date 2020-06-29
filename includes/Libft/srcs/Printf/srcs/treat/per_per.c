@@ -15,9 +15,7 @@
 static void	gest_no_precision(t_param *p)
 {
 	int padding;
-	int i;
 
-	i = 0;
 	padding = 0;
 	if (p->min_width > 1)
 		padding += p->min_width - 1;

@@ -26,9 +26,7 @@ static void		print_0x(t_param *p, int nbr)
 static void		gest_precision(t_param *p, int nbr, int len)
 {
 	int padding;
-	int i;
 
-	i = 0;
 	padding = 0;
 	if (p->min_width >= len && (p->precision != 0 || nbr == 0))
 		padding += p->min_width;
@@ -54,9 +52,7 @@ static void		gest_precision(t_param *p, int nbr, int len)
 static void		gest_no_precision(t_param *p, int nbr, int len)
 {
 	int padding;
-	int i;
 
-	i = 0;
 	padding = 0;
 	if (p->min_width > len)
 		padding += p->min_width - len;
@@ -75,9 +71,7 @@ static void		gest_no_precision(t_param *p, int nbr, int len)
 int				per_x(va_list va, t_param *p)
 {
 	long	nbr;
-	int		i;
 
-	i = 0;
 	p->n_print = 0;
 	gest_wildcard(va, p);
 	nbr = va_arg(va, int);

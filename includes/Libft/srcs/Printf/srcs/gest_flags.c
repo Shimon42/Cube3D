@@ -16,12 +16,10 @@ t_param		*find_func(t_brain_prf *b, const char *str)
 {
 	t_param **tmp;
 	t_param **ret;
-	int		first_found;
 	int		found;
 
 	tmp = &(b->params);
 	ret = NULL;
-	first_found = ft_strlen(str);
 	while (*tmp != NULL)
 	{
 		if ((found = check_key(str, (*tmp)->key)) > -1)

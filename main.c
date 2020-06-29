@@ -69,7 +69,7 @@ int		main(int ac, char **av)
 	ft_putstr(
 		RED"\n🔥 L"YELO"O"GRN"O"CYAN"P "BLUE"I"PURP"N"PINK"I"RST"T 🔥\n\n"RST);
 	mlx_loop_hook(b->ctx->mlx_ptr, &loop_hook, b);
-	mlx_hook(b->ctx->win_ptr, InputOnly, KeyPress, &key_press, b);
+	mlx_hook(b->ctx->win_ptr, 2, 2, &key_press, b);
 	mlx_key_hook(b->ctx->win_ptr, &key_release, b);
 	mlx_do_key_autorepeaton(b->ctx->mlx_ptr);
 	mlx_loop(b->ctx->mlx_ptr);

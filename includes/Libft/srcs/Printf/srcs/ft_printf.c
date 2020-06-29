@@ -48,10 +48,8 @@ static t_param		*analyse(t_brain_prf *b, const char *str)
 {
 	t_param *ret;
 	int		i;
-	int		j;
 
 	i = 0;
-	j = 0;
 	ret = new_param(b);
 	if (str[i] && (ft_strchr("-+0123456789#.* ", str[i]) != NULL))
 	{
