@@ -65,6 +65,8 @@ typedef struct	s_rgb
 	int			b;
 }				t_rgb;
 
+void			free_buff(t_buff *buff);
+void			check_n_free(void *var);
 void			exit_cube(t_brain *brain, int error_code, char *msg, int init);
 void			meditate(t_brain *b);
 /*

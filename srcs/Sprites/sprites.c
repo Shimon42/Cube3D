@@ -43,17 +43,22 @@ void		draw_sprite_col(t_brain *b, t_sprite *s, t_draw_spr *drw)
 
 void		draw_sprite_row(t_brain *b, t_sprite *s, t_draw_spr *s_draw)
 {
-	s_draw->x = 0;
+	s_draw->x = ((s_draw->start.x < 0) ? (s_draw->start.x) * -1 : 0);
 	while (s_draw->x < s_draw->size.x)
 	{
-		if (b->map->sprites->column[s_draw->start.x + s_draw->x]
-			>= floor(s->dist))
-			if (s_draw->start.x + s_draw->x > 0
-				&& s_draw->start.x + s_draw->x < b->ctx->width)
+		if (s_draw->start.x + s_draw->x < b->ctx->width)
+		{
+			if (b->map->sprites->column[s_draw->start.x + s_draw->x]
+				>= floor(s->dist))
 			{
-				s_draw->y = 0;
-				draw_sprite_col(b, s, s_draw);
+				if (s_draw->start.x + s_draw->x > 0)
+				{
+					s_draw->y = 0;
+					draw_sprite_col(b, s, s_draw);
+				}
 			}
+		} else 
+			break;
 		s_draw->x++;
 	}
 }
