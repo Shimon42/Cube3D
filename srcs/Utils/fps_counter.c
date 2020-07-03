@@ -33,7 +33,7 @@ void		fps_count(t_ctx *c)
 	if (str != NULL)
 	{
 		c->color = 0;
-		c->text("FPS:", 10, 2, c);
-		c->text(str, 50, 2, c);
+		c->text("FPS:", 10, 15, c);
+		c->text(str, 35, 15, c);
 	}
 }

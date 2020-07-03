@@ -44,9 +44,8 @@ int		key_press(int key, void *param)
 	t_brain	*b;
 
 	b = (t_brain*)param;
-	//ft_printf("press = %d\n", key);
-	if (key == 53)
-		exit_cube(b, 0, "Exit from red cross", 0);
+	if (key == 65307)
+		exit_cube(b, 0, "Exit from Escape key", 0);
 	if (key != -1 && is_key_pressed(b, key) == -1)
 		add_key_pressed(b, key);
 	action_keys(key, param, b);

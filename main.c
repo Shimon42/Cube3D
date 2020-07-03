@@ -26,10 +26,11 @@ t_brain	*new_brain(int width, int height, char *name)
 	{
 		width = size.x;
 		height = size.y;
+		check_n_free(new->ctx->mlx_ptr);
+		check_n_free(new->ctx);
 		new->ctx = new_ctx(width, height);
-		new->ctx->win_ptr = mlx_new_window(new->ctx->mlx_ptr,
-														width, height, name);
 	}
+	new->ctx->win_ptr = mlx_new_window(new->ctx->mlx_ptr, width, height, name);
 	new->map = NULL;
 	new->player = NULL;
 	init_buff(new->ctx, &new->ctx->buff, new->ctx->width, new->ctx->height);
@@ -45,11 +46,11 @@ int		loop_hook(t_brain *b)
 	{
 		draw_walls(b, b->ctx);
 		update_sprite(b);
-		if (is_key_pressed(b, 3) == -1)
+		if (is_key_pressed(b, 102) == -1)
 			draw_minimap(b, 10, 25, 200);
 		b->player->as_move = 0;
 	}
-	if (is_key_pressed(b, 3) != -1)
+	if (is_key_pressed(b, 102) != -1)
 		draw_fullmap(b, 0.28);
 	mlx_put_image_to_window(b->ctx->mlx_ptr, b->ctx->win_ptr,
 													b->map->frame->img, 0, 0);
