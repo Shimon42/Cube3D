@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/30 14:39:54 by siferrar          #+#    #+#             */
-/*   Updated: 2020/07/03 10:23:00 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/07/03 17:17:17 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,6 @@ int			treat_left(t_gnl *b, char **line)
 		b->asleft = 1;
 		return (1);
 	}
-	free(temp);
 	temp = ft_strnjoin(*line, b->buff, 0, BUFFER_SIZE);
 	free(*line);
 	*line = temp;
