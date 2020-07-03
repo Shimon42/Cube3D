@@ -94,10 +94,6 @@ void	ft_flag_res(char *str, int *target, t_type *map)
 	target[0] = ft_atoi(str);
 	str = ft_strchr(str, ' ');
 	target[1] = ft_atoi(str);
-	/*if (target[0] >= 2560)
-		target[0] = 2559;
-	if (target[1] >= 1440)
-		target[1] = 1439;*/
 	if (target[0] < 100)
 		target[0] = 100;
 	if (target[1] < 100)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mandric <mandric@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 21:29:11 by siferrar          #+#    #+#             */
-/*   Updated: 2020/05/21 11:48:10 by mandric          ###   ########lyon.fr   */
+/*   Updated: 2020/07/03 10:03:01 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ t_brain	*new_brain(int width, int height, char *name)
 
 	new = malloc(sizeof(t_brain));
 	new->ctx = new_ctx(width, height);
-	new->ctx->color = 0x00FFFF;
 	mlx_get_screen_size(new->ctx->mlx_ptr, &size.x, &size.y);
 	if (width > size.x || height > size.y)
 	{
@@ -31,6 +30,7 @@ t_brain	*new_brain(int width, int height, char *name)
 		new->ctx = new_ctx(width, height);
 	}
 	new->ctx->win_ptr = mlx_new_window(new->ctx->mlx_ptr, width, height, name);
+	new->ctx->color = 0x00FFFF;
 	new->map = NULL;
 	new->player = NULL;
 	init_buff(new->ctx, &new->ctx->buff, new->ctx->width, new->ctx->height);
@@ -38,6 +38,8 @@ t_brain	*new_brain(int width, int height, char *name)
 	new->inited = 1;
 	return (new);
 }
+
+
 
 int		loop_hook(t_brain *b)
 {

@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/09 18:31:48 by siferrar          #+#    #+#             */
-/*   Updated: 2020/05/20 12:46:42 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/07/03 10:03:32 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,19 @@
 
 void	free_buff(t_buff *buff)
 {
-	ft_putstr("  -> Free buff - ");
+	ft_putstr("  -> Free buff\n");
 	if (buff != NULL)
 	{
+		ft_putstr("     -> Free IMG - ");
 		if (buff->img)
 			free(buff->img);
-		if (buff->addr)
-			free(buff->addr);
+		ft_putstr("OK\n");
+		ft_putstr("     -> Free ADDR - ");
+		/*if (buff->addr && buff->addr != NULL)
+			free(buff->addr);*/
+		ft_putstr("OK\n");
+		free(buff);
 	}
-	free(buff);
 	ft_putstr("OK\n");
 }
 
@@ -39,7 +43,7 @@ void	free_map(t_brain *b)
 
 	i = 0;
 	ft_putstr(DYELO"Free Map\n");
-	if (b->map != NULL)
+	if (b != NULL && b->map != NULL)
 	{
 		free_buff(b->map->w_n);
 		free_buff(b->map->w_e);
@@ -49,10 +53,11 @@ void	free_map(t_brain *b)
 		free_buff(b->map->skybox);
 		free_buff(b->map->frame);
 		while (i < b->map->sprites->length)
-		{
 			free(b->map->sprites->list[i++]);
-		}
 		free(b->map->sprites->list);
+		i = 0;
+		while (i < b->map->height)
+			free(b->map->grid[i++]); 
 		check_n_free(b->map);
 	}
 }
@@ -60,7 +65,6 @@ void	free_map(t_brain *b)
 void	meditate(t_brain *b)
 {
 	ft_putstr(DCYAN"Free Context\n");
-	free_map(b);
 	if (b->ctx != NULL)
 	{
 		free_buff(b->ctx->buff);
@@ -68,6 +72,7 @@ void	meditate(t_brain *b)
 		check_n_free(b->ctx->mlx_ptr);
 		check_n_free(b->ctx);
 	}
+	free_map(b);
 	ft_putstr(DPINK"Free Player\n");
 	if (b->player != NULL)
 	{
@@ -85,7 +90,10 @@ void	exit_cube(t_brain *brain, int error_code, char *msg, int init)
 	static t_brain *b = NULL;
 
 	if (b == NULL && brain != NULL)
+	{
 		b = brain;
+		ft_putstr("EXIT CUB INIT\n");
+	}
 	if (init)
 		return ;
 	if (error_code != 0)
