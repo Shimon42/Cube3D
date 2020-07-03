@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/13 12:16:27 by milosandric       #+#    #+#             */
-/*   Updated: 2020/05/20 12:47:27 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/07/03 10:17:52 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ void				get_map(t_brain *b, char *map_path)
 			break ;
 		ret = get_next_line(file, &line);
 	}
+	free(line);
 	free(player);
 	close(file);
 }
