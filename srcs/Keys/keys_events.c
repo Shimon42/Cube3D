@@ -16,25 +16,25 @@ void	action_keys(int key, void *param, t_brain *b)
 {
 	if (b && b->inited && b->player && b->player->inited)
 	{
-		if ((key = is_key_pressed(b, 13)) >= 0)
+		if ((key = is_key_pressed(b, 122)) >= 0)
 			b->player->move(b->player, 1);
-		else if ((key = is_key_pressed(b, 1)) >= 0)
+		else if ((key = is_key_pressed(b, 115)) >= 0)
 			b->player->move(b->player, -1);
-		if ((key = is_key_pressed(b, 49)) >= 0)
+		if ((key = is_key_pressed(b, 32)) >= 0)
 			b->player->jump(b->player, 15);
 		else if (b->player->z != 0 && b->player->jumping != 0)
 			b->player->jump(b->player, 15);
-		if ((key = is_key_pressed(b, 123)) >= 0 && is_key_pressed(b, 257) >= 0)
+		if ((key = is_key_pressed(b, 65361)) >= 0 && is_key_pressed(b, 257) >= 0)
 			b->player->rot(b->player, -b->player->rot_speed / 20);
 		else if (key >= 0)
 			b->player->rot(b->player, -b->player->rot_speed);
-		if ((key = is_key_pressed(b, 124)) >= 0 && is_key_pressed(b, 257) >= 0)
+		if ((key = is_key_pressed(b, 65363)) >= 0 && is_key_pressed(b, 257) >= 0)
 			b->player->rot(b->player, b->player->rot_speed / 20);
 		else if (key >= 0)
 			b->player->rot(b->player, b->player->rot_speed);
-		if ((key = is_key_pressed(b, 0)) >= 0)
+		if ((key = is_key_pressed(b, 113)) >= 0)
 			b->player->sidemove(b->player, -1);
-		if ((key = is_key_pressed(b, 2)) >= 0)
+		if ((key = is_key_pressed(b, 100)) >= 0)
 			b->player->sidemove(b->player, 1);
 	}
 }
@@ -44,6 +44,7 @@ int		key_press(int key, void *param)
 	t_brain	*b;
 
 	b = (t_brain*)param;
+	//ft_printf("press = %d\n", key);
 	if (key == 53)
 		exit_cube(b, 0, "Exit from red cross", 0);
 	if (key != -1 && is_key_pressed(b, key) == -1)
@@ -57,6 +58,7 @@ int		key_release(int key, void *param)
 	t_brain *b;
 
 	b = (t_brain*)param;
+	//ft_printf("release = %d\n", key);
 	if (key == 3)
 	{
 		draw_fullmap(b, 0);
