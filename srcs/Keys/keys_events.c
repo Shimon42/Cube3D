@@ -36,7 +36,6 @@ void	action_keys(int key, void *param, t_brain *b)
 			b->player->sidemove(b->player, -1);
 		if ((key = is_key_pressed(b, 2)) >= 0)
 			b->player->sidemove(b->player, 1);
-		ft_putnbr(key);
 	}
 }
 
