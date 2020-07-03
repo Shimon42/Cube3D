@@ -35,7 +35,7 @@ int		loop_hook(t_brain *b)
 	if (b->player->as_move == 1)
 	{
 		draw_walls(b, b->ctx);
-		update_sprite(b);
+		//update_sprite(b);
 		if (is_key_pressed(b, 3) == -1)
 			draw_minimap(b, 10, 25, 200);
 		b->player->as_move = 0;
