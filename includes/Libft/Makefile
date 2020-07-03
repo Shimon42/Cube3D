@@ -99,7 +99,7 @@ GNL_OBJS	= ${GNL_SRCS:.c=.o}
 
 GNL_BUFF_SIZE = 128
 
-CC		= gcc
+CC		= clang
 CFLAGS	= -Wall -Wextra -Werror
 CLEAR	= clear
 RM		= rm -f

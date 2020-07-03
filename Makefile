@@ -3,7 +3,7 @@ NAME =		Cub3D
 SRCSPATH =	srcs/
 DEBUGPATH =	debug/
 INCPATH =	includes/
-MLX_PATH =	$(INCPATH)MiniLib
+MLX_PATH =	$(INCPATH)MiniLib/
 
 #---------  LIBS --
 MINILIB =	$(INCPATH)MiniLib/
@@ -104,13 +104,13 @@ all:		$(NAME)
 $(NAME):	$(OBJS) $(INCLUDES)
 			make -C $(MINILIB)
 			make -C $(LIBFT)
-			gcc -c $(GNL_SRCS) -D BUFFER_SIZE=400
-			mv $(MINILIB)libmlx.a .
+			clang -c $(GNL_SRCS) -D BUFFER_SIZE=400
+			mv $(MINILIB)libmlx_Linux.a .
 			mv $(LIBFT)libft.a .
 			ar rc $(NAME).a $(OBJS) get_next_line.o get_next_line_utils.o
 
 comp:		all
-			gcc $(CFLAGSPROD) main.c $(NAME).a libft.a libmlx.a -lX11 -lXext -L$(MLX_PATH) -lmlx -lm -o $(NAME) 
+		clang $(CFLAGSSAN) main.c $(NAME).a libft.a libmlx_Linux.a -lX11 -lXext -Lincludes/MiniLib/ -lm -I. -o $(NAME) 
 
 launch:		comp
 			clear
@@ -143,7 +143,7 @@ clean:
 fclean:		clean
 			@make -C $(LIBFT) fclean
 			@make -C $(MINILIB) clean
-			${RM} $(NAME).a $(NAME) libft.a libmlx.a
+			${RM} $(NAME).a $(NAME) libft.a libmlx_Linux.a
 
 re:			fclean all
 

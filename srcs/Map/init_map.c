@@ -11,13 +11,16 @@
 /* ************************************************************************** */
 
 #include "../../includes/cube3d.h"
+#include <stdio.h>
 
 int					init_map(t_ctx *ctx, void *brain)
 {
 	t_brain *b;
 
 	b = (t_brain *)brain;
-	b->map = malloc(sizeof(t_map));
+	printf("sizeof : %d\n", sizeof(t_map));
+	if (!(b->map = malloc(sizeof(t_map))))
+		exit_cube(brain, 122, "WTFFFFFF", 0);
 	b->map->height = 0;
 	b->map->width = 0;
 	b->map->grid = NULL;
@@ -28,8 +31,10 @@ int					init_map(t_ctx *ctx, void *brain)
 	b->map->w_s = NULL;
 	b->map->w_w = NULL;
 	b->map->floor = NULL;
+	printf("sizeof : %d\n", sizeof(t_spr_list));
 	if (!(b->map->sprites = malloc(sizeof(t_spr_list))))
 		exit_cube(brain, 120, "malloc failing for number of sprites in map", 0);
+	printf("sizeof : %d\n", (b->ctx->width * sizeof(float)));
 	if (!(b->map->sprites->column = malloc(b->ctx->width * sizeof(float))))
 		exit_cube(brain, 121, "malloc failing for the distance array", 0);
 	b->map->sprites->length = 0;

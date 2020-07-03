@@ -164,6 +164,7 @@ void			disp_map_s(t_map *m);
 void			disp_buff(t_buff *b);
 void			print_player_debug(t_brain *b);
 void			disp_brain(t_brain *b);
+void			disp_keys(t_brain *b);
 
 /*
 ** --- Parsing
