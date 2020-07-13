@@ -1,10 +1,14 @@
-# Cube 3D • Alpha 0.8.5 - All sources normed
+# Cube 3D • Alpha 0.9 - It's All Good
 
 ![Cube3D Screenshot](/images/sprites.png)
 
 ![Cube3D Minimap expanded](/images/minimap.png)
 
 <hr>
+
+-> Open Terminal
+
+-> Go into the directory corresponding to your OS (Mac OSX or Linux)
 
 -> make - Compile only
 
@@ -31,40 +35,41 @@
 <hr>
 
 	————————————————————————————————————
-		Changes:
+		Changes
 	———————————————————————————————————— 
-	- All srcs normed, includes left
+	- Everything is good, Netwhat is Sh*t
+	- No Leaks
+	- Tested on Mac OSX 10.14.4
+	- Tested on xUbuntu 18.04.4
 
     ————————————————————————————————————
-		Cur State:
+		Cur State
 	————————————————————————————————————
-	- All srcs normed
-	- Map parsing
+	- Everything 42Normed
+	- Map parsing & Checking
 	- Minimap display and expand to fullmap
-	- Draw walls (fish eye sort of corrected)
+	- Draw walls with textures and collisions
 	- SkyBox
-	- Walls textures
-	- Walls collisions
-	- Floor texture (Fisheye with some texture)
-	- Textured sprites
+	- Textured floor
+	- Textured sprites and shadows
 	- Sprites collisions
+	- No Leaks
+	- Peer evaluations - Not done
 	
 	————————————————————————————————————
-    	Known Bugs:
+    	Known Bugs
 	————————————————————————————————————
-	General
-	- RANDOM CRASH ON START (Temporaly Fixed with -gcc g -g3 -fsanitize=address in Makefile)
-	- Random BadMap error - weird chars in map display
-
-	Drawing: 
+	General:
+	- Red cross not calling exit_cube
+	
+	Drawing:
 	- Line drawn after end of win width is drawn on the other side of the window
 	
 	Moving:
 	- Double speed if walk on side and move forward
 
-	Floor Casting
+	Floor Casting:
 	- Floor texture move badly sometimes
 	- Fish eye
 
-	Sprites:
-	- Weird position (Bad fish eye correction ?)
+	
