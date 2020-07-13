@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/31 16:39:19 by milosand          #+#    #+#             */
-/*   Updated: 2020/07/13 12:16:50 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/07/13 12:25:55 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ t_type	*ft_getmap_flag(char *path)
 	while (ret && ((ft_strmultichr(line, " 012SNEW")) != 1))
 	{
 		ft_getmap_values(line, map);
+		free(line);
 		ret = get_next_line(fd, &line);
 	}
 	ft_check_struct(map);

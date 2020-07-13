@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/13 12:16:27 by milosandric       #+#    #+#             */
-/*   Updated: 2020/07/13 11:57:52 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/07/13 12:49:39 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,17 @@ void				get_map(t_brain *b, char *map_path)
 	file = open(map_path, O_RDONLY);
 	ret = get_next_line(file, &line);
 	while (ret && ((ft_strmultichr(line, " 01SNEW")) != 1))
+	{
+		free(line);
 		ret = get_next_line(file, &line);
+	}
 	while (ret != -1)
 	{
 		if ((player = add_map_row(b->map, line)) != NULL)
+		{
 			init_player(b, player->pos_x, player->direction);
+			free(player);
+		}
 		if (!ret)
 			break ;
 		ret = get_next_line(file, &line);
@@ -49,5 +55,13 @@ int					open_map(t_brain *b, char *map_path, t_type *map)
 	b->map->px_height = b->map->height * b->map->bloc_size;
 	dprintf(1, DCYAN"\nReal Size : %d x %d px\n", b->map->px_width,
 												b->map->px_height);
+	free(map->no);
+	free(map->so);
+	free(map->we);
+	free(map->ea);
+	free(map->s);
+	free(map->f);
+	free(map->c);
+	free(map);
 	return (1);
 }
