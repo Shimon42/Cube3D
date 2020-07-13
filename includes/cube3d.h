@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 21:30:44 by siferrar          #+#    #+#             */
-/*   Updated: 2020/05/20 17:51:32 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/07/13 13:06:20 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,7 @@ void			fps_count(t_ctx *c);
 t_fpoint		to_fpoint(t_fpoint *p);
 float			calc_dist(t_fpoint p1, t_fpoint p2);
 void			init_textures(t_brain *b, t_type *map);
+int				ft_create_bmp(t_buff *frame);
 
 /*
 ** --- Player

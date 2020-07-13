@@ -68,6 +68,8 @@ SRCS = 		main.c \
 			$(SRCSPATH)Player/player.c \
 			$(SRCSPATH)Player/move.c \
 			\
+			$(SRCSPATH)create_bmp.c \
+			\
 			$(SRCSPATH)meditate.c \
 			$(SRCSPATH)textures.c \
 			$(DEBUGPATH)debug.c
@@ -125,7 +127,7 @@ launch:		comp
 			@echo "|  |____________$(COL_TXT)\_____/\____|____/  \____/|____/ $(COL_CUBE)___________|  |"
 			@echo "| / $(COL_SHADOW)           /////// /////////     \\\\\\\\\\\\\\\\\\\ \\\\\\\\\\\\\\\\\\\\\\\\$(COL_CUBE)            \ |"
 			@echo "+––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––+\033[0m"
-			@./$(NAME) $(NEW)
+			@./$(NAME) $(NEW) --save
 
 minilib:	
 			@make -C $(MINILIB)
