@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/14 20:36:43 by siferrar          #+#    #+#             */
-/*   Updated: 2020/07/03 10:03:02 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/07/13 11:24:14 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,16 +66,18 @@ int					realloc_map(t_map *m, char *line)
 	if (len > m->width)
 		m->width = len;
 	y = 0;
-	grid = ft_calloc(m->height + 2, sizeof(t_map_line *));
+	grid = ft_calloc(m->height + 1, sizeof(t_map_line *));
 	while (y < m->height)
 	{
 		grid[y] = m->grid[y];
+		
 		y++;
 	}
 	grid[y] = malloc(sizeof(t_map_line));
 	grid[y]->length = len;
 	grid[y]->line = ft_str_to_int_tab(line);
-	grid[++y] = NULL;
+	free(line);
+	free(m->grid);
 	m->grid = grid;
 	m->height++;
 	return (1);
