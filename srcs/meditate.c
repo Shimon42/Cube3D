@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/09 18:31:48 by siferrar          #+#    #+#             */
-/*   Updated: 2020/07/13 11:42:41 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/07/13 12:12:03 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ void	free_map(t_brain *b)
 			free(b->map->sprites->list[i++]);
 		}
 		free(b->map->sprites->list);
+		free(b->map->sprites->column);
 		i = 0;
 		while (i < b->map->height)
 		{

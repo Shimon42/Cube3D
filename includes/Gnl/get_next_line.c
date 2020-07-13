@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/30 14:39:54 by siferrar          #+#    #+#             */
-/*   Updated: 2020/07/13 11:59:09 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/07/13 12:13:24 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,6 @@ int			treat_left(t_gnl *b, char **line)
 	temp = ft_strnjoin(*line, b->buff, 0, BUFFER_SIZE);
 	free(*line);
 	*line = temp;
-	free(temp);
 	free(b->buff);
 	b->buff = malloc((BUFFER_SIZE + 1) * sizeof(char));
 	b->asleft = 1;
