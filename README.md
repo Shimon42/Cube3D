@@ -1,8 +1,8 @@
 # Cube 3D • Alpha 0.9 - It's All Good
 
-![Cube3D Screenshot](/images/sprites.png)
+![Cube3D Screenshot](/Screenshots/sprites.png)
 
-![Cube3D Minimap expanded](/images/minimap.png)
+![Cube3D Minimap expanded](/Screenshots/minimap.png)
 
 <hr>
 
