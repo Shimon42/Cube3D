@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 21:29:11 by siferrar          #+#    #+#             */
-/*   Updated: 2020/07/13 13:40:04 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/07/13 16:14:48 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,6 @@ t_brain	*new_brain(int width, int height, char *name)
 	return (new);
 }
 
-
-
 int		loop_hook(t_brain *b)
 {
 	key_press(-1, b);
@@ -51,6 +49,7 @@ int		loop_hook(t_brain *b)
 		if (is_key_pressed(b, 102) == -1)
 			draw_minimap(b, 10, 25, 200);
 		b->player->as_move = 0;
+	
 	}
 	if (is_key_pressed(b, 102) != -1)
 		draw_fullmap(b, 0.28);
@@ -58,6 +57,25 @@ int		loop_hook(t_brain *b)
 													b->map->frame->img, 0, 0);
 	fps_count(b->ctx);
 	return (b->inited);
+}
+
+void	init_loop(t_brain *b, int save)
+{
+	if (save)
+	{
+		loop_hook(b);
+		ft_create_bmp(b->map->frame);
+		exit_cube(b, 0, "Exit After Save", 0);
+	}
+	else
+	{
+		ft_putstr("Loop Init OK\n");
+		mlx_loop_hook(b->ctx->mlx_ptr, &loop_hook, b);
+		mlx_hook(b->ctx->win_ptr, 2, (1L << 0), &key_press, b);
+		mlx_key_hook(b->ctx->win_ptr, &key_release, b);
+		mlx_do_key_autorepeaton(b->ctx->mlx_ptr);
+		mlx_loop(b->ctx->mlx_ptr);
+	}
 }
 
 int		main(int ac, char **av)
@@ -68,7 +86,7 @@ int		main(int ac, char **av)
 
 	if (ac > 3)
 		return (-1);
-	//save = (ac == 3 && ft_strnstr("--save", av[2], 6) ? 1 : 0);
+	save = (ac == 3 && ft_strnstr("--save", av[2], 6) ? 1 : 0);
 	save = 0;
 	map = ft_getmap_flag(av[1]);
 	b = new_brain(map->res[0], map->res[1], "Cube3D");
@@ -79,18 +97,6 @@ int		main(int ac, char **av)
 		exit_cube(b, 2, "BAD MAP", 0);
 	ft_putstr(
 		RED"\n🔥 L"YELO"O"GRN"O"CYAN"P "BLUE"I"PURP"N"PINK"I"RST"T 🔥\n\n"RST);
-	if (save)
-	{
-		loop_hook(b);
-		ft_create_bmp(b->map->frame);
-		exit_cube(b, 0, "Exit After Save", 0);
-	} else {
-		ft_putstr("Loop Init OK\n");
-		mlx_loop_hook(b->ctx->mlx_ptr, &loop_hook, b);
-		mlx_hook(b->ctx->win_ptr, 2, (1L<<0), &key_press, b);
-		mlx_key_hook(b->ctx->win_ptr, &key_release, b);
-		mlx_do_key_autorepeaton(b->ctx->mlx_ptr);
-		mlx_loop(b->ctx->mlx_ptr);
-	}
+	init_loop(b, save);
 	return (0);
 }

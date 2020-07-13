@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/08 17:32:22 by milosandric       #+#    #+#             */
-/*   Updated: 2020/05/20 16:11:47 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/07/13 14:58:50 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int		init_values(t_brain *b, t_player *p)
 	p->brain = b;
 	p->as_move = 1;
 	p->as_rotate = 1;
-	p->bobbing = 1;
+	p->bobbing = 0;
 	p->jumping = 0;
 	p->inited = 1;
 	return (1);
@@ -75,7 +75,8 @@ int		init_player(t_brain *b, int pos_x, char angle)
 	b->player->angle = get_player_angle(angle);
 	b->player->rot(b->player, 0);
 	b->player->ctx = b->ctx;
-	b->player->bob_height = 5;
+	b->player->bob_height = 5.0;
+	b->player->z = 0;
 	b->ctx->col_step = b->player->cam->fov / b->ctx->width;
 	disp_point(*b->player->pos);
 	ft_putstr("	-> Init Cam - ");

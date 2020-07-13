@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 22:11:09 by siferrar          #+#    #+#             */
-/*   Updated: 2020/05/20 16:12:05 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/07/13 16:13:09 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,13 +62,13 @@ void		draw_walls(t_brain *b, t_ctx *c)
 	{
 		cur_angle = b->player->divided + (c->col_step * cur_col);
 		wall = dist_to_wall(b, b->player->pos, cur_angle);
-		b->map->sprites->column[cur_col] = wall.dist;
-		wall.dist *= cos((cur_col < c->divided.x ? -1 : 1)
+		wall.dist *= cos((cur_angle < b->player->angle ? -1 : 1)
 						* (b->player->angle - cur_angle));
+		b->map->sprites->column[cur_col] = wall.dist;
 		w_hgt = ((b->map->bloc_size) / wall.dist) * b->player->cam->proj_dist;
 		mid_wall = w_hgt / 2;
 		if (w_hgt < b->ctx->height)
-			draw_sky(b, cur_col, c->divided.y - mid_wall + b->player->z);
+			draw_sky(b, cur_col, c->divided.y - (float)mid_wall + b->player->z);
 		draw_col(b, w_hgt, cur_col, wall);
 		if (w_hgt < b->ctx->height)
 			draw_floor(b, cur_angle,

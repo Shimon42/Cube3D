@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 21:30:44 by siferrar          #+#    #+#             */
-/*   Updated: 2020/07/13 13:26:30 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/07/13 15:23:59 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <fcntl.h>
-# include <stdio.h>
 # include <string.h>
 # include <math.h>
 # include "MiniLib/mlx.h"
@@ -26,7 +25,6 @@
 # include "map.h"
 # include "sprites.h"
 # include "player.h"
-//# include "MiniLib/X.h"
 # include "../debug/debug.h"
 # include "../debug/debug_defines.h"
 
@@ -66,7 +64,7 @@ typedef struct	s_rgb
 }				t_rgb;
 
 void			free_buff(t_buff *buff);
-void    		free_sprites(t_brain *b);
+void			free_sprites(t_brain *b);
 void			free_map(t_brain *b);
 void			check_n_free(void *var);
 void			exit_cube(t_brain *brain, int error_code, char *msg, int init);
