@@ -1,0 +1,10 @@
+
+a.out
+libft.h.gch
+a.out.dSYM/Contents/Info.plist
+libft.a
+*.DS_Store
+testputchar
+testputendl
+testputnbr
+testputstr
