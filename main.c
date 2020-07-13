@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 21:29:11 by siferrar          #+#    #+#             */
-/*   Updated: 2020/07/13 16:14:48 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/07/13 16:19:40 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ int		loop_hook(t_brain *b)
 		if (is_key_pressed(b, 102) == -1)
 			draw_minimap(b, 10, 25, 200);
 		b->player->as_move = 0;
-	
 	}
 	if (is_key_pressed(b, 102) != -1)
 		draw_fullmap(b, 0.28);
