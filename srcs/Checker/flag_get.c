@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/31 16:39:19 by milosand          #+#    #+#             */
-/*   Updated: 2020/05/20 14:11:22 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/07/13 12:09:36 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ t_type	*ft_getmap_flag(char *path)
 		ret = get_next_line(fd, &line);
 	}
 	ft_check_struct(map);
+	free(line);
 	close(fd);
 	return (map);
 }
@@ -91,6 +92,10 @@ void	ft_flag_res(char *str, int *target, t_type *map)
 		i++;
 	if (i != 2)
 		exit_flag(511, "Resolution not gud\n", map);
+	i ! 0
+	while (splited[i] != NULL)
+		free(splited[i]);
+	free(splited);
 	target[0] = ft_atoi(str);
 	str = ft_strchr(str, ' ');
 	target[1] = ft_atoi(str);

@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 21:29:11 by siferrar          #+#    #+#             */
-/*   Updated: 2020/07/03 10:03:01 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/07/13 11:45:56 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,6 @@ int		main(int ac, char **av)
 	open_map(b, av[1], map);
 	if (!check_map(b->map))
 		exit_cube(b, 2, "BAD MAP", 0);
-
 	ft_putstr(
 		RED"\n🔥 L"YELO"O"GRN"O"CYAN"P "BLUE"I"PURP"N"PINK"I"RST"T 🔥\n\n"RST);
 	mlx_loop_hook(b->ctx->mlx_ptr, &loop_hook, b);
