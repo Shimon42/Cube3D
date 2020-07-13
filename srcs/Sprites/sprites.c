@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/27 08:02:21 by siferrar          #+#    #+#             */
-/*   Updated: 2020/05/20 17:36:43 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/07/13 13:22:48 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,9 @@ void		draw_sprite_row(t_brain *b, t_sprite *s, t_draw_spr *s_draw)
 					draw_sprite_col(b, s, s_draw);
 				}
 			}
-		} else 
-			break;
+		}
+		else
+			break ;
 		s_draw->x++;
 	}
 }

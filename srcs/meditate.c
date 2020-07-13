@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/09 18:31:48 by siferrar          #+#    #+#             */
-/*   Updated: 2020/07/13 12:47:49 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/07/13 13:26:35 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,6 @@ void	free_buff(t_buff *buff)
 			free(buff->img);
 		ft_putstr("OK\n");
 		ft_putstr("     -> Free ADDR - ");
-		/*if (buff->addr && buff->addr != NULL)
-			free(buff->addr);*/
 		ft_putstr("OK\n");
 		free(buff);
 	}
@@ -34,43 +32,6 @@ void	check_n_free(void *var)
 {
 	if (var != NULL)
 		free(var);
-}
-
-void	free_map(t_brain *b)
-{
-	int			i;
-	t_sprite	*s;
-
-	i = 0;
-	ft_putstr(DYELO"Free Map\n");
-	if (b != NULL && b->map != NULL)
-	{
-		free_buff(b->map->w_n);
-		free_buff(b->map->w_e);
-		free_buff(b->map->w_s);
-		free_buff(b->map->w_w);
-		free_buff(b->map->floor);
-		free_buff(b->map->skybox);
-		free_buff(b->map->frame);
-		while (i < b->map->sprites->length)
-		{
-			free_buff(b->map->sprites->list[i]->model);
-			free_buff(b->map->sprites->list[i]->shadow);
-			free(b->map->sprites->list[i++]);
-		}
-		free(b->map->sprites->list);
-		free(b->map->sprites->column);
-		free(b->map->sprites);
-		i = 0;
-		while (i < b->map->height)
-		{
-			free(b->map->grid[i]->line);
-			free(b->map->grid[i]);
-			i++;
-		}
-		free(b->map->grid);
-		check_n_free(b->map);
-	}
 }
 
 void	meditate(t_brain *b)

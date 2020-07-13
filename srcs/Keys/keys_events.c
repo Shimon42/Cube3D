@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/11 06:48:57 by siferrar          #+#    #+#             */
-/*   Updated: 2020/07/03 10:02:59 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/07/13 13:31:02 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,13 @@ void	action_keys(int key, void *param, t_brain *b)
 			b->player->jump(b->player, 15);
 		else if (b->player->z != 0 && b->player->jumping != 0)
 			b->player->jump(b->player, 15);
-		if ((key = is_key_pressed(b, 65361)) >= 0 && is_key_pressed(b, 65505) >= 0)
+		if ((key = is_key_pressed(b, 65361)) >= 0
+			&& is_key_pressed(b, 65505) >= 0)
 			b->player->rot(b->player, -b->player->rot_speed / 20);
 		else if (key >= 0)
 			b->player->rot(b->player, -b->player->rot_speed);
-		if ((key = is_key_pressed(b, 65363)) >= 0 && is_key_pressed(b, 65505) >= 0)
+		if ((key = is_key_pressed(b, 65363)) >= 0
+			&& is_key_pressed(b, 65505) >= 0)
 			b->player->rot(b->player, b->player->rot_speed / 20);
 		else if (key >= 0)
 			b->player->rot(b->player, b->player->rot_speed);
@@ -57,7 +59,6 @@ int		key_release(int key, void *param)
 	t_brain *b;
 
 	b = (t_brain*)param;
-	//ft_printf("release = %d\n", key);
 	if (key == 3)
 	{
 		draw_fullmap(b, 0);

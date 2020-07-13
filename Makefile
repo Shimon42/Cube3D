@@ -71,6 +71,7 @@ SRCS = 		main.c \
 			$(SRCSPATH)create_bmp.c \
 			\
 			$(SRCSPATH)meditate.c \
+			$(SRCSPATH)meditate_map.c \
 			$(SRCSPATH)textures.c \
 			$(DEBUGPATH)debug.c
 
@@ -81,7 +82,7 @@ GNL_OBJS =	${GNL_SRCS:.c=.o}
 
 CC =		clang
 
-CFLAGSPROD	= -g -Wall -Wextra -Werror
+CFLAGSPROD	= -Wall -Wextra -Werror
 CFLAGS	= 
 CFLAGSSAN	= -g -g3 -fsanitize=address -Wall -Wextra -Werror
 
@@ -112,7 +113,7 @@ $(NAME):	$(OBJS) $(INCLUDES)
 			ar rc $(NAME).a $(OBJS) get_next_line.o get_next_line_utils.o
 
 comp:		all
-		clang $(CFLAGSSAN) main.c $(NAME).a libft.a libmlx_Linux.a -lX11 -lXext -Lincludes/MiniLib/ -lm -I. -o $(NAME) 
+		clang $(CFLAGSPROD) main.c $(NAME).a libft.a libmlx_Linux.a -lX11 -lXext -Lincludes/MiniLib/ -lm -I. -o $(NAME) 
 
 launch:		comp
 			clear
@@ -127,7 +128,7 @@ launch:		comp
 			@echo "|  |____________$(COL_TXT)\_____/\____|____/  \____/|____/ $(COL_CUBE)___________|  |"
 			@echo "| / $(COL_SHADOW)           /////// /////////     \\\\\\\\\\\\\\\\\\\ \\\\\\\\\\\\\\\\\\\\\\\\$(COL_CUBE)            \ |"
 			@echo "+––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––+\033[0m"
-			@./$(NAME) $(NEW) --save
+			@./$(NAME) $(NEW)
 
 minilib:	
 			@make -C $(MINILIB)

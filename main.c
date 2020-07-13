@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 21:29:11 by siferrar          #+#    #+#             */
-/*   Updated: 2020/07/13 13:08:13 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/07/13 13:40:04 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,8 @@ int		main(int ac, char **av)
 
 	if (ac > 3)
 		return (-1);
-	save = (ac == 3 && ft_strnstr("--save", av[2], 6) ? 1 : 0);
+	//save = (ac == 3 && ft_strnstr("--save", av[2], 6) ? 1 : 0);
+	save = 0;
 	map = ft_getmap_flag(av[1]);
 	b = new_brain(map->res[0], map->res[1], "Cube3D");
 	exit_cube(b, 0, "Init Exit", 1);
@@ -84,12 +85,12 @@ int		main(int ac, char **av)
 		ft_create_bmp(b->map->frame);
 		exit_cube(b, 0, "Exit After Save", 0);
 	} else {
+		ft_putstr("Loop Init OK\n");
 		mlx_loop_hook(b->ctx->mlx_ptr, &loop_hook, b);
 		mlx_hook(b->ctx->win_ptr, 2, (1L<<0), &key_press, b);
 		mlx_key_hook(b->ctx->win_ptr, &key_release, b);
 		mlx_do_key_autorepeaton(b->ctx->mlx_ptr);
 		mlx_loop(b->ctx->mlx_ptr);
-		ft_putstr("Loop Init OK\n");
 	}
 	return (0);
 }
