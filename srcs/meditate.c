@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/09 18:31:48 by siferrar          #+#    #+#             */
-/*   Updated: 2020/07/13 11:29:08 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/07/13 11:42:41 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ void	free_map(t_brain *b)
 		while (i < b->map->sprites->length)
 		{
 			free_buff(b->map->sprites->list[i]->model);
+			free_buff(b->map->sprites->list[i]->shadow);
 			free(b->map->sprites->list[i++]);
 		}
 		free(b->map->sprites->list);
