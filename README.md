@@ -1,4 +1,4 @@
-# Cube 3D • Alpha 0.9 - It's All Good
+# Cube 3D • Alpha 0.9.1 - It's All Good
 
 ![Cube3D Screenshot](/Screenshots/sprites.png)
 
@@ -38,6 +38,7 @@
 		Changes
 	———————————————————————————————————— 
 	- Everything is good, Netwhat is Sh*t
+	- Fixed bad arguments number and map not found errors
 	- No Leaks
 	- Tested on Mac OSX 10.14.4
 	- Tested on xUbuntu 18.04.4
