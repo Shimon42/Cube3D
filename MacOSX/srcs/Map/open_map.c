@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/13 12:16:27 by milosandric       #+#    #+#             */
-/*   Updated: 2020/07/13 12:49:39 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/07/14 14:46:33 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,18 @@ void				get_map(t_brain *b, char *map_path)
 	close(file);
 }
 
+void				free_map_check(t_type *map)
+{
+	free(map->no);
+	free(map->so);
+	free(map->we);
+	free(map->ea);
+	free(map->s);
+	free(map->f);
+	free(map->c);
+	free(map);
+}
+
 int					open_map(t_brain *b, char *map_path, t_type *map)
 {
 	init_map(b->ctx, b);
@@ -55,13 +67,6 @@ int					open_map(t_brain *b, char *map_path, t_type *map)
 	b->map->px_height = b->map->height * b->map->bloc_size;
 	dprintf(1, DCYAN"\nReal Size : %d x %d px\n", b->map->px_width,
 												b->map->px_height);
-	free(map->no);
-	free(map->so);
-	free(map->we);
-	free(map->ea);
-	free(map->s);
-	free(map->f);
-	free(map->c);
-	free(map);
+	free_map_check(map);
 	return (1);
 }

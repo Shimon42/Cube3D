@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/31 16:39:19 by milosand          #+#    #+#             */
-/*   Updated: 2020/07/13 12:25:55 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/07/14 14:45:38 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,19 +21,24 @@ t_type	*ft_getmap_flag(char *path)
 
 	map = malloc(sizeof(t_type));
 	fd = open(path, O_RDONLY);
-	map->res[0] = 0;
-	ft_init_t_type(map);
-	ret = get_next_line(fd, &line);
-	while (ret && ((ft_strmultichr(line, " 012SNEW")) != 1))
+	if (fd > 0)
 	{
-		ft_getmap_values(line, map);
-		free(line);
+		map->res[0] = 0;
+		ft_init_t_type(map);
 		ret = get_next_line(fd, &line);
+		while (ret && ((ft_strmultichr(line, " 012SNEW")) != 1))
+		{
+			ft_getmap_values(line, map);
+			free(line);
+			ret = get_next_line(fd, &line);
+		}
+		ft_check_struct(map);
+		free(line);
+		close(fd);
+		return (map);
 	}
-	ft_check_struct(map);
-	free(line);
-	close(fd);
-	return (map);
+	else
+		return (NULL);
 }
 
 void	ft_getmap_values(char *line, t_type *map)

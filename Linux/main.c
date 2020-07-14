@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 21:29:11 by siferrar          #+#    #+#             */
-/*   Updated: 2020/07/13 16:19:40 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/07/14 14:50:20 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,12 @@ int		loop_hook(t_brain *b)
 	return (b->inited);
 }
 
+int red_cross(void *brain)
+{
+	exit_cube(brain, 0, "Exit From Red Cross", 0);
+	return (1);
+}
+
 void	init_loop(t_brain *b, int save)
 {
 	if (save)
@@ -71,6 +77,7 @@ void	init_loop(t_brain *b, int save)
 		ft_putstr("Loop Init OK\n");
 		mlx_loop_hook(b->ctx->mlx_ptr, &loop_hook, b);
 		mlx_hook(b->ctx->win_ptr, 2, (1L << 0), &key_press, b);
+		mlx_hook(b->ctx->win_ptr, 17, (1L << 16), &red_cross, b);
 		mlx_key_hook(b->ctx->win_ptr, &key_release, b);
 		mlx_do_key_autorepeaton(b->ctx->mlx_ptr);
 		mlx_loop(b->ctx->mlx_ptr);
@@ -83,11 +90,12 @@ int		main(int ac, char **av)
 	t_type			*map;
 	int				save;
 
-	if (ac > 3)
-		return (-1);
+	if (ac < 2 || ac > 3)
+		exit_cube(NULL, 1, "Wrong number of arguments\n\
+	launch with ./Cub3D <map_file> [--save]\n", 0);
 	save = (ac == 3 && ft_strnstr("--save", av[2], 6) ? 1 : 0);
-	save = 0;
-	map = ft_getmap_flag(av[1]);
+	if ((map = ft_getmap_flag(av[1])) == NULL)
+		exit_cube(NULL, 404, "Map Not Found", 0);
 	b = new_brain(map->res[0], map->res[1], "Cube3D");
 	exit_cube(b, 0, "Init Exit", 1);
 	ft_printf(GRN"Opening Map "DCYAN"%s\n"RST, av[1]);

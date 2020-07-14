@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mandric <mandric@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 21:29:11 by siferrar          #+#    #+#             */
-/*   Updated: 2020/05/21 11:48:10 by mandric          ###   ########lyon.fr   */
+/*   Updated: 2020/07/14 14:50:01 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,15 +48,45 @@ int		loop_hook(t_brain *b)
 	return (b->inited);
 }
 
+int red_cross(void *brain)
+{
+	exit_cube(brain, 0, "Exit From Red Cross", 0);
+	return (1);
+}
+
+void	init_loop(t_brain *b, int save)
+{
+	if (save)
+	{
+		loop_hook(b);
+		ft_create_bmp(b->map->frame);
+		exit_cube(b, 0, "Exit After Save", 0);
+	}
+	else
+	{
+		ft_putstr("Loop Init OK\n");
+		mlx_loop_hook(b->ctx->mlx_ptr, &loop_hook, b);
+		mlx_hook(b->ctx->win_ptr, 2, (1L << 0), &key_press, b);
+		mlx_hook(b->ctx->win_ptr, 17, (1L << 16), &red_cross, b);
+		mlx_key_hook(b->ctx->win_ptr, &key_release, b);
+		mlx_do_key_autorepeaton(b->ctx->mlx_ptr);
+		mlx_loop(b->ctx->mlx_ptr);
+	}
+}
+
 int		main(int ac, char **av)
 {
 	t_brain			*b;
 	t_mlx_win_list	*win;
 	t_type			*map;
+	int				save;
 
-	if (ac != 2)
-		return (-1);
-	map = ft_getmap_flag(av[1]);
+	if (ac < 2 || ac > 3)
+		exit_cube(NULL, 1, "Wrong number of arguments\n\
+	launch with ./Cub3D <map_file> [--save]\n", 0);
+	save = (ac == 3 && ft_strnstr("--save", av[2], 6) ? 1 : 0);
+	if ((map = ft_getmap_flag(av[1])) == NULL)
+		exit_cube(NULL, 404, "Map Not Found", 0);
 	b = new_brain(map->res[0], map->res[1], "Cube3D");
 	exit_cube(b, 0, "Init Exit", 1);
 	win = (t_mlx_win_list *)b->ctx->win_ptr;
@@ -68,11 +98,6 @@ int		main(int ac, char **av)
 		exit_cube(b, 2, "BAD MAP", 0);
 	ft_putstr(
 		RED"\n🔥 L"YELO"O"GRN"O"CYAN"P "BLUE"I"PURP"N"PINK"I"RST"T 🔥\n\n"RST);
-	mlx_loop_hook(b->ctx->mlx_ptr, &loop_hook, b);
-	mlx_hook(b->ctx->win_ptr, InputOnly, KeyPress, &key_press, b);
-	mlx_key_hook(b->ctx->win_ptr, &key_release, b);
-	mlx_do_key_autorepeaton(b->ctx->mlx_ptr);
-	mlx_loop(b->ctx->mlx_ptr);
-	ft_putstr("Loop Init OK\n");
+	init_loop(b, save);
 	return (0);
 }

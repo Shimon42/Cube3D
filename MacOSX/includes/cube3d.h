@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 21:30:44 by siferrar          #+#    #+#             */
-/*   Updated: 2020/05/20 17:51:32 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/07/14 14:25:57 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,10 @@ typedef struct	s_rgb
 	int			b;
 }				t_rgb;
 
+void			free_buff(t_buff *buff);
+void			free_sprites(t_brain *b);
+void			free_map(t_brain *b);
+void			check_n_free(void *var);
 void			exit_cube(t_brain *brain, int error_code, char *msg, int init);
 void			meditate(t_brain *b);
 /*
@@ -110,6 +114,7 @@ void			fps_count(t_ctx *c);
 t_fpoint		to_fpoint(t_fpoint *p);
 float			calc_dist(t_fpoint p1, t_fpoint p2);
 void			init_textures(t_brain *b, t_type *map);
+int				ft_create_bmp(t_buff *frame);
 
 /*
 ** --- Player

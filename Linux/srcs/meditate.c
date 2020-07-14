@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/09 18:31:48 by siferrar          #+#    #+#             */
-/*   Updated: 2020/07/13 13:26:35 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/07/14 14:46:59 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,26 +36,29 @@ void	check_n_free(void *var)
 
 void	meditate(t_brain *b)
 {
-	ft_putstr(DCYAN"Free Context\n");
-	if (b->ctx != NULL)
+	if (b)
 	{
-		free_buff(b->ctx->buff);
-		check_n_free(b->ctx->win_ptr);
-		check_n_free(b->ctx->mlx_ptr);
-		check_n_free(b->ctx);
+		if (b->ctx != NULL)
+		{
+			ft_putstr(DCYAN"Free Context\n");
+			free_buff(b->ctx->buff);
+			check_n_free(b->ctx->win_ptr);
+			check_n_free(b->ctx->mlx_ptr);
+			check_n_free(b->ctx);
+		}
+		free_map(b);
+		ft_putstr(DPINK"Free Player\n");
+		if (b->player != NULL)
+		{
+			check_n_free(b->player->cam);
+			check_n_free(b->player->pos);
+			check_n_free(b->player->step);
+			check_n_free(b->player);
+		}
+		ft_putstr(DGRN"Free Brain Struct\n");
+		free(b->keys);
+		free(b);
 	}
-	free_map(b);
-	ft_putstr(DPINK"Free Player\n");
-	if (b->player != NULL)
-	{
-		check_n_free(b->player->cam);
-		check_n_free(b->player->pos);
-		check_n_free(b->player->step);
-		check_n_free(b->player);
-	}
-	ft_putstr(DGRN"Free Brain Struct\n");
-	free(b->keys);
-	free(b);
 }
 
 void	exit_cube(t_brain *brain, int error_code, char *msg, int init)
