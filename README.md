@@ -60,12 +60,6 @@
 	————————————————————————————————————
     	Known Bugs
 	————————————————————————————————————
-	General:
-	- Red cross not calling exit_cube
-	
-	Drawing:
-	- Line drawn after end of win width is drawn on the other side of the window
-	
 	Moving:
 	- Double speed if walk on side and move forward
 
