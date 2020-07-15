@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   flag_get.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: mandric <mandric@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/31 16:39:19 by milosand          #+#    #+#             */
-/*   Updated: 2020/07/14 14:45:38 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/07/15 19:12:34 by mandric          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,10 @@ t_type	*ft_getmap_flag(char *path)
 	t_type	*map;
 
 	map = malloc(sizeof(t_type));
-	fd = open(path, O_RDONLY);
+	if (ft_ext_check(path, ".cub"))
+		fd = open(path, O_RDONLY);
+	else
+		exit_flag(500, "please provide .cub file\n", &map);
 	if (fd > 0)
 	{
 		map->res[0] = 0;
