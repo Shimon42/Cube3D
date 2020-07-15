@@ -23,7 +23,7 @@ t_type	*ft_getmap_flag(char *path)
 	if (ft_ext_check(path, ".cub"))
 		fd = open(path, O_RDONLY);
 	else
-		exit_flag(500, "please provide .cub file\n", &map);
+		exit_flag(500, "please provide .cub file\n", map);
 	if (fd > 0)
 	{
 		map->res[0] = 0;
