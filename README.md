@@ -40,7 +40,7 @@
 	- Everything is good, Netwhat is Sh*t
 	- Fixed bad arguments number and map not found errors
 	- No Leaks
-	- Tested on Mac OSX 10.14.4
+	- Tested on Mac OSX 10.14.6 and lower
 	- Tested on xUbuntu 18.04.4
 
     ————————————————————————————————————
