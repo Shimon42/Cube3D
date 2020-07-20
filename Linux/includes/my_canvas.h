@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/15 17:33:03 by siferrar          #+#    #+#             */
-/*   Updated: 2020/05/20 17:45:30 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/07/20 15:25:15 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ typedef struct	s_buff {
 	int			max_addr;
 	double		ratio;
 	int			initied;
+	int			is_color;
 }				t_buff;
 
 typedef struct	s_ctx

@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 22:11:09 by siferrar          #+#    #+#             */
-/*   Updated: 2020/07/13 16:58:56 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/07/20 15:31:00 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,6 @@ void		draw_col(t_brain *b, float w_height, float cur_col, t_detect w)
 	while (i <= w_height + 1)
 	{
 		texture_col = pixel_get(*texture, ratio.x, (i + 1) * ratio.y);
-		texture_col -= 0x101010;
 		if (mid_wall + i >= 0)
 			pixel_put(cur_col, mid_wall + i + b->player->z,
 													texture_col, b->map->frame);
