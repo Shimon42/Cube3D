@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   flag_get.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mandric <mandric@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/31 16:39:19 by milosand          #+#    #+#             */
-/*   Updated: 2020/07/15 19:12:34 by mandric          ###   ########lyon.fr   */
+/*   Updated: 2020/07/20 16:22:49 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,32 @@ void	ft_getmap_values(char *line, t_type *map)
 		exit_flag(501, "Unkown identifier(s) in setup file\n", map);
 }
 
+int    ft_flag_color(t_type *map, char *str)
+{
+    int i;
+    char **splited;
+    t_rgb target;
+	
+    i = 0;
+    if (ft_str_search(str, "0123456789,"))
+		 exit_flag(520, "Illegal character in color declaration\n", map);
+    i = 0;
+    splited = ft_split(str, ',');
+    while (splited[i] != NULL)
+        i++;
+    if (i != 3)
+        exit_flag(520, "wtf is that color\n", map);
+    i = 0;
+    target.r = ft_atoi(splited[0]);
+    target.g = ft_atoi(splited[1]);
+    target.b = ft_atoi(splited[2]);
+	if ((target.r  > 255) || (target.r < 0)
+		|| (target.g  > 255) || (target.g < 0)
+		|| (target.b  > 255) || (target.b < 0))
+		exit_flag(520, "One of the colors is not formatted correctly\n", map);
+	return (rgb_to_hex(target));
+}
+
 void	ft_flag_str(char *str, char **target, t_type *map)
 {
 	int	fd;
@@ -83,7 +109,7 @@ void	ft_flag_str(char *str, char **target, t_type *map)
 		close(fd);
 	}
 	else
-		exit_flag(504, "Please provide a \'.xpm\' file.\n", map);
+		*target = ft_itoa(ft_flag_color(map,	str));
 }
 
 void	ft_flag_res(char *str, int *target, t_type *map)

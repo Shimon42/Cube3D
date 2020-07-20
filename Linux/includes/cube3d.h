@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 21:30:44 by siferrar          #+#    #+#             */
-/*   Updated: 2020/07/13 15:23:59 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/07/20 16:22:11 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -176,7 +176,7 @@ void			disp_keys(t_brain *b);
 t_type			*ft_getmap_flag(char *str);
 void			ft_getmap_values(char *line, t_type *map);
 void			ft_flag_str(char *str, char **target, t_type *map);
-void			ft_flag_color(char *str, int *target, t_type *map);
+int				ft_flag_color(t_type *map, char *str);
 void			ft_flag_res(char *str, int *target, t_type *map);
 char			*ft_str_search(char *str, char *chrs);
 void			ft_check_struct(t_type *map);
@@ -199,4 +199,7 @@ void			calculate_size_mm(t_brain *b, int *margin,
 												float *mrgn_top, float *ease);
 void			ease_in_n_out(t_brain *b, float *ease, float ease_val);
 int				opacity(int color1, int color2, double opa);
+
+int				rgb_to_hex(t_rgb color);
+
 #endif
