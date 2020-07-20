@@ -29,7 +29,7 @@ t_type	*ft_getmap_flag(char *path)
 		map->res[0] = 0;
 		ft_init_t_type(map);
 		ret = get_next_line(fd, &line);
-		while (ret && ((ft_strmultichr(line, " 012SNEW")) != 1))
+		while (ret && ((ft_strmultichr(line, " 01234SNEW")) != 1))
 		{
 			ft_getmap_values(line, map);
 			free(line);

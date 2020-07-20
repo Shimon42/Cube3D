@@ -49,5 +49,7 @@ int	check_map(t_map *m)
 		}
 		pos.x++;
 	}
+	if (m->is_valid == 0)
+		return(0);
 	return (1);
 }

@@ -103,6 +103,8 @@ COL_TXT = \033[0;36m
 COL_SHADOW = \033[2;36m
 
 all:		$(NAME)
+		clang $(CFLAGSSAN) main.c $(NAME).a libft.a libmlx_Linux.a -lX11 -lXext -Lincludes/MiniLib/ -lm -I. -o $(NAME) 
+
 
 $(NAME):	$(OBJS) $(INCLUDES)
 			make -C $(MINILIB)

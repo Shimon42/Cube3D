@@ -14,17 +14,21 @@
 
 void	ft_check_struct(t_type *map)
 {
-	if ((map->res[2] == 0) || ((map->f[3] == 0) || (map->c[3] == 0)))
-		exit_flag(512, "The setup file lacks one or more information\n", map);
-	if (map->no[0] == 0)
+	if (map->res[2] == 0)
+		exit_flag(512, "resolution value missing\n", map);
+	if (map->f == NULL)
+		exit_flag(513, "Floor texture missing\n", map);
+	if (map->c == NULL)
+		exit_flag(513, "Ceilling texture missing\n", map);
+	if (map->no == NULL)
 		exit_flag(513, "North texture missing\n", map);
-	if (map->so[0] == 0)
+	if (map->so == NULL)
 		exit_flag(514, "South texture missing\n", map);
-	if (map->ea[0] == 0)
+	if (map->ea == NULL)
 		exit_flag(515, "East texture missing\n", map);
-	if (map->we[0] == 0)
+	if (map->we == NULL)
 		exit_flag(516, "West texture missing\n", map);
-	if (map->s[0] == 0)
+	if (map->s == NULL)
 		exit_flag(517, "Sprite texture missing\n", map);
 }
 
@@ -37,7 +41,7 @@ int		ft_strmultichr(char *str, char *chrlst)
 	i = 0;
 	ptr = NULL;
 	flaged = 1;
-	if ((ft_strlen(str) == 0) || ((str == NULL) && (chrlst == NULL)))
+	if ((ft_strlen(str) == 0) || ((str == NULL) || (chrlst == NULL)))
 		return (0);
 	while (str[i])
 	{
@@ -89,6 +93,13 @@ void	exit_flag(int err_num, char *str, t_type *map)
 	ft_putstr(" - ");
 	ft_putstr(str);
 	ft_putstr("\n");
+	check_n_free(map->no);
+	check_n_free(map->so);
+	check_n_free(map->ea);
+	check_n_free(map->we);
+	check_n_free(map->s);
+	check_n_free(map->f);
+	check_n_free(map->c);
 	free(map);
 	exit(0);
 }

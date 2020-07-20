@@ -84,9 +84,10 @@ typedef struct	s_map
 	t_buff		*frame;
 	t_buff		*skybox;
 	void		*brain;
+	char		is_valid;
 }				t_map;
 
-int				init_map(t_ctx *ctx, void *brain);
+void			init_map(t_ctx *ctx, void *brain);
 int				parse_map(t_map **map, char *line);
 int				alloc_map(t_map **map);
 int				realloc_map(t_map *m, char *line);

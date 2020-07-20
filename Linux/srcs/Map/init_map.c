@@ -12,7 +12,7 @@
 
 #include "../../includes/cube3d.h"
 
-int					init_map(t_ctx *ctx, void *brain)
+void				init_map(t_ctx *ctx, void *brain)
 {
 	t_brain *b;
 
@@ -38,7 +38,7 @@ int					init_map(t_ctx *ctx, void *brain)
 	b->map->skybox = NULL;
 	b->map->brain = b;
 	init_buff(ctx, &b->map->frame, ctx->width, ctx->height);
-	return (1);
+	b->map->is_valid = 1;
 }
 
 void				init_textures(t_brain *b, t_type *map)
@@ -112,7 +112,10 @@ t_player_detect		*add_map_row(t_map *m, char *line)
 	int				*new;
 	int				*temp;
 	t_player_detect	*player;
+	int 			flag;
 
+	if (((flag = ft_strmultichr(line, " 01234SNEW")) == 0) && (ft_strlen(line) != 0))
+		m->is_valid = 0;
 	player = chr_trt(line, m);
 	realloc_map(m, line);
 	return (player);
