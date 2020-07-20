@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/09 19:25:10 by siferrar          #+#    #+#             */
-/*   Updated: 2020/07/20 16:19:50 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/07/20 16:36:36 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,11 @@ void	init_texture(t_brain *b, char *path, t_buff **t)
 		(*t)->offset = (*t)->bits_per_pixel / 8;
 		(*t)->ratio = (*t)->width / b->map->bloc_size;
 		(*t)->initied = 3;
+		(*t)->is_color = -1;
 		ft_printf(GRN" - OK\n"RST);
 	}
 	else {
+		dprintf(1, IPINK"\nPATH IS COLOR %s => %d\n"RST, path, ft_atoi(path));
 		(*t)->is_color = ft_atoi(path);
 		(*t)->initied = 3;
 		(*t)->img = NULL;

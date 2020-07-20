@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/15 18:42:08 by siferrar          #+#    #+#             */
-/*   Updated: 2020/07/20 15:24:56 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/07/20 16:37:10 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ int		pixel_get(t_buff *img, int x, int y)
 	int		addr_index;
 	int		*color;
 
-	if (img->is_color)
+	if (img->is_color != -1)
 		return (img->is_color);
 	addr_index = (y * img->line_length + x * img->offset);
 	if (addr_index >= 0 && addr_index < img->max_addr)
