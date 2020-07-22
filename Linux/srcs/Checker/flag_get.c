@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/31 16:39:19 by milosand          #+#    #+#             */
-/*   Updated: 2020/07/22 15:39:40 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/07/22 15:52:54 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,13 @@ int		pre_check(char *path, t_type *map)
 	map = malloc(sizeof(t_type));
 	if (map == NULL)
 		return (-1);
+	map->no = NULL;
+	map->so = NULL;
+	map->ea = NULL;
+	map->we = NULL;
+	map->s = NULL;
+	map->f = NULL;
+	map->c = NULL;
 	if (ft_ext_check(path, ".cub"))
 		fd = open(path, O_RDONLY);
 	else
