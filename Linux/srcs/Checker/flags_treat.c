@@ -20,17 +20,17 @@ int		ft_flag_color(t_type *map, char *str)
 
 	i = 0;
 	if (ft_check_str(str, "0123456789,"))
-		exit_flag(520, "Illegal character in color, or give xpm file\n", map);
+		exit_flag(520, "Illegal character in color declaration\n", map);
 	i = 0;
 	splited = ft_split(str, ',');
 	while (splited[i] != NULL)
 		i++;
 	if (i != 3)
-		exit_flag(520, "wtf is that color, or give a .xpm file\n", map);
-	check_n_free(splited[0]);
-	check_n_free(splited[1]);
-	check_n_free(splited[2]);
-	check_n_free(splited);
+		exit_flag(520, "wtf is that color\n", map);
+	i = 0;
+	target.r = ft_atoi(splited[0]);
+	target.g = ft_atoi(splited[1]);
+	target.b = ft_atoi(splited[2]);
 	if ((target.r > 255) || (target.r < 0)
 		|| (target.g > 255) || (target.g < 0)
 		|| (target.b > 255) || (target.b < 0))
@@ -42,11 +42,11 @@ void	ft_flag_str(char *str, char **target, t_type *map)
 {
 	int	fd;
 
-	if (*target != NULL)
-		exit_flag(502,
-			"Several textures provided for one identifiers\n", map);
 	if (ft_ext_check(str, ".xpm"))
 	{
+		if (*target != NULL)
+			exit_flag(502,
+				"Several textures provided for one identifiers\n", map);
 		if ((fd = open(str, O_RDONLY)) == -1)
 			exit_flag(503, "Invalid path for one of the textures\n", map);
 		*target = ft_strdup(str);
