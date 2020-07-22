@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/14 20:36:43 by siferrar          #+#    #+#             */
-/*   Updated: 2020/07/22 16:31:07 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/07/22 16:32:57 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ void				init_map(t_ctx *ctx, void *brain)
 	b->map->sprites->list = NULL;
 	b->map->skybox = NULL;
 	b->map->brain = b;
+	b->map->default_spr = NULL;
 	init_buff(ctx, &b->map->frame, ctx->width, ctx->height);
 	b->map->is_valid = 1;
 }

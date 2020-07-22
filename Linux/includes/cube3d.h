@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 21:30:44 by siferrar          #+#    #+#             */
-/*   Updated: 2020/07/20 16:22:11 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/07/22 16:47:05 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ typedef struct	s_rgb
 	int			b;
 }				t_rgb;
 
-void			free_buff(t_buff *buff);
+void			free_buff(t_brain *b, t_buff *buff);
 void			free_sprites(t_brain *b);
 void			free_map(t_brain *b);
 void			check_n_free(void *var);

@@ -6,20 +6,23 @@
 /*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/09 18:31:48 by siferrar          #+#    #+#             */
-/*   Updated: 2020/07/14 14:46:59 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/07/22 17:05:08 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cube3d.h"
 
-void	free_buff(t_buff *buff)
+void	free_buff(t_brain *b, t_buff *buff)
 {
 	ft_putstr("  -> Free buff\n");
 	if (buff != NULL)
 	{
 		ft_putstr("     -> Free IMG - ");
-		if (buff->img)
+		if (buff->img != NULL)
+		{
+			//mlx_destroy_image(b->ctx->mlx_ptr, buff->img);
 			free(buff->img);
+		}
 		ft_putstr("OK\n");
 		ft_putstr("     -> Free ADDR - ");
 		ft_putstr("OK\n");
@@ -41,7 +44,7 @@ void	meditate(t_brain *b)
 		if (b->ctx != NULL)
 		{
 			ft_putstr(DCYAN"Free Context\n");
-			free_buff(b->ctx->buff);
+			free_buff(b, b->ctx->buff);
 			check_n_free(b->ctx->win_ptr);
 			check_n_free(b->ctx->mlx_ptr);
 			check_n_free(b->ctx);

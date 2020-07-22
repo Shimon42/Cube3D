@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/20 13:45:58 by siferrar          #+#    #+#             */
-/*   Updated: 2020/05/20 17:49:41 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/07/22 16:34:36 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,16 @@ void		set_spr_texture(t_brain *b, t_sprite *s, int type)
 {
 	if (type == 2)
 	{
-		init_texture(b, "./assets/sprites/barrel.xpm", &s->model);
-		init_texture(b, "./assets/sprites/barrel-shadow.xpm", &s->shadow);
+		if (b->map->default_spr != NULL)
+		{
+			s->model = b->map->default_spr;
+			s->shadow = NULL;
+		}
+		else
+		{
+			init_texture(b, "./assets/sprites/barrel.xpm", &s->model);
+			init_texture(b, "./assets/sprites/barrel-shadow.xpm", &s->shadow);
+		}
 	}
 	else if (type == 3)
 	{
