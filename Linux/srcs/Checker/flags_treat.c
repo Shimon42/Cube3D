@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/22 15:29:02 by siferrar          #+#    #+#             */
-/*   Updated: 2020/07/22 15:29:46 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/07/22 20:32:44 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ int		ft_flag_color(t_type *map, char *str)
 	target.r = ft_atoi(splited[0]);
 	target.g = ft_atoi(splited[1]);
 	target.b = ft_atoi(splited[2]);
+	ft_free_split(splited);
 	if ((target.r > 255) || (target.r < 0)
 		|| (target.g > 255) || (target.g < 0)
 		|| (target.b > 255) || (target.b < 0))
@@ -71,10 +72,7 @@ void	ft_flag_res(char *str, int *target, t_type *map)
 		i++;
 	if (i != 2)
 		exit_flag(511, "Resolution not gud\n", map);
-	i = 0;
-	while (splited[i] != NULL)
-		free(splited[i++]);
-	free(splited);
+	ft_free_split(splited);
 	target[0] = ft_atoi(str);
 	str = ft_strchr(str, ' ');
 	target[1] = ft_atoi(str);

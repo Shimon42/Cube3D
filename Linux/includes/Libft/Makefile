@@ -37,6 +37,7 @@ SRCS	=	$(MATHLIB)ft_abs.c \
 			$(PRINTLIB)ft_putint.c \
 			\
 			$(STRLIB)ft_split.c \
+			$(STRLIB)ft_free_split.c \
 			$(STRLIB)ft_strchr.c \
 			$(STRLIB)ft_strdup.c \
 			$(STRLIB)ft_strjoin.c \

@@ -6,11 +6,17 @@
 /*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/09 18:31:48 by siferrar          #+#    #+#             */
-/*   Updated: 2020/07/22 17:05:08 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/07/22 20:41:14 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cube3d.h"
+
+/*
+** Need to use
+** mlx_destroy_image(b->ctx->mlx_ptr, buff->img);
+** in free_buff to remove MLX Leaks (???)
+*/
 
 void	free_buff(t_brain *b, t_buff *buff)
 {
@@ -19,8 +25,7 @@ void	free_buff(t_brain *b, t_buff *buff)
 	{
 		ft_putstr("     -> Free IMG - ");
 		if (buff->img != NULL)
-		{
-			//mlx_destroy_image(b->ctx->mlx_ptr, buff->img);
+		{			
 			free(buff->img);
 		}
 		ft_putstr("OK\n");

@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/13 13:24:06 by siferrar          #+#    #+#             */
-/*   Updated: 2020/07/22 17:10:27 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/07/22 20:36:29 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	free_sprites(t_brain *b)
 	free(b->map->sprites->column);
 	free(b->map->sprites);
 	if (b->map->default_spr != NULL)
-	free_buff(b, b->map->default_spr);
+		free_buff(b, b->map->default_spr);
 }
 
 void	free_map(t_brain *b)
