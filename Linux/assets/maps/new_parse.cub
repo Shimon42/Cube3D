@@ -1,16 +1,16 @@
-EA ./assets/textures/walls/stone_bricks/1.xpm
+EA 255,255,255
 
-SO ./assets/textures/walls/stone_bricks/2.xpm
+SO 255,0,255
 
-NO ./assets/textures/walls/stone_bricks/3.xpm
+NO 255,255,0
 
-WE ./assets/textures/walls/stone_bricks/4.xpm
+WE 0,255,255
 
 S ./assets/sprites/tree.xpm
 
 R 1280 800
-F ./assets/textures/floor/sand.xpm
-C ./assets/sky/mountains/mountains.xpm
+F 255,0,0
+C 0,255,0
 
       111
      14S41
