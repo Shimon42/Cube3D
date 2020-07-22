@@ -40,7 +40,7 @@ SRCS = 		main.c \
 			\
 			$(SRCSPATH)Checker/check.c \
 			$(SRCSPATH)Checker/flag_get.c \
-			$(SRCSPATH)Checker/flag_treat.c \
+			$(SRCSPATH)Checker/flags_treat.c \
 			$(SRCSPATH)Checker/flag_get_utils.c \
 			\
 			$(SRCSPATH)Map/open_map.c \
@@ -116,7 +116,7 @@ $(NAME):	$(OBJS) $(INCLUDES)
 			ar rc $(NAME).a $(OBJS) get_next_line.o get_next_line_utils.o
 
 comp:		all
-		clang $(CFLAGSPROD) main.c $(NAME).a libft.a libmlx_Linux.a -lX11 -lXext -Lincludes/MiniLib/ -lm -I. -o $(NAME) 
+		clang $(CFLAGSSAN) main.c $(NAME).a libft.a libmlx_Linux.a -lX11 -lXext -Lincludes/MiniLib/ -lm -I. -o $(NAME) 
 
 launch:		comp
 			clear
