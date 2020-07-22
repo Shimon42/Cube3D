@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/14 20:36:43 by siferrar          #+#    #+#             */
-/*   Updated: 2020/07/13 13:21:00 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/07/22 15:27:16 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,9 +112,10 @@ t_player_detect		*add_map_row(t_map *m, char *line)
 	int				*new;
 	int				*temp;
 	t_player_detect	*player;
-	int 			flag;
+	int				flag;
 
-	if (((flag = ft_strmultichr(line, " 01234SNEW")) == 0) && (ft_strlen(line) != 0))
+	if (((flag = ft_strmultichr(line, " 01234SNEW")) == 0)
+			&& (ft_strlen(line) != 0))
 		m->is_valid = 0;
 	player = chr_trt(line, m);
 	realloc_map(m, line);

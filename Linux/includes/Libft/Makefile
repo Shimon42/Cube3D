@@ -58,6 +58,7 @@ SRCS	=	$(MATHLIB)ft_abs.c \
 			$(STRLIB)ft_isascii.c \
 			$(STRLIB)ft_isdigit.c \
 			$(STRLIB)ft_isprint.c \
+			$(STRLIB)ft_check_str.c \
 			\
 			$(CONVLIB)ft_ftoa.c \
 			$(CONVLIB)ft_atoi.c \

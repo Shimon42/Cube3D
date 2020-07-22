@@ -6,11 +6,26 @@
 /*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/09 19:25:10 by siferrar          #+#    #+#             */
-/*   Updated: 2020/07/20 16:36:36 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/07/22 15:08:26 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cube3d.h"
+
+void	init_color(t_buff *t, char *path)
+{
+	dprintf(1, IPINK"\nPATH IS COLOR %s => %d\n"RST, path, ft_atoi(path));
+	t->is_color = ft_atoi(path);
+	t->initied = 3;
+	t->img = NULL;
+	t->addr = NULL;
+	t->max_addr = 1;
+	t->offset = 1;
+	t->ratio = 1;
+	t->width = 1;
+	t->height = 1;
+	t->line_length = 1;
+}
 
 void	init_texture(t_brain *b, char *path, t_buff **t)
 {
@@ -37,17 +52,6 @@ void	init_texture(t_brain *b, char *path, t_buff **t)
 		(*t)->is_color = -1;
 		ft_printf(GRN" - OK\n"RST);
 	}
-	else {
-		dprintf(1, IPINK"\nPATH IS COLOR %s => %d\n"RST, path, ft_atoi(path));
-		(*t)->is_color = ft_atoi(path);
-		(*t)->initied = 3;
-		(*t)->img = NULL;
-		(*t)->addr = NULL;
-		(*t)->max_addr = 1;
-		(*t)->offset = 1;
-		(*t)->ratio = 1;
-		(*t)->width = 1;
-		(*t)->height = 1;
-		(*t)->line_length = 1;
-	}		
+	else
+		init_color(*t, path);
 }

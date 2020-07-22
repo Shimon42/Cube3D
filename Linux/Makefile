@@ -40,6 +40,7 @@ SRCS = 		main.c \
 			\
 			$(SRCSPATH)Checker/check.c \
 			$(SRCSPATH)Checker/flag_get.c \
+			$(SRCSPATH)Checker/flag_treat.c \
 			$(SRCSPATH)Checker/flag_get_utils.c \
 			\
 			$(SRCSPATH)Map/open_map.c \
