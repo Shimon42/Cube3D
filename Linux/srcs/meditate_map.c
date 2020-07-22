@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/13 13:24:06 by siferrar          #+#    #+#             */
-/*   Updated: 2020/07/22 20:36:29 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/07/22 20:58:54 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,16 @@ void	free_sprites(t_brain *b)
 		free_buff(b, b->map->default_spr);
 }
 
+void	free_textures(t_brain *b)
+{
+	free_buff(b, b->map->w_n);
+	free_buff(b, b->map->w_e);
+	free_buff(b, b->map->w_s);
+	free_buff(b, b->map->w_w);
+	free_buff(b, b->map->floor);
+	free_buff(b, b->map->skybox);
+}
+
 void	free_map(t_brain *b)
 {
 	int			i;
@@ -42,12 +52,9 @@ void	free_map(t_brain *b)
 	ft_putstr(DYELO"Free Map\n");
 	if (b != NULL && b->map != NULL)
 	{
-		free_buff(b, b->map->w_n);
-		free_buff(b, b->map->w_e);
-		free_buff(b, b->map->w_s);
-		free_buff(b, b->map->w_w);
-		free_buff(b, b->map->floor);
-		free_buff(b, b->map->skybox);
+		free_textures(b);
+		mlx_destroy_image(b->ctx->mlx_ptr, b->map->frame->img);
+		b->map->frame->img = NULL;
 		free_buff(b, b->map->frame);
 		free_sprites(b);
 		i = 0;
