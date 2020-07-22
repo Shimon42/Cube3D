@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/14 20:36:43 by siferrar          #+#    #+#             */
-/*   Updated: 2020/07/22 20:42:53 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/07/22 20:50:27 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ void				init_map(t_ctx *ctx, void *brain)
 
 void				init_textures(t_brain *b, t_type *map)
 {
+	b->map->default_spr = NULL;
 	ft_putstr(CYAN"Init Textures\n");
 	init_texture(b, map->no, &b->map->w_n);
 	init_texture(b, map->ea, &b->map->w_e);
