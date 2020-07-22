@@ -6,7 +6,7 @@ NO ./assets/textures/walls/stone_bricks/3.xpm
 
 WE ./assets/textures/walls/stone_bricks/4.xpm
 
-S ./assets/sprites/barrel.xpm
+
 
 R 1280 800
 F ./assets/textures/floor/sand.xpm

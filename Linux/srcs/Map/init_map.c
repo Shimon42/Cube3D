@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/14 20:36:43 by siferrar          #+#    #+#             */
-/*   Updated: 2020/07/22 15:27:16 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/07/22 16:31:07 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ void				init_textures(t_brain *b, t_type *map)
 	init_texture(b, map->we, &b->map->w_w);
 	init_texture(b, map->f, &b->map->floor);
 	init_texture(b, map->c, &b->map->skybox);
+	init_texture(b, map->s, &b->map->default_spr);
 }
 
 int					realloc_map(t_map *m, char *line)

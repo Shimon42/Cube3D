@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/13 12:20:59 by milosandric       #+#    #+#             */
-/*   Updated: 2020/07/22 15:53:04 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/07/22 16:29:38 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,6 @@ void	exit_flag(int err_num, char *str, t_type *map)
 	check_n_free(map->s);
 	check_n_free(map->f);
 	check_n_free(map->c);
-	free(map);
+	check_n_free(map);
 	exit(0);
 }

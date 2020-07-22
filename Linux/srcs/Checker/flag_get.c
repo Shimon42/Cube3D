@@ -6,31 +6,25 @@
 /*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/31 16:39:19 by milosand          #+#    #+#             */
-/*   Updated: 2020/07/22 15:52:54 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/07/22 16:29:23 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cube3d.h"
 
-int		pre_check(char *path, t_type *map)
+int		pre_check(char *path, t_type **map)
 {
 	int	fd;
 
 	fd = -1;
-	map = malloc(sizeof(t_type));
-	if (map == NULL)
+	*map = malloc(sizeof(t_type));
+	if (*map == NULL)
 		return (-1);
-	map->no = NULL;
-	map->so = NULL;
-	map->ea = NULL;
-	map->we = NULL;
-	map->s = NULL;
-	map->f = NULL;
-	map->c = NULL;
+	ft_init_t_type(*map);
 	if (ft_ext_check(path, ".cub"))
 		fd = open(path, O_RDONLY);
 	else
-		exit_flag(500, "please provide .cub file\n", map);
+		exit_flag(500, "please provide .cub file\n", *map);
 	return (fd);
 }
 
@@ -41,11 +35,10 @@ t_type	*ft_getmap_flag(char *path)
 	char	*line;
 	t_type	*map;
 
-	fd = pre_check(path, map);
+	fd = pre_check(path, &map);
 	if (fd > 0)
 	{
 		map->res[0] = 0;
-		ft_init_t_type(map);
 		ret = get_next_line(fd, &line);
 		while (ret && ((ft_strmultichr(line, " 01234SNEW")) != 1))
 		{

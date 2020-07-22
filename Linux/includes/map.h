@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/14 22:46:16 by siferrar          #+#    #+#             */
-/*   Updated: 2020/05/20 17:45:07 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/07/22 16:09:25 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ typedef struct	s_map
 	t_fpoint	disp;
 	int			mini_map_width;
 	int			sprites_count;
+	t_sprite	*default_spr;
 	t_spr_list	*sprites;
 	t_buff		*w_n;
 	t_buff		*w_e;
