@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/22 15:29:02 by siferrar          #+#    #+#             */
-/*   Updated: 2020/07/22 20:32:44 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/07/22 21:12:28 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,10 @@ void	ft_flag_str(char *str, char **target, t_type *map)
 		*target = ft_strdup(str);
 		close(fd);
 	}
-	else
+	else if (*target == NULL)
 		*target = ft_itoa(ft_flag_color(map, str));
+	else
+		exit_flag(503, "Several textures provided for one identifiers", map);
 }
 
 void	ft_flag_res(char *str, int *target, t_type *map)
