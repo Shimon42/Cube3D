@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 21:29:11 by siferrar          #+#    #+#             */
-/*   Updated: 2020/07/14 14:50:20 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/07/22 21:21:40 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int		loop_hook(t_brain *b)
 	return (b->inited);
 }
 
-int red_cross(void *brain)
+int		red_cross(void *brain)
 {
 	exit_cube(brain, 0, "Exit From Red Cross", 0);
 	return (1);
@@ -90,10 +90,15 @@ int		main(int ac, char **av)
 	t_type			*map;
 	int				save;
 
+	save = 0;
 	if (ac < 2 || ac > 3)
 		exit_cube(NULL, 1, "Wrong number of arguments\n\
 	launch with ./Cub3D <map_file> [--save]\n", 0);
-	save = (ac == 3 && ft_strnstr("--save", av[2], 6) ? 1 : 0);
+	if (ac == 3 && ft_strnstr("--save", av[2], 6))
+		save = 1;
+	else
+		exit_cube(NULL, 1, "Wrong argument\n\
+	launch with ./Cub3D <map_file> [--save]\n", 0);
 	if ((map = ft_getmap_flag(av[1])) == NULL)
 		exit_cube(NULL, 404, "Map Not Found", 0);
 	b = new_brain(map->res[0], map->res[1], "Cube3D");
