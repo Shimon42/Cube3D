@@ -94,9 +94,9 @@ int		main(int ac, char **av)
 	if (ac < 2 || ac > 3)
 		exit_cube(NULL, 1, "Wrong number of arguments\n\
 	launch with ./Cub3D <map_file> [--save]\n", 0);
-	if (ac == 3 && ft_strnstr("--save", av[2], 6))
+	if (ac == 3 && ft_strnstr("--save", av[2], 6) && ft_strnstr(av[2], "--save", 6))
 		save = 1;
-	else
+	else if ((ac != 2) && (save == 0))
 		exit_cube(NULL, 1, "Wrong argument\n\
 	launch with ./Cub3D <map_file> [--save]\n", 0);
 	if ((map = ft_getmap_flag(av[1])) == NULL)
