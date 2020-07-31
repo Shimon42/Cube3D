@@ -114,9 +114,8 @@ t_player_detect		*add_map_row(t_map *m, char *line)
 	int				*new;
 	int				*temp;
 	t_player_detect	*player;
-	int				flag;
 
-	if (((flag = ft_strmultichr(line, " 01234SNEW")) == 0)
+	if (((ft_strmultichr(line, " 01234SNEW")) == 0)
 			&& (ft_strlen(line) != 0))
 		m->is_valid = 0;
 	player = chr_trt(line, m);

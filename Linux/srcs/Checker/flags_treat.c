@@ -12,14 +12,31 @@
 
 #include "../../includes/cube3d.h"
 
+int		ft_charcount(char *str, char cara)
+{
+	int i;
+	int count;
+
+	count = 0;
+	i = 0;
+	if (str == NULL)
+		return (-1);
+	while (str[i])
+	{
+		if (str[i] == cara)
+			count++;
+		i++;
+	}
+	return (count);
+}
+
 int		ft_flag_color(t_type *map, char *str)
 {
 	int		i;
 	char	**splited;
 	t_rgb	target;
 
-	i = 0;
-	if (ft_check_str(str, "0123456789,"))
+	if (ft_check_str(str, "0123456789,") || (ft_charcount(str, ',') != 2))
 		exit_flag(520, "Illegal character in color declaration\n", map);
 	i = 0;
 	splited = ft_split(str, ',');
