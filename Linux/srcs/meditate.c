@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/09 18:31:48 by siferrar          #+#    #+#             */
-/*   Updated: 2020/07/22 21:01:41 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/08/03 09:14:48 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,13 +38,6 @@ void	meditate(t_brain *b)
 {
 	if (b)
 	{
-		if (b->ctx != NULL)
-		{
-			ft_putstr(DCYAN"Free Context\n");
-			free_buff(b, b->ctx->buff);
-			mlx_destroy_window(b->ctx->mlx_ptr, b->ctx->win_ptr);
-			check_n_free(b->ctx);
-		}
 		free_map(b);
 		ft_putstr(DPINK"Free Player\n");
 		if (b->player != NULL)
@@ -53,6 +46,15 @@ void	meditate(t_brain *b)
 			check_n_free(b->player->pos);
 			check_n_free(b->player->step);
 			check_n_free(b->player);
+		}
+		if (b->ctx != NULL)
+		{
+			ft_putstr(DCYAN"Free Context\n");
+			free_buff(b, b->ctx->buff);
+			if (!b->save)
+				mlx_destroy_window(b->ctx->mlx_ptr, b->ctx->win_ptr);
+			check_n_free(b->ctx);
+			free(b->ctx->mlx_ptr);
 		}
 		ft_putstr(DGRN"Free Brain Struct\n");
 		free(b->keys);

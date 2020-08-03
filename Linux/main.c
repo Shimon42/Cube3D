@@ -6,20 +6,21 @@
 /*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 21:29:11 by siferrar          #+#    #+#             */
-/*   Updated: 2020/07/22 21:21:40 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/08/03 09:07:11 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/cube3d.h"
 #include <stdio.h>
 
-t_brain	*new_brain(int width, int height, char *name)
+t_brain	*new_brain(int width, int height, char *name, int save)
 {
 	t_brain *new;
 	t_point	size;
 
 	new = malloc(sizeof(t_brain));
 	new->ctx = new_ctx(width, height);
+	new->save = save;
 	mlx_get_screen_size(new->ctx->mlx_ptr, &size.x, &size.y);
 	if (width > size.x || height > size.y)
 	{
@@ -29,8 +30,8 @@ t_brain	*new_brain(int width, int height, char *name)
 		check_n_free(new->ctx);
 		new->ctx = new_ctx(width, height);
 	}
-	new->ctx->win_ptr = mlx_new_window(new->ctx->mlx_ptr, width, height, name);
-	new->ctx->color = 0x00FFFF;
+	if (!save)
+		new->ctx->win_ptr = mlx_new_window(new->ctx->mlx_ptr, width, height, name);
 	new->map = NULL;
 	new->player = NULL;
 	init_buff(new->ctx, &new->ctx->buff, new->ctx->width, new->ctx->height);
@@ -52,7 +53,8 @@ int		loop_hook(t_brain *b)
 	}
 	if (is_key_pressed(b, 102) != -1)
 		draw_fullmap(b, 0.28);
-	mlx_put_image_to_window(b->ctx->mlx_ptr, b->ctx->win_ptr,
+	if (!b->save)
+		mlx_put_image_to_window(b->ctx->mlx_ptr, b->ctx->win_ptr,
 													b->map->frame->img, 0, 0);
 	fps_count(b->ctx);
 	return (b->inited);
@@ -91,9 +93,6 @@ int		main(int ac, char **av)
 	int				save;
 
 	save = 0;
-	if (ac < 2 || ac > 3)
-		exit_cube(NULL, 1, "Wrong number of arguments\n\
-	launch with ./Cub3D <map_file> [--save]\n", 0);
 	if (ac == 3 && ft_strnstr("--save", av[2], 6) && ft_strnstr(av[2], "--save", 6))
 		save = 1;
 	else if ((ac != 2) && (save == 0))
@@ -101,7 +100,7 @@ int		main(int ac, char **av)
 	launch with ./Cub3D <map_file> [--save]\n", 0);
 	if ((map = ft_getmap_flag(av[1])) == NULL)
 		exit_cube(NULL, 404, "Map Not Found", 0);
-	b = new_brain(map->res[0], map->res[1], "Cube3D");
+	b = new_brain(map->res[0], map->res[1], "Cube3D", save);
 	exit_cube(b, 0, "Init Exit", 1);
 	ft_printf(GRN"Opening Map "DCYAN"%s\n"RST, av[1]);
 	open_map(b, av[1], map);

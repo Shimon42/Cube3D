@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 21:30:44 by siferrar          #+#    #+#             */
-/*   Updated: 2020/07/22 16:47:05 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/08/03 09:04:52 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@
 typedef struct	s_brain
 {
 	int			inited;
+	int			save;
 	t_ctx		*ctx;
 	t_map		*map;
 	t_player	*player;

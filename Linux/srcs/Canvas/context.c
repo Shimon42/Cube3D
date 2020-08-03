@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/15 18:42:08 by siferrar          #+#    #+#             */
-/*   Updated: 2020/07/20 16:37:10 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/08/03 09:06:28 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ t_ctx	*new_ctx(int width, int height)
 	ctx->circle = &draw_circle;
 	ctx->text = &put_text;
 	ctx->clear = &clear_ctx;
+	ctx->color = 0;
 	return (ctx);
 }
 
