@@ -6,14 +6,14 @@
 /*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/20 12:30:05 by siferrar          #+#    #+#             */
-/*   Updated: 2020/05/20 13:16:07 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/08/03 11:55:34 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/cube3d.h"
 
 void		calculate_size_mm(t_brain *b, int *margin,
-												float *mrgn_top, float *ease)
+												float *mrgn_top)
 {
 	float scale;
 
@@ -60,7 +60,7 @@ void		draw_fullmap(t_brain *b, float ease_val)
 	margin = 100;
 	if (ease_val > 0)
 	{
-		calculate_size_mm(b, &margin, &mrgn_top, &ease);
+		calculate_size_mm(b, &margin, &mrgn_top);
 		draw_minimap(b,
 			margin,
 			mrgn_top,

@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/15 18:42:08 by siferrar          #+#    #+#             */
-/*   Updated: 2020/08/03 09:06:28 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/08/03 11:52:39 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,6 @@ t_ctx	*new_ctx(int width, int height)
 
 void	pixel_put(int x, int y, int color, t_buff *buff)
 {
-	char	*dst;
 	int		addr_index;
 
 	addr_index = (y * buff->line_length + x * buff->offset);
@@ -80,7 +79,6 @@ void	pixel_put(int x, int y, int color, t_buff *buff)
 
 int		pixel_get(t_buff *img, int x, int y)
 {
-	char	*dst;
 	int		addr_index;
 	int		*color;
 

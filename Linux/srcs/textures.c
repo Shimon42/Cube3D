@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/09 19:25:10 by siferrar          #+#    #+#             */
-/*   Updated: 2020/07/22 15:08:26 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/08/03 11:58:42 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,6 @@ void	init_color(t_buff *t, char *path)
 
 void	init_texture(t_brain *b, char *path, t_buff **t)
 {
-	int	fd;
-
 	ft_printf(DCYAN"	-> %s", path);
 	if ((*t = malloc(sizeof(t_buff))) == NULL)
 		exit_cube(NULL, 401, "Failed to malloc texture", 0);

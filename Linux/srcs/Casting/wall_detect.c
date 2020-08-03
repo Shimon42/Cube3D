@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/13 16:51:40 by milosandric       #+#    #+#             */
-/*   Updated: 2020/05/20 13:58:26 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/08/03 11:56:21 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ t_detect	closest_wall_h(t_brain *b, t_fpoint *p, float angle)
 	t_fpoint	offset;
 	t_detect	d;
 	int			is_wall;
-	int			is_sprite;
 	int			verif;
 
 	verif = angle > PI && angle < 2 * PI;
@@ -68,7 +67,6 @@ t_detect	closest_wall_v(t_brain *b, t_fpoint *p, float angle)
 	t_detect	d;
 	t_fpoint	offset;
 	int			is_wall;
-	int			is_sprite;
 	int			verif;
 
 	verif = angle < 2 * PI * 0.75 && angle > PI / 2;

@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 21:30:44 by siferrar          #+#    #+#             */
-/*   Updated: 2020/08/03 09:04:52 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/08/03 11:55:17 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,9 @@ typedef struct	s_mlx_win_list
 int				open_map(t_brain *b, char *map_path, t_type *map);
 void			draw_minimap(t_brain *b, int x, int y, int width);
 void			draw_fullmap(t_brain *b, float ease_val);
+void			calculate_size_mm(t_brain *b, int *margin,
+												float *mrgn_top);
+void			ease_in_n_out(t_brain *b, float *ease, float ease_val);
 void			draw_frame(t_brain *b);
 t_fpoint		map_scaled(t_fpoint *p, t_map *m);
 t_fpoint		map_fscaled(t_fpoint *p, t_map *m);
@@ -196,9 +199,6 @@ void			draw_elems(t_brain *b, int disp_x, int disp_y, float scale);
 void			draw_player_map(t_brain *b, t_player *p, t_fpoint m_pos);
 void			draw_minimap_closest(t_brain *b, t_fpoint disp, float angle);
 char			get_wall_side(float angle, int closest);
-void			calculate_size_mm(t_brain *b, int *margin,
-												float *mrgn_top, float *ease);
-void			ease_in_n_out(t_brain *b, float *ease, float ease_val);
 int				opacity(int color1, int color2, double opa);
 
 int				rgb_to_hex(t_rgb color);

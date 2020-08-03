@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mandric <mandric@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/30 14:39:54 by siferrar          #+#    #+#             */
-/*   Updated: 2020/05/20 17:52:47 by mandric          ###   ########lyon.fr   */
+/*   Updated: 2020/07/13 12:13:24 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-t_gnl	*init_brain(int fd)
+t_gnl		*init_brain(int fd)
 {
 	t_gnl *brain;
 
@@ -28,7 +28,7 @@ t_gnl	*init_brain(int fd)
 	return (brain);
 }
 
-t_gnl	*get_brain(t_gnl **b, int fd, char **line)
+t_gnl		*get_brain(t_gnl **b, int fd, char **line)
 {
 	t_gnl *tmp;
 	t_gnl **ptr;
@@ -56,7 +56,7 @@ t_gnl	*get_brain(t_gnl **b, int fd, char **line)
 	return (*b);
 }
 
-void	meditate(t_gnl **blist, t_gnl *b, char **line)
+static void	meditate(t_gnl **blist, t_gnl *b, char **line)
 {
 	t_gnl **ptr;
 
@@ -80,7 +80,7 @@ void	meditate(t_gnl **blist, t_gnl *b, char **line)
 	free(b);
 }
 
-int		treat_left(t_gnl *b, char **line)
+int			treat_left(t_gnl *b, char **line)
 {
 	char *temp;
 	char *btemp;
@@ -108,7 +108,7 @@ int		treat_left(t_gnl *b, char **line)
 	return (0);
 }
 
-int		get_next_line(int fd, char **line)
+int			get_next_line(int fd, char **line)
 {
 	static	t_gnl	*blist;
 	t_gnl			*b;

@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/13 13:24:06 by siferrar          #+#    #+#             */
-/*   Updated: 2020/07/22 20:58:54 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/08/03 11:58:26 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ void	free_textures(t_brain *b)
 void	free_map(t_brain *b)
 {
 	int			i;
-	t_sprite	*s;
 
 	i = 0;
 	ft_putstr(DYELO"Free Map\n");

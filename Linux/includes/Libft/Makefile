@@ -116,14 +116,15 @@ all:		$(NAME) $(OBJS) $(INCLUDES)
 
 $(NAME): 	$(OBJS) $(INCLUDES)
 			@echo "\033[0;32m––––––––––––––––––––––––\nMaking Libft\n––––––––––––––––––––––––\033[0;33m"
-
-			ar rc $(NAME) $(OBJS)
+			clang -c $(CFLAGS) $(GNL_SRCS) -D BUFFER_SIZE=400
+			ar rc $(NAME) $(OBJS) get_next_line.o get_next_line_utils.o
 			@echo "\033[0;m"
 
 $(OBJS):	$(INCLUDES)
 
 clean:		
 			${RM} $(OBJS)
+			${RM} get_next_line.o get_next_line_utils.o
 
 fclean:		clean
 			${RM} $(NAME)

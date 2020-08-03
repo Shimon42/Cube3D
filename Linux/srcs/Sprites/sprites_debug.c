@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/20 13:45:04 by siferrar          #+#    #+#             */
-/*   Updated: 2020/05/20 14:57:02 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/08/03 11:56:43 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 void		disp_sprites(t_spr_list *s_list)
 {
 	int			i;
-	t_sprite	*s;
 
 	i = 0;
 	ft_putstr(PINK);

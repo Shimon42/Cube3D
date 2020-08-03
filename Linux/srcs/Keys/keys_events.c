@@ -6,13 +6,13 @@
 /*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/11 06:48:57 by siferrar          #+#    #+#             */
-/*   Updated: 2020/07/13 13:31:02 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/08/03 11:58:06 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cube3d.h"
 
-void	action_keys(int key, void *param, t_brain *b)
+void	action_keys(int key, t_brain *b)
 {
 	if (b && b->inited && b->player && b->player->inited)
 	{
@@ -50,7 +50,7 @@ int		key_press(int key, void *param)
 		exit_cube(b, 0, "Exit from Escape key", 0);
 	if (key != -1 && is_key_pressed(b, key) == -1)
 		add_key_pressed(b, key);
-	action_keys(key, param, b);
+	action_keys(key, b);
 	return (0);
 }
 

@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/14 20:36:43 by siferrar          #+#    #+#             */
-/*   Updated: 2020/08/03 11:34:42 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/08/03 14:56:08 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,9 +88,9 @@ t_player_detect		*chr_trt(char *line, t_map *m)
 
 	i = -1;
 	player = NULL;
-	while (line[i++])
+	while (line[++i])
 	{
-		(line[i] == ' ' ? line[i] = '0' - 1 : NULL);
+		line[i] = (line[i] == ' ' ? '0' - 1 : line[i]);
 		if (line[i] != '\0' && ft_strchr("NESW", line[i]) != NULL)
 		{
 			if (player != NULL)
@@ -111,8 +111,6 @@ t_player_detect		*chr_trt(char *line, t_map *m)
 
 t_player_detect		*add_map_row(t_map *m, char *line)
 {
-	int				*new;
-	int				*temp;
 	t_player_detect	*player;
 	t_brain			*b;
 
