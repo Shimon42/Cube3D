@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 21:29:11 by siferrar          #+#    #+#             */
-/*   Updated: 2020/08/03 09:07:11 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/08/03 09:37:40 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,8 @@ t_brain	*new_brain(int width, int height, char *name, int save)
 		new->ctx = new_ctx(width, height);
 	}
 	if (!save)
-		new->ctx->win_ptr = mlx_new_window(new->ctx->mlx_ptr, width, height, name);
+		new->ctx->win_ptr = mlx_new_window(new->ctx->mlx_ptr,
+			width, height, name);
 	new->map = NULL;
 	new->player = NULL;
 	init_buff(new->ctx, &new->ctx->buff, new->ctx->width, new->ctx->height);
@@ -93,7 +94,7 @@ int		main(int ac, char **av)
 	int				save;
 
 	save = 0;
-	if (ac == 3 && ft_strnstr("--save", av[2], 6) && ft_strnstr(av[2], "--save", 6))
+	if (ac == 3 && ft_strnstr("--save", av[2], 6))
 		save = 1;
 	else if ((ac != 2) && (save == 0))
 		exit_cube(NULL, 1, "Wrong argument\n\
