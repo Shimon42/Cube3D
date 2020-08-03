@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/09 18:31:48 by siferrar          #+#    #+#             */
-/*   Updated: 2020/08/03 09:14:48 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/08/03 11:29:58 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	meditate(t_brain *b)
 		{
 			ft_putstr(DCYAN"Free Context\n");
 			free_buff(b, b->ctx->buff);
-			if (!b->save)
+			if (!b->save && b->ctx->win_ptr)
 				mlx_destroy_window(b->ctx->mlx_ptr, b->ctx->win_ptr);
 			check_n_free(b->ctx);
 			free(b->ctx->mlx_ptr);
@@ -73,17 +73,16 @@ void	exit_cube(t_brain *brain, int error_code, char *msg, int init)
 	}
 	if (init)
 		return ;
+	meditate(b);
+	ft_putstr(GRN"Meditate OK\n");
 	if (error_code != 0)
 		ft_putstr(RED);
 	else
 		ft_putstr(GRN);
-	ft_putstr("\nCub3D Exit - Error: ");
+	ft_putstr("\nCub3D Exit Done - Error: ");
 	ft_putnbr(error_code);
 	ft_putstr(" - ");
 	ft_putstr(msg);
 	ft_putstr("\n"RST);
-	meditate(b);
-	ft_putstr(GRN"Meditate OK\n");
-	ft_putstr("Exit Done\n"RST);
 	exit(0);
 }

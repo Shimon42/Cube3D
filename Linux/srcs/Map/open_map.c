@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/13 12:16:27 by milosandric       #+#    #+#             */
-/*   Updated: 2020/07/22 20:43:33 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/08/03 10:45:47 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,8 @@ int					open_map(t_brain *b, char *map_path, t_type *map)
 	init_textures(b, map);
 	get_map(b, map_path);
 	disp_sprites(b->map->sprites);
+	if (b->player == NULL)
+		exit_cube(NULL, 800, "No Player found in map", 0);
 	sort_sprites(b->player->pos, b->map->sprites);
 	ft_printf(DCYAN"	-> Width: [%d]\n", b->map->width);
 	ft_printf("	-> Height:[%d]\n\n"RST, b->map->height);

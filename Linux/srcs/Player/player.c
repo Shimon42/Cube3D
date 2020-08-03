@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/08 17:32:22 by milosandric       #+#    #+#             */
-/*   Updated: 2020/07/13 14:58:50 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/08/03 10:44:42 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,8 @@ int		init_values(t_brain *b, t_player *p)
 int		init_player(t_brain *b, int pos_x, char angle)
 {
 	ft_printf(DCYAN"	-> Init player at ");
+	if (b->player != NULL)
+		exit_cube(b, 801, "Player already initied", 0);
 	if ((b->player = malloc(sizeof(t_player))) == NULL)
 		exit_cube(NULL, 1, "Failed to malloc player", 0);
 	if ((b->player->pos = malloc(sizeof(t_fpoint))) == NULL)

@@ -6,14 +6,14 @@
 /*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 21:29:11 by siferrar          #+#    #+#             */
-/*   Updated: 2020/08/03 10:00:58 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/08/03 10:36:23 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/cube3d.h"
 #include <stdio.h>
 
-t_brain	*new_brain(int width, int height, char *name, int save)
+t_brain	*new_brain(int width, int height, int save)
 {
 	t_brain *new;
 	t_point	size;
@@ -30,9 +30,6 @@ t_brain	*new_brain(int width, int height, char *name, int save)
 		check_n_free(new->ctx);
 		new->ctx = new_ctx(width, height);
 	}
-	if (!save)
-		new->ctx->win_ptr = mlx_new_window(new->ctx->mlx_ptr,
-			width, height, name);
 	new->map = NULL;
 	new->player = NULL;
 	init_buff(new->ctx, &new->ctx->buff, new->ctx->width, new->ctx->height);
@@ -77,6 +74,8 @@ void	init_loop(t_brain *b, int save)
 	}
 	else
 	{
+		b->ctx->win_ptr = mlx_new_window(b->ctx->mlx_ptr,
+			b->ctx->width, b->ctx->height, "Cube3D");
 		ft_putstr("Loop Init OK\n");
 		mlx_loop_hook(b->ctx->mlx_ptr, &loop_hook, b);
 		mlx_hook(b->ctx->win_ptr, 2, (1L << 0), &key_press, b);
@@ -101,7 +100,7 @@ int		main(int ac, char **av)
 	launch with ./Cub3D <map_file> [--save]\n", 0);
 	if ((map = ft_getmap_flag(av[1])) == NULL)
 		exit_cube(NULL, 404, "Map Not Found", 0);
-	b = new_brain(map->res[0], map->res[1], "Cube3D", save);
+	b = new_brain(map->res[0], map->res[1], save);
 	exit_cube(b, 0, "Init Exit", 1);
 	ft_printf(GRN"Opening Map "DCYAN"%s\n"RST, av[1]);
 	open_map(b, av[1], map);
