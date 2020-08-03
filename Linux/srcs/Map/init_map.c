@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/14 20:36:43 by siferrar          #+#    #+#             */
-/*   Updated: 2020/08/03 11:27:15 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/08/03 11:34:42 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ t_player_detect		*chr_trt(char *line, t_map *m)
 	player = NULL;
 	while (line[i++])
 	{
-		(line[i] == ' ' ? line[i] = '0' - 1 : NULL);			
+		(line[i] == ' ' ? line[i] = '0' - 1 : NULL);
 		if (line[i] != '\0' && ft_strchr("NESW", line[i]) != NULL)
 		{
 			if (player != NULL)
@@ -120,7 +120,6 @@ t_player_detect		*add_map_row(t_map *m, char *line)
 	if (((ft_strmultichr(line, " 01234SNEW")) == 0)
 			&& (ft_strlen(line) != 0))
 		m->is_valid = 0;
-	
 	player = chr_trt(line, m);
 	realloc_map(m, line);
 	return (player);
