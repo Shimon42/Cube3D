@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 21:29:11 by siferrar          #+#    #+#             */
-/*   Updated: 2020/08/03 10:36:23 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/08/04 15:00:14 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ t_brain	*new_brain(int width, int height, int save)
 
 int		loop_hook(t_brain *b)
 {
+	b->player->as_move = 1;
 	key_press(-1, b);
 	if (b->player->as_move == 1)
 	{

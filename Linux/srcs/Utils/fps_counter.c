@@ -6,12 +6,11 @@
 /*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/20 13:52:35 by siferrar          #+#    #+#             */
-/*   Updated: 2020/07/03 10:03:03 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/08/04 14:32:43 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cube3d.h"
-#include <time.h>
 
 void		fps_count(t_ctx *c)
 {
@@ -25,6 +24,7 @@ void		fps_count(t_ctx *c)
 	{
 		str_time = time(0);
 		free(str);
+		c->fps = count;
 		str = ft_itoa(count);
 		count = 0;
 	}

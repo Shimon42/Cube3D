@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/23 18:52:51 by siferrar          #+#    #+#             */
-/*   Updated: 2020/05/20 17:45:49 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/08/04 15:02:22 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ typedef struct	s_player
 	t_fpoint	*step;
 	float		rot_speed;
 	float		speed;
+	float		speedRatio;
 	int			bobbing;
 	int			jumping;
 	float		divided;
