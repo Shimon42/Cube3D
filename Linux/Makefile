@@ -99,8 +99,6 @@ COL_TXT = \033[0;36m
 COL_SHADOW = \033[2;36m
 
 all:		$(NAME)
-		clang $(CFLAGS) main.c $(NAME).a libft.a libmlx_Linux.a -lX11 -lXext -Lincludes/MiniLib/ -lm -I. -o $(NAME) 
-
 
 $(NAME):	$(OBJS) $(INCLUDES)
 			make -C $(MINILIB)
@@ -108,6 +106,7 @@ $(NAME):	$(OBJS) $(INCLUDES)
 			mv $(MINILIB)libmlx_Linux.a .
 			mv $(LIBFT)libft.a .
 			ar rc $(NAME).a $(OBJS)
+			clang $(CFLAGS) main.c $(NAME).a libft.a libmlx_Linux.a -lX11 -lXext -Lincludes/MiniLib/ -lm -I. -o $(NAME) 
 
 launch:		all
 			clear
