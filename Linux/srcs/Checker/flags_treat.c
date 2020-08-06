@@ -82,7 +82,7 @@ void	ft_flag_res(char *str, int *target, t_type *map)
 	char	**splited;
 
 	i = 0;
-	if (ft_check_str(str, "0123456789 "))
+	if (ft_check_str(str, "0123456789 ") || (ft_charcount(str, ' ') != 1))
 		exit_flag(509, "Illegal character in resolution\n", map);
 	if (target[2] != 0)
 		exit_flag(510, "Make up your mind about the resolution\n", map);
