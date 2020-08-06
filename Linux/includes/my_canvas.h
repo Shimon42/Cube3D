@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/15 17:33:03 by siferrar          #+#    #+#             */
-/*   Updated: 2020/07/20 15:25:15 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/08/04 14:30:22 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ typedef struct	s_ctx
 {
 	int			width;
 	int			height;
+	int			fps;
 	int			color;
 	int			line_width;
 	void		*mlx_ptr;

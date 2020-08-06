@@ -80,7 +80,7 @@ CC =		clang
 
 CFLAGSPROD	= -Wall -Wextra -Werror
 CFLAGS	= -Wall -Wextra -Werror
-CFLAGSSAN	= -g -g3 -fsanitize=address -Wall -Wextra -Werror
+CFLAGSSAN	= -g -g3 -fsanitize=address $(CFLAGS)
 
 OBJS = ${SRCS:.c=.o}
 

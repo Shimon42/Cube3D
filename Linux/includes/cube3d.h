@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cube3d.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 21:30:44 by siferrar          #+#    #+#             */
-/*   Updated: 2020/08/03 11:55:17 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/08/06 11:20:20 by user42           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <fcntl.h>
+# include <time.h>
 # include <string.h>
 # include <math.h>
 # include "MiniLib/mlx.h"
@@ -144,7 +145,6 @@ int				key_release(int key, void *param);
 */
 
 void			draw_sky(t_brain *b, double col, double end);
-
 t_fpoint		closest_grid_h(t_fpoint *p, t_map *m, float angle);
 t_fpoint		closest_grid_v(t_fpoint *p, t_map *m, float angle);
 t_detect		closest_wall_h(t_brain *b, t_fpoint *p, float angle);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_sky.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/20 13:53:35 by siferrar          #+#    #+#             */
-/*   Updated: 2020/08/03 10:24:11 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/08/06 11:37:02 by user42           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	draw_sky(t_brain *b, double col, double end)
 	{
 		color = pixel_get(b->map->skybox,
 							col + left,
-							b->player->z * 0.1 + y * ratio.y + 180);
+							b->player->z * -0.2 + y * ratio.y + 180);
 		pixel_put(col, y, color, b->map->frame);
 		y++;
 	}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_fullmap.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/20 12:30:05 by siferrar          #+#    #+#             */
-/*   Updated: 2020/08/03 11:55:34 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/08/06 11:41:57 by user42           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,11 +68,5 @@ void		draw_fullmap(t_brain *b, float ease_val)
 		ease_in_n_out(b, &ease, ease_val);
 	}
 	else
-	{
-		if (ease != 0)
-			b->player->as_move = 1;
-		else
-			b->player->as_move = 0;
 		ease = 0;
-	}
 }

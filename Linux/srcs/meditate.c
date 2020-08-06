@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   meditate.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/09 18:31:48 by siferrar          #+#    #+#             */
-/*   Updated: 2020/08/03 11:29:58 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/08/06 12:06:00 by user42           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ void	exit_cube(t_brain *brain, int error_code, char *msg, int init)
 {
 	static t_brain *b = NULL;
 
+	ft_putstr(UCYAN"EXIT CUBE CALLED\n\n");
 	if (b == NULL && brain != NULL)
 	{
 		b = brain;
