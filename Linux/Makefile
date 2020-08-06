@@ -80,7 +80,7 @@ CC =		clang
 
 CFLAGSPROD	= -Wall -Wextra -Werror
 CFLAGS	= -Wall -Wextra -Werror
-CFLAGSSAN	= -g -g3 -fsanitize=address -Wall -Wextra -Werror
+CFLAGSSAN	= -g -g3 -fsanitize=address #$(CFLAGS)
 
 OBJS = ${SRCS:.c=.o}
 
@@ -106,7 +106,7 @@ $(NAME):	$(OBJS) $(INCLUDES)
 			mv $(MINILIB)libmlx_Linux.a .
 			mv $(LIBFT)libft.a .
 			ar rc $(NAME).a $(OBJS)
-			clang $(CFLAGS) main.c $(NAME).a libft.a libmlx_Linux.a -lX11 -lXext -Lincludes/MiniLib/ -lm -I. -o $(NAME) 
+			clang $(CFLAGSSAN) main.c $(NAME).a libft.a libmlx_Linux.a -lX11 -lXext -Lincludes/MiniLib/ -lm -I. -o $(NAME) 
 
 launch:		all
 			clear

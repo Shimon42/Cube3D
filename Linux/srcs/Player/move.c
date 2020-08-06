@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   move.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/09 19:09:03 by siferrar          #+#    #+#             */
-/*   Updated: 2020/08/04 16:30:02 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/08/06 12:07:43 by user42           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	bobbing(t_player *p)
 	{
 		if (p->bobbing == 1)
 		{
-			p->z += step * (p->bob_height * p->speedRatio);
+			p->z += step * (p->bob_height * p->speed_ratio);
 			if (p->z > p->bob_height)
 			{
 				p->bobbing = -1;
@@ -30,7 +30,7 @@ void	bobbing(t_player *p)
 		}
 		else
 		{
-			p->z -= step * (p->bob_height * p->speedRatio);
+			p->z -= step * (p->bob_height * p->speed_ratio);
 			if (p->z <= 0)
 			{
 				p->bobbing = 1;
@@ -47,17 +47,17 @@ void	side_move(struct s_player *p, int dir)
 	int		key;
 
 	b = (t_brain *)p->brain;
-	p->speedRatio = 1.0/(b->ctx->fps + 1);
 	m = b->map;
 	if ((key = get_grid(m,
-		p->pos->x + p->speed * (cos(p->angle + (ft_inrad(90)) * dir)) * p->speedRatio,
-								p->pos->y, 1)) != 1 && key != 2 && key != 4)
-		p->pos->x += p->speed * (cos(p->angle + (ft_inrad(90)) * dir)) * p->speedRatio;
+		p->pos->x + p->speed * (cos(p->angle + (ft_inrad(90)) * dir))
+				* p->speed_ratio, p->pos->y, 1)) != 1 && key != 2 && key != 4)
+		p->pos->x += p->speed * (cos(p->angle + (ft_inrad(90)) * dir))
+						* p->speed_ratio;
 	if ((key = get_grid(m, p->pos->x,
-		p->pos->y + p->speed * (sin(p->angle + (ft_inrad(90)) * dir)) * p->speedRatio,
-											1)) != 1 && key != 2 && key != 4)
-		p->pos->y += p->speed * (sin(p->angle + (ft_inrad(90)) * dir)) * p->speedRatio;
-	p->as_move = 1;
+		p->pos->y + p->speed * (sin(p->angle + (ft_inrad(90)) * dir))
+				* p->speed_ratio, 1)) != 1 && key != 2 && key != 4)
+		p->pos->y += p->speed * (sin(p->angle + (ft_inrad(90)) * dir))
+						* p->speed_ratio;
 	if (is_key_pressed(b, 13) == -1 && is_key_pressed(b, 1) == -1)
 		bobbing(p);
 }
@@ -70,14 +70,13 @@ void	move(struct s_player *p, int dir)
 
 	b = (t_brain *)p->brain;
 	m = b->map;
-	p->speedRatio = 1.0/(b->ctx->fps + 1);
-	if ((key = get_grid(m, p->pos->x + p->step->x * dir * p->speedRatio, p->pos->y, 1))
-											!= 1 && key != 2 && key != 4)
-		p->pos->x += p->step->x * dir * p->speedRatio;
-	if ((key = get_grid(m, p->pos->x, p->pos->y + p->step->y * dir * p->speedRatio, 1))
-											!= 1 && key != 2 && key != 4)
-		p->pos->y += p->step->y * dir * p->speedRatio;
-	p->as_move = 1;
+	if ((key = get_grid(m, p->pos->x + p->step->x * dir * p->speed_ratio,
+		p->pos->y, 1)) != 1 && key != 2 && key != 4)
+		p->pos->x += p->step->x * dir * p->speed_ratio;
+	if ((key = get_grid(m, p->pos->x,
+		p->pos->y + p->step->y * dir * p->speed_ratio, 1))
+			!= 1 && key != 2 && key != 4)
+		p->pos->y += p->step->y * dir * p->speed_ratio;
 	bobbing(p);
 }
 
@@ -91,8 +90,6 @@ void	rotate(struct s_player *p, float angle)
 	p->step->x = (p->pos->x + p->speed * cos(p->angle)) - p->pos->x;
 	p->step->y = (p->pos->y + p->speed * sin(p->angle)) - p->pos->y;
 	p->divided = p->angle - (p->cam->fov / 2);
-	p->as_rotate = 1;
-	p->as_move = 1;
 }
 
 void	jump(t_player *p, float speed)
@@ -102,7 +99,7 @@ void	jump(t_player *p, float speed)
 
 	b = (t_brain *)p->brain;
 	jump_h = (double)b->map->bloc_size * 0.9;
-	speed *= jump_h * (p->speedRatio);
+	speed *= jump_h * (p->speed_ratio);
 	if (speed > 0 && p->jumping == 0)
 		p->jumping = 1;
 	if (p->jumping != 0)
@@ -120,5 +117,4 @@ void	jump(t_player *p, float speed)
 			p->z = 0;
 		}
 	}
-	b->player->as_move = 1;
 }

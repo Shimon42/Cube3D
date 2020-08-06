@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/09 21:29:11 by siferrar          #+#    #+#             */
-/*   Updated: 2020/08/04 15:00:14 by siferrar         ###   ########lyon.fr   */
+/*   Created: 2020/08/06 10:41:58 by user42            #+#    #+#             */
+/*   Updated: 2020/08/06 12:08:46 by user42           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ t_brain	*new_brain(int width, int height, int save)
 		check_n_free(new->ctx->mlx_ptr);
 		check_n_free(new->ctx);
 		new->ctx = new_ctx(width, height);
+		new->ctx->fps = 0;
 	}
 	new->map = NULL;
 	new->player = NULL;
@@ -40,17 +41,15 @@ t_brain	*new_brain(int width, int height, int save)
 
 int		loop_hook(t_brain *b)
 {
-	b->player->as_move = 1;
 	key_press(-1, b);
-	if (b->player->as_move == 1)
+	draw_walls(b, b->ctx);
+	update_sprite(b);
+	if (is_key_pressed(b, 102) == -1)
 	{
-		draw_walls(b, b->ctx);
-		update_sprite(b);
-		if (is_key_pressed(b, 102) == -1)
-			draw_minimap(b, 10, 25, 200);
-		b->player->as_move = 0;
+		draw_minimap(b, 10, 25, 200);
+		draw_fullmap(b, 0);
 	}
-	if (is_key_pressed(b, 102) != -1)
+	else
 		draw_fullmap(b, 0.28);
 	if (!b->save)
 		mlx_put_image_to_window(b->ctx->mlx_ptr, b->ctx->win_ptr,
@@ -61,6 +60,9 @@ int		loop_hook(t_brain *b)
 
 int		red_cross(void *brain)
 {
+	t_brain	*b;
+
+	b = (t_brain*)brain;
 	exit_cube(brain, 0, "Exit From Red Cross", 0);
 	return (1);
 }
@@ -77,11 +79,10 @@ void	init_loop(t_brain *b, int save)
 	{
 		b->ctx->win_ptr = mlx_new_window(b->ctx->mlx_ptr,
 			b->ctx->width, b->ctx->height, "Cube3D");
-		ft_putstr("Loop Init OK\n");
 		mlx_loop_hook(b->ctx->mlx_ptr, &loop_hook, b);
 		mlx_hook(b->ctx->win_ptr, 2, (1L << 0), &key_press, b);
-		mlx_hook(b->ctx->win_ptr, 17, (1L << 16), &red_cross, b);
-		mlx_key_hook(b->ctx->win_ptr, &key_release, b);
+		mlx_hook(b->ctx->win_ptr, 33, (1L << 17), &red_cross, b);
+		mlx_hook(b->ctx->win_ptr, 3, (1L << 1), &key_release, b);
 		mlx_do_key_autorepeaton(b->ctx->mlx_ptr);
 		mlx_loop(b->ctx->mlx_ptr);
 	}
