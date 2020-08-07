@@ -1,36 +1,536 @@
-==11640== Memcheck, a memory error detector
-==11640== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==11640== Using Valgrind-3.13.0 and LibVEX; rerun with -h for copyright info
-==11640== Command: ./Cub3D assets/maps/new_parse.cub
-==11640== Parent PID: 11639
-==11640== 
-==11640== 
-==11640== HEAP SUMMARY:
-==11640==     in use at exit: 240 bytes in 2 blocks
-==11640==   total heap usage: 42 allocs, 40 frees, 4,125 bytes allocated
-==11640== 
-==11640== 32 bytes in 1 blocks are still reachable in loss record 1 of 2
-==11640==    at 0x4C2FB0F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
-==11640==    by 0x40E949: init_brain (in /home/user42/42/Cube3D/Linux/Cub3D)
-==11640==    by 0x40EA9A: get_brain (in /home/user42/42/Cube3D/Linux/Cub3D)
-==11640==    by 0x40EC59: get_next_line (in /home/user42/42/Cube3D/Linux/Cub3D)
-==11640==    by 0x402B8C: ft_getmap_flag (in /home/user42/42/Cube3D/Linux/Cub3D)
-==11640==    by 0x40206A: main (in /home/user42/42/Cube3D/Linux/Cub3D)
-==11640== 
-==11640== 208 bytes in 1 blocks are still reachable in loss record 2 of 2
-==11640==    at 0x4C2FB0F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
-==11640==    by 0x40EF58: ft_strnjoin (in /home/user42/42/Cube3D/Linux/Cub3D)
-==11640==    by 0x40EB71: treat_left (in /home/user42/42/Cube3D/Linux/Cub3D)
-==11640==    by 0x40EC82: get_next_line (in /home/user42/42/Cube3D/Linux/Cub3D)
-==11640==    by 0x402BEE: ft_getmap_flag (in /home/user42/42/Cube3D/Linux/Cub3D)
-==11640==    by 0x40206A: main (in /home/user42/42/Cube3D/Linux/Cub3D)
-==11640== 
-==11640== LEAK SUMMARY:
-==11640==    definitely lost: 0 bytes in 0 blocks
-==11640==    indirectly lost: 0 bytes in 0 blocks
-==11640==      possibly lost: 0 bytes in 0 blocks
-==11640==    still reachable: 240 bytes in 2 blocks
-==11640==         suppressed: 0 bytes in 0 blocks
-==11640== 
-==11640== For counts of detected and suppressed errors, rerun with: -v
-==11640== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==13808== Memcheck, a memory error detector
+==13808== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==13808== Using Valgrind-3.13.0 and LibVEX; rerun with -h for copyright info
+==13808== Command: ./Cub3D assets/maps/new_parse.cub
+==13808== Parent PID: 13807
+==13808== 
+==13808== 
+==13808== HEAP SUMMARY:
+==13808==     in use at exit: 84,999 bytes in 97 blocks
+==13808==   total heap usage: 5,395 allocs, 5,298 frees, 1,033,826 bytes allocated
+==13808== 
+==13808== 5 bytes in 1 blocks are still reachable in loss record 1 of 49
+==13808==    at 0x4C2FB0F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==13808==    by 0x57C1A29: strdup (strdup.c:42)
+==13808==    by 0x4E69EE1: XOpenDisplay (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==13808==    by 0x40F8A0: mlx_init (in /home/user42/42/Cube3D/Linux/Cub3D)
+==13808==    by 0x402419: new_ctx (in /home/user42/42/Cube3D/Linux/Cub3D)
+==13808==    by 0x401C0E: new_brain (in /home/user42/42/Cube3D/Linux/Cub3D)
+==13808==    by 0x4020A8: main (in /home/user42/42/Cube3D/Linux/Cub3D)
+==13808== 
+==13808== 8 bytes in 1 blocks are still reachable in loss record 2 of 49
+==13808==    at 0x4C2FB0F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==13808==    by 0x57C1A29: strdup (strdup.c:42)
+==13808==    by 0x4E63FD1: XInitExtension (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==13808==    by 0x5180FDE: XextAddDisplay (in /usr/lib/x86_64-linux-gnu/libXext.so.6.4.0)
+==13808==    by 0x517C4DC: XShmQueryVersion (in /usr/lib/x86_64-linux-gnu/libXext.so.6.4.0)
+==13808==    by 0x40F990: mlx_int_deal_shm (in /home/user42/42/Cube3D/Linux/Cub3D)
+==13808==    by 0x40F918: mlx_init (in /home/user42/42/Cube3D/Linux/Cub3D)
+==13808==    by 0x402419: new_ctx (in /home/user42/42/Cube3D/Linux/Cub3D)
+==13808==    by 0x401C0E: new_brain (in /home/user42/42/Cube3D/Linux/Cub3D)
+==13808==    by 0x4020A8: main (in /home/user42/42/Cube3D/Linux/Cub3D)
+==13808== 
+==13808== 8 bytes in 1 blocks are still reachable in loss record 3 of 49
+==13808==    at 0x4C2FB0F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==13808==    by 0x5180D3E: ??? (in /usr/lib/x86_64-linux-gnu/libXext.so.6.4.0)
+==13808==    by 0x5180DAA: ??? (in /usr/lib/x86_64-linux-gnu/libXext.so.6.4.0)
+==13808==    by 0x5181181: XextAddDisplay (in /usr/lib/x86_64-linux-gnu/libXext.so.6.4.0)
+==13808==    by 0x517C4DC: XShmQueryVersion (in /usr/lib/x86_64-linux-gnu/libXext.so.6.4.0)
+==13808==    by 0x40F990: mlx_int_deal_shm (in /home/user42/42/Cube3D/Linux/Cub3D)
+==13808==    by 0x40F918: mlx_init (in /home/user42/42/Cube3D/Linux/Cub3D)
+==13808==    by 0x402419: new_ctx (in /home/user42/42/Cube3D/Linux/Cub3D)
+==13808==    by 0x401C0E: new_brain (in /home/user42/42/Cube3D/Linux/Cub3D)
+==13808==    by 0x4020A8: main (in /home/user42/42/Cube3D/Linux/Cub3D)
+==13808== 
+==13808== 10 bytes in 1 blocks are still reachable in loss record 4 of 49
+==13808==    at 0x4C2FB0F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==13808==    by 0x57C1A29: strdup (strdup.c:42)
+==13808==    by 0x4E63FD1: XInitExtension (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==13808==    by 0x4ECE0FB: XkbUseExtension (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==13808==    by 0x4E6A953: XOpenDisplay (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==13808==    by 0x40F8A0: mlx_init (in /home/user42/42/Cube3D/Linux/Cub3D)
+==13808==    by 0x402419: new_ctx (in /home/user42/42/Cube3D/Linux/Cub3D)
+==13808==    by 0x401C0E: new_brain (in /home/user42/42/Cube3D/Linux/Cub3D)
+==13808==    by 0x4020A8: main (in /home/user42/42/Cube3D/Linux/Cub3D)
+==13808== 
+==13808== 16 bytes in 1 blocks are still reachable in loss record 5 of 49
+==13808==    at 0x4C2FB0F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==13808==    by 0x5B2390D: ??? (in /usr/lib/x86_64-linux-gnu/libxcb.so.1.1.0)
+==13808==    by 0x5B21E43: ??? (in /usr/lib/x86_64-linux-gnu/libxcb.so.1.1.0)
+==13808==    by 0x5B20478: xcb_connect_to_fd (in /usr/lib/x86_64-linux-gnu/libxcb.so.1.1.0)
+==13808==    by 0x5B24464: xcb_connect_to_display_with_auth_info (in /usr/lib/x86_64-linux-gnu/libxcb.so.1.1.0)
+==13808==    by 0x4E79561: _XConnectXCB (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==13808==    by 0x4E69F01: XOpenDisplay (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==13808==    by 0x40F8A0: mlx_init (in /home/user42/42/Cube3D/Linux/Cub3D)
+==13808==    by 0x402419: new_ctx (in /home/user42/42/Cube3D/Linux/Cub3D)
+==13808==    by 0x401C0E: new_brain (in /home/user42/42/Cube3D/Linux/Cub3D)
+==13808==    by 0x4020A8: main (in /home/user42/42/Cube3D/Linux/Cub3D)
+==13808== 
+==13808== 21 bytes in 1 blocks are still reachable in loss record 6 of 49
+==13808==    at 0x4C2FB0F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==13808==    by 0x4E6A385: XOpenDisplay (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==13808==    by 0x40F8A0: mlx_init (in /home/user42/42/Cube3D/Linux/Cub3D)
+==13808==    by 0x402419: new_ctx (in /home/user42/42/Cube3D/Linux/Cub3D)
+==13808==    by 0x401C0E: new_brain (in /home/user42/42/Cube3D/Linux/Cub3D)
+==13808==    by 0x4020A8: main (in /home/user42/42/Cube3D/Linux/Cub3D)
+==13808== 
+==13808== 24 bytes in 1 blocks are still reachable in loss record 7 of 49
+==13808==    at 0x4C2FB0F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==13808==    by 0x5180F4D: XextCreateExtension (in /usr/lib/x86_64-linux-gnu/libXext.so.6.4.0)
+==13808==    by 0x5180A14: ??? (in /usr/lib/x86_64-linux-gnu/libXext.so.6.4.0)
+==13808==    by 0x5180D97: ??? (in /usr/lib/x86_64-linux-gnu/libXext.so.6.4.0)
+==13808==    by 0x5181181: XextAddDisplay (in /usr/lib/x86_64-linux-gnu/libXext.so.6.4.0)
+==13808==    by 0x517C4DC: XShmQueryVersion (in /usr/lib/x86_64-linux-gnu/libXext.so.6.4.0)
+==13808==    by 0x40F990: mlx_int_deal_shm (in /home/user42/42/Cube3D/Linux/Cub3D)
+==13808==    by 0x40F918: mlx_init (in /home/user42/42/Cube3D/Linux/Cub3D)
+==13808==    by 0x402419: new_ctx (in /home/user42/42/Cube3D/Linux/Cub3D)
+==13808==    by 0x401C0E: new_brain (in /home/user42/42/Cube3D/Linux/Cub3D)
+==13808==    by 0x4020A8: main (in /home/user42/42/Cube3D/Linux/Cub3D)
+==13808== 
+==13808== 24 bytes in 1 blocks are still reachable in loss record 8 of 49
+==13808==    at 0x4C2FB0F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==13808==    by 0x57C1A29: strdup (strdup.c:42)
+==13808==    by 0x4E63FD1: XInitExtension (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==13808==    by 0x5180FDE: XextAddDisplay (in /usr/lib/x86_64-linux-gnu/libXext.so.6.4.0)
+==13808==    by 0x5180A52: ??? (in /usr/lib/x86_64-linux-gnu/libXext.so.6.4.0)
+==13808==    by 0x5180D97: ??? (in /usr/lib/x86_64-linux-gnu/libXext.so.6.4.0)
+==13808==    by 0x5181181: XextAddDisplay (in /usr/lib/x86_64-linux-gnu/libXext.so.6.4.0)
+==13808==    by 0x517C4DC: XShmQueryVersion (in /usr/lib/x86_64-linux-gnu/libXext.so.6.4.0)
+==13808==    by 0x40F990: mlx_int_deal_shm (in /home/user42/42/Cube3D/Linux/Cub3D)
+==13808==    by 0x40F918: mlx_init (in /home/user42/42/Cube3D/Linux/Cub3D)
+==13808==    by 0x402419: new_ctx (in /home/user42/42/Cube3D/Linux/Cub3D)
+==13808==    by 0x401C0E: new_brain (in /home/user42/42/Cube3D/Linux/Cub3D)
+==13808== 
+==13808== 24 bytes in 1 blocks are still reachable in loss record 9 of 49
+==13808==    at 0x4C2FB0F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==13808==    by 0x5180DCD: ??? (in /usr/lib/x86_64-linux-gnu/libXext.so.6.4.0)
+==13808==    by 0x5181181: XextAddDisplay (in /usr/lib/x86_64-linux-gnu/libXext.so.6.4.0)
+==13808==    by 0x517C4DC: XShmQueryVersion (in /usr/lib/x86_64-linux-gnu/libXext.so.6.4.0)
+==13808==    by 0x40F990: mlx_int_deal_shm (in /home/user42/42/Cube3D/Linux/Cub3D)
+==13808==    by 0x40F918: mlx_init (in /home/user42/42/Cube3D/Linux/Cub3D)
+==13808==    by 0x402419: new_ctx (in /home/user42/42/Cube3D/Linux/Cub3D)
+==13808==    by 0x401C0E: new_brain (in /home/user42/42/Cube3D/Linux/Cub3D)
+==13808==    by 0x4020A8: main (in /home/user42/42/Cube3D/Linux/Cub3D)
+==13808== 
+==13808== 29 bytes in 1 blocks are still reachable in loss record 10 of 49
+==13808==    at 0x4C2FB0F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==13808==    by 0x4E64DC7: _XUpdateAtomCache (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==13808==    by 0x4E65189: XInternAtom (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==13808==    by 0x4E75693: XSetWMProtocols (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==13808==    by 0x40FBFA: mlx_new_window (in /home/user42/42/Cube3D/Linux/Cub3D)
+==13808==    by 0x401EE4: init_loop (in /home/user42/42/Cube3D/Linux/Cub3D)
+==13808==    by 0x402145: main (in /home/user42/42/Cube3D/Linux/Cub3D)
+==13808== 
+==13808== 32 bytes in 1 blocks are still reachable in loss record 11 of 49
+==13808==    at 0x4C2FB0F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==13808==    by 0x40E969: init_brain (in /home/user42/42/Cube3D/Linux/Cub3D)
+==13808==    by 0x40EABA: get_brain (in /home/user42/42/Cube3D/Linux/Cub3D)
+==13808==    by 0x40EC79: get_next_line (in /home/user42/42/Cube3D/Linux/Cub3D)
+==13808==    by 0x402B8C: ft_getmap_flag (in /home/user42/42/Cube3D/Linux/Cub3D)
+==13808==    by 0x40206A: main (in /home/user42/42/Cube3D/Linux/Cub3D)
+==13808== 
+==13808== 32 bytes in 1 blocks are still reachable in loss record 12 of 49
+==13808==    at 0x4C2FA3F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==13808==    by 0x4C31D84: realloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==13808==    by 0x5B23576: ??? (in /usr/lib/x86_64-linux-gnu/libxcb.so.1.1.0)
+==13808==    by 0x5B235F9: xcb_get_extension_data (in /usr/lib/x86_64-linux-gnu/libxcb.so.1.1.0)
+==13808==    by 0x5B20C4E: xcb_prefetch_maximum_request_length (in /usr/lib/x86_64-linux-gnu/libxcb.so.1.1.0)
+==13808==    by 0x5B20CC4: xcb_get_maximum_request_length (in /usr/lib/x86_64-linux-gnu/libxcb.so.1.1.0)
+==13808==    by 0x4E6A80B: XOpenDisplay (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==13808==    by 0x40F8A0: mlx_init (in /home/user42/42/Cube3D/Linux/Cub3D)
+==13808==    by 0x402419: new_ctx (in /home/user42/42/Cube3D/Linux/Cub3D)
+==13808==    by 0x401C0E: new_brain (in /home/user42/42/Cube3D/Linux/Cub3D)
+==13808==    by 0x4020A8: main (in /home/user42/42/Cube3D/Linux/Cub3D)
+==13808== 
+==13808== 32 bytes in 1 blocks are still reachable in loss record 13 of 49
+==13808==    at 0x4C2FB0F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==13808==    by 0x5B22C5B: ??? (in /usr/lib/x86_64-linux-gnu/libxcb.so.1.1.0)
+==13808==    by 0x5B20A07: ??? (in /usr/lib/x86_64-linux-gnu/libxcb.so.1.1.0)
+==13808==    by 0x5B2206E: ??? (in /usr/lib/x86_64-linux-gnu/libxcb.so.1.1.0)
+==13808==    by 0x5B2217F: xcb_wait_for_reply (in /usr/lib/x86_64-linux-gnu/libxcb.so.1.1.0)
+==13808==    by 0x5B23642: xcb_get_extension_data (in /usr/lib/x86_64-linux-gnu/libxcb.so.1.1.0)
+==13808==    by 0x5B20C4E: xcb_prefetch_maximum_request_length (in /usr/lib/x86_64-linux-gnu/libxcb.so.1.1.0)
+==13808==    by 0x5B20CC4: xcb_get_maximum_request_length (in /usr/lib/x86_64-linux-gnu/libxcb.so.1.1.0)
+==13808==    by 0x4E6A80B: XOpenDisplay (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==13808==    by 0x40F8A0: mlx_init (in /home/user42/42/Cube3D/Linux/Cub3D)
+==13808==    by 0x402419: new_ctx (in /home/user42/42/Cube3D/Linux/Cub3D)
+==13808==    by 0x401C0E: new_brain (in /home/user42/42/Cube3D/Linux/Cub3D)
+==13808== 
+==13808== 32 bytes in 1 blocks are still reachable in loss record 14 of 49
+==13808==    at 0x4C2FB0F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==13808==    by 0x5180FBF: XextAddDisplay (in /usr/lib/x86_64-linux-gnu/libXext.so.6.4.0)
+==13808==    by 0x517C4DC: XShmQueryVersion (in /usr/lib/x86_64-linux-gnu/libXext.so.6.4.0)
+==13808==    by 0x40F990: mlx_int_deal_shm (in /home/user42/42/Cube3D/Linux/Cub3D)
+==13808==    by 0x40F918: mlx_init (in /home/user42/42/Cube3D/Linux/Cub3D)
+==13808==    by 0x402419: new_ctx (in /home/user42/42/Cube3D/Linux/Cub3D)
+==13808==    by 0x401C0E: new_brain (in /home/user42/42/Cube3D/Linux/Cub3D)
+==13808==    by 0x4020A8: main (in /home/user42/42/Cube3D/Linux/Cub3D)
+==13808== 
+==13808== 32 bytes in 1 blocks are still reachable in loss record 15 of 49
+==13808==    at 0x4C2FB0F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==13808==    by 0x5180FBF: XextAddDisplay (in /usr/lib/x86_64-linux-gnu/libXext.so.6.4.0)
+==13808==    by 0x5180A52: ??? (in /usr/lib/x86_64-linux-gnu/libXext.so.6.4.0)
+==13808==    by 0x5180D97: ??? (in /usr/lib/x86_64-linux-gnu/libXext.so.6.4.0)
+==13808==    by 0x5181181: XextAddDisplay (in /usr/lib/x86_64-linux-gnu/libXext.so.6.4.0)
+==13808==    by 0x517C4DC: XShmQueryVersion (in /usr/lib/x86_64-linux-gnu/libXext.so.6.4.0)
+==13808==    by 0x40F990: mlx_int_deal_shm (in /home/user42/42/Cube3D/Linux/Cub3D)
+==13808==    by 0x40F918: mlx_init (in /home/user42/42/Cube3D/Linux/Cub3D)
+==13808==    by 0x402419: new_ctx (in /home/user42/42/Cube3D/Linux/Cub3D)
+==13808==    by 0x401C0E: new_brain (in /home/user42/42/Cube3D/Linux/Cub3D)
+==13808==    by 0x4020A8: main (in /home/user42/42/Cube3D/Linux/Cub3D)
+==13808== 
+==13808== 33 bytes in 1 blocks are still reachable in loss record 16 of 49
+==13808==    at 0x4C2FB0F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==13808==    by 0x4E64DC7: _XUpdateAtomCache (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==13808==    by 0x4E65189: XInternAtom (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==13808==    by 0x40F90C: mlx_init (in /home/user42/42/Cube3D/Linux/Cub3D)
+==13808==    by 0x402419: new_ctx (in /home/user42/42/Cube3D/Linux/Cub3D)
+==13808==    by 0x401C0E: new_brain (in /home/user42/42/Cube3D/Linux/Cub3D)
+==13808==    by 0x4020A8: main (in /home/user42/42/Cube3D/Linux/Cub3D)
+==13808== 
+==13808== 40 bytes in 1 blocks are still reachable in loss record 17 of 49
+==13808==    at 0x4C2FB0F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==13808==    by 0x4E7B5BD: _XPollfdCacheInit (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==13808==    by 0x4E6A1B5: XOpenDisplay (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==13808==    by 0x40F8A0: mlx_init (in /home/user42/42/Cube3D/Linux/Cub3D)
+==13808==    by 0x402419: new_ctx (in /home/user42/42/Cube3D/Linux/Cub3D)
+==13808==    by 0x401C0E: new_brain (in /home/user42/42/Cube3D/Linux/Cub3D)
+==13808==    by 0x4020A8: main (in /home/user42/42/Cube3D/Linux/Cub3D)
+==13808== 
+==13808== 48 bytes in 1 blocks are still reachable in loss record 18 of 49
+==13808==    at 0x4C2FB0F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==13808==    by 0x4E794E9: _XConnectXCB (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==13808==    by 0x4E69F01: XOpenDisplay (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==13808==    by 0x40F8A0: mlx_init (in /home/user42/42/Cube3D/Linux/Cub3D)
+==13808==    by 0x402419: new_ctx (in /home/user42/42/Cube3D/Linux/Cub3D)
+==13808==    by 0x401C0E: new_brain (in /home/user42/42/Cube3D/Linux/Cub3D)
+==13808==    by 0x4020A8: main (in /home/user42/42/Cube3D/Linux/Cub3D)
+==13808== 
+==13808== 48 bytes in 1 blocks are still reachable in loss record 19 of 49
+==13808==    at 0x4C2FB0F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==13808==    by 0x4E794FF: _XConnectXCB (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==13808==    by 0x4E69F01: XOpenDisplay (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==13808==    by 0x40F8A0: mlx_init (in /home/user42/42/Cube3D/Linux/Cub3D)
+==13808==    by 0x402419: new_ctx (in /home/user42/42/Cube3D/Linux/Cub3D)
+==13808==    by 0x401C0E: new_brain (in /home/user42/42/Cube3D/Linux/Cub3D)
+==13808==    by 0x4020A8: main (in /home/user42/42/Cube3D/Linux/Cub3D)
+==13808== 
+==13808== 48 bytes in 1 blocks are still reachable in loss record 20 of 49
+==13808==    at 0x4C31B25: calloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==13808==    by 0x4EC8B8C: XkbGetMap (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==13808==    by 0x4EC4C98: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==13808==    by 0x4EC5157: XkbKeycodeToKeysym (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==13808==    by 0x411ADE: mlx_int_param_KeyPress (in /home/user42/42/Cube3D/Linux/Cub3D)
+==13808==    by 0x40FD48: mlx_loop (in /home/user42/42/Cube3D/Linux/Cub3D)
+==13808==    by 0x401FC1: init_loop (in /home/user42/42/Cube3D/Linux/Cub3D)
+==13808==    by 0x402145: main (in /home/user42/42/Cube3D/Linux/Cub3D)
+==13808== 
+==13808== 72 bytes in 1 blocks are still reachable in loss record 21 of 49
+==13808==    at 0x4C31B25: calloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==13808==    by 0x4E6A264: XOpenDisplay (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==13808==    by 0x40F8A0: mlx_init (in /home/user42/42/Cube3D/Linux/Cub3D)
+==13808==    by 0x402419: new_ctx (in /home/user42/42/Cube3D/Linux/Cub3D)
+==13808==    by 0x401C0E: new_brain (in /home/user42/42/Cube3D/Linux/Cub3D)
+==13808==    by 0x4020A8: main (in /home/user42/42/Cube3D/Linux/Cub3D)
+==13808== 
+==13808== 72 bytes in 1 blocks are still reachable in loss record 22 of 49
+==13808==    at 0x4C31B25: calloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==13808==    by 0x4EC8B70: XkbGetMap (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==13808==    by 0x4EC4C98: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==13808==    by 0x4EC5157: XkbKeycodeToKeysym (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==13808==    by 0x411ADE: mlx_int_param_KeyPress (in /home/user42/42/Cube3D/Linux/Cub3D)
+==13808==    by 0x40FD48: mlx_loop (in /home/user42/42/Cube3D/Linux/Cub3D)
+==13808==    by 0x401FC1: init_loop (in /home/user42/42/Cube3D/Linux/Cub3D)
+==13808==    by 0x402145: main (in /home/user42/42/Cube3D/Linux/Cub3D)
+==13808== 
+==13808== 104 bytes in 1 blocks are still reachable in loss record 23 of 49
+==13808==    at 0x4C31B25: calloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==13808==    by 0x4E793EE: _XConnectXCB (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==13808==    by 0x4E69F01: XOpenDisplay (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==13808==    by 0x40F8A0: mlx_init (in /home/user42/42/Cube3D/Linux/Cub3D)
+==13808==    by 0x402419: new_ctx (in /home/user42/42/Cube3D/Linux/Cub3D)
+==13808==    by 0x401C0E: new_brain (in /home/user42/42/Cube3D/Linux/Cub3D)
+==13808==    by 0x4020A8: main (in /home/user42/42/Cube3D/Linux/Cub3D)
+==13808== 
+==13808== 112 bytes in 1 blocks are still reachable in loss record 24 of 49
+==13808==    at 0x4C31B25: calloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==13808==    by 0x4E6A53F: XOpenDisplay (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==13808==    by 0x40F8A0: mlx_init (in /home/user42/42/Cube3D/Linux/Cub3D)
+==13808==    by 0x402419: new_ctx (in /home/user42/42/Cube3D/Linux/Cub3D)
+==13808==    by 0x401C0E: new_brain (in /home/user42/42/Cube3D/Linux/Cub3D)
+==13808==    by 0x4020A8: main (in /home/user42/42/Cube3D/Linux/Cub3D)
+==13808== 
+==13808== 118 bytes in 1 blocks are still reachable in loss record 25 of 49
+==13808==    at 0x4C2FB0F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==13808==    by 0x40EF78: ft_strnjoin (in /home/user42/42/Cube3D/Linux/Cub3D)
+==13808==    by 0x40EB91: treat_left (in /home/user42/42/Cube3D/Linux/Cub3D)
+==13808==    by 0x40ECA2: get_next_line (in /home/user42/42/Cube3D/Linux/Cub3D)
+==13808==    by 0x402BEE: ft_getmap_flag (in /home/user42/42/Cube3D/Linux/Cub3D)
+==13808==    by 0x40206A: main (in /home/user42/42/Cube3D/Linux/Cub3D)
+==13808== 
+==13808== 128 bytes in 1 blocks are still reachable in loss record 26 of 49
+==13808==    at 0x4C31B25: calloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==13808==    by 0x4E6A46F: XOpenDisplay (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==13808==    by 0x40F8A0: mlx_init (in /home/user42/42/Cube3D/Linux/Cub3D)
+==13808==    by 0x402419: new_ctx (in /home/user42/42/Cube3D/Linux/Cub3D)
+==13808==    by 0x401C0E: new_brain (in /home/user42/42/Cube3D/Linux/Cub3D)
+==13808==    by 0x4020A8: main (in /home/user42/42/Cube3D/Linux/Cub3D)
+==13808== 
+==13808== 128 bytes in 1 blocks are still reachable in loss record 27 of 49
+==13808==    at 0x4C31B25: calloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==13808==    by 0x4E63FBE: XInitExtension (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==13808==    by 0x4ECE0FB: XkbUseExtension (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==13808==    by 0x4E6A953: XOpenDisplay (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==13808==    by 0x40F8A0: mlx_init (in /home/user42/42/Cube3D/Linux/Cub3D)
+==13808==    by 0x402419: new_ctx (in /home/user42/42/Cube3D/Linux/Cub3D)
+==13808==    by 0x401C0E: new_brain (in /home/user42/42/Cube3D/Linux/Cub3D)
+==13808==    by 0x4020A8: main (in /home/user42/42/Cube3D/Linux/Cub3D)
+==13808== 
+==13808== 128 bytes in 1 blocks are still reachable in loss record 28 of 49
+==13808==    at 0x4C31B25: calloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==13808==    by 0x4E63FBE: XInitExtension (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==13808==    by 0x5180FDE: XextAddDisplay (in /usr/lib/x86_64-linux-gnu/libXext.so.6.4.0)
+==13808==    by 0x517C4DC: XShmQueryVersion (in /usr/lib/x86_64-linux-gnu/libXext.so.6.4.0)
+==13808==    by 0x40F990: mlx_int_deal_shm (in /home/user42/42/Cube3D/Linux/Cub3D)
+==13808==    by 0x40F918: mlx_init (in /home/user42/42/Cube3D/Linux/Cub3D)
+==13808==    by 0x402419: new_ctx (in /home/user42/42/Cube3D/Linux/Cub3D)
+==13808==    by 0x401C0E: new_brain (in /home/user42/42/Cube3D/Linux/Cub3D)
+==13808==    by 0x4020A8: main (in /home/user42/42/Cube3D/Linux/Cub3D)
+==13808== 
+==13808== 128 bytes in 1 blocks are still reachable in loss record 29 of 49
+==13808==    at 0x4C31B25: calloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==13808==    by 0x4E63FBE: XInitExtension (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==13808==    by 0x5180FDE: XextAddDisplay (in /usr/lib/x86_64-linux-gnu/libXext.so.6.4.0)
+==13808==    by 0x5180A52: ??? (in /usr/lib/x86_64-linux-gnu/libXext.so.6.4.0)
+==13808==    by 0x5180D97: ??? (in /usr/lib/x86_64-linux-gnu/libXext.so.6.4.0)
+==13808==    by 0x5181181: XextAddDisplay (in /usr/lib/x86_64-linux-gnu/libXext.so.6.4.0)
+==13808==    by 0x517C4DC: XShmQueryVersion (in /usr/lib/x86_64-linux-gnu/libXext.so.6.4.0)
+==13808==    by 0x40F990: mlx_int_deal_shm (in /home/user42/42/Cube3D/Linux/Cub3D)
+==13808==    by 0x40F918: mlx_init (in /home/user42/42/Cube3D/Linux/Cub3D)
+==13808==    by 0x402419: new_ctx (in /home/user42/42/Cube3D/Linux/Cub3D)
+==13808==    by 0x401C0E: new_brain (in /home/user42/42/Cube3D/Linux/Cub3D)
+==13808==    by 0x4020A8: main (in /home/user42/42/Cube3D/Linux/Cub3D)
+==13808== 
+==13808== 152 bytes in 1 blocks are still reachable in loss record 30 of 49
+==13808==    at 0x4C31B25: calloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==13808==    by 0x4ECE1EE: XkbUseExtension (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==13808==    by 0x4E6A953: XOpenDisplay (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==13808==    by 0x40F8A0: mlx_init (in /home/user42/42/Cube3D/Linux/Cub3D)
+==13808==    by 0x402419: new_ctx (in /home/user42/42/Cube3D/Linux/Cub3D)
+==13808==    by 0x401C0E: new_brain (in /home/user42/42/Cube3D/Linux/Cub3D)
+==13808==    by 0x4020A8: main (in /home/user42/42/Cube3D/Linux/Cub3D)
+==13808== 
+==13808== 160 bytes in 1 blocks are still reachable in loss record 31 of 49
+==13808==    at 0x4C2FB0F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==13808==    by 0x4E582FB: XCreateGC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==13808==    by 0x4E6A887: XOpenDisplay (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==13808==    by 0x40F8A0: mlx_init (in /home/user42/42/Cube3D/Linux/Cub3D)
+==13808==    by 0x402419: new_ctx (in /home/user42/42/Cube3D/Linux/Cub3D)
+==13808==    by 0x401C0E: new_brain (in /home/user42/42/Cube3D/Linux/Cub3D)
+==13808==    by 0x4020A8: main (in /home/user42/42/Cube3D/Linux/Cub3D)
+==13808== 
+==13808== 168 bytes in 1 blocks are still reachable in loss record 32 of 49
+==13808==    at 0x4C31B25: calloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==13808==    by 0x4E6A3F0: XOpenDisplay (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==13808==    by 0x40F8A0: mlx_init (in /home/user42/42/Cube3D/Linux/Cub3D)
+==13808==    by 0x402419: new_ctx (in /home/user42/42/Cube3D/Linux/Cub3D)
+==13808==    by 0x401C0E: new_brain (in /home/user42/42/Cube3D/Linux/Cub3D)
+==13808==    by 0x4020A8: main (in /home/user42/42/Cube3D/Linux/Cub3D)
+==13808== 
+==13808== 208 bytes in 1 blocks are still reachable in loss record 33 of 49
+==13808==    at 0x4C2FB0F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==13808==    by 0x5180CE9: ??? (in /usr/lib/x86_64-linux-gnu/libXext.so.6.4.0)
+==13808==    by 0x5180DAA: ??? (in /usr/lib/x86_64-linux-gnu/libXext.so.6.4.0)
+==13808==    by 0x5181181: XextAddDisplay (in /usr/lib/x86_64-linux-gnu/libXext.so.6.4.0)
+==13808==    by 0x517C4DC: XShmQueryVersion (in /usr/lib/x86_64-linux-gnu/libXext.so.6.4.0)
+==13808==    by 0x40F990: mlx_int_deal_shm (in /home/user42/42/Cube3D/Linux/Cub3D)
+==13808==    by 0x40F918: mlx_init (in /home/user42/42/Cube3D/Linux/Cub3D)
+==13808==    by 0x402419: new_ctx (in /home/user42/42/Cube3D/Linux/Cub3D)
+==13808==    by 0x401C0E: new_brain (in /home/user42/42/Cube3D/Linux/Cub3D)
+==13808==    by 0x4020A8: main (in /home/user42/42/Cube3D/Linux/Cub3D)
+==13808== 
+==13808== 208 bytes in 1 blocks are still reachable in loss record 34 of 49
+==13808==    at 0x4C2FB0F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==13808==    by 0x4E7CB6E: _XEnq (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==13808==    by 0x4E798BE: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==13808==    by 0x4E7A328: _XReadEvents (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==13808==    by 0x4E788CD: XWindowEvent (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==13808==    by 0x40FDF1: mlx_int_wait_first_expose (in /home/user42/42/Cube3D/Linux/Cub3D)
+==13808==    by 0x40FC5C: mlx_new_window (in /home/user42/42/Cube3D/Linux/Cub3D)
+==13808==    by 0x401EE4: init_loop (in /home/user42/42/Cube3D/Linux/Cub3D)
+==13808==    by 0x402145: main (in /home/user42/42/Cube3D/Linux/Cub3D)
+==13808== 
+==13808== 256 bytes in 1 blocks are still reachable in loss record 35 of 49
+==13808==    at 0x4C31B25: calloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==13808==    by 0x4ED696D: XkbAllocClientMap (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==13808==    by 0x4EC88DE: _XkbReadGetMapReply (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==13808==    by 0x4EC8A88: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==13808==    by 0x4EC8B01: XkbGetUpdatedMap (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==13808==    by 0x4EC8BBC: XkbGetMap (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==13808==    by 0x4EC4C98: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==13808==    by 0x4EC5157: XkbKeycodeToKeysym (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==13808==    by 0x411ADE: mlx_int_param_KeyPress (in /home/user42/42/Cube3D/Linux/Cub3D)
+==13808==    by 0x40FD48: mlx_loop (in /home/user42/42/Cube3D/Linux/Cub3D)
+==13808==    by 0x401FC1: init_loop (in /home/user42/42/Cube3D/Linux/Cub3D)
+==13808==    by 0x402145: main (in /home/user42/42/Cube3D/Linux/Cub3D)
+==13808== 
+==13808== 344 bytes in 6 blocks are still reachable in loss record 36 of 49
+==13808==    at 0x4C31B25: calloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==13808==    by 0x4EC8489: _XkbReadGetMapReply (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==13808==    by 0x4EC8A88: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==13808==    by 0x4EC8B01: XkbGetUpdatedMap (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==13808==    by 0x4EC8BBC: XkbGetMap (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==13808==    by 0x4EC4C98: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==13808==    by 0x4EC5157: XkbKeycodeToKeysym (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==13808==    by 0x411ADE: mlx_int_param_KeyPress (in /home/user42/42/Cube3D/Linux/Cub3D)
+==13808==    by 0x40FD48: mlx_loop (in /home/user42/42/Cube3D/Linux/Cub3D)
+==13808==    by 0x401FC1: init_loop (in /home/user42/42/Cube3D/Linux/Cub3D)
+==13808==    by 0x402145: main (in /home/user42/42/Cube3D/Linux/Cub3D)
+==13808== 
+==13808== 416 bytes in 2 blocks are still reachable in loss record 37 of 49
+==13808==    at 0x4C2FB0F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==13808==    by 0x4E7CB6E: _XEnq (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==13808==    by 0x4E798BE: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==13808==    by 0x4E7A82F: _XReply (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==13808==    by 0x4E6511E: XInternAtom (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==13808==    by 0x4E75693: XSetWMProtocols (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==13808==    by 0x40FBFA: mlx_new_window (in /home/user42/42/Cube3D/Linux/Cub3D)
+==13808==    by 0x401EE4: init_loop (in /home/user42/42/Cube3D/Linux/Cub3D)
+==13808==    by 0x402145: main (in /home/user42/42/Cube3D/Linux/Cub3D)
+==13808== 
+==13808== 512 bytes in 1 blocks are still reachable in loss record 38 of 49
+==13808==    at 0x4C31B25: calloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==13808==    by 0x4E64CF3: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==13808==    by 0x4E650A9: XInternAtom (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==13808==    by 0x40F90C: mlx_init (in /home/user42/42/Cube3D/Linux/Cub3D)
+==13808==    by 0x402419: new_ctx (in /home/user42/42/Cube3D/Linux/Cub3D)
+==13808==    by 0x401C0E: new_brain (in /home/user42/42/Cube3D/Linux/Cub3D)
+==13808==    by 0x4020A8: main (in /home/user42/42/Cube3D/Linux/Cub3D)
+==13808== 
+==13808== 1,120 bytes in 1 blocks are still reachable in loss record 39 of 49
+==13808==    at 0x4C31B25: calloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==13808==    by 0x4ED699C: XkbAllocClientMap (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==13808==    by 0x4EC81D4: _XkbReadGetMapReply (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==13808==    by 0x4EC8A88: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==13808==    by 0x4EC8B01: XkbGetUpdatedMap (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==13808==    by 0x4EC8BBC: XkbGetMap (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==13808==    by 0x4EC4C98: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==13808==    by 0x4EC5157: XkbKeycodeToKeysym (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==13808==    by 0x411ADE: mlx_int_param_KeyPress (in /home/user42/42/Cube3D/Linux/Cub3D)
+==13808==    by 0x40FD48: mlx_loop (in /home/user42/42/Cube3D/Linux/Cub3D)
+==13808==    by 0x401FC1: init_loop (in /home/user42/42/Cube3D/Linux/Cub3D)
+==13808==    by 0x402145: main (in /home/user42/42/Cube3D/Linux/Cub3D)
+==13808== 
+==13808== 1,331 bytes in 1 blocks are still reachable in loss record 40 of 49
+==13808==    at 0x4C2FB0F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==13808==    by 0x4E6A9BF: XOpenDisplay (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==13808==    by 0x40F8A0: mlx_init (in /home/user42/42/Cube3D/Linux/Cub3D)
+==13808==    by 0x402419: new_ctx (in /home/user42/42/Cube3D/Linux/Cub3D)
+==13808==    by 0x401C0E: new_brain (in /home/user42/42/Cube3D/Linux/Cub3D)
+==13808==    by 0x4020A8: main (in /home/user42/42/Cube3D/Linux/Cub3D)
+==13808== 
+==13808== 2,016 bytes in 27 blocks are still reachable in loss record 41 of 49
+==13808==    at 0x4C31B25: calloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==13808==    by 0x4EC8471: _XkbReadGetMapReply (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==13808==    by 0x4EC8A88: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==13808==    by 0x4EC8B01: XkbGetUpdatedMap (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==13808==    by 0x4EC8BBC: XkbGetMap (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==13808==    by 0x4EC4C98: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==13808==    by 0x4EC5157: XkbKeycodeToKeysym (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==13808==    by 0x411ADE: mlx_int_param_KeyPress (in /home/user42/42/Cube3D/Linux/Cub3D)
+==13808==    by 0x40FD48: mlx_loop (in /home/user42/42/Cube3D/Linux/Cub3D)
+==13808==    by 0x401FC1: init_loop (in /home/user42/42/Cube3D/Linux/Cub3D)
+==13808==    by 0x402145: main (in /home/user42/42/Cube3D/Linux/Cub3D)
+==13808== 
+==13808== 2,048 bytes in 1 blocks are still reachable in loss record 42 of 49
+==13808==    at 0x4C31B25: calloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==13808==    by 0x4EC8217: _XkbReadGetMapReply (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==13808==    by 0x4EC8A88: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==13808==    by 0x4EC8B01: XkbGetUpdatedMap (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==13808==    by 0x4EC8BBC: XkbGetMap (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==13808==    by 0x4EC4C98: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==13808==    by 0x4EC5157: XkbKeycodeToKeysym (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==13808==    by 0x411ADE: mlx_int_param_KeyPress (in /home/user42/42/Cube3D/Linux/Cub3D)
+==13808==    by 0x40FD48: mlx_loop (in /home/user42/42/Cube3D/Linux/Cub3D)
+==13808==    by 0x401FC1: init_loop (in /home/user42/42/Cube3D/Linux/Cub3D)
+==13808==    by 0x402145: main (in /home/user42/42/Cube3D/Linux/Cub3D)
+==13808== 
+==13808== 3,328 bytes in 16 blocks are still reachable in loss record 43 of 49
+==13808==    at 0x4C2FB0F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==13808==    by 0x4E7CB6E: _XEnq (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==13808==    by 0x4E798BE: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==13808==    by 0x4E7A374: _XReadEvents (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==13808==    by 0x4E788CD: XWindowEvent (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==13808==    by 0x40FDF1: mlx_int_wait_first_expose (in /home/user42/42/Cube3D/Linux/Cub3D)
+==13808==    by 0x40FC5C: mlx_new_window (in /home/user42/42/Cube3D/Linux/Cub3D)
+==13808==    by 0x401EE4: init_loop (in /home/user42/42/Cube3D/Linux/Cub3D)
+==13808==    by 0x402145: main (in /home/user42/42/Cube3D/Linux/Cub3D)
+==13808== 
+==13808== 4,680 bytes in 1 blocks are still reachable in loss record 44 of 49
+==13808==    at 0x4C31B25: calloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==13808==    by 0x4E69ECD: XOpenDisplay (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==13808==    by 0x40F8A0: mlx_init (in /home/user42/42/Cube3D/Linux/Cub3D)
+==13808==    by 0x402419: new_ctx (in /home/user42/42/Cube3D/Linux/Cub3D)
+==13808==    by 0x401C0E: new_brain (in /home/user42/42/Cube3D/Linux/Cub3D)
+==13808==    by 0x4020A8: main (in /home/user42/42/Cube3D/Linux/Cub3D)
+==13808== 
+==13808== 6,692 bytes in 1 blocks are still reachable in loss record 45 of 49
+==13808==    at 0x4C31D2F: realloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==13808==    by 0x5B205AD: xcb_connect_to_fd (in /usr/lib/x86_64-linux-gnu/libxcb.so.1.1.0)
+==13808==    by 0x5B24464: xcb_connect_to_display_with_auth_info (in /usr/lib/x86_64-linux-gnu/libxcb.so.1.1.0)
+==13808==    by 0x4E79561: _XConnectXCB (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==13808==    by 0x4E69F01: XOpenDisplay (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==13808==    by 0x40F8A0: mlx_init (in /home/user42/42/Cube3D/Linux/Cub3D)
+==13808==    by 0x402419: new_ctx (in /home/user42/42/Cube3D/Linux/Cub3D)
+==13808==    by 0x401C0E: new_brain (in /home/user42/42/Cube3D/Linux/Cub3D)
+==13808==    by 0x4020A8: main (in /home/user42/42/Cube3D/Linux/Cub3D)
+==13808== 
+==13808== 7,168 bytes in 1 blocks are still reachable in loss record 46 of 49
+==13808==    at 0x4C31B25: calloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==13808==    by 0x4EC89A5: _XkbReadGetMapReply (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==13808==    by 0x4EC8A88: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==13808==    by 0x4EC8B01: XkbGetUpdatedMap (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==13808==    by 0x4EC8BBC: XkbGetMap (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==13808==    by 0x4EC4C98: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==13808==    by 0x4EC5157: XkbKeycodeToKeysym (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==13808==    by 0x411ADE: mlx_int_param_KeyPress (in /home/user42/42/Cube3D/Linux/Cub3D)
+==13808==    by 0x40FD48: mlx_loop (in /home/user42/42/Cube3D/Linux/Cub3D)
+==13808==    by 0x401FC1: init_loop (in /home/user42/42/Cube3D/Linux/Cub3D)
+==13808==    by 0x402145: main (in /home/user42/42/Cube3D/Linux/Cub3D)
+==13808== 
+==13808== 15,120 bytes in 2 blocks are still reachable in loss record 47 of 49
+==13808==    at 0x4C31B25: calloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==13808==    by 0x4E6A673: XOpenDisplay (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==13808==    by 0x40F8A0: mlx_init (in /home/user42/42/Cube3D/Linux/Cub3D)
+==13808==    by 0x402419: new_ctx (in /home/user42/42/Cube3D/Linux/Cub3D)
+==13808==    by 0x401C0E: new_brain (in /home/user42/42/Cube3D/Linux/Cub3D)
+==13808==    by 0x4020A8: main (in /home/user42/42/Cube3D/Linux/Cub3D)
+==13808== 
+==13808== 16,384 bytes in 1 blocks are still reachable in loss record 48 of 49
+==13808==    at 0x4C31B25: calloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==13808==    by 0x4E6A205: XOpenDisplay (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==13808==    by 0x40F8A0: mlx_init (in /home/user42/42/Cube3D/Linux/Cub3D)
+==13808==    by 0x402419: new_ctx (in /home/user42/42/Cube3D/Linux/Cub3D)
+==13808==    by 0x401C0E: new_brain (in /home/user42/42/Cube3D/Linux/Cub3D)
+==13808==    by 0x4020A8: main (in /home/user42/42/Cube3D/Linux/Cub3D)
+==13808== 
+==13808== 21,152 bytes in 1 blocks are still reachable in loss record 49 of 49
+==13808==    at 0x4C31B25: calloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==13808==    by 0x5B203C0: xcb_connect_to_fd (in /usr/lib/x86_64-linux-gnu/libxcb.so.1.1.0)
+==13808==    by 0x5B24464: xcb_connect_to_display_with_auth_info (in /usr/lib/x86_64-linux-gnu/libxcb.so.1.1.0)
+==13808==    by 0x4E79561: _XConnectXCB (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==13808==    by 0x4E69F01: XOpenDisplay (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==13808==    by 0x40F8A0: mlx_init (in /home/user42/42/Cube3D/Linux/Cub3D)
+==13808==    by 0x402419: new_ctx (in /home/user42/42/Cube3D/Linux/Cub3D)
+==13808==    by 0x401C0E: new_brain (in /home/user42/42/Cube3D/Linux/Cub3D)
+==13808==    by 0x4020A8: main (in /home/user42/42/Cube3D/Linux/Cub3D)
+==13808== 
+==13808== LEAK SUMMARY:
+==13808==    definitely lost: 0 bytes in 0 blocks
+==13808==    indirectly lost: 0 bytes in 0 blocks
+==13808==      possibly lost: 0 bytes in 0 blocks
+==13808==    still reachable: 84,999 bytes in 97 blocks
+==13808==         suppressed: 0 bytes in 0 blocks
+==13808== 
+==13808== For counts of detected and suppressed errors, rerun with: -v
+==13808== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 2 from 1)

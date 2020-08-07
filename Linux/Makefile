@@ -13,6 +13,7 @@ LIBFT =		$(INCPATH)Libft/
 INCLUDES =	$(INCPATH)cube3d.h \
 			$(INCPATH)my_canvas.h \
 			$(INCPATH)map.h \
+			$(INCPATH)keys.h \
 			$(INCPATH)player.h \
 			$(LIBFT)includes/libft.h \
 			\

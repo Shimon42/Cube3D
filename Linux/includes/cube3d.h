@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 21:30:44 by siferrar          #+#    #+#             */
-/*   Updated: 2020/08/07 14:12:21 by user42           ###   ########lyon.fr   */
+/*   Updated: 2020/08/07 15:05:56 by user42           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@
 # include "map.h"
 # include "sprites.h"
 # include "player.h"
+# include "keys.h"
 # include "../debug/debug.h"
 # include "../debug/debug_defines.h"
 
