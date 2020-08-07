@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/06 10:41:58 by user42            #+#    #+#             */
-/*   Updated: 2020/08/06 12:08:46 by user42           ###   ########lyon.fr   */
+/*   Updated: 2020/08/07 14:40:58 by user42           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int		loop_hook(t_brain *b)
 	if (!b->save)
 		mlx_put_image_to_window(b->ctx->mlx_ptr, b->ctx->win_ptr,
 													b->map->frame->img, 0, 0);
-	fps_count(b->ctx);
+	fps_count(b->ctx, 0);
 	return (b->inited);
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   open_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/13 12:16:27 by milosandric       #+#    #+#             */
-/*   Updated: 2020/08/03 10:45:47 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/08/07 14:40:17 by user42           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ int					open_map(t_brain *b, char *map_path, t_type *map)
 	init_map(b->ctx, b);
 	b->map->frame->is_color = -1;
 	init_textures(b, map);
+	free_map_check(map);
 	get_map(b, map_path);
 	disp_sprites(b->map->sprites);
 	if (b->player == NULL)
@@ -70,6 +71,5 @@ int					open_map(t_brain *b, char *map_path, t_type *map)
 	b->map->px_height = b->map->height * b->map->bloc_size;
 	dprintf(1, DCYAN"\nReal Size : %d x %d px\n", b->map->px_width,
 												b->map->px_height);
-	free_map_check(map);
 	return (1);
 }

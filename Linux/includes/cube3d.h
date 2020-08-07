@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 21:30:44 by siferrar          #+#    #+#             */
-/*   Updated: 2020/08/06 11:20:20 by user42           ###   ########lyon.fr   */
+/*   Updated: 2020/08/07 14:12:21 by user42           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,12 +108,12 @@ void			draw_fov_map(t_brain *b, t_ctx *c);
 void			draw_ray(t_player *p, t_map *m, float angle);
 void			draw_minimap_rays(t_brain *b, t_fpoint disp);
 void			init_texture(t_brain *b, char *path, t_buff **t);
-
+void			free_map_check(t_type *map);
 /*
 ** --- Utils
 */
 
-void			fps_count(t_ctx *c);
+void			fps_count(t_ctx *c, int clear);
 t_fpoint		to_fpoint(t_fpoint *p);
 float			calc_dist(t_fpoint p1, t_fpoint p2);
 void			init_textures(t_brain *b, t_type *map);

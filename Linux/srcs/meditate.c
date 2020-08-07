@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/09 18:31:48 by siferrar          #+#    #+#             */
-/*   Updated: 2020/08/06 12:06:00 by user42           ###   ########lyon.fr   */
+/*   Updated: 2020/08/07 13:34:02 by user42           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,9 @@ void	meditate(t_brain *b)
 			free_buff(b, b->ctx->buff);
 			if (!b->save && b->ctx->win_ptr)
 				mlx_destroy_window(b->ctx->mlx_ptr, b->ctx->win_ptr);
-			check_n_free(b->ctx);
 			free(b->ctx->mlx_ptr);
+			fps_count(b->ctx, 1);
+			check_n_free(b->ctx);
 		}
 		ft_putstr(DGRN"Free Brain Struct\n");
 		free(b->keys);

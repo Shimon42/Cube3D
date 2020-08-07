@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   flag_get.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/31 16:39:19 by milosand          #+#    #+#             */
-/*   Updated: 2020/07/22 16:29:23 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/08/07 14:46:33 by user42           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ t_type	*ft_getmap_flag(char *path)
 	char	*line;
 	t_type	*map;
 
+	map = NULL;
+	line = NULL;
 	fd = pre_check(path, &map);
 	if (fd > 0)
 	{
@@ -47,12 +49,10 @@ t_type	*ft_getmap_flag(char *path)
 			ret = get_next_line(fd, &line);
 		}
 		ft_check_struct(map);
-		free(line);
-		close(fd);
-		return (map);
 	}
-	else
-		return (NULL);
+	free(line);
+	close(fd);
+	return (map);
 }
 
 void	ft_getmap_values(char *line, t_type *map)
@@ -76,5 +76,8 @@ void	ft_getmap_values(char *line, t_type *map)
 	else if (!(ft_strncmp(line, "C ", 2)))
 		ft_flag_str(line + 2, &map->c, map);
 	else if (line[0] != '\0')
+	{
+		free(line);
 		exit_flag(501, "Unkown identifier(s) in setup file\n", map);
+	}
 }
