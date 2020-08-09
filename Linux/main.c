@@ -13,6 +13,7 @@
 #include "includes/cube3d.h"
 #include <stdio.h>
 
+
 t_brain	*new_brain(int width, int height, int save)
 {
 	t_brain *new;
@@ -24,8 +25,10 @@ t_brain	*new_brain(int width, int height, int save)
 	mlx_get_screen_size(new->ctx->mlx_ptr, &size.x, &size.y);
 	if (width > size.x || height > size.y)
 	{
-		width = size.x;
-		height = size.y;
+		if (width > size.x)
+			width = size.x;
+		if (height > size.y)
+			height = size.y;
 		check_n_free(new->ctx->mlx_ptr);
 		check_n_free(new->ctx);
 		new->ctx = new_ctx(width, height);

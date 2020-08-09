@@ -43,7 +43,7 @@ int		ft_flag_color(t_type *map, char *str)
 	while (splited[i] != NULL)
 		i++;
 	if (i != 3)
-		exit_flag(520, "wtf is that color\n", map);
+		exit_flag(520, "not a color\n", map);
 	i = 0;
 	target.r = ft_atoi(splited[0]);
 	target.g = ft_atoi(splited[1]);
@@ -90,7 +90,7 @@ void	ft_flag_res(char *str, int *target, t_type *map)
 	while (splited[i] != NULL)
 		i++;
 	if (i != 2)
-		exit_flag(511, "Resolution not gud\n", map);
+		exit_flag(511, "Resolution not good\n", map);
 	ft_free_split(splited);
 	target[0] = ft_atoi(str);
 	str = ft_strchr(str, ' ');
