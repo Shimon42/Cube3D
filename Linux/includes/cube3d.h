@@ -190,6 +190,7 @@ void			ft_check_struct(t_type *map);
 ** --- Utilities
 */
 
+int				ft_atoi_ovr(const char *str);
 int				ft_strmultichr(char *str, char *chrlst);
 int				ft_ext_check(char *str, char *end);
 void			ft_init_t_type(t_type *map);

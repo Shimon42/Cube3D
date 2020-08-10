@@ -81,3 +81,30 @@ void	ft_getmap_values(char *line, t_type *map)
 		exit_flag(501, "Unkown identifier(s) in setup file\n", map);
 	}
 }
+
+int		ft_atoi_ovr(const char *str)
+{
+	int			i;
+	long long	res;
+	int			sign;
+	int			digits;
+
+	sign = 1;
+	res = 0;
+	i = 0;
+	digits = 0;
+	while (str[i] == '\t' || str[i] == '\v' || str[i] == '\n' || str[i] == '\r'
+		|| str[i] == '\f' || str[i] == ' ')
+		i++;
+	if (str[i] == '-' || str[i] == '+')
+		if (str[i++] == '-')
+			sign = -1;
+	while (str[i] >= '0' && str[i] <= '9')
+	{
+		res = res * 10 + (str[i++] - '0');
+		digits++;
+	}
+	if (digits > 6)
+		return (9999999);
+	return (res * sign);
+}

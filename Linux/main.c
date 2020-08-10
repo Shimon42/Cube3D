@@ -13,7 +13,6 @@
 #include "includes/cube3d.h"
 #include <stdio.h>
 
-
 t_brain	*new_brain(int width, int height, int save)
 {
 	t_brain *new;

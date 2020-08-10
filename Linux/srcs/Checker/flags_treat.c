@@ -45,9 +45,9 @@ int		ft_flag_color(t_type *map, char *str)
 	if (i != 3)
 		exit_flag(520, "not a color\n", map);
 	i = 0;
-	target.r = ft_atoi(splited[0]);
-	target.g = ft_atoi(splited[1]);
-	target.b = ft_atoi(splited[2]);
+	target.r = ft_atoi_ovr(splited[0]);
+	target.g = ft_atoi_ovr(splited[1]);
+	target.b = ft_atoi_ovr(splited[2]);
 	ft_free_split(splited);
 	if ((target.r > 255) || (target.r < 0)
 		|| (target.g > 255) || (target.g < 0)
@@ -76,7 +76,7 @@ void	ft_flag_str(char *str, char **target, t_type *map)
 		exit_flag(503, "Several textures provided for one identifiers", map);
 }
 
-void size_capper(int *size, int cap)
+void	size_capper(int *size, int cap)
 {
 	if (*size < cap)
 	{
@@ -101,9 +101,9 @@ void	ft_flag_res(char *str, int *target, t_type *map)
 	if (i != 2)
 		exit_flag(511, "Resolution not good\n", map);
 	ft_free_split(splited);
-	target[0] = ft_atoi(str);
+	target[0] = ft_atoi_ovr(str);
 	str = ft_strchr(str, ' ');
-	target[1] = ft_atoi(str);
+	target[1] = ft_atoi_ovr(str);
 	size_capper(&target[0], 100);
 	size_capper(&target[1], 100);
 	target[2] = 1;
