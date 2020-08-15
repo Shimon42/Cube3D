@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/08 17:32:22 by milosandric       #+#    #+#             */
-/*   Updated: 2020/08/06 11:12:04 by user42           ###   ########lyon.fr   */
+/*   Updated: 2020/08/15 18:06:15 by user42           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,8 @@ int		init_values(t_brain *b, t_player *p)
 	if (p->step == NULL)
 		exit_cube(NULL, 102, "Failed to malloc player step", 0);
 	p->brain = b;
-	p->as_move = 1;
-	p->as_rotate = 1;
+	p->as_move = 0;
+	p->as_rotate = 0;
 	p->bobbing = 0;
 	p->jumping = 0;
 	p->inited = 1;

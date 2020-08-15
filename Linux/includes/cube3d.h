@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 21:30:44 by siferrar          #+#    #+#             */
-/*   Updated: 2020/08/07 15:05:56 by user42           ###   ########lyon.fr   */
+/*   Updated: 2020/08/15 14:42:45 by user42           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,6 +129,7 @@ void			move(struct s_player *p, int dir);
 void			rotate(struct s_player *p, float angle);
 void			side_move(struct s_player *p, int dir);
 void			jump(t_player *p, float speed);
+void			calc_speed_ratio(t_brain *b);
 
 /*
 ** --- Controls

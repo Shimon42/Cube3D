@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/11 06:48:57 by siferrar          #+#    #+#             */
-/*   Updated: 2020/08/07 15:11:33 by user42           ###   ########lyon.fr   */
+/*   Updated: 2020/08/15 18:12:49 by user42           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ void	action_keys(int key, t_brain *b)
 			b->player->sidemove(b->player, -1);
 		if ((key = is_key_pressed(b, RIGHT_KEY)) >= 0)
 			b->player->sidemove(b->player, 1);
+		calc_speed_ratio(b);
 	}
 }
 
@@ -60,7 +61,6 @@ int		key_press(int key, void *param)
 		exit_cube(b, 0, "Exit from Escape key", 0);
 	if (key != -1 && is_key_pressed(b, key) == -1)
 		add_key_pressed(b, key);
-	calc_speed_ratio(b);
 	action_keys(key, b);
 	return (0);
 }
