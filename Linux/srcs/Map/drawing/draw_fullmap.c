@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/20 12:30:05 by siferrar          #+#    #+#             */
-/*   Updated: 2020/08/06 11:41:57 by user42           ###   ########lyon.fr   */
+/*   Updated: 2020/08/17 16:12:08 by user42           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,9 @@ void		ease_in_n_out(t_brain *b, float *ease, float ease_val)
 	else if (b->player->as_move == 0 && *ease == 1)
 	{
 		b->player->as_move = 1;
-		*ease = 1.000001;
+		*ease = 1;
 	}
-	else if (*ease != 1 && *ease != 1.000001)
+	else if (*ease != 1 && *ease != 1)
 	{
 		*ease = 1;
 		b->player->as_move = 1;

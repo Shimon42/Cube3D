@@ -1,8 +1,12 @@
-R 800 800
+R 1280 800
 
 EA assets/textures/walls/stone_bricks/1.xpm
 
+<<<<<<< HEAD
 SO          0,                  243,  154
+=======
+SO assets/textures/walls/stone_bricks/2.xpm
+>>>>>>> e63b31d23223b93fbfa46a43381c914b8354e21b
 
 NO assets/textures/walls/stone_bricks/3.xpm
 

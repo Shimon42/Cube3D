@@ -6,11 +6,21 @@
 /*   By: user42 <user42@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/20 13:53:35 by siferrar          #+#    #+#             */
-/*   Updated: 2020/08/06 11:37:02 by user42           ###   ########lyon.fr   */
+/*   Updated: 2020/08/17 16:01:25 by user42           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cube3d.h"
+
+int		get_sky_color(t_brain *b, t_fpoint ratio, float offset, int y)
+{
+	if (b->map->skybox->is_color != -1)
+		return (b->map->skybox->is_color);
+	else
+		return (pixel_get(b->map->skybox,
+							offset,
+							b->player->z * -0.2 + y * ratio.y + 180));
+}
 
 void	draw_sky(t_brain *b, double col, double end)
 {
@@ -32,9 +42,7 @@ void	draw_sky(t_brain *b, double col, double end)
 		left -= width + b->player->cam->proj_size.x;
 	while (y < end)
 	{
-		color = pixel_get(b->map->skybox,
-							col + left,
-							b->player->z * -0.2 + y * ratio.y + 180);
+		color = get_sky_color(b, ratio, col + left, y);
 		pixel_put(col, y, color, b->map->frame);
 		y++;
 	}
