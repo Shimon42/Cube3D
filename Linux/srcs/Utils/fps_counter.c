@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/20 13:52:35 by siferrar          #+#    #+#             */
-/*   Updated: 2020/08/07 13:39:12 by user42           ###   ########lyon.fr   */
+/*   Updated: 2020/08/17 10:46:13 by user42           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ void		fps_count(t_ctx *c, int clear)
 	if (clear == 1)
 	{
 		free(str);
-		ft_putstr("Clear == 1\n");
 		return ;
 	}
 	if (str_time == 0)
