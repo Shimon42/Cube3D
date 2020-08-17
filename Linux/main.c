@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/06 10:41:58 by user42            #+#    #+#             */
-/*   Updated: 2020/08/17 15:31:57 by user42           ###   ########lyon.fr   */
+/*   Updated: 2020/08/17 15:40:42 by user42           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int		loop_hook(t_brain *b)
 	//mlx_clear_window(b->ctx->mlx_ptr, b->ctx->win_ptr);
 	key_press(-1, b);
 	draw_walls(b, b->ctx);
-	update_sprite(b);
+	//update_sprite(b);
 	if (is_key_pressed(b, MAP_KEY) == -1)
 	{
 		draw_minimap(b, 10, 25, 200);

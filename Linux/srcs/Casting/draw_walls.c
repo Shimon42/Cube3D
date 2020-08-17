@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_walls.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 22:11:09 by siferrar          #+#    #+#             */
-/*   Updated: 2020/08/04 15:23:51 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/08/17 15:54:43 by user42           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,9 @@ void		draw_col(t_brain *b, float w_height, float cur_col, t_detect w)
 	i = ((mid_wall < 0) ? (mid_wall) * -1 : 0);
 	while (i <= w_height + 1)
 	{
-		texture_col = pixel_get(*texture, ratio.x, (i + 1) * ratio.y);
+		texture_col = ((*texture)->is_color != -1 ?
+			(*texture)->is_color :
+			pixel_get(*texture, ratio.x, (i + 1) * ratio.y));
 		if (mid_wall + i >= 0)
 			pixel_put(cur_col, mid_wall + i + b->player->z,
 													texture_col, b->map->frame);
