@@ -1,8 +1,8 @@
-R 500 500
+R 1280 800
 
 EA assets/textures/walls/stone_bricks/1.xpm
 
-SO          0,243,154
+SO assets/textures/walls/stone_bricks/2.xpm
 
 NO assets/textures/walls/stone_bricks/3.xpm
 
