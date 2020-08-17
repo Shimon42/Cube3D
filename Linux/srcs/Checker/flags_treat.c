@@ -36,7 +36,7 @@ int		ft_flag_color(t_type *map, char *str)
 	char	**splited;
 	t_rgb	target;
 
-	if (ft_check_str(str, "0123456789,") || (ft_charcount(str, ',') != 2))
+	if (ft_check_str(str, "0123456789, ") || (ft_charcount(str, ',') != 2))
 		exit_flag(520, "Illegal character in color declaration\n", map);
 	i = 0;
 	splited = ft_split(str, ',');
@@ -60,7 +60,7 @@ void	ft_flag_str(char *str, char **target, t_type *map)
 {
 	int	fd;
 
-	while (*str == '\t' || *str == ' ')
+	while (*str == ' ')
 		str++;
 	if (ft_ext_check(str, ".xpm"))
 	{
