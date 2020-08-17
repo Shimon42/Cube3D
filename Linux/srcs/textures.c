@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   textures.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/09 19:25:10 by siferrar          #+#    #+#             */
-/*   Updated: 2020/08/03 11:58:42 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/08/17 11:37:08 by user42           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	init_color(t_buff *t, char *path)
 {
-	dprintf(1, IPINK"\nPATH IS COLOR %s => %d\n"RST, path, ft_atoi(path));
+	ft_printf(IPINK"\nPATH IS COLOR %s => %d\n"RST, path, ft_atoi(path));
 	t->is_color = ft_atoi(path);
 	t->initied = 3;
 	t->img = NULL;

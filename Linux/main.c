@@ -6,12 +6,11 @@
 /*   By: user42 <user42@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/06 10:41:58 by user42            #+#    #+#             */
-/*   Updated: 2020/08/07 15:15:04 by user42           ###   ########lyon.fr   */
+/*   Updated: 2020/08/17 11:35:57 by user42           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/cube3d.h"
-#include <stdio.h>
 
 t_brain	*new_brain(int width, int height, int save)
 {

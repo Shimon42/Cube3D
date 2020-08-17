@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/13 12:16:27 by milosandric       #+#    #+#             */
-/*   Updated: 2020/08/07 14:40:17 by user42           ###   ########lyon.fr   */
+/*   Updated: 2020/08/17 11:36:58 by user42           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ int					open_map(t_brain *b, char *map_path, t_type *map)
 	print_map_grid((b->map));
 	b->map->px_width = b->map->width * b->map->bloc_size;
 	b->map->px_height = b->map->height * b->map->bloc_size;
-	dprintf(1, DCYAN"\nReal Size : %d x %d px\n", b->map->px_width,
+	ft_printf(DCYAN"\nReal Size : %d x %d px\n", b->map->px_width,
 												b->map->px_height);
 	return (1);
 }

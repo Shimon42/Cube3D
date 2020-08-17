@@ -3,17 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   my_canvas.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/15 17:33:03 by siferrar          #+#    #+#             */
-/*   Updated: 2020/08/04 14:30:22 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/08/17 11:36:06 by user42           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MY_CANVAS_H
 # define MY_CANVAS_H
 # include <stdlib.h>
-# include <stdio.h>
 # include <unistd.h>
 # include "MiniLib/mlx.h"
 

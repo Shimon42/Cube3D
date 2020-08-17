@@ -3,14 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   ft_abs.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mandric <mandric@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/26 23:29:17 by siferrar          #+#    #+#             */
-/*   Updated: 2020/05/20 17:51:55 by mandric          ###   ########lyon.fr   */
+/*   Updated: 2020/08/17 11:36:18 by user42           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include <stdio.h>
 
 long	ft_abs(long n)
 {

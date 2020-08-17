@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_bmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/15 13:48:30 by mandric           #+#    #+#             */
-/*   Updated: 2020/07/13 13:04:33 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/08/17 11:37:49 by user42           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ int			ft_create_bmp(t_buff *frame)
 	if (!(bmp = (char *)ft_calloc(54 + size * 4, sizeof(int))) ||
 		(fd = open("output.bmp", O_RDWR | O_CREAT, 0666)) < 0)
 	{
-		printf("error");
+		ft_putstr("error\n");
 		return (0);
 	}
 	ft_set_bmpheader(bmp, frame->width, frame->height);
@@ -76,7 +76,7 @@ int			ft_create_bmp(t_buff *frame)
 	{
 		close(fd);
 		free(bmp);
-		printf("error");
+		ft_putstr("error\n");
 		return (0);
 	}
 	free(bmp);
