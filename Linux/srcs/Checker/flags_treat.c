@@ -60,6 +60,8 @@ void	ft_flag_str(char *str, char **target, t_type *map)
 {
 	int	fd;
 
+	while (*str == '\t' || *str == ' ')
+		str++;
 	if (ft_ext_check(str, ".xpm"))
 	{
 		if (*target != NULL)
