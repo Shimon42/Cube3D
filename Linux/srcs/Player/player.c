@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/08 17:32:22 by milosandric       #+#    #+#             */
-/*   Updated: 2020/08/15 18:06:15 by user42           ###   ########lyon.fr   */
+/*   Updated: 2020/08/18 17:59:52 by user42           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int		init_values(t_brain *b, t_player *p)
 	p->rot = &rotate;
 	p->jump = &jump;
 	p->speed = b->map->bloc_size * 2.5;
-	p->rot_speed = (3 * PI) / 180;
+	p->rot_speed = 4;
 	p->step = malloc(sizeof(t_fpoint *));
 	if (p->step == NULL)
 		exit_cube(NULL, 102, "Failed to malloc player step", 0);

@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/20 12:30:05 by siferrar          #+#    #+#             */
-/*   Updated: 2020/08/17 16:12:08 by user42           ###   ########lyon.fr   */
+/*   Updated: 2020/08/18 18:05:30 by user42           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,9 +57,9 @@ void		draw_fullmap(t_brain *b, float ease_val)
 	float			mrgn_top;
 	static float	ease = 0;
 
-	margin = 100;
 	if (ease_val > 0)
 	{
+		margin = 100;
 		calculate_size_mm(b, &margin, &mrgn_top);
 		draw_minimap(b,
 			margin,

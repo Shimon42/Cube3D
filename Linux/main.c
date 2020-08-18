@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/06 10:41:58 by user42            #+#    #+#             */
-/*   Updated: 2020/08/17 16:05:35 by user42           ###   ########lyon.fr   */
+/*   Updated: 2020/08/18 19:17:32 by user42           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ void	init_loop(t_brain *b, int save)
 		mlx_hook(b->ctx->win_ptr, 2, (1L << 0), &key_press, b);
 		mlx_hook(b->ctx->win_ptr, 33, (1L << 17), &red_cross, b);
 		mlx_hook(b->ctx->win_ptr, 3, (1L << 1), &key_release, b);
-		mlx_do_key_autorepeaton(b->ctx->mlx_ptr);
+		mlx_do_sync(b->ctx->mlx_ptr);
 		mlx_loop(b->ctx->mlx_ptr);
 	}
 }

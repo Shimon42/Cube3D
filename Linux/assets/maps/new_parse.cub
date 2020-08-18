@@ -1,21 +1,17 @@
-R 1280 800
+R 600 600
 
-EA assets/textures/walls/stone_bricks/1.xpm
+EA 245,56,25
 
-<<<<<<< HEAD
-SO          0,                  243,  154
-=======
-SO assets/textures/walls/stone_bricks/2.xpm
->>>>>>> e63b31d23223b93fbfa46a43381c914b8354e21b
+SO 24,254,25
 
-NO assets/textures/walls/stone_bricks/3.xpm
+NO 145,156,25
 
-WE assets/textures/walls/stone_bricks/4.xpm
+WE 45,56,225
 
 S assets/sprites/barrel.xpm
 
-C assets/sky/mountains/mountains.xpm
-F assets/textures/floor/sand.xpm
+C 25,69,255
+F 25,69,255
 
       111
      14S41
@@ -25,6 +21,13 @@ F assets/textures/floor/sand.xpm
     1300031
      14041
      10001
+     12021
+     12021
+     12021
+     12021
+     12021
+     12021
+     12021
      12021
      10001                                1111111
  111114041111111111111111111           1110000000111
