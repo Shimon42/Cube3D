@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/11 06:48:57 by siferrar          #+#    #+#             */
-/*   Updated: 2020/08/15 18:12:49 by user42           ###   ########lyon.fr   */
+/*   Updated: 2020/08/19 16:24:21 by user42           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ void	action_keys(int key, t_brain *b)
 		if ((key = is_key_pressed(b, RIGHT_KEY)) >= 0)
 			b->player->sidemove(b->player, 1);
 		calc_speed_ratio(b);
+		mlx_do_sync(b->ctx->mlx_ptr);
 	}
 }
 

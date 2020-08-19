@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/06 10:41:58 by user42            #+#    #+#             */
-/*   Updated: 2020/08/18 19:17:32 by user42           ###   ########lyon.fr   */
+/*   Updated: 2020/08/19 16:47:57 by user42           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ t_brain	*new_brain(int width, int height, int save)
 
 int		loop_hook(t_brain *b)
 {
-	mlx_clear_window(b->ctx->mlx_ptr, b->ctx->win_ptr);
 	key_press(-1, b);
 	draw_walls(b, b->ctx);
 	update_sprite(b);
