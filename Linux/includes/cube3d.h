@@ -6,13 +6,14 @@
 /*   By: user42 <user42@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 21:30:44 by siferrar          #+#    #+#             */
-/*   Updated: 2020/08/15 14:42:45 by user42           ###   ########lyon.fr   */
+/*   Updated: 2020/08/20 19:30:19 by user42           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUBE3D_H
 # define CUBE3D_H
 
+# include <stdio.h>
 # include <pthread.h>
 # include <stdlib.h>
 # include <unistd.h>
@@ -42,6 +43,8 @@ typedef struct	s_brain
 	t_map		*map;
 	t_player	*player;
 	int			*keys;
+	int			is_paused;
+	t_buff		*pause_menu;
 }				t_brain;
 
 typedef struct	s_type
@@ -65,6 +68,15 @@ typedef struct	s_rgb
 	int			g;
 	int			b;
 }				t_rgb;
+
+typedef struct	s_draw_spr
+{
+	t_fpoint	size;
+	t_point		start;
+	t_fpoint	ratio;
+	int			x;
+	int			y;
+}				t_draw_spr;
 
 void			free_buff(t_brain *b, t_buff *buff);
 void			free_sprites(t_brain *b);
@@ -119,6 +131,7 @@ t_fpoint		to_fpoint(t_fpoint *p);
 float			calc_dist(t_fpoint p1, t_fpoint p2);
 void			init_textures(t_brain *b, t_type *map);
 int				ft_create_bmp(t_buff *frame);
+void			disp_pause(t_brain *b);
 
 /*
 ** --- Player

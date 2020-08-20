@@ -18,6 +18,8 @@
 
 <kbd>ESC</kbd> - Quit (brutal killing)
 
+<kbd>P</kbd> - Pause
+
 <kbd>F</kbd> - Expand map
 
 <kbd>Z</kbd> - Move forward
@@ -37,8 +39,7 @@
 	————————————————————————————————————
 		Changes
 	———————————————————————————————————— 
-	- Everything is good, Netwhat is Sh*t
-	- Fixed bad arguments number and map not found errors
+	- Everything is good
 	- No Leaks
 	- Tested on Mac OSX 10.14.6 and lower
 	- Tested on xUbuntu 18.04.4
@@ -49,7 +50,7 @@
 	- Everything 42Normed
 	- Map parsing & Checking
 	- Minimap display and expand to fullmap
-	- Draw walls with textures and collisions
+	- Draw walls with textures/colors and collisions
 	- SkyBox
 	- Textured floor
 	- Textured sprites and shadows
@@ -60,6 +61,9 @@
 	————————————————————————————————————
     	Known Bugs
 	————————————————————————————————————
+	Casing:
+	- Small fish eye remaining
+
 	Moving:
 	- Double speed if walk on side and move forward
 

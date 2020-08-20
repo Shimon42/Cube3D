@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/11 06:48:57 by siferrar          #+#    #+#             */
-/*   Updated: 2020/08/19 16:24:21 by user42           ###   ########lyon.fr   */
+/*   Updated: 2020/08/20 19:47:25 by user42           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,9 +60,12 @@ int		key_press(int key, void *param)
 	b = (t_brain*)param;
 	if (key == 65307)
 		exit_cube(b, 0, "Exit from Escape key", 0);
-	if (key != -1 && is_key_pressed(b, key) == -1)
-		add_key_pressed(b, key);
-	action_keys(key, b);
+	if (!b->is_paused)
+	{
+		if (key != -1 && is_key_pressed(b, key) == -1)
+			add_key_pressed(b, key);
+		action_keys(key, b);
+	}
 	return (0);
 }
 
@@ -73,6 +76,13 @@ int		key_release(int key, void *param)
 	b = (t_brain*)param;
 	if (key == 49)
 		b->player->jump(b->player, 15);
+	if (key == PAUSE_KEY)
+	{
+		if (b->is_paused)
+			b->is_paused = 0;
+		else
+			b->is_paused = 1;
+	}
 	del_key_pressed(b, key);
 	return (0);
 }

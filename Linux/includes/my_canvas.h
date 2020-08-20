@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/15 17:33:03 by siferrar          #+#    #+#             */
-/*   Updated: 2020/08/17 11:36:06 by user42           ###   ########lyon.fr   */
+/*   Updated: 2020/08/20 18:57:19 by user42           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ t_ctx			*new_ctx(int width, int height);
 void			init_buff(t_ctx *ctx, t_buff **buff, int width, int height);
 void			pixel_put(int x, int y, int color, t_buff *buff);
 int				pixel_get(t_buff *img, int x, int y);
+void			put_image(t_buff *ctx, t_buff *img, t_point pos, t_point size);
 void			draw_line(t_point p1, t_point p2, t_ctx *ctx);
 void			draw_rect(t_point pos, t_point size, int fill, t_ctx *ctx);
 void			draw_circle(t_fpoint pos,

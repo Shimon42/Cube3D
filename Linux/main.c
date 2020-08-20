@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/06 10:41:58 by user42            #+#    #+#             */
-/*   Updated: 2020/08/19 16:47:57 by user42           ###   ########lyon.fr   */
+/*   Updated: 2020/08/20 19:40:27 by user42           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,32 +30,37 @@ t_brain	*new_brain(int width, int height, int save)
 		check_n_free(new->ctx->mlx_ptr);
 		check_n_free(new->ctx);
 		new->ctx = new_ctx(width, height);
-		new->ctx->fps = 0;
 	}
 	new->map = NULL;
 	new->player = NULL;
 	init_buff(new->ctx, &new->ctx->buff, new->ctx->width, new->ctx->height);
 	init_keys(new);
 	new->inited = 1;
+	new->is_paused = 0;
 	return (new);
 }
 
 int		loop_hook(t_brain *b)
 {
 	key_press(-1, b);
-	draw_walls(b, b->ctx);
-	update_sprite(b);
-	if (is_key_pressed(b, MAP_KEY) == -1)
+	if (!b->is_paused)
 	{
-		draw_minimap(b, 10, 25, 200);
-		draw_fullmap(b, 0);
+		draw_walls(b, b->ctx);
+		update_sprite(b);
+		if (is_key_pressed(b, MAP_KEY) == -1)
+		{
+			draw_minimap(b, 10, 25, 200);
+			draw_fullmap(b, 0);
+		}
+		else
+			draw_fullmap(b, 0.28);
+		if (!b->save)
+			mlx_put_image_to_window(b->ctx->mlx_ptr, b->ctx->win_ptr,
+				b->map->frame->img, 0, 0);
+		fps_count(b->ctx, 0);
 	}
 	else
-		draw_fullmap(b, 0.28);
-	if (!b->save)
-		mlx_put_image_to_window(b->ctx->mlx_ptr, b->ctx->win_ptr,
-													b->map->frame->img, 0, 0);
-	fps_count(b->ctx, 0);
+		disp_pause(b);
 	return (b->inited);
 }
 
@@ -78,6 +83,7 @@ void	init_loop(t_brain *b, int save)
 	}
 	else
 	{
+		init_texture(b, "assets/pause.xpm", &(b->pause_menu));
 		b->ctx->win_ptr = mlx_new_window(b->ctx->mlx_ptr,
 			b->ctx->width, b->ctx->height, "Cube3D");
 		mlx_loop_hook(b->ctx->mlx_ptr, &loop_hook, b);

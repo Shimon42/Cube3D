@@ -31,12 +31,14 @@ SRCS = 		main.c \
 			$(SRCSPATH)Canvas/line/draw_line.c \
 			$(SRCSPATH)Canvas/rect.c \
 			$(SRCSPATH)Canvas/circle.c \
+			$(SRCSPATH)Canvas/image.c \
 			$(SRCSPATH)Canvas/text.c \
 			$(SRCSPATH)Canvas/context.c \
 			$(SRCSPATH)Canvas/points.c \
 			\
 			$(SRCSPATH)Utils/colors.c \
 			$(SRCSPATH)Utils/fps_counter.c \
+			$(SRCSPATH)Utils/pause.c \
 			\
 			$(SRCSPATH)Checker/check.c \
 			$(SRCSPATH)Checker/flag_get.c \
