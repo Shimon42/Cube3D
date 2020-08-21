@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/06 10:41:58 by user42            #+#    #+#             */
-/*   Updated: 2020/08/20 19:40:27 by user42           ###   ########lyon.fr   */
+/*   Updated: 2020/08/21 22:40:02 by user42           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ t_brain	*new_brain(int width, int height, int save)
 	t_point	size;
 
 	new = malloc(sizeof(t_brain));
+	new->keys = NULL;
 	new->ctx = new_ctx(width, height);
 	new->save = save;
 	mlx_get_screen_size(new->ctx->mlx_ptr, &size.x, &size.y);
@@ -27,8 +28,7 @@ t_brain	*new_brain(int width, int height, int save)
 			width = size.x;
 		if (height > size.y)
 			height = size.y;
-		check_n_free(new->ctx->mlx_ptr);
-		check_n_free(new->ctx);
+		free_ctx(new->ctx);
 		new->ctx = new_ctx(width, height);
 	}
 	new->map = NULL;
@@ -37,6 +37,7 @@ t_brain	*new_brain(int width, int height, int save)
 	init_keys(new);
 	new->inited = 1;
 	new->is_paused = 0;
+	new->pause_menu = NULL;
 	return (new);
 }
 

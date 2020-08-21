@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 21:30:44 by siferrar          #+#    #+#             */
-/*   Updated: 2020/08/21 10:23:48 by user42           ###   ########lyon.fr   */
+/*   Updated: 2020/08/21 22:48:58 by user42           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # include <string.h>
 # include <math.h>
 # include "MiniLib/mlx.h"
+# include "MiniLib/mlx_int.h"
 # include "Libft/includes/libft.h"
 # include "my_canvas.h"
 # include "map.h"
@@ -84,20 +85,6 @@ void			free_map(t_brain *b);
 void			check_n_free(void *var);
 void			exit_cube(t_brain *brain, int error_code, char *msg, int init);
 void			meditate(t_brain *b);
-/*
-** --- Copy of mlx structure to gest sizes > screen size
-*/
-
-typedef struct	s_mlx_win_list
-{
-	void		*winid;
-	void		*img_list;
-	int			nb_flush;
-	int			pixmgt;
-	void		*next;
-	int			size_x;
-	int			size_y;
-}				t_mlx_win_list;
 
 /*
 ** --- Map and Minimap

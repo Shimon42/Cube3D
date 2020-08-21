@@ -11,7 +11,15 @@
 
 #include	"mlx_int.h"
 
+void	*free_mlx(void *mlx_ptr)
+{
+	t_xvar *xvar;
 
+	dprintf(1, "\033[0;33mFree MLX\n");
+	xvar = (t_xvar *)mlx_ptr;
+	XCloseDisplay(xvar->display);
+	dprintf(1, "\033[0;33mFree MLX OK\n\033[0m");
+}
 
 void	*mlx_init()
 {

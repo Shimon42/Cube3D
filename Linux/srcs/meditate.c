@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/09 18:31:48 by siferrar          #+#    #+#             */
-/*   Updated: 2020/08/21 09:33:08 by user42           ###   ########lyon.fr   */
+/*   Updated: 2020/08/21 23:29:14 by user42           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,12 +57,8 @@ void	meditate(t_brain *b)
 		{
 			free_buff(b, b->pause_menu);
 			ft_putstr(DCYAN"Free Context\n");
-			free_buff(b, b->ctx->buff);
-			if (!b->save && b->ctx->win_ptr)
-				mlx_destroy_window(b->ctx->mlx_ptr, b->ctx->win_ptr);
-			free(b->ctx->mlx_ptr);
 			fps_count(b->ctx, 1);
-			check_n_free(b->ctx);
+			free_ctx(b->ctx);
 		}
 		ft_putstr(DGRN"Free Brain Struct\n");
 		free_brain(b);
@@ -73,14 +69,11 @@ void	exit_cube(t_brain *brain, int error_code, char *msg, int init)
 {
 	static t_brain *b = NULL;
 
-	ft_putstr(UCYAN"EXIT CUBE CALLED\n\n");
 	if (b == NULL && brain != NULL)
-	{
 		b = brain;
-		ft_putstr("EXIT CUB INIT\n");
-	}
 	if (init)
 		return ;
+	ft_putstr(UCYAN"EXIT CUBE CALLED\n\n");
 	meditate(b);
 	ft_putstr(GRN"Meditate OK\n");
 	if (error_code != 0)

@@ -30,6 +30,7 @@ SRCS = 		main.c \
 			$(SRCSPATH)Canvas/line/calc_fourth_quad.c \
 			$(SRCSPATH)Canvas/line/draw_line.c \
 			$(SRCSPATH)Canvas/rect.c \
+			$(SRCSPATH)Canvas/pixel.c \
 			$(SRCSPATH)Canvas/circle.c \
 			$(SRCSPATH)Canvas/image.c \
 			$(SRCSPATH)Canvas/text.c \
@@ -82,7 +83,7 @@ SRCS = 		main.c \
 CC =		clang
 
 CFLAGSPROD	= -Wall -Wextra -Werror
-CFLAGS	= -Wall -Wextra -Werror
+CFLAGS	= -g -Wall -Wextra -Werror
 CFLAGSSAN	= -g -g3 -fsanitize=address $(CFLAGS)
 
 OBJS = ${SRCS:.c=.o}

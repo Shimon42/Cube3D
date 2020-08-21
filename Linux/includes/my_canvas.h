@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/15 17:33:03 by siferrar          #+#    #+#             */
-/*   Updated: 2020/08/20 18:57:19 by user42           ###   ########lyon.fr   */
+/*   Updated: 2020/08/21 21:42:49 by user42           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include "MiniLib/mlx.h"
+# include "MiniLib/mlx_int.h"
 
 typedef struct	s_point
 {
@@ -50,7 +51,7 @@ typedef struct	s_ctx
 	int			fps;
 	int			color;
 	int			line_width;
-	void		*mlx_ptr;
+	t_xvar		*mlx_ptr;
 	void		*win_ptr;
 	t_buff		*buff;
 	t_buff		*cur_buff;
@@ -63,6 +64,7 @@ typedef struct	s_ctx
 	void		(*clear)(int, struct s_ctx *);
 }				t_ctx;
 
+void			free_ctx(t_ctx *c);
 t_ctx			*new_ctx(int width, int height);
 void			init_buff(t_ctx *ctx, t_buff **buff, int width, int height);
 void			pixel_put(int x, int y, int color, t_buff *buff);

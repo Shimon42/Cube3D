@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/11 12:00:43 by siferrar          #+#    #+#             */
-/*   Updated: 2020/08/17 11:35:56 by user42           ###   ########lyon.fr   */
+/*   Updated: 2020/08/21 21:01:04 by user42           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,5 +95,5 @@ void				ft_lstclear(t_list **lst, void (*del)(void*));
 t_list				*ft_lstmap(t_list *lst,
 								void *(*f)(void *),
 								void (*del)(void *));
-int					get_next_line(int fd, char **line);
+int					get_next_line(int fd, char **line, int meditate_gnl);
 #endif

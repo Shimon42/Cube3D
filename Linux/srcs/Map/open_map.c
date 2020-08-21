@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/13 12:16:27 by milosandric       #+#    #+#             */
-/*   Updated: 2020/08/17 11:36:58 by user42           ###   ########lyon.fr   */
+/*   Updated: 2020/08/21 23:45:25 by user42           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,11 @@ void				get_map(t_brain *b, char *map_path)
 	char			*line;
 
 	file = open(map_path, O_RDONLY);
-	ret = get_next_line(file, &line);
-	while (ret && ((ft_strmultichr(line, " 01SNEW")) != 1))
+	ret = get_next_line(file, &line, 0);
+	while (ret && ((ft_strmultichr(line, " 02341SNEW")) != 1))
 	{
 		free(line);
-		ret = get_next_line(file, &line);
+		ret = get_next_line(file, &line, 0);
 	}
 	while (ret != -1)
 	{
@@ -35,10 +35,10 @@ void				get_map(t_brain *b, char *map_path)
 		}
 		if (!ret)
 			break ;
-		ret = get_next_line(file, &line);
+		ret = get_next_line(file, &line, 0);
 	}
-	free(player);
-	close(file);
+	get_next_line(file, &line, 1);
+	free(line);
 }
 
 void				free_map_check(t_type *map)
@@ -60,7 +60,6 @@ int					open_map(t_brain *b, char *map_path, t_type *map)
 	init_textures(b, map);
 	free_map_check(map);
 	get_map(b, map_path);
-	disp_sprites(b->map->sprites);
 	if (b->player == NULL)
 		exit_cube(NULL, 800, "No Player found in map", 0);
 	sort_sprites(b->player->pos, b->map->sprites);

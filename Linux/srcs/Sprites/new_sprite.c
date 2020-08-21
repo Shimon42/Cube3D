@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   new_sprite.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/20 13:45:58 by siferrar          #+#    #+#             */
-/*   Updated: 2020/07/22 16:34:36 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/08/21 22:26:06 by user42           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,7 @@ void		add_spr_to_list(t_spr_list *s_list, t_sprite *s)
 	int			i;
 
 	i = 0;
-	ft_printf(YELO"Add spr to list\n");
-	disp_sprite(s);
+	ft_printf(YELO"Add spr to list -> ");
 	ret = malloc((s_list->length + 1) * sizeof(t_sprite *));
 	if (s_list->list != NULL)
 		while (i < s_list->length)
@@ -31,7 +30,7 @@ void		add_spr_to_list(t_spr_list *s_list, t_sprite *s)
 	free(s_list->list);
 	s_list->list = ret;
 	s_list->length++;
-	ft_printf(GRN"Add spr to list OK\n"RST);
+	ft_printf(GRN"OK\n"RST);
 }
 
 void		set_spr_texture(t_brain *b, t_sprite *s, int type)

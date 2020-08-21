@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/30 14:39:54 by siferrar          #+#    #+#             */
-/*   Updated: 2020/07/13 12:13:24 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/08/21 23:51:29 by user42           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ t_gnl		*get_brain(t_gnl **b, int fd, char **line)
 	return (*b);
 }
 
-static void	meditate(t_gnl **blist, t_gnl *b, char **line)
+static int	meditate(t_gnl **blist, t_gnl *b, char **line)
 {
 	t_gnl **ptr;
 
@@ -78,6 +78,7 @@ static void	meditate(t_gnl **blist, t_gnl *b, char **line)
 	free(b->buff);
 	b->next = NULL;
 	free(b);
+	return (0);
 }
 
 int			treat_left(t_gnl *b, char **line)
@@ -108,7 +109,7 @@ int			treat_left(t_gnl *b, char **line)
 	return (0);
 }
 
-int			get_next_line(int fd, char **line)
+int			get_next_line(int fd, char **line, int meditate_gnl)
 {
 	static	t_gnl	*blist;
 	t_gnl			*b;
@@ -117,6 +118,8 @@ int			get_next_line(int fd, char **line)
 	if (BUFFER_SIZE > 0 && fd >= 0)
 		if ((b = get_brain(&blist, fd, line)) != NULL)
 		{
+			if (meditate_gnl == 1)
+				return (meditate(&blist, b, line));
 			if (b->asleft && treat_left(b, line))
 				return (1);
 			if (!b->buff
@@ -129,10 +132,7 @@ int			get_next_line(int fd, char **line)
 					return (1);
 			}
 			if (!b->nbr_read)
-			{
-				meditate(&blist, b, line);
-				return (0);
-			}
+				return (meditate(&blist, b, line));
 		}
 	return (-1);
 }

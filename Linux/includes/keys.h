@@ -6,13 +6,13 @@
 /*   By: user42 <user42@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/07 15:13:02 by user42            #+#    #+#             */
-/*   Updated: 2020/08/20 18:11:43 by user42           ###   ########lyon.fr   */
+/*   Updated: 2020/08/21 18:37:28 by user42           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef KEYS_H
 # define KEYS_H
-# define KEY_STYLE 1
+# define KEY_STYLE 0
 
 # if KEY_STYLE == 0
 

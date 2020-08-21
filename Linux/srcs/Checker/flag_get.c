@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/31 16:39:19 by milosand          #+#    #+#             */
-/*   Updated: 2020/08/07 14:46:33 by user42           ###   ########lyon.fr   */
+/*   Updated: 2020/08/21 23:35:55 by user42           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,16 +41,18 @@ t_type	*ft_getmap_flag(char *path)
 	if (fd > 0)
 	{
 		map->res[0] = 0;
-		ret = get_next_line(fd, &line);
+		ret = get_next_line(fd, &line, 0);
 		while (ret && ((ft_strmultichr(line, " 01234SNEW")) != 1))
 		{
 			ft_getmap_values(line, map);
 			free(line);
-			ret = get_next_line(fd, &line);
+			ret = get_next_line(fd, &line, 0);
 		}
+		check_n_free(line);
 		ft_check_struct(map);
 	}
-	free(line);
+	ret = get_next_line(fd, &line, 1);
+	check_n_free(line);
 	close(fd);
 	return (map);
 }

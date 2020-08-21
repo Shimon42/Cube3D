@@ -99,10 +99,10 @@ GNL_SRCS =	$(GNL)get_next_line.c \
 			$(GNL)get_next_line_utils.c
 GNL_OBJS	= ${GNL_SRCS:.c=.o}
 
-GNL_BUFF_SIZE = 128
+GNL_BUFF_SIZE = 400
 
 CC		= clang
-CFLAGS	= -Wall -Wextra -Werror
+CFLAGS	= -Wall -Wextra -Werror -g
 CLEAR	= clear
 RM		= rm -f
 OBJS	= ${SRCS:.c=.o}
@@ -116,7 +116,7 @@ all:		$(NAME) $(OBJS) $(INCLUDES)
 
 $(NAME): 	$(OBJS) $(INCLUDES)
 			@echo "\033[0;32m––––––––––––––––––––––––\nMaking Libft\n––––––––––––––––––––––––\033[0;33m"
-			clang -c $(CFLAGS) $(GNL_SRCS) -D BUFFER_SIZE=400
+			clang -c $(CFLAGS) $(GNL_SRCS) -D BUFFER_SIZE=$(GNL_BUFF_SIZE)
 			ar rc $(NAME) $(OBJS) get_next_line.o get_next_line_utils.o
 			@echo "\033[0;m"
 

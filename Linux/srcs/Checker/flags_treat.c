@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/22 15:29:02 by siferrar          #+#    #+#             */
-/*   Updated: 2020/08/07 14:43:41 by user42           ###   ########lyon.fr   */
+/*   Updated: 2020/08/21 22:54:12 by user42           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ void	ft_flag_str(char *str, char **target, t_type *map)
 		*target = ft_itoa(ft_flag_color(map, str));
 	else
 		exit_flag(503, "Several textures provided for one identifiers", map);
+	dprintf(1, "SIZE:%lu\n", sizeof(target));
 }
 
 void	size_capper(int *size, int cap)
@@ -100,9 +101,9 @@ void	ft_flag_res(char *str, int *target, t_type *map)
 	splited = ft_split(str, ' ');
 	while (splited[i] != NULL)
 		i++;
+	ft_free_split(splited);
 	if (i != 2)
 		exit_flag(511, "Resolution not good\n", map);
-	ft_free_split(splited);
 	target[0] = ft_atoi_ovr(str);
 	str = ft_strchr(str, ' ');
 	target[1] = ft_atoi_ovr(str);

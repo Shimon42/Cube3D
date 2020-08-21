@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/08 17:32:22 by milosandric       #+#    #+#             */
-/*   Updated: 2020/08/18 17:59:52 by user42           ###   ########lyon.fr   */
+/*   Updated: 2020/08/21 18:37:12 by user42           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ int		init_player(t_brain *b, int pos_x, char angle)
 	init_cam(b);
 	init_values(b, b->player);
 	b->player->angle = get_player_angle(angle);
+	b->player->speed_ratio = 1;
 	b->player->rot(b->player, 0);
 	b->player->ctx = b->ctx;
 	b->player->bob_height = 5.0;
