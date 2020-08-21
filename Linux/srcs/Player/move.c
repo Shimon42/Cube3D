@@ -82,10 +82,7 @@ void	move(struct s_player *p, int dir)
 void	rotate(struct s_player *p, float angle)
 {
 	p->angle += angle * p->speed_ratio;
-	if (p->angle > 2 * PI)
-		p->angle = p->angle - 2 * PI;
-	else if (p->angle <= 0)
-		p->angle = 2 * PI - p->angle;
+	p->angle = ft_to_360(p->angle);
 	p->step->x = (p->pos->x + p->speed * cos(p->angle)) - p->pos->x;
 	p->step->y = (p->pos->y + p->speed * sin(p->angle)) - p->pos->y;
 	p->divided = p->angle - (p->cam->fov / 2);

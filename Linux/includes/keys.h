@@ -12,7 +12,7 @@
 
 #ifndef KEYS_H
 # define KEYS_H
-# define KEY_STYLE 0
+# define KEY_STYLE 1
 
 # if KEY_STYLE == 0
 
