@@ -3,14 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   draw_map_debug.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/20 12:34:25 by siferrar          #+#    #+#             */
-/*   Updated: 2020/05/20 15:45:44 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/08/21 11:24:35 by user42           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/cube3d.h"
+
+/*
+** Add this at the end of draw_minimap_closest to disp grid points
+** ------------
+** b->ctx->circle(new_fpoint(disp.x + close_h.x, disp.y + close_h.y),
+** 				(b->map->bloc_size * 0.08) * b->map->scale, 1, b->ctx);
+** b->ctx->color = 0x00FFFF;
+** b->ctx->circle(new_fpoint(disp.x + close_v.x, disp.y + close_v.y),
+** 				(b->map->bloc_size * 0.08) * b->map->scale, 1, b->ctx);
+** b->ctx->color = 0x00FFFF;
+*/
 
 void		draw_minimap_closest(t_brain *b, t_fpoint disp, float angle)
 {
@@ -33,12 +44,6 @@ void		draw_minimap_closest(t_brain *b, t_fpoint disp, float angle)
 	disp.y + p_pos.y + (wall.dist * b->map->scale) * sin(angle)),
 		b->ctx);
 	b->ctx->color = 0xFF0000;
-	b->ctx->circle(new_fpoint(disp.x + close_h.x, disp.y + close_h.y),
-					(b->map->bloc_size * 0.08) * b->map->scale, 1, b->ctx);
-	b->ctx->color = 0x00FFFF;
-	b->ctx->circle(new_fpoint(disp.x + close_v.x, disp.y + close_v.y),
-					(b->map->bloc_size * 0.08) * b->map->scale, 1, b->ctx);
-	b->ctx->color = 0x00FFFF;
 }
 
 void		draw_minimap_rays(t_brain *b, t_fpoint disp)

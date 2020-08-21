@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_minimap.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/14 22:43:45 by siferrar          #+#    #+#             */
-/*   Updated: 2020/05/20 15:39:38 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/08/21 11:31:03 by user42           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,16 @@ void		draw_elem(t_brain *b, int disp_x, int disp_y, int val)
 	}
 }
 
+/*
+** - Add this at the end of draw_elems to show current grid case
+** b->ctx->color = 0xFFFF00;
+**	b->ctx->rect(
+**			new_point(floor(disp_x + (p_pos.x * (b->map->bloc_size * scale))),
+**				floor(disp_y + (p_pos.y * (b->map->bloc_size * scale)))),
+**			new_point(b->map->bloc_size * scale, b->map->bloc_size * scale),
+**			0, b->ctx);
+*/
+
 void		draw_elems(t_brain *b, int disp_x, int disp_y, float scale)
 {
 	int			y;
@@ -52,12 +62,6 @@ void		draw_elems(t_brain *b, int disp_x, int disp_y, float scale)
 		}
 		y++;
 	}
-	b->ctx->color = 0xFFFF00;
-	b->ctx->rect(
-			new_point(floor(disp_x + (p_pos.x * (b->map->bloc_size * scale))),
-				floor(disp_y + (p_pos.y * (b->map->bloc_size * scale)))),
-			new_point(b->map->bloc_size * scale, b->map->bloc_size * scale),
-			0, b->ctx);
 }
 
 void		draw_player_map(t_brain *b, t_player *p, t_fpoint m_pos)
@@ -65,17 +69,18 @@ void		draw_player_map(t_brain *b, t_player *p, t_fpoint m_pos)
 	t_fpoint position;
 
 	b->ctx->color = 0xFFFFFF;
-	position = new_fpoint(m_pos.x + (p->pos->x * b->map->scale),
-						m_pos.y + (p->pos->y * b->map->scale));
-	b->ctx->circle(position,
-					(b->map->bloc_size * 0.1) * b->map->scale,
-					1,
-					b->ctx);
 	draw_minimap_closest(b, m_pos, p->angle);
 	b->ctx->color = 0xFF0000;
 	draw_minimap_closest(b, m_pos, ft_to_360(p->angle - p->cam->fov / 2));
 	b->ctx->color = 0x00FF00;
 	draw_minimap_closest(b, m_pos, p->angle + p->cam->fov / 2);
+	b->ctx->color = 0xFFF000;
+	position = new_fpoint(m_pos.x + (p->pos->x * b->map->scale),
+						m_pos.y + (p->pos->y * b->map->scale));
+	b->ctx->circle(position,
+					(b->map->bloc_size * 0.15) * b->map->scale,
+					1,
+					b->ctx);
 }
 
 void		draw_minimap(t_brain *b, int x, int y, int width)
