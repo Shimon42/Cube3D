@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/09 18:31:48 by siferrar          #+#    #+#             */
-/*   Updated: 2020/08/07 13:34:02 by user42           ###   ########lyon.fr   */
+/*   Updated: 2020/08/21 09:33:08 by user42           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,12 @@ void	check_n_free(void *var)
 		free(var);
 }
 
+void	free_brain(t_brain *b)
+{
+	check_n_free(b->keys);
+	check_n_free(b);
+}
+
 void	meditate(t_brain *b)
 {
 	if (b)
@@ -49,6 +55,7 @@ void	meditate(t_brain *b)
 		}
 		if (b->ctx != NULL)
 		{
+			free_buff(b, b->pause_menu);
 			ft_putstr(DCYAN"Free Context\n");
 			free_buff(b, b->ctx->buff);
 			if (!b->save && b->ctx->win_ptr)
@@ -58,8 +65,7 @@ void	meditate(t_brain *b)
 			check_n_free(b->ctx);
 		}
 		ft_putstr(DGRN"Free Brain Struct\n");
-		free(b->keys);
-		free(b);
+		free_brain(b);
 	}
 }
 

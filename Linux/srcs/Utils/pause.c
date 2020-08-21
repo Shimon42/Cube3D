@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/20 19:29:17 by user42            #+#    #+#             */
-/*   Updated: 2020/08/20 19:49:33 by user42           ###   ########lyon.fr   */
+/*   Updated: 2020/08/21 09:33:35 by user42           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ void	disp_pause(t_brain *b)
 
 	if (b->is_paused != 1)
 		return ;
-	dprintf(1, "ok");
 	margin = b->ctx->width * 0.2;
 	img = b->pause_menu;
 	scale = ((float)((b->ctx->width - 2 * margin) /
