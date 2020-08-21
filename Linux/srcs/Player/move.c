@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/09 19:09:03 by siferrar          #+#    #+#             */
-/*   Updated: 2020/08/18 19:18:30 by user42           ###   ########lyon.fr   */
+/*   Updated: 2020/08/21 10:57:02 by user42           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,11 @@ void	side_move(struct s_player *p, int dir)
 				* p->speed_ratio;
 	new.y = p->pos->y + p->speed * (sin(p->angle + (ft_inrad(90)) * dir))
 				* p->speed_ratio;
-	if ((res = get_grid(m, new.x, p->pos->y, 1)) != 1 && res != 2 && res != 4)
+	if ((res = get_grid(m, new.x, p->pos->y, 1)) != 1
+		&& !(res >= 2 && res <= 4))
 		p->pos->x = new.x;
-	if ((res = get_grid(m, p->pos->x, new.y, 1)) != 1 && res != 2 && res != 4)
+	if ((res = get_grid(m, p->pos->x, new.y, 1)) != 1
+		&& !(res >= 2 && res <= 4))
 		p->pos->y = new.y;
 	if (is_key_pressed(b, 13) == -1 && is_key_pressed(b, 1) == -1)
 		bobbing(p);
@@ -72,9 +74,11 @@ void	move(struct s_player *p, int dir)
 	m = b->map;
 	new.x = p->pos->x + p->step->x * dir * p->speed_ratio;
 	new.y = p->pos->y + p->step->y * dir * p->speed_ratio;
-	if ((res = get_grid(m, new.x, p->pos->y, 1)) != 1 && res != 2 && res != 4)
+	if ((res = get_grid(m, new.x, p->pos->y, 1)) != 1
+		&& !(res >= 2 && res <= 4))
 		p->pos->x = new.x;
-	if ((res = get_grid(m, p->pos->x, new.y, 1)) != 1 && res != 2 && res != 4)
+	if ((res = get_grid(m, p->pos->x, new.y, 1)) != 1
+		&& !(res >= 2 && res <= 4))
 		p->pos->y = new.y;
 	bobbing(p);
 }
