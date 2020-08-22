@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/06 10:41:58 by user42            #+#    #+#             */
-/*   Updated: 2020/08/22 14:07:04 by user42           ###   ########lyon.fr   */
+/*   Updated: 2020/08/22 17:37:13 by user42           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int		loop_hook(t_brain *b)
 			draw_fullmap(b, 0);
 		}
 		else
-			draw_fullmap(b, 0.28);
+			draw_fullmap(b, 0.2);
 		if (!b->save)
 			mlx_put_image_to_window(b->ctx->mlx_ptr, b->ctx->win_ptr,
 				b->map->frame->img, 0, 0);
@@ -84,7 +84,6 @@ void	init_loop(t_brain *b, int save)
 	}
 	else
 	{
-		init_texture(b, "assets/pause.xpm", &(b->pause_menu));
 		b->ctx->win_ptr = mlx_new_window(b->ctx->mlx_ptr,
 			b->ctx->width, b->ctx->height, "Cube3D");
 		mlx_loop_hook(b->ctx->mlx_ptr, &loop_hook, b);
@@ -114,6 +113,7 @@ int		main(int ac, char **av)
 	exit_cube(b, 0, "Init Exit", 1);
 	ft_printf(GRN"Opening Map "DCYAN"%s\n"RST, av[1]);
 	open_map(b, av[1], map);
+	init_texture(b, "assets/pause.xpm", &(b->pause_menu));
 	if (!check_map(b->map))
 		exit_cube(b, 2, "BAD MAP", 0);
 	ft_putstr(
