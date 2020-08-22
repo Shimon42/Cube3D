@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 22:11:09 by siferrar          #+#    #+#             */
-/*   Updated: 2020/08/17 15:54:43 by user42           ###   ########lyon.fr   */
+/*   Updated: 2020/08/22 18:12:32 by user42           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ void		draw_col(t_brain *b, float w_height, float cur_col, t_detect w)
 	int			texture_col;
 	int			mid_wall;
 
-	mid_wall = (b->ctx->height / 2 - w_height / 2 + 1);
+	mid_wall = (b->ctx->height / 2.0 - w_height / 2.0 + 1);
 	texture_col = ((w.w_side_hit == 'n' || w.w_side_hit == 's') ?
 	(int)w.hit.x % b->map->bloc_size : (int)w.hit.y % b->map->bloc_size);
 	texture = get_wall_texture(b->map, w.w_side_hit);
@@ -97,7 +97,7 @@ void		draw_col(t_brain *b, float w_height, float cur_col, t_detect w)
 		texture_col = ((*texture)->is_color != -1 ?
 			(*texture)->is_color :
 			pixel_get(*texture, ratio.x, (i + 1) * ratio.y));
-		if (mid_wall + i >= 0)
+		if (mid_wall + i + b->player->z >= 0)
 			pixel_put(cur_col, mid_wall + i + b->player->z,
 													texture_col, b->map->frame);
 		if (mid_wall + i > b->ctx->height)
