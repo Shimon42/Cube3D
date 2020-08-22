@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/13 12:16:27 by milosandric       #+#    #+#             */
-/*   Updated: 2020/08/22 11:17:42 by user42           ###   ########lyon.fr   */
+/*   Updated: 2020/08/22 14:02:19 by user42           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,9 @@ void				free_map_check(t_type *map)
 int					open_map(t_brain *b, char *map_path, t_type *map)
 {
 	init_map(b->ctx, b);
+	b->map->mini_map_width = b->ctx->width * 0.4;
+	if (b->map->mini_map_width > 300)
+		b->map->mini_map_width = 300;
 	b->map->frame->is_color = -1;
 	init_textures(b, map);
 	free_map_check(map);

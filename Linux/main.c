@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/06 10:41:58 by user42            #+#    #+#             */
-/*   Updated: 2020/08/22 12:40:59 by user42           ###   ########lyon.fr   */
+/*   Updated: 2020/08/22 14:07:04 by user42           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,8 @@ int		loop_hook(t_brain *b)
 		update_sprite(b);
 		if (is_key_pressed(b, MAP_KEY) == -1)
 		{
-			if (200 < b->ctx->width / 2)
-				draw_minimap(b, 10, 25, 200);
+			if (b->ctx->width > 150)
+				draw_minimap(b, 10, 25, b->map->mini_map_width);
 			draw_fullmap(b, 0);
 		}
 		else
