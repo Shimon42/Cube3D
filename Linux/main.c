@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/06 10:41:58 by user42            #+#    #+#             */
-/*   Updated: 2020/08/21 22:40:02 by user42           ###   ########lyon.fr   */
+/*   Updated: 2020/08/22 12:40:59 by user42           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,8 @@ t_brain	*new_brain(int width, int height, int save)
 	mlx_get_screen_size(new->ctx->mlx_ptr, &size.x, &size.y);
 	if (width > size.x || height > size.y)
 	{
-		if (width > size.x)
-			width = size.x;
-		if (height > size.y)
-			height = size.y;
+		width = (width > size.x ? size.x : width);
+		height = (height > size.y ? size.y : height);
 		free_ctx(new->ctx);
 		new->ctx = new_ctx(width, height);
 	}
@@ -50,7 +48,8 @@ int		loop_hook(t_brain *b)
 		update_sprite(b);
 		if (is_key_pressed(b, MAP_KEY) == -1)
 		{
-			draw_minimap(b, 10, 25, 200);
+			if (200 < b->ctx->width / 2)
+				draw_minimap(b, 10, 25, 200);
 			draw_fullmap(b, 0);
 		}
 		else
@@ -70,6 +69,7 @@ int		red_cross(void *brain)
 	t_brain	*b;
 
 	b = (t_brain*)brain;
+	b->ctx->red_cross = 1;
 	exit_cube(brain, 0, "Exit From Red Cross", 0);
 	return (1);
 }

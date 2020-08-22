@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/15 18:42:08 by siferrar          #+#    #+#             */
-/*   Updated: 2020/08/21 23:29:34 by user42           ###   ########lyon.fr   */
+/*   Updated: 2020/08/22 12:44:31 by user42           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,15 @@
 
 void	free_ctx(t_ctx *c)
 {
+	ft_printf("REDCROSS %d\n", c->red_cross);
 	if (c->buff->img != NULL)
 		mlx_destroy_image(c->mlx_ptr, c->buff->img);
 	free(c->buff);
-	if (c->win_ptr != NULL)
+	if (c->win_ptr != NULL && c->red_cross == 0)
 		mlx_destroy_window(c->mlx_ptr, c->win_ptr);
+	ft_putstr("\033[0;33mFree MLX -> ");
 	free_mlx(c->mlx_ptr);
+	ft_putstr("OK\033[0;33m\n");
 	check_n_free(c->mlx_ptr);
 	check_n_free(c);
 }
@@ -77,5 +80,6 @@ t_ctx	*new_ctx(int width, int height)
 	ctx->text = &put_text;
 	ctx->clear = &clear_ctx;
 	ctx->color = 0;
+	ctx->red_cross = 0;
 	return (ctx);
 }

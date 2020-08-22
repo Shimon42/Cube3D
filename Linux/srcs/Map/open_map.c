@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/13 12:16:27 by milosandric       #+#    #+#             */
-/*   Updated: 2020/08/21 23:45:25 by user42           ###   ########lyon.fr   */
+/*   Updated: 2020/08/22 11:17:42 by user42           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,14 +43,16 @@ void				get_map(t_brain *b, char *map_path)
 
 void				free_map_check(t_type *map)
 {
-	free(map->no);
-	free(map->so);
-	free(map->we);
-	free(map->ea);
-	free(map->s);
-	free(map->f);
-	free(map->c);
-	free(map);
+	get_next_line(map->fd, &(map->line), 1);
+	check_n_free(map->line);
+	check_n_free(map->no);
+	check_n_free(map->so);
+	check_n_free(map->we);
+	check_n_free(map->ea);
+	check_n_free(map->s);
+	check_n_free(map->f);
+	check_n_free(map->c);
+	check_n_free(map);
 }
 
 int					open_map(t_brain *b, char *map_path, t_type *map)

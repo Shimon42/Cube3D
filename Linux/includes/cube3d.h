@@ -6,14 +6,13 @@
 /*   By: user42 <user42@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 21:30:44 by siferrar          #+#    #+#             */
-/*   Updated: 2020/08/21 22:48:58 by user42           ###   ########lyon.fr   */
+/*   Updated: 2020/08/22 11:43:33 by user42           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUBE3D_H
 # define CUBE3D_H
 
-# include <stdio.h>
 # include <pthread.h>
 # include <stdlib.h>
 # include <unistd.h>
@@ -50,10 +49,12 @@ typedef struct	s_brain
 
 typedef struct	s_type
 {
+	int			fd;
 	int			height;
 	int			width;
 	int			valid;
 	int			res[3];
+	char		*line;
 	char		*no;
 	char		*so;
 	char		*we;

@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/22 15:29:02 by siferrar          #+#    #+#             */
-/*   Updated: 2020/08/21 22:54:12 by user42           ###   ########lyon.fr   */
+/*   Updated: 2020/08/22 11:23:52 by user42           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,6 @@ void	ft_flag_str(char *str, char **target, t_type *map)
 		*target = ft_itoa(ft_flag_color(map, str));
 	else
 		exit_flag(503, "Several textures provided for one identifiers", map);
-	dprintf(1, "SIZE:%lu\n", sizeof(target));
 }
 
 void	size_capper(int *size, int cap)

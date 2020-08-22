@@ -34,5 +34,9 @@ int	mlx_destroy_window(t_xvar *xvar,t_win_list *win)
   XFreeGC(xvar->display,win->gc);
   free(win);
   if (xvar->do_flush)
+  {
+    XCloseDisplay(xvar->display);
     XFlush(xvar->display);
+    xvar->display = NULL;
+  }
 }

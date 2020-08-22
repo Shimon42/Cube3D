@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/15 17:33:03 by siferrar          #+#    #+#             */
-/*   Updated: 2020/08/21 21:42:49 by user42           ###   ########lyon.fr   */
+/*   Updated: 2020/08/22 11:59:33 by user42           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,11 +51,12 @@ typedef struct	s_ctx
 	int			fps;
 	int			color;
 	int			line_width;
-	t_xvar		*mlx_ptr;
+	void		*mlx_ptr;
 	void		*win_ptr;
 	t_buff		*buff;
 	t_buff		*cur_buff;
 	t_fpoint	divided;
+	int			red_cross;
 	float		col_step;
 	void		(*line)(t_point, t_point, struct s_ctx *);
 	void		(*rect)(t_point, t_point, int, struct s_ctx *);
