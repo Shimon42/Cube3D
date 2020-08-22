@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/13 13:13:15 by siferrar          #+#    #+#             */
-/*   Updated: 2020/08/21 22:20:19 by user42           ###   ########lyon.fr   */
+/*   Updated: 2020/08/22 13:38:53 by user42           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,10 @@ int		del_key_pressed(t_brain *b, int key)
 	int i;
 
 	i = 0;
+	disp_keys(b);
 	if (b->keys == NULL)
 		return (1);
-	while (b->keys[i] && b->keys[i] != key && i < 10)
+	while (b->keys[i] != -1 && b->keys[i] != key && i < 10)
 		i++;
 	if (i < 10 && b->keys[i] == key)
 	{
