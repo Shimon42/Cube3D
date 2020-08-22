@@ -1,4 +1,4 @@
-# Cube 3D • Alpha 0.9.1 - It's All Good
+# Cube 3D • Alpha 0.9.5 - It's All Good NOW
 
 ![Cube3D Screenshot](/Screenshots/sprites.png)
 
@@ -11,6 +11,10 @@
 -> Go into the directory corresponding to your OS (Mac OSX or Linux)
 
 -> make - Compile only
+
+-> ./cub3D assets/maps/<filename.cub>
+
+or
 
 -> make launch - Compile changes & launch
 
@@ -40,8 +44,8 @@
 		Changes
 	———————————————————————————————————— 
 	- Everything is good
-	- No Leaks
-	- Tested on Mac OSX 10.14.6 and lower
+	- No Leaks at all
+	- Fixed MinilibX Leaks
 	- Tested on xUbuntu 18.04.4
 
     ————————————————————————————————————
@@ -50,19 +54,24 @@
 	- Everything 42Normed
 	- Map parsing & Checking
 	- Minimap display and expand to fullmap
-	- Draw walls with textures/colors and collisions
+	- Player bobbing
+	- Draw walls with textures or colors
+	- Wall Collisions
 	- SkyBox
-	- Textured floor
+	- FPS counter
+	- Draw floor with texture or color
+	- Multiple sprites
 	- Textured sprites and shadows
 	- Sprites collisions
-	- No Leaks
-	- Peer evaluations - Not done
+	- No Leaks (Cub & MinilibX)
+	- Peer evaluations - 2nd try
+	- Mac OSX not up to date
 	
 	————————————————————————————————————
     	Known Bugs
 	————————————————————————————————————
-	Casing:
-	- Small fish eye remaining
+	Casting:
+	- Really Small fish eye remaining
 
 	Moving:
 	- Double speed if walk on side and move forward
@@ -70,5 +79,8 @@
 	Floor Casting:
 	- Floor texture move badly sometimes
 	- Fish eye
+
+	SkyBox:
+	- Texture jump at angle = 0 (not perfect texture ?)
 
 	
