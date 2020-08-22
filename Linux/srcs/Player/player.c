@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/08 17:32:22 by milosandric       #+#    #+#             */
-/*   Updated: 2020/07/13 14:58:50 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/08/21 18:37:12 by user42           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,14 +45,14 @@ int		init_values(t_brain *b, t_player *p)
 	p->sidemove = &side_move;
 	p->rot = &rotate;
 	p->jump = &jump;
-	p->speed = b->map->bloc_size * 0.12;
-	p->rot_speed = (3 * PI) / 180;
+	p->speed = b->map->bloc_size * 2.5;
+	p->rot_speed = 4;
 	p->step = malloc(sizeof(t_fpoint *));
 	if (p->step == NULL)
 		exit_cube(NULL, 102, "Failed to malloc player step", 0);
 	p->brain = b;
-	p->as_move = 1;
-	p->as_rotate = 1;
+	p->as_move = 0;
+	p->as_rotate = 0;
 	p->bobbing = 0;
 	p->jumping = 0;
 	p->inited = 1;
@@ -62,6 +62,8 @@ int		init_values(t_brain *b, t_player *p)
 int		init_player(t_brain *b, int pos_x, char angle)
 {
 	ft_printf(DCYAN"	-> Init player at ");
+	if (b->player != NULL)
+		exit_cube(b, 801, "Player already initied", 0);
 	if ((b->player = malloc(sizeof(t_player))) == NULL)
 		exit_cube(NULL, 1, "Failed to malloc player", 0);
 	if ((b->player->pos = malloc(sizeof(t_fpoint))) == NULL)
@@ -73,6 +75,7 @@ int		init_player(t_brain *b, int pos_x, char angle)
 	init_cam(b);
 	init_values(b, b->player);
 	b->player->angle = get_player_angle(angle);
+	b->player->speed_ratio = 1;
 	b->player->rot(b->player, 0);
 	b->player->ctx = b->ctx;
 	b->player->bob_height = 5.0;

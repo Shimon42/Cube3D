@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/14 22:46:16 by siferrar          #+#    #+#             */
-/*   Updated: 2020/05/20 17:45:07 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/08/20 18:54:33 by user42           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,6 @@
 # define MAP_H
 
 # include "cube3d.h"
-
-typedef struct	s_draw_spr
-{
-	t_fpoint	size;
-	t_point		start;
-	t_fpoint	ratio;
-	int			x;
-	int			y;
-}				t_draw_spr;
 
 typedef struct	s_sprite
 {
@@ -75,6 +66,7 @@ typedef struct	s_map
 	t_fpoint	disp;
 	int			mini_map_width;
 	int			sprites_count;
+	t_buff		*default_spr;
 	t_spr_list	*sprites;
 	t_buff		*w_n;
 	t_buff		*w_e;

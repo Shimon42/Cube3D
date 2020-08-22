@@ -3,22 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   debug.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/20 15:53:12 by siferrar          #+#    #+#             */
-/*   Updated: 2020/05/20 15:36:37 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/08/17 11:34:47 by user42           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cube3d.h"
 #include "debug.h"
-#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
 void	disp_point(t_fpoint p)
 {
-	dprintf(1, "{ x:%6f, y:%6f }\n", p.x, p.y);
+	ft_printf("{ x:%6f, y:%6f }\n", p.x, p.y);
 }
 
 void	disp_buff(t_buff *b)

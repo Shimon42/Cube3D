@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mandric <mandric@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/21 20:52:46 by siferrar          #+#    #+#             */
-/*   Updated: 2020/05/20 17:52:57 by mandric          ###   ########lyon.fr   */
+/*   Updated: 2020/08/21 21:01:17 by user42           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ typedef struct		s_gnl
 	char			*buff;
 }					t_gnl;
 
-int					get_next_line(int fd, char **line);
+int					get_next_line(int fd, char **line, int meditate_gnl);
 int					has_eol(char *s);
 char				*ft_strnjoin(char const *s1,
 					char const *s2,

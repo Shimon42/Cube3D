@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mandric <mandric@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/30 14:39:54 by siferrar          #+#    #+#             */
-/*   Updated: 2020/05/20 17:52:47 by mandric          ###   ########lyon.fr   */
+/*   Updated: 2020/08/21 23:51:29 by user42           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-t_gnl	*init_brain(int fd)
+t_gnl		*init_brain(int fd)
 {
 	t_gnl *brain;
 
@@ -28,7 +28,7 @@ t_gnl	*init_brain(int fd)
 	return (brain);
 }
 
-t_gnl	*get_brain(t_gnl **b, int fd, char **line)
+t_gnl		*get_brain(t_gnl **b, int fd, char **line)
 {
 	t_gnl *tmp;
 	t_gnl **ptr;
@@ -56,7 +56,7 @@ t_gnl	*get_brain(t_gnl **b, int fd, char **line)
 	return (*b);
 }
 
-void	meditate(t_gnl **blist, t_gnl *b, char **line)
+static int	meditate(t_gnl **blist, t_gnl *b, char **line)
 {
 	t_gnl **ptr;
 
@@ -78,9 +78,10 @@ void	meditate(t_gnl **blist, t_gnl *b, char **line)
 	free(b->buff);
 	b->next = NULL;
 	free(b);
+	return (0);
 }
 
-int		treat_left(t_gnl *b, char **line)
+int			treat_left(t_gnl *b, char **line)
 {
 	char *temp;
 	char *btemp;
@@ -108,7 +109,7 @@ int		treat_left(t_gnl *b, char **line)
 	return (0);
 }
 
-int		get_next_line(int fd, char **line)
+int			get_next_line(int fd, char **line, int meditate_gnl)
 {
 	static	t_gnl	*blist;
 	t_gnl			*b;
@@ -117,6 +118,8 @@ int		get_next_line(int fd, char **line)
 	if (BUFFER_SIZE > 0 && fd >= 0)
 		if ((b = get_brain(&blist, fd, line)) != NULL)
 		{
+			if (meditate_gnl == 1)
+				return (meditate(&blist, b, line));
 			if (b->asleft && treat_left(b, line))
 				return (1);
 			if (!b->buff
@@ -129,10 +132,7 @@ int		get_next_line(int fd, char **line)
 					return (1);
 			}
 			if (!b->nbr_read)
-			{
-				meditate(&blist, b, line);
-				return (0);
-			}
+				return (meditate(&blist, b, line));
 		}
 	return (-1);
 }

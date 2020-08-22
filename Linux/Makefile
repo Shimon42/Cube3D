@@ -1,4 +1,4 @@
-NAME =		Cub3D
+NAME =		cub3D
 
 SRCSPATH =	srcs/
 DEBUGPATH =	debug/
@@ -13,8 +13,8 @@ LIBFT =		$(INCPATH)Libft/
 INCLUDES =	$(INCPATH)cube3d.h \
 			$(INCPATH)my_canvas.h \
 			$(INCPATH)map.h \
+			$(INCPATH)keys.h \
 			$(INCPATH)player.h \
-			$(INCPATH)Gnl/get_next_line.h \
 			$(LIBFT)includes/libft.h \
 			\
 			$(MINILIB)mlx.h \
@@ -30,16 +30,20 @@ SRCS = 		main.c \
 			$(SRCSPATH)Canvas/line/calc_fourth_quad.c \
 			$(SRCSPATH)Canvas/line/draw_line.c \
 			$(SRCSPATH)Canvas/rect.c \
+			$(SRCSPATH)Canvas/pixel.c \
 			$(SRCSPATH)Canvas/circle.c \
+			$(SRCSPATH)Canvas/image.c \
 			$(SRCSPATH)Canvas/text.c \
 			$(SRCSPATH)Canvas/context.c \
 			$(SRCSPATH)Canvas/points.c \
 			\
 			$(SRCSPATH)Utils/colors.c \
 			$(SRCSPATH)Utils/fps_counter.c \
+			$(SRCSPATH)Utils/pause.c \
 			\
 			$(SRCSPATH)Checker/check.c \
 			$(SRCSPATH)Checker/flag_get.c \
+			$(SRCSPATH)Checker/flags_treat.c \
 			$(SRCSPATH)Checker/flag_get_utils.c \
 			\
 			$(SRCSPATH)Map/open_map.c \
@@ -75,16 +79,12 @@ SRCS = 		main.c \
 			$(SRCSPATH)textures.c \
 			$(DEBUGPATH)debug.c
 
-GNL_SRCS =	$(INCPATH)Gnl/get_next_line.c \
-			$(INCPATH)Gnl/get_next_line_utils.c
-
-GNL_OBJS =	${GNL_SRCS:.c=.o}
 
 CC =		clang
 
 CFLAGSPROD	= -Wall -Wextra -Werror
-CFLAGS	= 
-CFLAGSSAN	= -g -g3 -fsanitize=address -Wall -Wextra -Werror
+CFLAGS	= -g -Wall -Wextra -Werror
+CFLAGSSAN	= -g -g3 -fsanitize=address $(CFLAGS)
 
 OBJS = ${SRCS:.c=.o}
 
@@ -103,21 +103,16 @@ COL_TXT = \033[0;36m
 COL_SHADOW = \033[2;36m
 
 all:		$(NAME)
-		clang $(CFLAGSSAN) main.c $(NAME).a libft.a libmlx_Linux.a -lX11 -lXext -Lincludes/MiniLib/ -lm -I. -o $(NAME) 
-
 
 $(NAME):	$(OBJS) $(INCLUDES)
 			make -C $(MINILIB)
 			make -C $(LIBFT)
-			clang -c $(GNL_SRCS) -D BUFFER_SIZE=400
 			mv $(MINILIB)libmlx_Linux.a .
 			mv $(LIBFT)libft.a .
-			ar rc $(NAME).a $(OBJS) get_next_line.o get_next_line_utils.o
+			ar rc $(NAME).a $(OBJS)
+			clang $(CFLAGS) main.c $(NAME).a libft.a libmlx_Linux.a -lX11 -lXext -Lincludes/MiniLib/ -lm -I. -o $(NAME) 
 
-comp:		all
-		clang $(CFLAGSPROD) main.c $(NAME).a libft.a libmlx_Linux.a -lX11 -lXext -Lincludes/MiniLib/ -lm -I. -o $(NAME) 
-
-launch:		comp
+launch:		all
 			clear
 			@echo "$(COL_CUBE)  .–––––––––––––––––––––––––––––––––––––––––––––––––––––––––.	"
 			@echo " / |                     $(COL_TITLE)Launching$(COL_CUBE)                          | \	"
@@ -141,7 +136,7 @@ libft:
 $(OBJS):	$(INCLUDES)
 
 clean:
-			${RM} $(OBJS) get_next_line.o get_next_line_utils.o
+			${RM} $(OBJS)
 			@make -C $(LIBFT) clean
 			@make -C $(MINILIB) clean
 

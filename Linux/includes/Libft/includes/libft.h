@@ -3,17 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mandric <mandric@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/11 12:00:43 by siferrar          #+#    #+#             */
-/*   Updated: 2020/05/21 11:49:55 by mandric          ###   ########lyon.fr   */
+/*   Updated: 2020/08/21 21:01:04 by user42           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
 
-# include <stdio.h>
 # include <unistd.h>
 # include <stdlib.h>
 # include <strings.h>
@@ -58,6 +57,8 @@ size_t				ft_putihex(unsigned int n, int upper);
 size_t				ft_puthex(unsigned long n, int upper);
 void				ft_putint(char *name, int nbr);
 char				**ft_split(char const *s, char c);
+void				ft_free_split(char **splited);
+char				*ft_check_str(char *str, char *chrs);
 char				*ft_strchr(const char *s, int c);
 char				*ft_strdup(const char *s1);
 char				*ft_strjoin(char const *s1, char const *s2);
@@ -94,5 +95,5 @@ void				ft_lstclear(t_list **lst, void (*del)(void*));
 t_list				*ft_lstmap(t_list *lst,
 								void *(*f)(void *),
 								void (*del)(void *));
-int					get_next_line(int fd, char **line);
+int					get_next_line(int fd, char **line, int meditate_gnl);
 #endif

@@ -3,45 +3,57 @@
 /*                                                        :::      ::::::::   */
 /*   flag_get.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mandric <mandric@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/31 16:39:19 by milosand          #+#    #+#             */
-/*   Updated: 2020/07/15 19:12:34 by mandric          ###   ########lyon.fr   */
+/*   Updated: 2020/08/22 11:22:39 by user42           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cube3d.h"
 
+int		pre_check(char *path, t_type **map)
+{
+	int	fd;
+
+	fd = -1;
+	*map = malloc(sizeof(t_type));
+	if (*map == NULL)
+		return (-1);
+	ft_init_t_type(*map);
+	if (ft_ext_check(path, ".cub"))
+		fd = open(path, O_RDONLY);
+	else
+		exit_flag(500, "please provide .cub file\n", *map);
+	(*map)->fd = fd;
+	return (fd);
+}
+
 t_type	*ft_getmap_flag(char *path)
 {
 	int		ret;
 	int		fd;
-	char	*line;
 	t_type	*map;
 
-	map = malloc(sizeof(t_type));
-	if (ft_ext_check(path, ".cub"))
-		fd = open(path, O_RDONLY);
-	else
-		exit_flag(500, "please provide .cub file\n", map);
+	map = NULL;
+	fd = pre_check(path, &map);
 	if (fd > 0)
 	{
 		map->res[0] = 0;
-		ft_init_t_type(map);
-		ret = get_next_line(fd, &line);
-		while (ret && ((ft_strmultichr(line, " 01234SNEW")) != 1))
+		ret = get_next_line(fd, &(map->line), 0);
+		while (ret && ((ft_strmultichr(map->line, " 01234SNEW")) != 1))
 		{
-			ft_getmap_values(line, map);
-			free(line);
-			ret = get_next_line(fd, &line);
+			ft_getmap_values(map->line, map);
+			free(map->line);
+			ret = get_next_line(fd, &(map->line), 0);
 		}
+		check_n_free(map->line);
 		ft_check_struct(map);
-		free(line);
-		close(fd);
-		return (map);
 	}
-	else
-		return (NULL);
+	ret = get_next_line(fd, &(map->line), 1);
+	check_n_free(map->line);
+	close(fd);
+	return (map);
 }
 
 void	ft_getmap_values(char *line, t_type *map)
@@ -65,78 +77,35 @@ void	ft_getmap_values(char *line, t_type *map)
 	else if (!(ft_strncmp(line, "C ", 2)))
 		ft_flag_str(line + 2, &map->c, map);
 	else if (line[0] != '\0')
+	{
+		free(line);
 		exit_flag(501, "Unkown identifier(s) in setup file\n", map);
-}
-
-void	ft_flag_str(char *str, char **target, t_type *map)
-{
-	int	fd;
-
-	if (ft_ext_check(str, ".xpm"))
-	{
-		if (*target != NULL)
-			exit_flag(502,
-				"Several textures provided for one identifiers\n", map);
-		if ((fd = open(str, O_RDONLY)) == -1)
-			exit_flag(503, "Invalid path for one of the textures\n", map);
-		*target = ft_strdup(str);
-		close(fd);
 	}
-	else
-		exit_flag(504, "Please provide a \'.xpm\' file.\n", map);
 }
 
-void	ft_flag_res(char *str, int *target, t_type *map)
+int		ft_atoi_ovr(const char *str)
 {
-	int		i;
-	char	**splited;
+	int			i;
+	long long	res;
+	int			sign;
+	int			digits;
 
+	sign = 1;
+	res = 0;
 	i = 0;
-	if (ft_str_search(str, "0123456789 "))
-		exit_flag(509, "Illegal character in resolution\n", map);
-	if (target[2] != 0)
-		exit_flag(510, "Make up your mind about the resolution\n", map);
-	splited = ft_split(str, ' ');
-	while (splited[i] != NULL)
+	digits = 0;
+	while (str[i] == '\t' || str[i] == '\v' || str[i] == '\n' || str[i] == '\r'
+		|| str[i] == '\f' || str[i] == ' ')
 		i++;
-	if (i != 2)
-		exit_flag(511, "Resolution not gud\n", map);
-	i = 0;
-	while (splited[i] != NULL)
-		free(splited[i++]);
-	free(splited);
-	target[0] = ft_atoi(str);
-	str = ft_strchr(str, ' ');
-	target[1] = ft_atoi(str);
-	if (target[0] < 100)
-		target[0] = 100;
-	if (target[1] < 100)
-		target[1] = 100;
-	target[2] = 1;
-}
-
-char	*ft_str_search(char *str, char *chrs)
-{
-	int i;
-	int flag;
-
-	i = 0;
-	flag = 0;
-	if (str == NULL)
-		return (NULL);
-	while (*str)
+	if (str[i] == '-' || str[i] == '+')
+		if (str[i++] == '-')
+			sign = -1;
+	while (str[i] >= '0' && str[i] <= '9')
 	{
-		while (chrs[i])
-		{
-			if (*str == chrs[i])
-				flag = 1;
-			i++;
-		}
-		if (flag == 0)
-			return (str);
-		flag = 0;
-		i = 0;
-		str++;
+		res = res * 10 + (str[i++] - '0');
+		digits++;
 	}
-	return (NULL);
+	if (digits > 6)
+		return (9999999);
+	return (res * sign);
 }

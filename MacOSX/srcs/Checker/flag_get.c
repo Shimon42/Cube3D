@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/31 16:39:19 by milosand          #+#    #+#             */
-/*   Updated: 2020/07/14 14:41:44 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/07/22 15:05:22 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ void	ft_flag_res(char *str, int *target, t_type *map)
 	char	**splited;
 
 	i = 0;
-	if (ft_str_search(str, "0123456789 "))
+	if (ft_check_str(str, "0123456789 "))
 		exit_flag(509, "Illegal character in resolution\n", map);
 	if (target[2] != 0)
 		exit_flag(510, "Make up your mind about the resolution\n", map);
@@ -112,7 +112,7 @@ void	ft_flag_res(char *str, int *target, t_type *map)
 	target[2] = 1;
 }
 
-char	*ft_str_search(char *str, char *chrs)
+char	*ft_check_str(char *str, char *chrs)
 {
 	int i;
 	int flag;

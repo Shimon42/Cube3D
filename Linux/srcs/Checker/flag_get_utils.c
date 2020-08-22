@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   flag_get_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/13 12:20:59 by milosandric       #+#    #+#             */
-/*   Updated: 2020/05/20 14:11:35 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/08/22 11:13:49 by user42           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ void	ft_init_t_type(t_type *map)
 	map->s = NULL;
 	map->c = NULL;
 	map->f = NULL;
+	map->line = NULL;
 	map->height = 0;
 	map->width = 0;
 	map->valid = 1;
@@ -93,13 +94,7 @@ void	exit_flag(int err_num, char *str, t_type *map)
 	ft_putstr(" - ");
 	ft_putstr(str);
 	ft_putstr("\n");
-	check_n_free(map->no);
-	check_n_free(map->so);
-	check_n_free(map->ea);
-	check_n_free(map->we);
-	check_n_free(map->s);
-	check_n_free(map->f);
-	check_n_free(map->c);
-	free(map);
+	check_n_free(map->line);
+	free_map_check(map);
 	exit(0);
 }

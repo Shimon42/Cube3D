@@ -3,19 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   my_canvas.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/15 17:33:03 by siferrar          #+#    #+#             */
-/*   Updated: 2020/05/20 17:45:30 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/08/22 11:59:33 by user42           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MY_CANVAS_H
 # define MY_CANVAS_H
 # include <stdlib.h>
-# include <stdio.h>
 # include <unistd.h>
 # include "MiniLib/mlx.h"
+# include "MiniLib/mlx_int.h"
 
 typedef struct	s_point
 {
@@ -41,12 +41,14 @@ typedef struct	s_buff {
 	int			max_addr;
 	double		ratio;
 	int			initied;
+	int			is_color;
 }				t_buff;
 
 typedef struct	s_ctx
 {
 	int			width;
 	int			height;
+	int			fps;
 	int			color;
 	int			line_width;
 	void		*mlx_ptr;
@@ -54,6 +56,7 @@ typedef struct	s_ctx
 	t_buff		*buff;
 	t_buff		*cur_buff;
 	t_fpoint	divided;
+	int			red_cross;
 	float		col_step;
 	void		(*line)(t_point, t_point, struct s_ctx *);
 	void		(*rect)(t_point, t_point, int, struct s_ctx *);
@@ -62,10 +65,12 @@ typedef struct	s_ctx
 	void		(*clear)(int, struct s_ctx *);
 }				t_ctx;
 
+void			free_ctx(t_ctx *c);
 t_ctx			*new_ctx(int width, int height);
 void			init_buff(t_ctx *ctx, t_buff **buff, int width, int height);
 void			pixel_put(int x, int y, int color, t_buff *buff);
 int				pixel_get(t_buff *img, int x, int y);
+void			put_image(t_buff *ctx, t_buff *img, t_point pos, t_point size);
 void			draw_line(t_point p1, t_point p2, t_ctx *ctx);
 void			draw_rect(t_point pos, t_point size, int fill, t_ctx *ctx);
 void			draw_circle(t_fpoint pos,

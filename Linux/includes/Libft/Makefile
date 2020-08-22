@@ -37,6 +37,7 @@ SRCS	=	$(MATHLIB)ft_abs.c \
 			$(PRINTLIB)ft_putint.c \
 			\
 			$(STRLIB)ft_split.c \
+			$(STRLIB)ft_free_split.c \
 			$(STRLIB)ft_strchr.c \
 			$(STRLIB)ft_strdup.c \
 			$(STRLIB)ft_strjoin.c \
@@ -58,6 +59,7 @@ SRCS	=	$(MATHLIB)ft_abs.c \
 			$(STRLIB)ft_isascii.c \
 			$(STRLIB)ft_isdigit.c \
 			$(STRLIB)ft_isprint.c \
+			$(STRLIB)ft_check_str.c \
 			\
 			$(CONVLIB)ft_ftoa.c \
 			$(CONVLIB)ft_atoi.c \
@@ -97,10 +99,10 @@ GNL_SRCS =	$(GNL)get_next_line.c \
 			$(GNL)get_next_line_utils.c
 GNL_OBJS	= ${GNL_SRCS:.c=.o}
 
-GNL_BUFF_SIZE = 128
+GNL_BUFF_SIZE = 400
 
 CC		= clang
-CFLAGS	= -Wall -Wextra -Werror
+CFLAGS	= -Wall -Wextra -Werror -g
 CLEAR	= clear
 RM		= rm -f
 OBJS	= ${SRCS:.c=.o}
@@ -114,14 +116,15 @@ all:		$(NAME) $(OBJS) $(INCLUDES)
 
 $(NAME): 	$(OBJS) $(INCLUDES)
 			@echo "\033[0;32m––––––––––––––––––––––––\nMaking Libft\n––––––––––––––––––––––––\033[0;33m"
-
-			ar rc $(NAME) $(OBJS)
+			clang -c $(CFLAGS) $(GNL_SRCS) -D BUFFER_SIZE=$(GNL_BUFF_SIZE)
+			ar rc $(NAME) $(OBJS) get_next_line.o get_next_line_utils.o
 			@echo "\033[0;m"
 
 $(OBJS):	$(INCLUDES)
 
 clean:		
 			${RM} $(OBJS)
+			${RM} get_next_line.o get_next_line_utils.o
 
 fclean:		clean
 			${RM} $(NAME)

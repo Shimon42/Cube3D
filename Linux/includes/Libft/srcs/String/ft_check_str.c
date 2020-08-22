@@ -1,40 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sprites_debug.c                                    :+:      :+:    :+:   */
+/*   ft_check_str.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/05/20 13:45:04 by siferrar          #+#    #+#             */
-/*   Updated: 2020/08/03 11:56:43 by siferrar         ###   ########lyon.fr   */
+/*   Created: 2020/07/22 15:02:28 by siferrar          #+#    #+#             */
+/*   Updated: 2020/07/22 15:04:37 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/cube3d.h"
+#include "../../includes/libft.h"
 
-void		disp_sprites(t_spr_list *s_list)
+char	*ft_check_str(char *str, char *chrs)
 {
-	int			i;
+	int i;
+	int flag;
 
 	i = 0;
-	ft_putstr(PINK);
-	if (s_list->list != NULL)
+	flag = 0;
+	if (str == NULL)
+		return (NULL);
+	while (*str)
 	{
-		ft_printf("%d sprites in list\n", s_list->length);
-		while (i < s_list->length)
+		while (chrs[i])
 		{
-			disp_sprite(s_list->list[i]);
+			if (*str == chrs[i])
+				flag = 1;
 			i++;
 		}
-		ft_printf("End of loop\n");
+		if (flag == 0)
+			return (str);
+		flag = 0;
+		i = 0;
+		str++;
 	}
-	else
-		ft_printf("No sprites in list\n");
-	ft_putstr(RST);
-}
-
-void		disp_sprite(t_sprite *s)
-{
-	ft_printf("Sprite of type %d\n", s->type);
-	disp_point(s->pos);
+	return (NULL);
 }

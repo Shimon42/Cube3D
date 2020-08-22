@@ -3,17 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   printf.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/20 16:49:16 by siferrar          #+#    #+#             */
-/*   Updated: 2020/04/29 15:40:08 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/08/17 11:36:09 by user42           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PRINTF_H
 # define PRINTF_H
 # include <stdarg.h>
-# include <stdio.h>
 # include "brain_printf.h"
 # include "../../../includes/libft.h"
 

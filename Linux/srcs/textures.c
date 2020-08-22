@@ -3,22 +3,36 @@
 /*                                                        :::      ::::::::   */
 /*   textures.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/09 19:25:10 by siferrar          #+#    #+#             */
-/*   Updated: 2020/05/20 13:23:01 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/08/17 11:37:08 by user42           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cube3d.h"
 
+void	init_color(t_buff *t, char *path)
+{
+	ft_printf(IPINK"\nPATH IS COLOR %s => %d\n"RST, path, ft_atoi(path));
+	t->is_color = ft_atoi(path);
+	t->initied = 3;
+	t->img = NULL;
+	t->addr = NULL;
+	t->max_addr = 1;
+	t->offset = 1;
+	t->ratio = 1;
+	t->width = 1;
+	t->height = 1;
+	t->line_length = 1;
+}
+
 void	init_texture(t_brain *b, char *path, t_buff **t)
 {
-	int	fd;
-
 	ft_printf(DCYAN"	-> %s", path);
-	*t = malloc(sizeof(t_buff));
-	if (*t)
+	if ((*t = malloc(sizeof(t_buff))) == NULL)
+		exit_cube(NULL, 401, "Failed to malloc texture", 0);
+	if (ft_ext_check(path, ".xpm"))
 	{
 		(*t)->initied = 1;
 		(*t)->img = mlx_xpm_file_to_image(b->ctx->mlx_ptr, path,
@@ -33,8 +47,9 @@ void	init_texture(t_brain *b, char *path, t_buff **t)
 		(*t)->offset = (*t)->bits_per_pixel / 8;
 		(*t)->ratio = (*t)->width / b->map->bloc_size;
 		(*t)->initied = 3;
+		(*t)->is_color = -1;
 		ft_printf(GRN" - OK\n"RST);
 	}
 	else
-		exit_cube(NULL, 401, "Failed to malloc texture", 0);
+		init_color(*t, path);
 }

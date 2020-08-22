@@ -6,7 +6,7 @@
 /*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/14 20:36:43 by siferrar          #+#    #+#             */
-/*   Updated: 2020/07/13 13:21:00 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/08/03 14:56:08 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ void				init_map(t_ctx *ctx, void *brain)
 
 void				init_textures(t_brain *b, t_type *map)
 {
+	b->map->default_spr = NULL;
 	ft_putstr(CYAN"Init Textures\n");
 	init_texture(b, map->no, &b->map->w_n);
 	init_texture(b, map->ea, &b->map->w_e);
@@ -50,6 +51,7 @@ void				init_textures(t_brain *b, t_type *map)
 	init_texture(b, map->we, &b->map->w_w);
 	init_texture(b, map->f, &b->map->floor);
 	init_texture(b, map->c, &b->map->skybox);
+	init_texture(b, map->s, &b->map->default_spr);
 }
 
 int					realloc_map(t_map *m, char *line)
@@ -84,37 +86,37 @@ t_player_detect		*chr_trt(char *line, t_map *m)
 	int				i;
 	int				real;
 
-	i = 0;
-	real = 0;
+	i = -1;
 	player = NULL;
-	while (line[i])
+	while (line[++i])
 	{
-		if (line[i] == ' ')
-			line[i] = '0' - 1;
-		if (line[i] == 'N' || line[i] == 'E'
-									|| line[i] == 'S' || line[i] == 'W')
+		line[i] = (line[i] == ' ' ? '0' - 1 : line[i]);
+		if (line[i] != '\0' && ft_strchr("NESW", line[i]) != NULL)
 		{
+			if (player != NULL)
+			{
+				free(player);
+				exit_cube(m->brain, 801, "Player already initied", 0);
+			}
 			player = malloc(sizeof(t_player_detect));
 			player->pos_x = i;
 			player->direction = line[i];
 		}
-		real = line[i] - '0';
-		if (real >= 2 && real <= 4)
+		if ((real = line[i] - '0') >= 2 && real <= 4)
 			add_spr_to_list(m->sprites,
 							init_sprite(m, new_fpoint(i, m->height), real));
-		i++;
 	}
 	return (player);
 }
 
 t_player_detect		*add_map_row(t_map *m, char *line)
 {
-	int				*new;
-	int				*temp;
 	t_player_detect	*player;
-	int 			flag;
+	t_brain			*b;
 
-	if (((flag = ft_strmultichr(line, " 01234SNEW")) == 0) && (ft_strlen(line) != 0))
+	b = (t_brain *)m->brain;
+	if (((ft_strmultichr(line, " 01234SNEW")) == 0)
+			&& (ft_strlen(line) != 0))
 		m->is_valid = 0;
 	player = chr_trt(line, m);
 	realloc_map(m, line);

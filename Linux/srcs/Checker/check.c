@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mandric <mandric@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/20 14:10:19 by siferrar          #+#    #+#             */
-/*   Updated: 2020/07/15 19:03:34 by mandric          ###   ########lyon.fr   */
+/*   Updated: 2020/07/22 14:56:49 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,6 @@ int	check_map(t_map *m)
 		pos.x++;
 	}
 	if (m->is_valid == 0)
-		return(0);
+		return (0);
 	return (1);
 }

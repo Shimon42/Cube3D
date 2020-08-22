@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mandric <mandric@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/30 14:44:05 by siferrar          #+#    #+#             */
-/*   Updated: 2020/05/20 17:52:43 by mandric          ###   ########lyon.fr   */
+/*   Updated: 2020/08/03 14:16:38 by siferrar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,29 +51,4 @@ int		has_eol(char *s)
 		i++;
 	}
 	return (-1);
-}
-
-void	*ft_calloc(size_t count, size_t size)
-{
-	void			*obj;
-	unsigned char	*pobj;
-
-	if ((obj = malloc(count * size)) != NULL)
-	{
-		pobj = obj;
-		while (count--)
-			*pobj++ = '\0';
-	}
-	return (obj);
-}
-
-size_t	ft_strlen(const char *s)
-{
-	size_t length;
-
-	length = 0;
-	if (s)
-		while (s[length])
-			length++;
-	return (length);
 }

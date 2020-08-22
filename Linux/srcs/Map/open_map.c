@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   open_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/13 12:16:27 by milosandric       #+#    #+#             */
-/*   Updated: 2020/07/14 14:46:35 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/08/22 14:02:19 by user42           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,11 @@ void				get_map(t_brain *b, char *map_path)
 	char			*line;
 
 	file = open(map_path, O_RDONLY);
-	ret = get_next_line(file, &line);
-	while (ret && ((ft_strmultichr(line, " 01SNEW")) != 1))
+	ret = get_next_line(file, &line, 0);
+	while (ret && ((ft_strmultichr(line, " 02341SNEW")) != 1))
 	{
 		free(line);
-		ret = get_next_line(file, &line);
+		ret = get_next_line(file, &line, 0);
 	}
 	while (ret != -1)
 	{
@@ -35,38 +35,45 @@ void				get_map(t_brain *b, char *map_path)
 		}
 		if (!ret)
 			break ;
-		ret = get_next_line(file, &line);
+		ret = get_next_line(file, &line, 0);
 	}
-	free(player);
-	close(file);
+	get_next_line(file, &line, 1);
+	free(line);
 }
 
 void				free_map_check(t_type *map)
 {
-	free(map->no);
-	free(map->so);
-	free(map->we);
-	free(map->ea);
-	free(map->s);
-	free(map->f);
-	free(map->c);
-	free(map);
+	get_next_line(map->fd, &(map->line), 1);
+	check_n_free(map->line);
+	check_n_free(map->no);
+	check_n_free(map->so);
+	check_n_free(map->we);
+	check_n_free(map->ea);
+	check_n_free(map->s);
+	check_n_free(map->f);
+	check_n_free(map->c);
+	check_n_free(map);
 }
 
 int					open_map(t_brain *b, char *map_path, t_type *map)
 {
 	init_map(b->ctx, b);
+	b->map->mini_map_width = b->ctx->width * 0.4;
+	if (b->map->mini_map_width > 300)
+		b->map->mini_map_width = 300;
+	b->map->frame->is_color = -1;
 	init_textures(b, map);
+	free_map_check(map);
 	get_map(b, map_path);
-	disp_sprites(b->map->sprites);
+	if (b->player == NULL)
+		exit_cube(NULL, 800, "No Player found in map", 0);
 	sort_sprites(b->player->pos, b->map->sprites);
 	ft_printf(DCYAN"	-> Width: [%d]\n", b->map->width);
 	ft_printf("	-> Height:[%d]\n\n"RST, b->map->height);
 	print_map_grid((b->map));
 	b->map->px_width = b->map->width * b->map->bloc_size;
 	b->map->px_height = b->map->height * b->map->bloc_size;
-	dprintf(1, DCYAN"\nReal Size : %d x %d px\n", b->map->px_width,
+	ft_printf(DCYAN"\nReal Size : %d x %d px\n", b->map->px_width,
 												b->map->px_height);
-	free_map_check(map);
 	return (1);
 }

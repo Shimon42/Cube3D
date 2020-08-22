@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   keys_states.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/13 13:13:15 by siferrar          #+#    #+#             */
-/*   Updated: 2020/07/13 13:14:18 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/08/22 13:47:06 by user42           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,9 @@ int		del_key_pressed(t_brain *b, int key)
 	int i;
 
 	i = 0;
-	while (b->keys[i] != key && i < 10)
+	if (b->keys == NULL)
+		return (1);
+	while (b->keys[i] != -1 && b->keys[i] != key && i < 10)
 		i++;
 	if (i < 10 && b->keys[i] == key)
 	{

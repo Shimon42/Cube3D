@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   draw_fullmap.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/20 12:30:05 by siferrar          #+#    #+#             */
-/*   Updated: 2020/05/20 13:16:07 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/08/18 18:05:30 by user42           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/cube3d.h"
 
 void		calculate_size_mm(t_brain *b, int *margin,
-												float *mrgn_top, float *ease)
+												float *mrgn_top)
 {
 	float scale;
 
@@ -42,9 +42,9 @@ void		ease_in_n_out(t_brain *b, float *ease, float ease_val)
 	else if (b->player->as_move == 0 && *ease == 1)
 	{
 		b->player->as_move = 1;
-		*ease = 1.000001;
+		*ease = 1;
 	}
-	else if (*ease != 1 && *ease != 1.000001)
+	else if (*ease != 1 && *ease != 1)
 	{
 		*ease = 1;
 		b->player->as_move = 1;
@@ -57,10 +57,10 @@ void		draw_fullmap(t_brain *b, float ease_val)
 	float			mrgn_top;
 	static float	ease = 0;
 
-	margin = 100;
 	if (ease_val > 0)
 	{
-		calculate_size_mm(b, &margin, &mrgn_top, &ease);
+		margin = 100;
+		calculate_size_mm(b, &margin, &mrgn_top);
 		draw_minimap(b,
 			margin,
 			mrgn_top,
@@ -68,11 +68,5 @@ void		draw_fullmap(t_brain *b, float ease_val)
 		ease_in_n_out(b, &ease, ease_val);
 	}
 	else
-	{
-		if (ease != 0)
-			b->player->as_move = 1;
-		else
-			b->player->as_move = 0;
 		ease = 0;
-	}
 }
