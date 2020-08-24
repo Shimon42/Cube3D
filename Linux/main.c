@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/06 10:41:58 by user42            #+#    #+#             */
-/*   Updated: 2020/08/24 08:07:21 by user42           ###   ########lyon.fr   */
+/*   Updated: 2020/08/24 12:55:45 by user42           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ int		main(int ac, char **av)
 	int				save;
 
 	save = 0;
-	if (ac == 3 && ft_strnstr("--save", av[2], 6))
+	if (ac == 3 && ft_strcmp("--save", av[2]) == 0)
 		save = 1;
 	else if ((ac != 2) && (save == 0))
 		exit_cube(NULL, 1, "Wrong argument\n\

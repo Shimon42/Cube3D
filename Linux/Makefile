@@ -83,7 +83,7 @@ SRCS = 		main.c \
 CC =		clang
 
 CFLAGSPROD	= -Wall -Wextra -Werror
-CFLAGS	= -g -Wall -Wextra -Werror
+CFLAGS	= -Wall -Wextra -Werror
 CFLAGSSAN	= -g -g3 -fsanitize=address $(CFLAGS)
 
 OBJS = ${SRCS:.c=.o}

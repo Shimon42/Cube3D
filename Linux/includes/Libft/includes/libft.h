@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/11 12:00:43 by siferrar          #+#    #+#             */
-/*   Updated: 2020/08/21 21:01:04 by user42           ###   ########lyon.fr   */
+/*   Updated: 2020/08/24 12:55:15 by user42           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ size_t				ft_strlcpy(char *dst, const char *src, size_t size);
 size_t				ft_strlen(const char *s);
 size_t				ft_hexlen(unsigned int n);
 char				*ft_strmapi(char const *s, char (*f)(unsigned int, char));
+int					ft_strcmp(const char *s1, const char *s2);
 int					ft_strncmp(const char *s1, const char *s2, size_t n);
 char				*ft_strnstr(const char *haystack, const char *needle,
 								size_t len);
