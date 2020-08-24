@@ -12,3 +12,5 @@ Cub3D
 Linux/includes/MiniLib/test/mlx-test
 Linux/includes/MiniLib/Makefile.gen
 Linux/includes/MiniLib/test/Makefile.gen
+cub3D
+Linux/cub3D
