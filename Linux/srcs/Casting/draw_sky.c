@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/20 13:53:35 by siferrar          #+#    #+#             */
-/*   Updated: 2020/08/17 16:01:25 by user42           ###   ########lyon.fr   */
+/*   Updated: 2020/08/24 09:14:47 by user42           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int		get_sky_color(t_brain *b, t_fpoint ratio, float offset, int y)
 		return (b->map->skybox->is_color);
 	else
 		return (pixel_get(b->map->skybox,
-							offset,
+							offset * ratio.x,
 							b->player->z * -0.2 + y * ratio.y + 180));
 }
 
@@ -33,16 +33,15 @@ void	draw_sky(t_brain *b, double col, double end)
 	if (ratio.x == -420)
 	{
 		ratio.y = (float)b->map->skybox->height / (b->player->cam->proj_size.y);
-		width = b->player->cam->proj_size.x * ((2 * PI) / b->player->cam->fov);
-		ratio.x = (float)b->map->skybox->width / width;
+		width = (float)b->player->cam->proj_size.x *
+			((2 * PI) / b->player->cam->fov);
+		ratio.x = b->map->skybox->width / width;
 	}
 	y = 0;
-	left = width * (b->player->angle / (2 * PI));
-	if (left < width - b->player->cam->proj_size.x)
-		left -= width + b->player->cam->proj_size.x;
+	left = width * (b->player->angle / (2.0 * PI));
 	while (y < end)
 	{
-		color = get_sky_color(b, ratio, col + left, y);
+		color = get_sky_color(b, ratio, (col + left), y);
 		pixel_put(col, y, color, b->map->frame);
 		y++;
 	}
