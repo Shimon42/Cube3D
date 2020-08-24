@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/20 14:10:19 by siferrar          #+#    #+#             */
-/*   Updated: 2020/07/22 14:56:49 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/08/24 07:19:55 by user42           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ int	check_map(t_map *m)
 	t_point pos;
 
 	pos.x = 0;
+	if (m->width < 3 || m->height < 3)
+		return (0);
 	while (pos.x < m->width)
 	{
 		pos.y = 0;
