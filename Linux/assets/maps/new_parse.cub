@@ -1,3 +1,4 @@
+R 1050 1050
 
 EA assets/textures/walls/stone_bricks/1.xpm
 
@@ -11,7 +12,6 @@ S assets/sprites/barrel-w-shadow.xpm
 
 C assets/sky/mountains/mountains.xpm
 
-R 1010 1010
 F assets/textures/floor/sand.xpm
 
       111

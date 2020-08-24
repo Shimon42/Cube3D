@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/20 12:30:05 by siferrar          #+#    #+#             */
-/*   Updated: 2020/08/18 18:05:30 by user42           ###   ########lyon.fr   */
+/*   Updated: 2020/08/24 08:11:57 by user42           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,38 +34,29 @@ void		calculate_size_mm(t_brain *b, int *margin,
 
 void		ease_in_n_out(t_brain *b, float *ease, float ease_val)
 {
+	b->player->as_move = 1;
 	if (*ease < 1 && *ease + ease_val <= 1)
-	{
 		*ease += ease_val;
-		b->player->as_move = 1;
-	}
-	else if (b->player->as_move == 0 && *ease == 1)
-	{
-		b->player->as_move = 1;
-		*ease = 1;
-	}
-	else if (*ease != 1 && *ease != 1)
-	{
-		*ease = 1;
-		b->player->as_move = 1;
-	}
+	else
+		*ease = 1;	
 }
 
 void		draw_fullmap(t_brain *b, float ease_val)
 {
 	int				margin;
 	float			mrgn_top;
-	static float	ease = 0;
+	static float	ease = 0.0;
 
 	if (ease_val > 0)
 	{
+		mrgn_top = 0;
 		margin = 100;
 		calculate_size_mm(b, &margin, &mrgn_top);
+		ease_in_n_out(b, &ease, ease_val);
 		draw_minimap(b,
 			margin,
 			mrgn_top,
 			(b->ctx->width - 2 * margin) * (ease));
-		ease_in_n_out(b, &ease, ease_val);
 	}
 	else
 		ease = 0;

@@ -34,9 +34,7 @@ or
 
 <kbd>D</kbd> - Move Right
 
-<kbd>LEFT</kbd> <kbd>RIGHT</kbd> - Rotate camera (+ <kbd>SHIFT</kbd> to rotate/10)
-
-<kbd>SPACE</kbd> - Jump
+<kbd>LEFT</kbd> <kbd>RIGHT</kbd> - Rotate camera (+ <kbd>SHIFT</kbd> to rotate/20)
 
 <hr>
 
