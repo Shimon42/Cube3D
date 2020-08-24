@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/20 12:30:05 by siferrar          #+#    #+#             */
-/*   Updated: 2020/08/24 08:11:57 by user42           ###   ########lyon.fr   */
+/*   Updated: 2020/08/24 10:45:04 by user42           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void		ease_in_n_out(t_brain *b, float *ease, float ease_val)
 	if (*ease < 1 && *ease + ease_val <= 1)
 		*ease += ease_val;
 	else
-		*ease = 1;	
+		*ease = 1;
 }
 
 void		draw_fullmap(t_brain *b, float ease_val)

@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/31 16:39:19 by milosand          #+#    #+#             */
-/*   Updated: 2020/08/22 11:22:39 by user42           ###   ########lyon.fr   */
+/*   Updated: 2020/08/24 12:37:00 by user42           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,8 @@ t_type	*ft_getmap_flag(char *path)
 		check_n_free(map->line);
 		ft_check_struct(map);
 	}
+	else
+		exit_flag(404, "Map file not found\n", map);
 	ret = get_next_line(fd, &(map->line), 1);
 	check_n_free(map->line);
 	close(fd);
