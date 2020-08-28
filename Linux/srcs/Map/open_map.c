@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/13 12:16:27 by milosandric       #+#    #+#             */
-/*   Updated: 2020/08/22 14:02:19 by user42           ###   ########lyon.fr   */
+/*   Updated: 2020/08/28 09:55:30 by user42           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,28 +16,27 @@ void				get_map(t_brain *b, char *map_path)
 {
 	t_player_detect	*player;
 	int				ret;
-	int				file;
 	char			*line;
 
-	file = open(map_path, O_RDONLY);
-	ret = get_next_line(file, &line, 0);
+	b->cur_fd = open(map_path, O_RDONLY);
+	ret = get_next_line(b->cur_fd, &line, 0);
 	while (ret && ((ft_strmultichr(line, " 02341SNEW")) != 1))
 	{
 		free(line);
-		ret = get_next_line(file, &line, 0);
+		ret = get_next_line(b->cur_fd, &line, 0);
 	}
 	while (ret != -1)
 	{
 		if ((player = add_map_row(b->map, line)) != NULL)
 		{
-			init_player(b, player->pos_x, player->direction);
+			init_player(b, player, player->pos_x, player->direction);
 			free(player);
 		}
 		if (!ret)
 			break ;
-		ret = get_next_line(file, &line, 0);
+		ret = get_next_line(b->cur_fd, &line, 0);
 	}
-	get_next_line(file, &line, 1);
+	get_next_line(b->cur_fd, &line, 1);
 	free(line);
 }
 

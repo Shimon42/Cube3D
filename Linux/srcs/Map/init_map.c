@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: siferrar <siferrar@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/14 20:36:43 by siferrar          #+#    #+#             */
-/*   Updated: 2020/08/03 14:56:08 by siferrar         ###   ########lyon.fr   */
+/*   Updated: 2020/08/28 09:44:54 by user42           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,14 +93,12 @@ t_player_detect		*chr_trt(char *line, t_map *m)
 		line[i] = (line[i] == ' ' ? '0' - 1 : line[i]);
 		if (line[i] != '\0' && ft_strchr("NESW", line[i]) != NULL)
 		{
-			if (player != NULL)
+			if (player == NULL)
 			{
-				free(player);
-				exit_cube(m->brain, 801, "Player already initied", 0);
+				player = malloc(sizeof(t_player_detect));
+				player->pos_x = i;
+				player->direction = line[i];
 			}
-			player = malloc(sizeof(t_player_detect));
-			player->pos_x = i;
-			player->direction = line[i];
 		}
 		if ((real = line[i] - '0') >= 2 && real <= 4)
 			add_spr_to_list(m->sprites,
