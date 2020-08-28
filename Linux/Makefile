@@ -83,19 +83,14 @@ SRCS = 		main.c \
 CC =		clang
 
 CFLAGSPROD	= -Wall -Wextra -Werror
-CFLAGS	= -Wall -Wextra -Werror
+CFLAGS		= -Wall -Wextra -Werror
 CFLAGSSAN	= -g -g3 -fsanitize=address $(CFLAGS)
 
 OBJS = ${SRCS:.c=.o}
 
 MAPS	= assets/maps/
-LAB = $(MAPS)Lab.cub
-WORLD = $(MAPS)world.cub
-MAP = $(MAPS)map.cub
-EMPTY = $(MAPS)empty.cub
 MINE = $(MAPS)Mine.cub
 NEW = $(MAPS)new_parse.cub
-PAC = $(MAPS)pacman.cub
 
 COL_TITLE = \033[2;33m
 COL_CUBE = \033[2;32m

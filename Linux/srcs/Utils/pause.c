@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/20 19:29:17 by user42            #+#    #+#             */
-/*   Updated: 2020/08/22 17:36:09 by user42           ###   ########lyon.fr   */
+/*   Updated: 2020/08/28 08:01:15 by user42           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ void	disp_pause(t_brain *b)
 		new_point(img->width * scale, img->height * scale));
 	mlx_put_image_to_window(b->ctx->mlx_ptr, b->ctx->win_ptr,
 		b->map->frame->img, 0, 0);
+	free(b->keys);
 	init_keys(b);
 	b->is_paused = 2;
 }

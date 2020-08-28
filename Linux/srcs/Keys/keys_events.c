@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/11 06:48:57 by siferrar          #+#    #+#             */
-/*   Updated: 2020/08/22 18:20:55 by user42           ###   ########lyon.fr   */
+/*   Updated: 2020/08/28 07:59:15 by user42           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +70,6 @@ int		key_release(int key, void *param)
 	t_brain *b;
 
 	b = (t_brain*)param;
-	if (key == 49)
-		b->player->jump(b->player, 15);
 	if (key == PAUSE_KEY)
 	{
 		if (b->is_paused)
