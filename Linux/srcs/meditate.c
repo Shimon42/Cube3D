@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/09 18:31:48 by siferrar          #+#    #+#             */
-/*   Updated: 2020/08/22 11:39:43 by user42           ###   ########lyon.fr   */
+/*   Updated: 2020/08/28 09:31:14 by user42           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,9 @@ void	check_n_free(void *var)
 
 void	free_brain(t_brain *b)
 {
+	char *line;
+
+	line = NULL;
 	check_n_free(b->keys);
 	check_n_free(b);
 }

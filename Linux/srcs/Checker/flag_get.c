@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/31 16:39:19 by milosand          #+#    #+#             */
-/*   Updated: 2020/08/24 12:37:00 by user42           ###   ########lyon.fr   */
+/*   Updated: 2020/08/28 09:15:18 by user42           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,8 @@ void	ft_getmap_values(char *line, t_type *map)
 		ft_flag_str(line + 2, &map->c, map);
 	else if (line[0] != '\0')
 	{
-		free(line);
+		check_n_free(line);
+		map->line = NULL;
 		exit_flag(501, "Unkown identifier(s) in setup file\n", map);
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 21:30:44 by siferrar          #+#    #+#             */
-/*   Updated: 2020/08/22 11:43:33 by user42           ###   ########lyon.fr   */
+/*   Updated: 2020/08/28 09:46:27 by user42           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ typedef struct	s_brain
 	int			*keys;
 	int			is_paused;
 	t_buff		*pause_menu;
+	int			cur_fd;
 }				t_brain;
 
 typedef struct	s_type
@@ -125,7 +126,8 @@ void			disp_pause(t_brain *b);
 ** --- Player
 */
 
-int				init_player(t_brain *b, int pos_x, char angle);
+int				init_player(t_brain *b, t_player_detect *p_obj,
+														int pos_x, char angle);
 void			move(struct s_player *p, int dir);
 void			rotate(struct s_player *p, float angle);
 void			side_move(struct s_player *p, int dir);
