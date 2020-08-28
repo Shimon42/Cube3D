@@ -1,4 +1,4 @@
-# Cube 3D • Alpha 0.9.5 - It's All Good NOW
+# Cube 3D • Beta 1.0 - 42Cubed
 
 ![Cube3D Screenshot](/Screenshots/sprites.png)
 
@@ -41,10 +41,7 @@ or
 	————————————————————————————————————
 		Changes
 	———————————————————————————————————— 
-	- Everything is good
-	- No Leaks at all
-	- Fixed MinilibX Leaks
-	- Tested on xUbuntu 18.04.4
+	- 42 Evaluation done ! (113%)
 
     ————————————————————————————————————
 		Cur State
@@ -62,7 +59,7 @@ or
 	- Textured sprites and shadows
 	- Sprites collisions
 	- No Leaks (Cub & MinilibX)
-	- Peer evaluations - 2nd try
+	- Peer evaluations - done (113%)
 	- Mac OSX not up to date
 	
 	————————————————————————————————————
@@ -77,8 +74,3 @@ or
 	Floor Casting:
 	- Floor texture move badly sometimes
 	- Fish eye
-
-	SkyBox:
-	- Texture jump at angle = 0 (not perfect texture ?)
-
-	
